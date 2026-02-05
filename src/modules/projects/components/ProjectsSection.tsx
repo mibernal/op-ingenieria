@@ -1,7 +1,7 @@
  import { useState, useMemo } from "react";
  import { ChevronDown, ChevronRight } from "lucide-react";
  import ProjectCard from "./ProjectCard";
- import { projects, projectCategories, type Project } from "@/data/projects";
+ import { projects, projectCategories, type Project } from "@/modules/projects/data/projects";
  import {
    DropdownMenu,
    DropdownMenuContent,

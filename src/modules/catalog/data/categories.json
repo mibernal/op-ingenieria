@@ -1,0 +1,91 @@
+[
+  {
+    "id": "aires-acondicionados-y-ventilacion",
+    "name": "Aires Acondicionados y Ventilacion",
+    "subcategories": [],
+    "count": 3
+  },
+  {
+    "id": "baterias",
+    "name": "Baterias",
+    "subcategories": [],
+    "count": 6
+  },
+  {
+    "id": "energia-solar",
+    "name": "Energia Solar",
+    "subcategories": [
+      "Centros Educativos, Energia Solar",
+      "Centros de Alto Consumo, Energia Solar"
+    ],
+    "count": 3
+  },
+  {
+    "id": "energia-solar,-energia-solar",
+    "name": "Energia Solar, Energia Solar",
+    "subcategories": [
+      "Hogares"
+    ],
+    "count": 1
+  },
+  {
+    "id": "iluminacion-led",
+    "name": "Iluminacion LED",
+    "subcategories": [],
+    "count": 7
+  },
+  {
+    "id": "inversores",
+    "name": "Inversores",
+    "subcategories": [],
+    "count": 3
+  },
+  {
+    "id": "plantas-electricas",
+    "name": "Plantas Electricas",
+    "subcategories": [
+      "Grupos Electrógenos a Diesel, Plantas Electricas",
+      "Grupos Electrógenos a Gas, Plantas Electricas",
+      "Grupos Electrógenos a Gasolina, Plantas Electricas"
+    ],
+    "count": 5
+  },
+  {
+    "id": "rectificadores---cargadores",
+    "name": "Rectificadores - Cargadores",
+    "subcategories": [],
+    "count": 6
+  },
+  {
+    "id": "sistemas-ups",
+    "name": "Sistemas UPS",
+    "subcategories": [],
+    "count": 3
+  },
+  {
+    "id": "tableros-distribucion-y-control",
+    "name": "Tableros Distribucion y Control",
+    "subcategories": [],
+    "count": 3
+  },
+  {
+    "id": "energia-solar,-sistemas-ups,-energia-solar",
+    "name": "Energia Solar, Sistemas UPS, Energia Solar",
+    "subcategories": [
+      "UPS Hibrida"
+    ],
+    "count": 1
+  },
+  {
+    "id": "estabilizadores-de-tensión",
+    "name": "Estabilizadores de tensión",
+    "subcategories": [],
+    "count": 1
+  },
+  {
+    "id": "reguladores-electrónicos-y-circuitos-de-control-eléctricos",
+    "name": "Reguladores electrónicos y circuitos de control eléctricos",
+    "subcategories": [],
+    "count": 1
+  }
+]

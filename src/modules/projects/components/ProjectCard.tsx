@@ -1,6 +1,6 @@
  import { useState } from "react";
  import { ChevronLeft, ChevronRight } from "lucide-react";
- import { type Project } from "@/data/projects";
+ import { type Project } from "@/modules/projects/data/projects";
  import { cn } from "@/lib/utils";
  
  interface ProjectCardProps {

@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Mail, X } from "lucide-react";
-import type { Product } from "@/data/products";
+import type { Product } from "@/modules/catalog/data/products";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -48,13 +48,21 @@ const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalP
 
         <div className="grid md:grid-cols-2 gap-6 mt-4">
           {/* Product Image */}
-          <div className="aspect-square rounded-lg overflow-hidden bg-secondary">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
+<div className="aspect-square rounded-lg overflow-hidden bg-secondary product-detail-image">
+  <img
+    src={product.image || (product.images && product.images[0]) || "/placeholder-product.jpg"}
+    alt={product.title}
+    loading="lazy"
+    decoding="async"
+onError={(e) => {
+  const target = e.currentTarget;
+  if (target.src !== "/placeholder-product.jpg") {
+    target.src = "/placeholder-product.jpg";
+  }
+}}
+    className="w-full h-full object-contain block"
+  />
+</div>
 
           {/* Product Info */}
           <div className="space-y-4">

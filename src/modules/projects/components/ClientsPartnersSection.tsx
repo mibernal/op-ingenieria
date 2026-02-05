@@ -1,6 +1,6 @@
  import { useRef, useEffect, useState } from "react";
  import { ChevronLeft, ChevronRight } from "lucide-react";
- import { clients, partners } from "@/data/clientsPartners";
+ import { clients, partners } from "@/modules/projects/data/clientsPartners";
  import { cn } from "@/lib/utils";
  
  interface LogoCarouselProps {

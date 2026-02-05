@@ -27,7 +27,7 @@ const ProductsSection = () => {
   const productsInCategory = useMemo(() => {
     if (!selectedCategory) return [];
     return allProducts.filter((p) => 
-      p.category === selectedCategory.name || p.category === selectedCategory.id
+      p.categoryId === selectedCategory.id
     );
   }, [selectedCategory]);
 

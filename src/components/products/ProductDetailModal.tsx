@@ -34,6 +34,12 @@ const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalP
     window.open(`mailto:ventas@opingenieria.com?subject=${subject}&body=${body}`, "_blank");
   };
 
+  // Función para obtener el nombre de la categoría (simulación)
+  const getCategoryName = () => {
+    // En un caso real, esto vendría de un contexto o servicio
+    return product.categoryId || "Sin categoría";
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
@@ -48,26 +54,26 @@ const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalP
 
         <div className="grid md:grid-cols-2 gap-6 mt-4">
           {/* Product Image */}
-<div className="aspect-square rounded-lg overflow-hidden bg-secondary product-detail-image">
-  <img
-    src={product.image || (product.images && product.images[0]) || "/placeholder-product.jpg"}
-    alt={product.title}
-    loading="lazy"
-    decoding="async"
-onError={(e) => {
-  const target = e.currentTarget;
-  if (target.src !== "/placeholder-product.jpg") {
-    target.src = "/placeholder-product.jpg";
-  }
-}}
-    className="w-full h-full object-contain block"
-  />
-</div>
+          <div className="aspect-square rounded-lg overflow-hidden bg-secondary product-detail-image">
+            <img
+              src={product.images?.[0] || "/placeholder-product.jpg"}
+              alt={product.title}
+              loading="lazy"
+              decoding="async"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.src !== "/placeholder-product.jpg") {
+                  target.src = "/placeholder-product.jpg";
+                }
+              }}
+              className="w-full h-full object-contain block"
+            />
+          </div>
 
           {/* Product Info */}
           <div className="space-y-4">
             <Badge variant="secondary" className="text-sm">
-              {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+              {getCategoryName()}
             </Badge>
 
             {product.price && (
@@ -100,7 +106,7 @@ onError={(e) => {
           <div className="bg-secondary rounded-lg overflow-hidden">
             <table className="w-full">
               <tbody>
-                {product.specs.map((spec, index) => (
+                {product.specs && product.specs.map((spec, index) => (
                   <tr
                     key={spec.label}
                     className={index % 2 === 0 ? "bg-secondary" : "bg-muted/50"}

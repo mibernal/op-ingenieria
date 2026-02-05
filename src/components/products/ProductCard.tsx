@@ -11,6 +11,12 @@ interface ProductCardProps {
 const ProductCard = ({ product, onClick }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Función para obtener el nombre de la categoría (simulación)
+  const getCategoryName = () => {
+    // En un caso real, esto vendría de un contexto o servicio
+    return product.categoryId || "Sin categoría";
+  };
+
   return (
     <button
       onClick={() => onClick(product)}
@@ -22,7 +28,7 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
       {/* Imagen del producto */}
       <div className="relative h-48 md:h-56 overflow-hidden rounded-t-lg bg-muted">
         <OptimizedImage
-          src={product.image || (product.images?.[0]) || "/placeholder-product.jpg"}
+          src={product.images?.[0] || "/placeholder-product.jpg"}
           alt={product.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           aspectRatio="square"
@@ -41,11 +47,9 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
         
         {/* Badges de categoría */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
-          {product.category && (
-            <Badge className="bg-primary/90 text-primary-foreground text-xs font-medium">
-              {product.category}
-            </Badge>
-          )}
+          <Badge className="bg-primary/90 text-primary-foreground text-xs font-medium">
+            {getCategoryName()}
+          </Badge>
           {product.subcategory && (
             <Badge className="bg-accent/20 text-accent border-accent/30 text-xs">
               {product.subcategory}

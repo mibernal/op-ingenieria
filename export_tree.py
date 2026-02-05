@@ -24,7 +24,7 @@ EXCLUDE_FILES = {
 }
 
 EXCLUDE_EXTENSIONS = {
-    ".json"
+    
 }
 # ===========================
 

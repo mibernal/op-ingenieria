@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
       // Solo en desarrollo
       ...(mode === "development" 
         ? [] 
-        : [] // Remover lovable-tagger en producción
+        : []
       ),
       // Optimización de imágenes
       ViteImageOptimizer({

@@ -19,7 +19,7 @@ def export_ultra_minimal(src_path, output_file):
     }
     
     # Extensiones a ignorar (incluyendo .css)
-    IGNORE_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.gif', '.ico', '.woff', '.woff2', '.ttf', '.eot','.DS_Store'}
+    IGNORE_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.gif', '.ico', '.woff', '.woff2', '.ttf', '.eot','.DS_Store','.css','.json'}
     
     file_count = 0
     

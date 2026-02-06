@@ -1,5 +1,5 @@
 import type { Category, Product } from "@/modules/catalog/data/products";
-import OptimizedImage from "@/components/shared/OptimizedImage";
+import OptimizedImage from "@/shared/components/OptimizedImage";
 
 interface CategoryGridProps {
   categories: Category[];

@@ -1,6 +1,6 @@
 import { useState, useMemo, lazy, Suspense } from "react";
 import { products as allProducts, categories as allCategories, type Product, type Category } from "@/modules/catalog/data/products";
-import ProductGridSkeleton from "@/components/skeletons/ProductGridSkeleton";
+import ProductGridSkeleton from "@/shared/components/skeletons/ProductGridSkeleton";
 import CategoryGrid from "@/modules/catalog/components/CategoryGrid";
 
 // Lazy load de componentes pesados

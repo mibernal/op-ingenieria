@@ -1,4 +1,4 @@
-import { useToast } from "@/hooks/usetoast";
+import { useToast } from "@/shared/hooks/useToast";
 import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "@/components/ui/toast";
 
 export function Toaster() {

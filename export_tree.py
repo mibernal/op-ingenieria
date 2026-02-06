@@ -18,9 +18,6 @@ EXCLUDE_DIRS = {
 
 EXCLUDE_FILES = {
     ".DS_Store",
-    "package-lock.json",
-    "yarn.lock",
-    "pnpm-lock.yaml"
 }
 
 EXCLUDE_EXTENSIONS = {

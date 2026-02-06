@@ -1,4 +1,4 @@
-//src/components/skeletons/ProductGridSkeleton.tsx
+//src/shared/components/skeletons/ProductGridSkeleton.tsx
 import ProductCardSkeleton from "./ProductCardSkeleton";
 
 interface ProductGridSkeletonProps {

@@ -1,12 +1,9 @@
 import { createRoot } from "react-dom/client";
 import App from "./app/App";
-import "./index.css";
+import "@/styles/index.css";
 
-const root = document.getElementById("root")!;
+const root = document.getElementById("root");
+
+if (!root) throw new Error("Root element not found");
 
 createRoot(root).render(<App />);
-
-requestAnimationFrame(() => {
-  root.classList.remove("critical-hidden");
-  root.classList.add("critical-visible");
-});

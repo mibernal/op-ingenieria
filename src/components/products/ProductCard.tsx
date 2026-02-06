@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import type { Product } from "@/modules/catalog/data/products";
 import { useState } from "react";
-import OptimizedImage from "@/components/shared/OptimizedImage";
+import OptimizedImage from "@/shared/components/OptimizedImage";
 import { categories } from "@/modules/catalog/data/products";
 
 interface ProductCardProps {

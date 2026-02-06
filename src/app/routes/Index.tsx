@@ -1,10 +1,10 @@
 import Header from "@/components/layout/Header";
-import Hero from "@/components/ui/Hero";
-import AboutSection from "@/components/AboutSection";
+import Hero from "@/components/marketing/HeroSection";
+import AboutSection from "@/components/marketing/AboutSection";
 import ProductsSection from "@/components/products/ProductsSection";
 import ProjectsSection from "@/modules/projects/components/ProjectsSection";
 import ClientsPartnersSection from "@/modules/projects/components/ClientsPartnersSection";
-import ServicesSection from "@/components/ServicesSection";
+import ServicesSection from "@/components/marketing/ServicesSection";
 import ContactSection from "@/modules/contact/components/ContactSection";
 import Footer from "@/components/layout/Footer";
 

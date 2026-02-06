@@ -2,7 +2,7 @@
 
 import { type Project } from "@/modules/projects/data/projects";
 import { useState } from "react";
-import OptimizedImage from "@/components/shared/OptimizedImage";
+import OptimizedImage from "@/shared/components/OptimizedImage";
 
 interface ProjectCardProps {
   project: Project;

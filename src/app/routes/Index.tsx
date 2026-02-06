@@ -1,26 +1,22 @@
+import { useEffect } from "react";
 import Header from "@/components/layout/Header";
-import Hero from "@/components/marketing/HeroSection";
-import AboutSection from "@/components/marketing/AboutSection";
-import ProductsSection from "@/components/products/ProductsSection";
-import ProjectsSection from "@/modules/projects/components/ProjectsSection";
-import ClientsPartnersSection from "@/modules/projects/components/ClientsPartnersSection";
-import ServicesSection from "@/components/marketing/ServicesSection";
-import ContactSection from "@/modules/contact/components/ContactSection";
 import Footer from "@/components/layout/Footer";
+import LandingPage from "@/modules/marketing/pages/LandingPage";
 
 const Index = () => {
+  useEffect(() => {
+    // Remover la clase critical-hidden cuando el componente se monte
+    const root = document.getElementById('root');
+    if (root) {
+      root.classList.remove('critical-hidden');
+      root.classList.add('critical-visible');
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
-        <Hero />
-        <AboutSection />
-        <ProductsSection />
-        <ProjectsSection />
-        <ClientsPartnersSection />
-        <ServicesSection />
-        <ContactSection />
-      </main>
+      <LandingPage />
       <Footer />
     </div>
   );

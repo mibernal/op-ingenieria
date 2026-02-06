@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import { products, categories } from "../data/products";
 import CategoryFilter from "../components/CategoryFilter";
 import SubcategoryList from "../components/SubcategoryList";
-import ProductGrid from "@/components/products/ProductGrid";
-import ProductDetailModal from "@/components/products/ProductDetailModal";
+import ProductGrid from "@/modules/catalog/components/products/ProductGrid";
+import ProductDetailModal from "@/modules/catalog/components/products/ProductDetailModal";
 
 const CatalogPage = () => {
   const [categoryId, setCategoryId] = useState<string | null>(null);

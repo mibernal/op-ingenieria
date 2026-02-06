@@ -1,11 +1,11 @@
 import { useState, useMemo, lazy, Suspense } from "react";
 import { products as allProducts, categories as allCategories, type Product, type Category } from "@/modules/catalog/data/products";
-import ProductGridSkeleton from "@/shared/components/skeletons/ProductGridSkeleton";
+import ProductGridSkeleton from "@/shared/skeletons/ProductGridSkeleton";
 import CategoryGrid from "@/modules/catalog/components/CategoryGrid";
 
 // Lazy load de componentes pesados
-const ProductGrid = lazy(() => import("@/components/products/ProductGrid"));
-const ProductDetailModal = lazy(() => import("@/components/products/ProductDetailModal"));
+const ProductGrid = lazy(() => import("@/modules/catalog/components/products/ProductGrid"));
+const ProductDetailModal = lazy(() => import("@/modules/catalog/components/products/ProductDetailModal"));
 
 const ProductsSection = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);

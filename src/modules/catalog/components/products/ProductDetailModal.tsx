@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Mail, X } from "lucide-react";
-import type { Product } from "@/modules/catalog/data/products";
+import type { Product, Spec } from "@/modules/catalog/data/products";
 import { categories } from "@/modules/catalog/data/products";
 
 interface ProductDetailModalProps {
@@ -107,7 +107,7 @@ const getCategoryName = () => {
           <div className="bg-secondary rounded-lg overflow-hidden">
             <table className="w-full">
               <tbody>
-                {product.specs && product.specs.map((spec, index) => (
+                {product.specs && product.specs.map((spec: Spec, index: number) => (
                   <tr
                     key={spec.label}
                     className={index % 2 === 0 ? "bg-secondary" : "bg-muted/50"}

@@ -31,9 +31,9 @@ def export_ultra_minimal(src_path, output_file):
             dirs[:] = [d for d in dirs if d not in {'.git', 'node_modules', '__pycache__'}]
             
             # Omitir carpeta ui dentro de components
-            if root_path.name == 'ui' and 'components' in root_path.parts:
-                dirs.clear()
-                continue
+            # if root_path.name == 'ui' and 'components' in root_path.parts:
+            #    dirs.clear()
+            #    continue
             
             for file in sorted(files):
                 file_path = root_path / file

@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import type { Product } from "@/modules/catalog/data/products";
 import { useState } from "react";
 import OptimizedImage from "@/components/shared/OptimizedImage";
+import { categories } from "@/modules/catalog/data/products";
 
 interface ProductCardProps {
   product: Product;
@@ -13,8 +14,8 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
 
   // Función para obtener el nombre de la categoría (simulación)
   const getCategoryName = () => {
-    // En un caso real, esto vendría de un contexto o servicio
-    return product.categoryId || "Sin categoría";
+    const category = categories.find(c => c.id === product.categoryId);
+    return category?.name || product.categoryId || "Sin categoría";
   };
 
   return (

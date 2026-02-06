@@ -25,9 +25,15 @@ export type Category = {
   subcategories: string[];
 };
 
+// Crear un mapa para convertir nombres de categoría a IDs
+const categoryNameToId: Record<string, string> = {};
+categoriesData.forEach(cat => {
+  categoryNameToId[cat.name] = cat.id;
+});
+
 export const products: Product[] = productsData.map((p) => ({
   ...p,
-  categoryId: p.category, // normalizamos
+  categoryId: categoryNameToId[p.category] || p.category, // Usar el mapa
 }));
 
 export const categories: Category[] = categoriesData.map((c) => ({

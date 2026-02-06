@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Mail, X } from "lucide-react";
 import type { Product } from "@/modules/catalog/data/products";
+import { categories } from "@/modules/catalog/data/products";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -35,10 +36,10 @@ const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalP
   };
 
   // Función para obtener el nombre de la categoría (simulación)
-  const getCategoryName = () => {
-    // En un caso real, esto vendría de un contexto o servicio
-    return product.categoryId || "Sin categoría";
-  };
+const getCategoryName = () => {
+  const category = categories.find(c => c.id === product.categoryId);
+  return category?.name || product.categoryId || "Sin categoría";
+};
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

@@ -1,0 +1,12 @@
+{
+  "language": "en,es",
+  "words": [
+    "categorías",
+    "subcategorías",
+    "productos",
+    "eléctricos",
+    "industriales",
+    "comerciales"
+  ],
+  "ignorePaths": ["node_modules", "dist"]
+}

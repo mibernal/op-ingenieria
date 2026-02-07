@@ -1,16 +1,17 @@
 // src/modules/projects/data/projects.ts
 
+import projectsData from './projects_normalized.json';
+
 export interface Project {
   id: string;
   name: string;
-  client: string;      // opcional: puedes conservar vacío o usar el mismo name
-  category: string;    // aquí usamos "work" por defecto (puedes mapearlo luego)
-  description: string; // vacío por ahora — lo puedes completar manualmente o extraer post_content
-  images: string[];    // URLs absolutas a las imágenes (thumbnail + gallery)
-  image?: string;      // URL de la imagen principal (thumbnail)
-  slug?: string;       // post_name en WP
-  date?: string;       // post_date de WP
-  source_id?: number;  // ID original en WP
+  client: string;
+  category: string;
+  description: string;
+  images: string[];
+  image?: string;
+  slug?: string;
+  source_id?: number;
 }
 
 export interface ProjectCategory {
@@ -18,7 +19,7 @@ export interface ProjectCategory {
   name: string;
 }
 
-// Mantengo tu lista de categorías original y añado 'work' como fallback
+// Mantengo tu lista de categorías original
 export const projectCategories: ProjectCategory[] = [
   { id: "grupos-electrogenos", name: "Grupos Electrógenos / Transferencias" },
   { id: "energia-fotovoltaica", name: "Energía Fotovoltaica" },
@@ -31,9 +32,10 @@ export const projectCategories: ProjectCategory[] = [
   { id: "work", name: "Work / Portfolio (importado)" },
 ];
 
-// Projects importados desde la DB exportada (post_type = portfolio).
-// Fuentes: post list, thumbnails y attachments. :contentReference[oaicite:4]{index=4} :contentReference[oaicite:5]{index=5} :contentReference[oaicite:6]{index=6}
-export const projects: Project[] = [
+// Type assertion para los datos importados
+export const projects: Project[] = projectsData as Project[];
+
+[
   {
     id: "2621",
     source_id: 2621,
@@ -647,7 +649,6 @@ export const projects: Project[] = [
     slug: "presidencia-republica",
     date: "2018-02-16",
   },
-];
+]
 
 export default projects;
-

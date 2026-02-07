@@ -1,0 +1,10 @@
+[
+  { "id": "1", "name": "Schneider Electric", "logo": "" },
+  { "id": "2", "name": "ABB", "logo": "" },
+  { "id": "3", "name": "Siemens", "logo": "" },
+  { "id": "4", "name": "Eaton", "logo": "" },
+  { "id": "5", "name": "Legrand", "logo": "" },
+  { "id": "6", "name": "General Electric", "logo": "" },
+  { "id": "7", "name": "Caterpillar", "logo": "" },
+  { "id": "8", "name": "Cummins", "logo": "" }
+]

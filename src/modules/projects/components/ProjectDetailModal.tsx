@@ -83,9 +83,6 @@ const ProjectDetailModal = ({ project, open, onOpenChange }: Props) => {
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary">{project.client}</Badge>
             <Badge variant="outline">{project.category}</Badge>
-            {project.date && (
-              <Badge variant="outline">{project.date}</Badge>
-            )}
           </div>
 
           <div className="text-muted-foreground leading-relaxed">

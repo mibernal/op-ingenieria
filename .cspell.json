@@ -6,7 +6,17 @@
     "productos",
     "eléctricos",
     "industriales",
-    "comerciales"
+    "comerciales",
+        "clients",
+    "Clients",
+    "confían",
+    "empresas",
+    "nosotros",
+    "clientes",
+    "carrusel",
+    "Cargando",
+    "mostrar",
+    "Lista"
   ],
   "ignorePaths": ["node_modules", "dist"]
 }

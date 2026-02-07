@@ -1,15 +1,17 @@
 import { Suspense } from "react";
+
 import ProductsSection from "@/modules/catalog/components/products/ProductsSection";
 import ProjectsSection from "@/modules/projects/components/ProjectsSection";
-import ClientsPartnersSection from "@/modules/projects/components/ClientsPartnersSection";
 import ContactSection from "@/modules/contact/components/ContactSection";
+
+import { ClientsSection } from "@/modules/clients/components";
+import { PartnersSection } from "@/modules/partners/components";
 
 import {
   Hero,
   AboutSection,
   ServicesSection,
   CTASection,
-  PartnersSection,
 } from "@/modules/marketing/components";
 
 import { ProductGridSkeleton } from "@/shared/skeletons";
@@ -20,20 +22,16 @@ export default function LandingPage() {
       <Hero />
       <AboutSection />
       <ServicesSection />
-      
-      {/* Agrega los componentes faltantes */}
+
       <Suspense fallback={<ProductGridSkeleton />}>
         <ProductsSection />
       </Suspense>
-      
-      <ProjectsSection />
-      
-      <ClientsPartnersSection />
-      
-      <Suspense fallback={<ProductGridSkeleton />}>
 
-      </Suspense>
-      
+      <ProjectsSection />
+
+      <ClientsSection />
+      <PartnersSection />
+
       <ContactSection />
       <CTASection />
     </main>

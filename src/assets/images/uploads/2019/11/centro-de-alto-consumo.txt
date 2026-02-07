@@ -1,0 +1,3 @@
+Centros de Alto Consumo 
+
+La generación de energía eléctrica (AC/DC) se obtiene a través de la transformación de la energía solar usando celdas solares que se conectan formando un arreglo que se conecta a un controlador de carga. Esta energía se puede almacenar en baterías, se usa de forma directa o se transforma a corriente alterna.

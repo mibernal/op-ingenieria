@@ -1,7 +1,7 @@
 export interface Project {
   id: string
-  title: string
+  name: string
   description?: string
-  images?: string[]
+  image?: string[]
   client?: string
 }

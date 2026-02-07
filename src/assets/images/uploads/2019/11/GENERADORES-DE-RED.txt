@@ -1,0 +1,3 @@
+Generadores de Red  
+
+El inversor generador de red coloca la referencia de la red en magnitud, amplitud y frecuencia, para sistemas monofásicos y/o trifásicos, posibilidad de sincronización con un grupo electrógeno de pendiendo de la potencia de trabajo.

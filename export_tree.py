@@ -14,14 +14,37 @@ EXCLUDE_DIRS = {
     "dist",
     "build",
     "coverage"
+    "assets",
+    "ui",
+    "assets"
 }
 
 EXCLUDE_FILES = {
     ".DS_Store",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".ico",
+    ".woff",
+    ".woff2",
+    ".ttf",
+    ".eot",
+    "webp"
 }
 
 EXCLUDE_EXTENSIONS = {
-    
+    ".DS_Store",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".ico",
+    ".woff",
+    ".woff2",
+    ".ttf",
+    ".eot",
+    "webp"
 }
 # ===========================
 

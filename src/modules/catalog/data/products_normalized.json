@@ -9,11 +9,11 @@
     "description": "",
     "longDescription": "<p align=justify> 4 rejillas de inyección en las orillas y un retorno por el centro. Inyección de aire curveado hacia las orillas, evitando el retorno. Incluye parrilla frontal, filtro y ganchos para su colocación y aseguramiento. Incluye control remoto inalámbrico. Ventiladores con tres velocidades - alta, media y baja. Funciones de enfriamiento, calefacción, ventilación y dehumidificación. Juegos sólo frío deben incluir tubo de expansión y transformador. Condensadora de descarga horizontal (YKJA) y vertical (AC0). Condensadoras incluyen rejillas para mayor protección del serpentín.</p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Casette-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/11/002B.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/11/cassette-1-via-samsug4.jpg"
+      "./src/assets/images/uploads/2019/11/Casette-Boton.jpg",
+      "./src/assets/images/uploads/2019/11/002B.jpg",
+      "./src/assets/images/uploads/2019/11/cassette-1-via-samsug4.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Casette-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Casette-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -27,11 +27,11 @@
     "description": "",
     "longDescription": "<p align=justify> Tipo:\taire acondicionado inverter v inverter v de 9.000 btu, capacidad\t9.000 btu /hr ó 0.75 tr/hr, refrigerante r-410a, voltaje 220v / 110v, todas las unidades incluyen refrigerante r-410a, control remoto infrarrojo, ventilador con tres velocidades - alta, media y baja. 1 año de garantía en partes y 5 en compresor.</p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Mini-BOTON.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/001A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/001B.jpg"
+      "./src/assets/images/uploads/2019/11/Mini-BOTON.jpg",
+      "./src/assets/images/uploads/2019/04/001A.jpg",
+      "./src/assets/images/uploads/2019/04/001B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Mini-BOTON.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Mini-BOTON.jpg",
     "price": "",
     "specs": []
   },
@@ -45,11 +45,11 @@
     "description": "",
     "longDescription": "<p align=justify> El Aire Acondicionado tipo Paquete es un equipo compacto, y como su nombre lo indica viene empaquetado en una sola unidad la unidad condensadora y la evaporadora, tal como viene el aire acondicionado tipo ventana, solo que mucho mas grande. Su instalación exige una área muy ventilada y bien soportada, en caso de ser instalada sobre una construcción. Requiere de ductos los que transportaran el aire frio al interior del espacio a refrigerar, permitiendo así una muy eficiente distribución de frío y un uso muy silencioso. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/04/Paquete-Boton-e1555361447463.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/paquete-lennox-raider.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/large01.jpg"
+      "./src/assets/images/uploads/2019/04/Paquete-Boton-e1555361447463.jpg",
+      "./src/assets/images/uploads/2019/04/paquete-lennox-raider.jpg",
+      "./src/assets/images/uploads/2019/04/large01.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/04/Paquete-Boton-e1555361447463.jpg",
+    "image": "./src/assets/images/uploads/2019/04/Paquete-Boton-e1555361447463.jpg",
     "price": "",
     "specs": []
   },
@@ -63,11 +63,11 @@
     "description": "",
     "longDescription": "<p align=justify> Las baterías son herméticas, no precisan mantenimiento. Diseñadas para descargas profundas, propias de las instalaciones solares y eólicas. Los modelos grandes se conectan mediante tornillo, los pequeños con terminales enchufables standard Las baterías PLOM-GEL no desprenden gases. Son aptas para entornos habitados y embarcaciones </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/12/GEL-SOLAR-BOTON.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/004A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/004B.jpg"
+      "./src/assets/images/uploads/2019/12/GEL-SOLAR-BOTON.jpg",
+      "./src/assets/images/uploads/2019/12/004A.jpg",
+      "./src/assets/images/uploads/2019/12/004B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/12/GEL-SOLAR-BOTON.jpg",
+    "image": "./src/assets/images/uploads/2019/12/GEL-SOLAR-BOTON.jpg",
     "price": "",
     "specs": []
   },
@@ -81,11 +81,11 @@
     "description": "",
     "longDescription": "<p align=justify> La batería de níquel-cadmio es altamente confiable disponible para un gran número de aplicaciones industriales. Sus características únicas la hacen capaz de ser utilizada en aplicaciones y ambientes agresivos donde no es posible tener una temperatura controlada. Son ideales para aplicaciones en trenes subestaciones electricas, plantas industriales etc. (colocar foto de baterías de mayor capacidad). </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/BATERIA-NIQUEL-CADMIO-BOTON.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/006A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/006B.jpg"
+      "./src/assets/images/uploads/2019/11/BATERIA-NIQUEL-CADMIO-BOTON.jpg",
+      "./src/assets/images/uploads/2019/12/006A.jpg",
+      "./src/assets/images/uploads/2019/12/006B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/BATERIA-NIQUEL-CADMIO-BOTON.jpg",
+    "image": "./src/assets/images/uploads/2019/11/BATERIA-NIQUEL-CADMIO-BOTON.jpg",
     "price": "",
     "specs": []
   },
@@ -99,11 +99,11 @@
     "description": "",
     "longDescription": "<p align=justify> Las baterías de tracción están diseñadas para soportar aplicaciones que requieren un alto nivel de fiabilidad y potencia. Ellas son utilizadas en vehículos eléctricos y otros. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/BATERIA-TRACCION-BOTON.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/11/002A-1.png",
-      "https://opingenieria.com/wp-content/uploads/2019/11/002B-1.png"
+      "./src/assets/images/uploads/2019/11/BATERIA-TRACCION-BOTON.jpg",
+      "./src/assets/images/uploads/2019/11/002A-1.png",
+      "./src/assets/images/uploads/2019/11/002B-1.png"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/BATERIA-TRACCION-BOTON.jpg",
+    "image": "./src/assets/images/uploads/2019/11/BATERIA-TRACCION-BOTON.jpg",
     "price": "",
     "specs": []
   },
@@ -117,11 +117,11 @@
     "description": "",
     "longDescription": "<p align=justify> Las baterías OPzS son la solución más robusta para almacenar energía con una probada tecnología, Son diseñadas y fabricadas de acuerdo con las normas DIN, para aplicaciones donde se requiere una batería segura y fiable con larga vida en servicio, como telecomunicaciones, grupos electrógenos, subestaciones eléctricas, estaciones de ferrocarril, entre otros. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/bateria-abierta-2v-350ah-refopzs-2v-350ah-cebat-7249-D_NQ_NP_614542-MCO30039138141_042019-F-1.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/11/002B-1.png",
-      "https://opingenieria.com/wp-content/uploads/2019/11/OPZS-BOTON-1.png"
+      "./src/assets/images/uploads/2019/11/bateria-abierta-2v-350ah-refopzs-2v-350ah-cebat-7249-D_NQ_NP_614542-MCO30039138141_042019-F-1.jpg",
+      "./src/assets/images/uploads/2019/11/002B-1.png",
+      "./src/assets/images/uploads/2019/11/OPZS-BOTON-1.png"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/bateria-abierta-2v-350ah-refopzs-2v-350ah-cebat-7249-D_NQ_NP_614542-MCO30039138141_042019-F-1.jpg",
+    "image": "./src/assets/images/uploads/2019/11/bateria-abierta-2v-350ah-refopzs-2v-350ah-cebat-7249-D_NQ_NP_614542-MCO30039138141_042019-F-1.jpg",
     "price": "",
     "specs": []
   },
@@ -135,11 +135,11 @@
     "description": "",
     "longDescription": "<p align=justify> Principalmente estas baterías se utilizan para conseguir una conexión sin interrupciones en campos de telecomunicaciones como centrales telefónicas o estaciones base de telefonía móvil. Entre el resto de sus aplicaciones se incluyen alumbrados de emergencia, seguridad, ferrocarriles, servicios y otros suministros de energía para sistemas de seguridad.\r\\n\r\\nCaracterísticas: Robusta tecnología de placas tubulares. Muy bajo índice de gaseo gracias a la recombinación de gases interna. Larga vida en circuito abierto, debido al bajo índice de auto descarga. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/OPZV-BOTON.png",
-      "https://opingenieria.com/wp-content/uploads/2019/11/003A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/11/003B.jpg"
+      "./src/assets/images/uploads/2019/11/OPZV-BOTON.png",
+      "./src/assets/images/uploads/2019/11/003A.jpg",
+      "./src/assets/images/uploads/2019/11/003B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/OPZV-BOTON.png",
+    "image": "./src/assets/images/uploads/2019/11/OPZV-BOTON.png",
     "price": "",
     "specs": []
   },
@@ -153,11 +153,11 @@
     "description": "",
     "longDescription": "<p align=justify> La batería de plomo ácido de Válvula Regulada (VRLA) es un tipo de acumulador (secundario) recargable, con válvula de seguridad, que permite la evacuación de la presión interna en caso de una sobrecarga. Los acumuladores de este tipo son de bajo mantenimiento, no requiere adicion de electrolito durante su vida en servicio. Diseñadas para aplicaciones tales como: telecomunicaciones, SAI-UPS, grupos electrógenos, sistemas fotovoltaicos, centros de control, de sistemas de información y datos, de los sistemas de seguridad, maquinaría etc... </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/VRLA-BOTON2.png",
-      "https://opingenieria.com/wp-content/uploads/2019/04/VRLA2.png",
-      "https://opingenieria.com/wp-content/uploads/2019/04/VRLA1.png"
+      "./src/assets/images/uploads/2019/11/VRLA-BOTON2.png",
+      "./src/assets/images/uploads/2019/04/VRLA2.png",
+      "./src/assets/images/uploads/2019/04/VRLA1.png"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/VRLA-BOTON2.png",
+    "image": "./src/assets/images/uploads/2019/11/VRLA-BOTON2.png",
     "price": "",
     "specs": []
   },
@@ -171,11 +171,11 @@
     "description": "",
     "longDescription": "<p align=justify> La generación de energía eléctrica (AC/DC) se obtiene a través de la transformación de la energía solar usando celdas solares que se conectan formando un arreglo que se conecta a un controlador de carga. Esta energía se puede almacenar en baterías, se usa de forma directa o se transforma a corriente alterna. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/12/003A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/CAC-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/20160629_172949-1-scaled.jpg"
+      "./src/assets/images/uploads/2019/12/003A.jpg",
+      "./src/assets/images/uploads/2019/12/CAC-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/20160629_172949-1-scaled.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/12/003A.jpg",
+    "image": "./src/assets/images/uploads/2019/12/003A.jpg",
     "price": "",
     "specs": []
   },
@@ -189,11 +189,11 @@
     "description": "",
     "longDescription": "<p align=justify> Los sistemas de energía solar para uso educativo pueden ser instalado prácticamente en cualquier centro educativo. Casi todos los gobiernos del mundo cuentan actualmente con programas de apoyo para la adquisición e instalación de sistemas solares, así como el apoyo para su adopción en nuevas construcciones de casas y edificios. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Educativos-Boton.jpeg",
-      "https://opingenieria.com/wp-content/uploads/2019/08/002A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002B.jpg"
+      "./src/assets/images/uploads/2019/11/Educativos-Boton.jpeg",
+      "./src/assets/images/uploads/2019/08/002A.jpg",
+      "./src/assets/images/uploads/2019/12/002B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Educativos-Boton.jpeg",
+    "image": "./src/assets/images/uploads/2019/11/Educativos-Boton.jpeg",
     "price": "",
     "specs": []
   },
@@ -207,11 +207,11 @@
     "description": "",
     "longDescription": "<p align=justify> La energía solar en el hogar puede usarse de dos formas distintas. La primera es el uso calentadores solares para transformar la energía del sol en calor, para producir agua caliente. La segunda es el uso de paneles o módulos de celdas fotovoltaicas para generar electricidad que se usará en cubrir las necesidades del hogar. Los sistemas solares fotovoltaicos son generalmente más caros que los sistemas de calentamiento de agua, pero en última instancia los dos tipos de sistemas conducen a un ahorro significativo en el largo plazo, además de contribuir a reducir las emisiones de gases contaminantes. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Solar-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/001A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/001B.jpg"
+      "./src/assets/images/uploads/2019/11/Solar-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/001A.jpg",
+      "./src/assets/images/uploads/2019/12/001B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Solar-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Solar-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -225,11 +225,11 @@
     "description": "",
     "longDescription": "<p align=justify>  </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/lampara-solar-led-15w-alumbrado-publico-con-panel-solar-D_NQ_NP_750115-MLM25215351409_122016-F.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/Alumbrado-BOTON.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/lampara-led-para-alumbrado-publico-180w-envio-gratis-D_NQ_NP_187225-MCO25405283434_032017-F.jpg"
+      "./src/assets/images/uploads/2019/11/lampara-solar-led-15w-alumbrado-publico-con-panel-solar-D_NQ_NP_750115-MLM25215351409_122016-F.jpg",
+      "./src/assets/images/uploads/2019/12/Alumbrado-BOTON.jpg",
+      "./src/assets/images/uploads/2019/12/lampara-led-para-alumbrado-publico-180w-envio-gratis-D_NQ_NP_187225-MCO25405283434_032017-F.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/lampara-solar-led-15w-alumbrado-publico-con-panel-solar-D_NQ_NP_750115-MLM25215351409_122016-F.jpg",
+    "image": "./src/assets/images/uploads/2019/11/lampara-solar-led-15w-alumbrado-publico-con-panel-solar-D_NQ_NP_750115-MLM25215351409_122016-F.jpg",
     "price": "",
     "specs": []
   },
@@ -243,11 +243,11 @@
     "description": "",
     "longDescription": "<p align=justify> Bombillos adaptados LED ofrecen una gran posibilidad de sustituir incandescentes , fluorescentes compactas o lámparas halógenas con un extra calienta la lámpara 2700K LED blanco con distribución de luz de ancho ( 220 ° ) para la iluminación general . LED de GE son muy económicos y respetuosos con el medio ambiente : son libres de mercurio , utilizan mucha menos energía que las luces halógenas o incandescentes , y duran más. Caben en accesorios de iluminación de todos los días y la luz entra en el instante en que encender el interruptor.  </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Bombillo-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/001A-1.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/001B-1.jpg"
+      "./src/assets/images/uploads/2019/11/Bombillo-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/001A-1.jpg",
+      "./src/assets/images/uploads/2019/12/001B-1.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Bombillo-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Bombillo-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -261,11 +261,11 @@
     "description": "",
     "longDescription": "<p align=justify> Ideales para aplicaciones de interior y exterior Hoteles/Restaurantes/Supermercados Edificios comerciales Iluminación arquitectónica de exterior /spot Notas de aplicación Rango de temperatura de operación es de -20 ° ~ +40 ° Sólo para aplicaciones de interior No utilizar con reguladores Para uso en dispositivos que pueden tolerar una lámpara de 0.32kg Características y Especificaciones Distribución similar de intensidad de iluminación como PAR38 75W Hal Ángulo de haz múltiple: 25 ° / 40 ° Larga vida útil 25.000 horas (L70, B10) * CCT: 2700K, 3000K, 6500K Dimensión IEC estándar, fácil para la instalación IP64, adecuada para luz spot al aire libre y luz arquitectónica.  </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Lamparas-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/003A-1.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/003B.jpg"
+      "./src/assets/images/uploads/2019/11/Lamparas-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/003A-1.jpg",
+      "./src/assets/images/uploads/2019/12/003B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Lamparas-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Lamparas-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -279,11 +279,11 @@
     "description": "",
     "longDescription": "<p align=justify>  </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/paneles-led-BOTON.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/panel-led-3w-6w-9w-12w-18w-y-24w-incrustar-y-sobreponer-D_NQ_NP_852225-MCO25403012841_022017-F.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/panel-led-cuadrado-embutido.jpg"
+      "./src/assets/images/uploads/2019/11/paneles-led-BOTON.jpg",
+      "./src/assets/images/uploads/2019/12/panel-led-3w-6w-9w-12w-18w-y-24w-incrustar-y-sobreponer-D_NQ_NP_852225-MCO25403012841_022017-F.jpg",
+      "./src/assets/images/uploads/2019/12/panel-led-cuadrado-embutido.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/paneles-led-BOTON.jpg",
+    "image": "./src/assets/images/uploads/2019/11/paneles-led-BOTON.jpg",
     "price": "",
     "specs": []
   },
@@ -297,11 +297,11 @@
     "description": "",
     "longDescription": "<p align=justify>  </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Reflectores-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/171114_Foto-Reflector-100W-Gris.png",
-      "https://opingenieria.com/wp-content/uploads/2019/12/reflector-led-100w-bajo-consumo-alta-potencia-exterior-frio-D_NQ_NP_784259-MLA26250663164_102017-F.jpg"
+      "./src/assets/images/uploads/2019/11/Reflectores-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/171114_Foto-Reflector-100W-Gris.png",
+      "./src/assets/images/uploads/2019/12/reflector-led-100w-bajo-consumo-alta-potencia-exterior-frio-D_NQ_NP_784259-MLA26250663164_102017-F.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Reflectores-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Reflectores-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -315,11 +315,11 @@
     "description": "",
     "longDescription": "<p align=justify> Reemplazo rápido, simple y seguro sin recablear, ahorro de energía de hasta un 65 % (en comparación con una lámpara fluorescente en CCG). Luz de encendido instantáneo, por lo que resulta especialmente adecuada en combinación con la tecnología de sensores, resistencia frente a cargas de conmutación muy elevada, también apto para el funcionamiento a bajas temperaturas. Extremadamente resistente a la rotura gracias al disipador de calor de aluminio y a la cubierta de policarbonato. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Tubos-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002B-1.jpg"
+      "./src/assets/images/uploads/2019/11/Tubos-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/002A.jpg",
+      "./src/assets/images/uploads/2019/12/002B-1.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Tubos-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Tubos-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -333,10 +333,10 @@
     "description": "",
     "longDescription": "<p align=justify> El inversor generador de red coloca la referencia de la red en magnitud, amplitud y frecuencia, para sistemas monofásicos y/o trifásicos, posibilidad de sincronización con un grupo electrógeno de pendiendo de la potencia de trabajo. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/12/inversor-quattro.png",
-      "https://opingenieria.com/wp-content/uploads/2019/12/001A-2.jpg"
+      "./src/assets/images/uploads/2019/12/inversor-quattro.png",
+      "./src/assets/images/uploads/2019/12/001A-2.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/12/inversor-quattro.png",
+    "image": "./src/assets/images/uploads/2019/12/inversor-quattro.png",
     "price": "",
     "specs": []
   },
@@ -350,11 +350,11 @@
     "description": "",
     "longDescription": "<p align=justify> Los inversores o convertidores CC-CA, son equipos que transforman la energía de una fuente continua en alterna dependiendo de las necesidades del usuario. Amplia gama de tensiones de entrada 12-24-48-125 Vcc y potencia de salida. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/INVERSOR-CC-CA-BOTON.png",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002A-1.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002B-2.jpg"
+      "./src/assets/images/uploads/2019/11/INVERSOR-CC-CA-BOTON.png",
+      "./src/assets/images/uploads/2019/12/002A-1.jpg",
+      "./src/assets/images/uploads/2019/12/002B-2.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/INVERSOR-CC-CA-BOTON.png",
+    "image": "./src/assets/images/uploads/2019/11/INVERSOR-CC-CA-BOTON.png",
     "price": "",
     "specs": []
   },
@@ -368,11 +368,11 @@
     "description": "",
     "longDescription": "<p align=justify> El inversor seguidor de red es un equipo diseñado para inyectar en la red eléctrica la energía producida por un campo de generacion fotovoltáico. Estos inversores trabajan con una tensión de entrada en corriente continua y generan una tensión de alterna de la misma amplitud y frecuencia que la tensión de la red eléctrica a la que se conectan.\r\\n010\r\\nGeneradores de Red\r\\n010\r\\nSeguidores de Red </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/SEGUIDOR-RED-BOTON.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/003A-2.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/003B-1.jpg"
+      "./src/assets/images/uploads/2019/11/SEGUIDOR-RED-BOTON.jpg",
+      "./src/assets/images/uploads/2019/12/003A-2.jpg",
+      "./src/assets/images/uploads/2019/12/003B-1.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/SEGUIDOR-RED-BOTON.jpg",
+    "image": "./src/assets/images/uploads/2019/11/SEGUIDOR-RED-BOTON.jpg",
     "price": "",
     "specs": []
   },
@@ -386,12 +386,12 @@
     "description": "",
     "longDescription": "<p align=justify> Diseño, suministro, instalación, puesta en marcha, montajes de grupos electrógenos desde 1 kVA hasta 3450 kVA a diesel, equipos para operacion en paralero, trabajo continuo o de emergencia. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/12/Planta-Diesel-Boton.png",
-      "https://opingenieria.com/wp-content/uploads/2019/12/20190611_162657-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/Diesel-1.png",
-      "https://opingenieria.com/wp-content/uploads/2019/12/Diesel-2.png"
+      "./src/assets/images/uploads/2019/12/Planta-Diesel-Boton.png",
+      "./src/assets/images/uploads/2019/12/20190611_162657-scaled.jpg",
+      "./src/assets/images/uploads/2019/12/Diesel-1.png",
+      "./src/assets/images/uploads/2019/12/Diesel-2.png"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/12/Planta-Diesel-Boton.png",
+    "image": "./src/assets/images/uploads/2019/12/Planta-Diesel-Boton.png",
     "price": "",
     "specs": []
   },
@@ -405,11 +405,11 @@
     "description": "",
     "longDescription": "<p align=justify> Suministro, instalación y montajes de grupos electrógenos desde 1 Kva hasta 2Mva a gas. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Planta-Gas-Boton.png",
-      "https://opingenieria.com/wp-content/uploads/2019/12/001A-3.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/001B-2.jpg"
+      "./src/assets/images/uploads/2019/11/Planta-Gas-Boton.png",
+      "./src/assets/images/uploads/2019/12/001A-3.jpg",
+      "./src/assets/images/uploads/2019/12/001B-2.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Planta-Gas-Boton.png",
+    "image": "./src/assets/images/uploads/2019/11/Planta-Gas-Boton.png",
     "price": "",
     "specs": []
   },
@@ -423,11 +423,11 @@
     "description": "",
     "longDescription": "<p align=justify> Diseño, suministro, instalación, puesta en marcha, montajes y mantenimientos de grupos electrógenos desde 700 W hasta 10 kVA. Equipos para trabajo en stand by. Alquiler de equipos. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Planta-Gasolina-Boton.png",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002A-2.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002B-3.jpg"
+      "./src/assets/images/uploads/2019/11/Planta-Gasolina-Boton.png",
+      "./src/assets/images/uploads/2019/12/002A-2.jpg",
+      "./src/assets/images/uploads/2019/12/002B-3.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Planta-Gasolina-Boton.png",
+    "image": "./src/assets/images/uploads/2019/11/Planta-Gasolina-Boton.png",
     "price": "",
     "specs": []
   },
@@ -441,11 +441,11 @@
     "description": "",
     "longDescription": "<p align=justify> Equipos con la más moderna tecnología de diseño vanguardista ideales para trabajo en subestaciones eléctricas, centrales de generación de energía, casas de máquinas, centros de control y comunicaciones. Módulos compactos de diferentes potencias flexibilizan las diversas configuraciones posibles, reemplazables en caliente, niveles de tensión y corriente de salida configurables de acuerdo con las necesidades del cliente (24- 48 – 110- 125 - 220 Vcc) mediante su control por microprocesador, amplia y completa gestión, local y remota, del estado del equipo y del banco de baterías asociado. Normativa UNE21000-6-5 IN:2002 de compatibilidad electromagnética CEM (parte 6) de inmunidad para los entornos de Centrales Eléctricas y Subestaciones. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Alta-Fre-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/003A-3.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/003B-2.jpg"
+      "./src/assets/images/uploads/2019/11/Alta-Fre-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/003A-3.jpg",
+      "./src/assets/images/uploads/2019/12/003B-2.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Alta-Fre-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Alta-Fre-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -459,11 +459,11 @@
     "description": "",
     "longDescription": "<p align=justify> Equipos para carga de grupos de baterías en tensiones de 24 – 48 – 125 Vcc tres regímenes de trabajo (carga Excepcional, igualación y flotación), modo de operación manual o automático, entrada monofásico o trifásica dependiendo de la disponibilidad del cliente, opcional salida de alarmas o grupos de medida de entrada y/o salida. Gran robustez y confiabilidad apto para trabajó en ambientes industriales. Control por medio de tarjetas electrónicas y/o microprocesador de la tarjeta de control principal, con puerto de comunicaciones. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Analogos-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002A-1-1.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002B-4.jpg"
+      "./src/assets/images/uploads/2019/11/Analogos-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/002A-1-1.jpg",
+      "./src/assets/images/uploads/2019/12/002B-4.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Analogos-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Analogos-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -477,11 +477,11 @@
     "description": "",
     "longDescription": "<p align=justify> Equipos para carga de grupos de baterías en tensiones de 24 – 48 – 125 Vcc tres regímenes de trabajo (carga Excepcional, igualación y flotación), modo de operación manual o automático, entrada monofásico o trifásica dependiendo de la disponibilidad del cliente, opcional salida de alarmas o grupos de medida de entrada y/o salida. Gran robustez y confiabilidad apto para trabajó en ambientes industriales. Control por medio de tarjetas electrónicas y/o microprocesador de la tarjeta de control principal, con puerto de comunicaciones. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/MicroPro-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/004A-1.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/004B-1.jpg"
+      "./src/assets/images/uploads/2019/11/MicroPro-Boton.jpg",
+      "./src/assets/images/uploads/2019/12/004A-1.jpg",
+      "./src/assets/images/uploads/2019/12/004B-1.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/MicroPro-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/MicroPro-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -495,10 +495,10 @@
     "description": "",
     "longDescription": "<p align=justify> Estos equipos están diseñados específicamente para Protección Catódica, cuya función es la de mantener inmune a la corrosión a las superficies metálicas que se encuentran inmersas en un electrolito corrosivo. Su función básica consiste en aplicar una corriente eléctrica continua que, partiendo de un electrodo auxiliar, circula por el electrolito y es recibida por la superficie metálica a proteger. En el circuito eléctrico de protección, el electrodo auxiliar (ánodo) y la superficie metálica a proteger (cátodo) deberán estar rodeados por el mismo electrolito (tierra, agua) y conectados entre sí a través de un circuito eléctrico externo. La protección catódica, es el método más efectivo de controlar la corrosión de metales inmersos en un electrolito </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Catodica-boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/005B.jpg"
+      "./src/assets/images/uploads/2019/11/Catodica-boton.jpg",
+      "./src/assets/images/uploads/2019/12/005B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Catodica-boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Catodica-boton.jpg",
     "price": "",
     "specs": []
   },
@@ -512,11 +512,11 @@
     "description": "",
     "longDescription": "<p align=justify> Los tiristores son unos componentes electrónicos parecidos a los diodos. Están compuestos por cuatro capas de silicio, dos de tipo N y otras dos de tipo P. Su utilización esta muy extendida, porque se puede controlar la corriente que por él circula, además de poder rectificar la corriente alterna. Su funcionamiento requiere de un cebado entre la puerta (G) y el cátodo (-), el cebado se realiza suministrando una pequeña corriente entre las dos patas del semiconductor que hemos mencionado. Llegado a este instante, decimos que el tiristor a entrado en fase de conducción, dejando pasar la corriente entre el ánodo y el cátodo, en esta fase se comporta como cualquier otro diodo </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/TIRISTORES-BOTON.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/001A-4.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002A-3.jpg"
+      "./src/assets/images/uploads/2019/11/TIRISTORES-BOTON.jpg",
+      "./src/assets/images/uploads/2019/12/001A-4.jpg",
+      "./src/assets/images/uploads/2019/12/002A-3.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/TIRISTORES-BOTON.jpg",
+    "image": "./src/assets/images/uploads/2019/11/TIRISTORES-BOTON.jpg",
     "price": "",
     "specs": []
   },
@@ -530,11 +530,11 @@
     "description": "",
     "longDescription": "<p align=justify> Ups ideal para servidores, telecomunicaciones, voz ip, laboratorios y datacenter. Cuenta con pantalla LED en los modelos de 1KVA a 3KVA y con pantalla LCD en modelos de 6 y 10 KVA. Tiempo de transferencia 0. Incluye puerto de comunicación RS-232, software de administración y monitoreo con cableado. Los modelos de 6 y 10 KVA son Paralelizables con opción de redundancia N+1 y poseen transformador de aislamiento a la salida </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Bifasica-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/002A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/002B-1.jpg"
+      "./src/assets/images/uploads/2019/11/Bifasica-Boton.jpg",
+      "./src/assets/images/uploads/2019/04/002A.jpg",
+      "./src/assets/images/uploads/2019/04/002B-1.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Bifasica-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Bifasica-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -548,11 +548,11 @@
     "description": "",
     "longDescription": "<p align=justify> Para colocación en piso. Topología: Stand By (de reserva) respaldo a plena carga eficiente y ecológico, protección contra transitorios de tensión, ideal para la computadora del hogar, de pequeñas oficinas o puntos de venta. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Mono-boton.png",
-      "https://opingenieria.com/wp-content/uploads/2019/04/001A-1.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/001B-1.jpg"
+      "./src/assets/images/uploads/2019/11/Mono-boton.png",
+      "./src/assets/images/uploads/2019/04/001A-1.jpg",
+      "./src/assets/images/uploads/2019/04/001B-1.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Mono-boton.png",
+    "image": "./src/assets/images/uploads/2019/11/Mono-boton.png",
     "price": "",
     "specs": []
   },
@@ -566,11 +566,11 @@
     "description": "",
     "longDescription": "<p align=justify> UPS ideal para Grandes Corporaciones y Data Center, Es la solución perfecta para cualquier aplicación crítica, es ideal para centros de datos, grandes almacenes, oficinas, equipos de laboratorios, servidores, redes, telecomunicaciones, pues brinda la máxima protección eléctrica posible, dando como resultado un alto nivel de confiabilidad. Su gran estabilidad, lo hace ideal para equipos muy sensibles a la variabilidad eléctrica, gracias a que provee un voltaje constante de 110(+/-) 1% impecable frecuencia de salida. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Trifasica-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/003A.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/04/003B.jpg"
+      "./src/assets/images/uploads/2019/11/Trifasica-Boton.jpg",
+      "./src/assets/images/uploads/2019/04/003A.jpg",
+      "./src/assets/images/uploads/2019/04/003B.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Trifasica-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Trifasica-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -584,11 +584,11 @@
     "description": "",
     "longDescription": "<p align=justify> Sistemas de control, monitoreo, protección, alarma, señalización de equipos esenciales o críticos, conforme los requerimientos o necesidades del cliente. Control de bombas, protección sistemas de aire Acondicionado, entre otros. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/T-Control-Boton-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/CIMG0662.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/SAM_1008.jpg"
+      "./src/assets/images/uploads/2019/11/T-Control-Boton-scaled.jpg",
+      "./src/assets/images/uploads/2019/12/CIMG0662.jpg",
+      "./src/assets/images/uploads/2019/12/SAM_1008.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/T-Control-Boton-scaled.jpg",
+    "image": "./src/assets/images/uploads/2019/11/T-Control-Boton-scaled.jpg",
     "price": "",
     "specs": []
   },
@@ -602,11 +602,11 @@
     "description": "",
     "longDescription": "<p align=justify> Tableros de distribución para separación de cargas críticas o equipos con alta potencia, aplicaciones con características especiales dependiendo de la necesidad del cliente conforme a la normatividad vigente en Colombia. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/11/Distribucion-Boton-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002A-4.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/002B-5.jpg"
+      "./src/assets/images/uploads/2019/11/Distribucion-Boton-scaled.jpg",
+      "./src/assets/images/uploads/2019/12/002A-4.jpg",
+      "./src/assets/images/uploads/2019/12/002B-5.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/11/Distribucion-Boton-scaled.jpg",
+    "image": "./src/assets/images/uploads/2019/11/Distribucion-Boton-scaled.jpg",
     "price": "",
     "specs": []
   },
@@ -620,11 +620,11 @@
     "description": "",
     "longDescription": "<p align=justify> Transferencias automáticas con señalización y monitoreo del estado de la tensión de entrada, dependiendo de los requerimientos de la carga se dimensiona su capacidad, maniobra por contactores o interruptores motorizados.\r\\n\r\\nTransferencias manuales, ajustadas a las necesidades del cliente, recomendadas para baja potencia sobre cargas no esenciales. Trifásicas, bifásicas o monofásicas. </p>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2019/08/Transferencias-Boton.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/11/Transferencias-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2019/12/003B-3.jpg"
+      "./src/assets/images/uploads/2019/08/Transferencias-Boton.jpg",
+      "./src/assets/images/uploads/2019/11/Transferencias-scaled.jpg",
+      "./src/assets/images/uploads/2019/12/003B-3.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2019/08/Transferencias-Boton.jpg",
+    "image": "./src/assets/images/uploads/2019/08/Transferencias-Boton.jpg",
     "price": "",
     "specs": []
   },
@@ -638,12 +638,12 @@
     "description": "",
     "longDescription": "<p align=\"justify\">Planta Electrica DE 20 KW/ 25 KVA STANDBY.</p>\r\\n\r\\n<ul>\r\\n \t<li>MOTOR PERKINS 404D-22G</li>\r\\n \t<li>GENERADOR LEROY-SOMER LSA40M7</li>\r\\n \t<li>TABLERO DE CONTROL COMAP AMF20</li>\r\\n \t<li>BREAKER DE PROTECCION</li>\r\\n \t<li>INCLUYE FILTROS, BATERIAS, CARGADOR DE BATERIAS, ACOPLE FLEXIBLE Y SILENCIADOR, BASE TANQUE, CABINA INSONORA EN LAMINA GALVANIZADA CON PINTURA ELECTROSTATICA ANTICORROSION.</li>\r\\n \t<li>SISTEMA DE ATENUACION BlackTheater DE 2\" DOBLE CON MALLA DE PROTECCION</li>\r\\n \t<li>SISTEMA DE ESCAPE (EXOSTO)</li>\r\\n \t<li>RESPUESTA DE ATENUACION 75dBA 1MTS</li>\r\\n \t<li>RESISTENTE A LA INTEMPERIE</li>\r\\n</ul>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.44-1.jpeg",
-      "https://opingenieria.com/wp-content/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.46-1.jpeg",
-      "https://opingenieria.com/wp-content/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.47-1.jpeg",
-      "https://opingenieria.com/wp-content/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.58.57-1.jpeg"
+      "./src/assets/images/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.44-1.jpeg",
+      "./src/assets/images/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.46-1.jpeg",
+      "./src/assets/images/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.47-1.jpeg",
+      "./src/assets/images/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.58.57-1.jpeg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.44-1.jpeg",
+    "image": "./src/assets/images/uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.44-1.jpeg",
     "price": "",
     "specs": []
   },
@@ -657,11 +657,11 @@
     "description": "",
     "longDescription": "<p align=\"justify\">Planta Electrica DE 30 KW/ 37,5 KVA STANDBY.</p>\r\\n\r\\n<ul>\r\\n \t<li>MOTOR PERKINS 404D-22TG</li>\r\\n \t<li>GENERADOR LEROY-SOMER LSA 42,3 VS2</li>\r\\n \t<li>TABLERO DE CONTROL COMAP AMF20</li>\r\\n \t<li>BREAKER DE PROTECCION</li>\r\\n \t<li>INCLUYE FILTROS, BATERIAS, CARGADOR DE BATERIAS, ACOPLE FLEXIBLE Y SILENCIADOR, BASE TANQUE, CABINA INSONORA EN LAMINA GALVANIZADA CON PINTURA ELECTROSTATICA ANTICORROSION.</li>\r\\n \t<li>SISTEMA DE ATENUACION BlackTheater DE 2″ DOBLE CON MALLA DE PROTECCION</li>\r\\n \t<li>SISTEMA DE ESCAPE (EXOSTO)</li>\r\\n \t<li>RESPUESTA DE ATENUACION 75dBA 1MTS</li>\r\\n \t<li>RESISTENTE A LA INTEMPERIE</li>\r\\n</ul>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2020/04/20190601_190508.png",
-      "https://opingenieria.com/wp-content/uploads/2020/04/20190522_092117-copia-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2020/04/20190601_190508.png"
+      "./src/assets/images/uploads/2020/04/20190601_190508.png",
+      "./src/assets/images/uploads/2020/04/20190522_092117-copia-scaled.jpg",
+      "./src/assets/images/uploads/2020/04/20190601_190508.png"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2020/04/20190601_190508.png",
+    "image": "./src/assets/images/uploads/2020/04/20190601_190508.png",
     "price": "",
     "specs": []
   },
@@ -675,12 +675,12 @@
     "description": "",
     "longDescription": "Los sistemas inteligentes de gestión de energía POWEST están equipados con un controlador MPTT que gestiona de manera eficiente la energía de sistemas de baterías, paneles solares, generadores eólicos y red eléctrica; logrando un sistema aislado sin cortes de luz, capaz de trabajar en 19 modos diferentes según la necesidad y la prioridad, equipado con un cargador inteligente que detecta el tipo de batería que se esté implementando.\r\\n\r\\n• Señal de salida onda senoidal pura\r\\n• Capacidad de carga solar MPPT controlador\r\\n• Rango de tensión de entrada seleccionable para los electrodomésticos y ordenadores personales\r\\n• Selección de corriente para carga basado en aplicaciones\r\\n• Configurable AC / prioridad de entrada solar a través de ajuste de LCD\r\\n• Compatible con la tensión de red o de un generador\r\\n• Auto reinicio mientras que el AC se está recuperando\r\\n• Protección de sobrecarga y cortocircuito\r\\n• Diseño del cargador de batería inteligente, para un rendimiento optimizado de la batería\r\\n• Función de arranque en frío\r\\n• Funcionamiento en paralelo hasta con 6 unidades",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2020/05/POWEST-UPS-HIBRIDA-1KVA.jpg",
-      "https://opingenieria.com/wp-content/uploads/2020/05/ups-hibrida-powest-5kva-on-grid-220v-inversor-carga-solar-D_NQ_NP_968033-MCO32461399236_102019-F.jpg",
-      "https://opingenieria.com/wp-content/uploads/2020/05/nicomar-ups-hibrida-powest-original-1kva-carga-solar-tdcex-D_NQ_NP_619567-MCO32381560460_102019-F.jpg",
-      "https://opingenieria.com/wp-content/uploads/2020/05/3kva-hybrid-110v-24v-inverter-3.jpg"
+      "./src/assets/images/uploads/2020/05/POWEST-UPS-HIBRIDA-1KVA.jpg",
+      "./src/assets/images/uploads/2020/05/ups-hibrida-powest-5kva-on-grid-220v-inversor-carga-solar-D_NQ_NP_968033-MCO32461399236_102019-F.jpg",
+      "./src/assets/images/uploads/2020/05/nicomar-ups-hibrida-powest-original-1kva-carga-solar-tdcex-D_NQ_NP_619567-MCO32381560460_102019-F.jpg",
+      "./src/assets/images/uploads/2020/05/3kva-hybrid-110v-24v-inverter-3.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2020/05/POWEST-UPS-HIBRIDA-1KVA.jpg",
+    "image": "./src/assets/images/uploads/2020/05/POWEST-UPS-HIBRIDA-1KVA.jpg",
     "price": "",
     "specs": []
   },
@@ -694,11 +694,11 @@
     "description": "",
     "longDescription": "<p class=\"p1\" style=\"text-align: justify;\">Ministab y Sterostab son los nombres registrados de dos series de estabilizadores de tensión que constituyen la solución fiable, aprobada y económica contra los mal servicios debidos a las fluctuaciones de tensión. El uso de estabilizadores de tensión aumenta el nivel de calidad de la energía y representa una inversión real porque eliminar los problemas de servicio significa bajar los costes y aumentar la productividad. Muy a menudo, en las aplicaciones industriales, es suficiente evitar algunos minutos de parada de las máquinas o una sola avería para cubrir el precio de los estabilizadores de tensión.</p>\r\\nMinistab y Sterostab son muy apropiados para las aplicaciones donde se requiere:\r\\n\r\\n✔ gran fiabilidad. Por ejemplo, por instalaciones en localidades donde es difícil llegar y sujetas a condiciones ambientales críticas por el frío, la temperatura elevada, la humedad, las descargas atmosféricas;\r\\n\r\\n✔ capacidad de compensación de grandes variaciones de la tensión de red. Ésta es una exigencia típica de las instalaciones que están lejos de las cabinas de distribución o instaladas en países en desarrollo;\r\\n\r\\n✔ elevada precisión de la tensión estabilizada. Condición ideal para bancos de calibración y ensayo, hornos eléctricos y aparatos de alumbrado profesional;\r\\n\r\\n✔ estabilización de la tensión de dispositivos de potencia elevada o con grandes corrientes de arranque como motores, acondicionadores de aire, compresores y bombas;\r\\n\r\\n✔ mantenimiento sencillo y limitado, característica indispensable cuando es difícil encontrar personal calificado capaz de realizar las intervenciones;\r\\n\r\\n✔ amplia variedad de versiones. Según las condiciones ambientales, se ofrecen armarios con grado de protección IP00, IP21, IP54 INDOOR, IP54 OUTDOOR.",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2020/05/Estabilizadores-de-Tension.png",
-      "https://opingenieria.com/wp-content/uploads/2020/05/Minista.jpg",
-      "https://opingenieria.com/wp-content/uploads/2020/05/stabilizzatori-di-tensione-IREM-Sterostab.png"
+      "./src/assets/images/uploads/2020/05/Estabilizadores-de-Tension.png",
+      "./src/assets/images/uploads/2020/05/Minista.jpg",
+      "./src/assets/images/uploads/2020/05/stabilizzatori-di-tensione-IREM-Sterostab.png"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2020/05/Estabilizadores-de-Tension.png",
+    "image": "./src/assets/images/uploads/2020/05/Estabilizadores-de-Tension.png",
     "price": "",
     "specs": []
   },
@@ -712,13 +712,13 @@
     "description": "El kit de cerca solar es un producto completo el cual contiene impulsor, panel, batería y regulador solar, todo en uno.\r\\nHaciéndolo muy práctico y fácil de instalar en cualquier lugar.",
     "longDescription": "",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2021/01/D_NQ_NP_784381-MCO31561290379_072019-O.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/863.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/IMPULSOR-SOLAR-SUPER-FOX-30KM.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/Sin-titulo-2.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/Sin-titulo.png"
+      "./src/assets/images/uploads/2021/01/D_NQ_NP_784381-MCO31561290379_072019-O.jpg",
+      "./src/assets/images/uploads/2021/01/863.jpg",
+      "./src/assets/images/uploads/2021/01/IMPULSOR-SOLAR-SUPER-FOX-30KM.jpg",
+      "./src/assets/images/uploads/2021/01/Sin-titulo-2.jpg",
+      "./src/assets/images/uploads/2021/01/Sin-titulo.png"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2021/01/D_NQ_NP_784381-MCO31561290379_072019-O.jpg",
+    "image": "./src/assets/images/uploads/2021/01/D_NQ_NP_784381-MCO31561290379_072019-O.jpg",
     "price": "",
     "specs": []
   },
@@ -732,12 +732,12 @@
     "description": "Luminaria Alumbrado Publico 100W con un excelente diseño especialmente para exteriores y alta eficiencia para una iluminación optima.",
     "longDescription": "Luminaria con un excelente diseño especialmente para exteriores y alta eficiencia para una iluminación optima.\r\\n<ul>\r\\n \t<li>Características:</li>\r\\n \t<li>Alta eficiencia Lumínica</li>\r\\n \t<li>Excelente Diseño</li>\r\\n \t<li>Excelente Disipación</li>\r\\n \t<li>Especificaciones:</li>\r\\n \t<li>Potencia: 30W</li>\r\\n \t<li>Voltaje: 100-240V</li>\r\\n \t<li>Frecuencia: 50/60Hz</li>\r\\n \t<li>Lúmenes: 2700lm</li>\r\\n \t<li>Vida Útil: 30000 hrs</li>\r\\n \t<li>Tº De Trabajo: Material: -20º a 40º</li>\r\\n \t<li>Material: ALU + PC</li>\r\\n \t<li>Dimensiones: 325 x 124 x 50mm</li>\r\\n \t<li>Diámetro Tubo: 4 cm *Tornillo ajustable</li>\r\\n</ul>",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2021/01/D_NQ_NP_799815-MCO43364381753_092020-O.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/LR008-2-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/LR008-4-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/LR008-1-scaled.jpg"
+      "./src/assets/images/uploads/2021/01/D_NQ_NP_799815-MCO43364381753_092020-O.jpg",
+      "./src/assets/images/uploads/2021/01/LR008-2-scaled.jpg",
+      "./src/assets/images/uploads/2021/01/LR008-4-scaled.jpg",
+      "./src/assets/images/uploads/2021/01/LR008-1-scaled.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2021/01/D_NQ_NP_799815-MCO43364381753_092020-O.jpg",
+    "image": "./src/assets/images/uploads/2021/01/D_NQ_NP_799815-MCO43364381753_092020-O.jpg",
     "price": "",
     "specs": []
   },
@@ -751,13 +751,13 @@
     "description": "",
     "longDescription": "Regulador de Voltaje trifásico de 30KVA con transformador de aislamiento, entrada 180-250 salida 208Vca o 220Vca. Regulación de carga +/- 4,5%. Onda Sinusoidal. Factor de Potencia +/- 0,8. Eficiencia 85%. Distorsión y contenidos armónicos &lt;1%. Conmutación por TRIAC`S.",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2021/01/IMG_20210205_113050-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/IMG_20210205_112419-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/IMG_20210205_112701-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/IMG_20210205_112533-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/01/IMG_20210205_112712-scaled.jpg"
+      "./src/assets/images/uploads/2021/01/IMG_20210205_113050-scaled.jpg",
+      "./src/assets/images/uploads/2021/01/IMG_20210205_112419-scaled.jpg",
+      "./src/assets/images/uploads/2021/01/IMG_20210205_112701-scaled.jpg",
+      "./src/assets/images/uploads/2021/01/IMG_20210205_112533-scaled.jpg",
+      "./src/assets/images/uploads/2021/01/IMG_20210205_112712-scaled.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2021/01/IMG_20210205_113050-scaled.jpg",
+    "image": "./src/assets/images/uploads/2021/01/IMG_20210205_113050-scaled.jpg",
     "price": "",
     "specs": []
   },
@@ -771,13 +771,14 @@
     "description": "Cargador de Alta frecuencia de 48Vcc-3200W, en gabinete auto soportado de 60cms x 50cms x 200cms. Controlador Orión. Módulos Delta de 1600W.",
     "longDescription": "",
     "images": [
-      "https://opingenieria.com/wp-content/uploads/2021/02/IMG_20210205_113752-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/02/IMG_20210205_113631-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/02/IMG_20210205_113701-scaled.jpg",
-      "https://opingenieria.com/wp-content/uploads/2021/02/IMG_20210205_113829-scaled.jpg"
+      "./src/assets/images/uploads/2021/02/IMG_20210205_113752-scaled.jpg",
+      "./src/assets/images/uploads/2021/02/IMG_20210205_113631-scaled.jpg",
+      "./src/assets/images/uploads/2021/02/IMG_20210205_113701-scaled.jpg",
+      "./src/assets/images/uploads/2021/02/IMG_20210205_113829-scaled.jpg"
     ],
-    "image": "https://opingenieria.com/wp-content/uploads/2021/02/IMG_20210205_113752-scaled.jpg",
+    "image": "./src/assets/images/uploads/2021/02/IMG_20210205_113752-scaled.jpg",
     "price": "",
     "specs": []
   }
 ]
+

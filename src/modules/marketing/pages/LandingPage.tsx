@@ -31,7 +31,7 @@ export default function LandingPage() {
       <ClientsPartnersSection />
       
       <Suspense fallback={<ProductGridSkeleton />}>
-        <PartnersSection />
+
       </Suspense>
       
       <ContactSection />

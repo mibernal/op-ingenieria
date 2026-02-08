@@ -6,7 +6,10 @@ import { landingSeo } from "@/modules/marketing/seo";
 import ContactSection from "@/modules/contact/components/ContactSection";
 import { ClientsSection } from "@/modules/clients/components";
 import { PartnersSection } from "@/modules/partners/components";
-import { Hero, AboutSection, ServicesSection, CTASection } from "@/modules/marketing/components";
+import Hero from "@/modules/marketing/components/HeroSection";
+import AboutSection from "@/modules/marketing/components/AboutSection";
+import ServicesSection from "@/modules/marketing/components/ServicesSection";
+import CTASection from "@/modules/marketing/components/CTASection";
 import { ProductGridSkeleton } from "@/shared/skeletons";
 
 // ✅ Lazy load: ahora sí Suspense aplica

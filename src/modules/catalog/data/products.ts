@@ -1,6 +1,6 @@
 import productsData from "../data/products_normalized.json";
 import categoriesData from "../data/categories.json";
-import { LucideIcon } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 
 export type Spec = { label: string; value: string };
 
@@ -21,22 +21,38 @@ export type Product = {
 export type Category = {
   id: string;
   name: string;
-  icon: LucideIcon;
+  icon: keyof typeof LucideIcons;
   subcategories: string[];
 };
 
-// Crear un mapa para convertir nombres de categoría a IDs
-const categoryNameToId: Record<string, string> = {};
-categoriesData.forEach(cat => {
-  categoryNameToId[cat.name] = cat.id;
-});
+type RawCategory = {
+  id: string;
+  name: string;
+  subcategories: string[];
+  count: number;
+};
+
+// Iconos definidos por arquitectura frontend
+const categoryIcons: Record<string, keyof typeof LucideIcons> = {
+  baterias: "Battery",
+  medidores: "Gauge",
+  energia: "Zap",
+  potencia: "Power",
+  sensores: "CircleDot",
+};
 
 export const products: Product[] = productsData.map((p) => ({
   ...p,
-  categoryId: categoryNameToId[p.category] || p.category, // Usar el mapa
+  categoryId: p.category || "uncategorized",
+  images: Array.isArray(p.images) ? p.images : [],
+  specs: Array.isArray(p.specs) ? p.specs : [],
 }));
 
-export const categories: Category[] = categoriesData.map((c) => ({
-  ...c,
-  icon: undefined as unknown as LucideIcon, // TODO: Map icons based on category
+const rawCategories = categoriesData as RawCategory[];
+
+export const categories: Category[] = rawCategories.map((c) => ({
+  id: c.id,
+  name: c.name,
+  subcategories: Array.isArray(c.subcategories) ? c.subcategories : [],
+  icon: categoryIcons[c.id] ?? "LayoutGrid",
 }));

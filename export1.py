@@ -2,72 +2,62 @@ import os
 import sys
 from pathlib import Path
 
-def export_ultra_minimal(src_path, output_file):
-    """
-    Exporta TODO lo relacionado con:
-    - catalog
-    - projects
-    - clients
+def export_clean(src_path, output_file):
+    """Exportación limpia con separadores mínimos"""
     
-    Incluye CSS
-    Excluye JSON y assets pesados
-    """
-
     src_path = Path(src_path)
-
-    if not src_path.exists():
-        print(f"Error: {src_path} no existe.")
-        sys.exit(1)
-
-    TARGET_KEYWORDS = {"catalog", "projects", "clients"}
-
-    IGNORE_EXTENSIONS = {
-        '.png', '.jpg', '.jpeg', '.gif', '.ico',
-        '.woff', '.woff2', '.ttf', '.eot',
-        '.DS_Store', '.json'
-    }
-
-    IGNORE_DIRS = {
-        '.git', 'node_modules', '__pycache__', 'dist', 'build', '.next'
-    }
-
+    
+    TARGETS = {"header", "footer", "landing", "projects", "clients", 
+               "partners", "catalog", "marketing", "contact", "layout", "styles"}
+    
     file_count = 0
-
+    
     with open(output_file, 'w', encoding='utf-8') as out:
         for root, dirs, files in os.walk(src_path):
             root_path = Path(root)
-
-            # Limpiar carpetas basura
-            dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
-
-            # ¿Este path pertenece a alguno de los dominios?
-            if not any(k in root_path.parts for k in TARGET_KEYWORDS):
+            
+            # Saltar directorios no deseados
+            if any(d in str(root_path) for d in ['.git', 'node_modules', 'dist','ui','assets', '.json']):
                 continue
-
-            for file in sorted(files):
-                file_path = root_path / file
-
-                # Omitir extensiones
-                if file_path.suffix.lower() in IGNORE_EXTENSIONS:
+            
+            # Verificar si es un directorio objetivo
+            root_lower = str(root_path).lower()
+            if not any(target in root_lower for target in TARGETS):
+                if "app" not in root_lower:
                     continue
-
+            
+            for file in sorted(files):
+                if file.endswith('.json'):
+                    continue
+                    
+                if not file.endswith(('.tsx', '.ts', '.jsx', '.js', '.css')):
+                    continue
+                
+                # Solo CSS importantes
+                if file.endswith('.css') and file not in ['App.css', 'index.css']:
+                    continue
+                
+                file_path = root_path / file
+                
                 try:
-                    with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    with open(file_path, 'r', encoding='utf-8') as f:
                         content = f.read().strip()
-
+                    
                     if content:
                         rel_path = file_path.relative_to(src_path)
-                        out.write(f"# {rel_path}\n")
+                        # Separador de 2 caracteres + ruta
+                        out.write(f"\n>>{rel_path}\n")
                         out.write(content)
-                        out.write("\n\n")
+                        out.write("\n")
                         file_count += 1
-
-                except Exception as e:
-                    print(f"⚠️ Error leyendo {file_path}: {e}")
-
-    print(f"\n✅ Exportados: {file_count} archivos -> {output_file}")
+                        
+                except Exception:
+                    pass
+    
+    print(f"Exportado: {file_count} archivos")
 
 if __name__ == "__main__":
-    src = "/Users/MiguelBernal/APPS/REACT/op-ingenieria/op-ingenieria/src"
-    output = "catalog_projects_clients_export.txt"
-    export_ultra_minimal(src, output)
+    export_clean(
+        "/Users/MiguelBernal/APPS/REACT/op-ingenieria/op-ingenieria/src",
+        "frontend_clean.txt"
+    )

@@ -1,10 +1,13 @@
+/* src/styles/index.css */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* O&P Ingeniería Design System */
+/* ==========================================================================
+   O&P Ingeniería Design System - Variables CSS Modernas
+   ========================================================================== */
 
 @layer base {
   :root {
@@ -98,6 +101,10 @@
   }
 }
 
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
 @layer base {
   * {
     @apply border-border;
@@ -105,14 +112,40 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-semibold tracking-tight;
   }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better focus styles */
+  :focus-visible {
+    @apply outline-2 outline-accent outline-offset-2;
+  }
+
+  /* Remove focus styles for mouse users */
+  :focus:not(:focus-visible) {
+    @apply outline-none;
+  }
+
+  /* Improve text rendering */
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
 @layer components {
+  /* Navigation */
   .nav-link {
     @apply relative px-4 py-2 font-medium text-foreground/80 transition-colors hover:text-foreground;
   }
@@ -126,6 +159,7 @@
     @apply absolute bottom-0 left-0 right-0 h-1 bg-accent rounded-t-sm;
   }
 
+  /* Hero Section */
   .hero-section {
     @apply relative bg-primary min-h-[70vh] flex items-center justify-center overflow-hidden;
   }
@@ -134,6 +168,7 @@
     @apply absolute inset-0 bg-gradient-to-b from-primary/90 to-primary;
   }
 
+  /* Section Styles */
   .section-title {
     @apply text-3xl md:text-4xl font-heading font-bold text-foreground mb-4;
   }
@@ -142,6 +177,7 @@
     @apply text-lg text-muted-foreground max-w-2xl;
   }
 
+  /* Product Cards */
   .product-card {
     @apply bg-card rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border;
   }
@@ -158,78 +194,72 @@
     @apply font-heading font-semibold text-card-foreground text-center;
   }
 
+  /* Contact Section */
   .contact-section {
     @apply bg-secondary py-16;
   }
 
+  /* Footer */
   .footer-section {
     @apply bg-primary text-primary-foreground py-12;
   }
 
+  /* Buttons */
   .btn-accent {
-    @apply bg-accent text-accent-foreground hover:bg-accent/90 font-medium px-6 py-3 rounded transition-all duration-200 hover:shadow-lg;
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 font-medium px-6 py-3 rounded transition-all duration-200 hover:shadow-lg focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground font-medium px-6 py-3 rounded transition-all duration-200;
+  }
+
+  /* Form Elements */
+  .form-input {
+    @apply w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-foreground mb-1;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-card rounded-lg border border-border shadow-sm transition-all duration-300 hover:shadow-md;
+  }
+
+  .card-header {
+    @apply p-6 pb-0;
+  }
+
+  .card-content {
+    @apply p-6;
+  }
+
+  .card-footer {
+    @apply p-6 pt-0;
   }
 }
 
-@layer utilities {
-  .animate-enter {
-    animation: enter 0.2s ease-out;
-  }
-  
-  .animate-exit {
-    animation: exit 0.15s ease-in;
-  }
-  
-  .animate-fade-in-up {
-    animation: fadeInUp 0.3s ease-out;
-  }
-  
-  .animate-scale-in {
-    animation: scaleIn 0.2s ease-out;
-  }
-  
-  @keyframes enter {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Feedback táctil para móvil */
-  @media (hover: none) and (pointer: coarse) {
-    .tap-highlight {
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-    }
-    
-    .touch-active:active {
-      transform: scale(0.98);
-      transition: transform 0.1s;
-    }
-  }
-}
-/* -------------------------
-   Product images: responsive, safe and consistent
-   ------------------------- */
+/* ==========================================================================
+   Image Utilities - Optimizadas y Responsivas
+   ========================================================================== */
+
+/* Product images: responsive, safe and consistent */
 .product-card-image {
-  /* altura consistente para todas las cards; ajusta h-48 si quieres otra */
-  height: 12rem; /* equivalente Tailwind: h-48 */
+  height: 12rem; /* equivalente a h-48 */
   overflow: hidden;
   position: relative;
+  background-color: hsl(var(--secondary)); /* Usar variables CSS */
 }
 
 .product-card-image img,
 .category-image,
 .logo-carousel img {
-  display: block;            /* evita espacio inline */
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;         /* mantiene cover sin romper el card */
+  object-fit: cover;
   object-position: center;
-  -o-object-fit: cover;
 }
 
 /* Imagen dentro de modal / aspecto cuadrado */
@@ -237,19 +267,444 @@
 .aspect-square img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* en modal preferible contain para no recortar specs */
+  object-fit: contain;
 }
 
-/* Placeholder para imágenes rotas (usa una ruta válida en tu /public) */
+/* Placeholder para imágenes rotas */
 .img-placeholder {
-  background: linear-gradient(180deg, rgba(240,240,240,1), rgba(225,225,225,1));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color: #9aa0a6;
+  background: linear-gradient(180deg, 
+    hsl(var(--secondary) / 0.9) 0%, 
+    hsl(var(--muted) / 0.9) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--muted-foreground));
   font-size: 0.9rem;
 }
 
-/* pequeño helper para imagenes con ratio */
+/* Aspect ratio helpers usando aspect-ratio moderno */
 .aspect-4-3 { aspect-ratio: 4 / 3; }
 .aspect-square { aspect-ratio: 1 / 1; }
+.aspect-video { aspect-ratio: 16 / 9; }
+
+/* ==========================================================================
+   Utility Classes - Optimizadas y Corregidas
+   ========================================================================== */
+
+@layer utilities {
+  /* Animaciones mejoradas */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* Efectos de gradiente - CORREGIDOS */
+  .gradient-text {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent)) 50%,
+      hsl(var(--primary)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .gradient-border {
+    border-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--accent) / 0.2) 50%,
+      transparent 100%
+    ) 1;
+  }
+  
+  /* Efectos de tarjeta */
+  .card-glow {
+    transition: all 0.3s ease;
+  }
+  
+  .card-glow:hover {
+    box-shadow: 
+      0 10px 40px -10px rgba(0, 0, 0, 0.1),
+      0 0 20px -5px hsl(var(--accent) / 0.2);
+  }
+  
+  /* Grid patterns usando CSS custom properties */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  /* Scrollbar personalizado - CORREGIDO */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) hsl(var(--secondary));
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--secondary));
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 9999px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+  
+  /* Shimmer effect - CORREGIDO */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--secondary)) 0%,
+      hsl(var(--muted)) 50%,
+      hsl(var(--secondary)) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+  }
+  
+  /* Glass effect */
+  .glass-effect {
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border) / 0.2);
+  }
+  
+  /* Text utilities */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Layout utilities */
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4;
+  }
+  
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4;
+  }
+  
+  /* Spacing utilities */
+  .section-spacing {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+  
+  /* Interaction utilities */
+  .tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .touch-active:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Hover utilities */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Focus utilities */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+  
+  /* Aspect ratio fallbacks para navegadores antiguos */
+  .aspect-fallback {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 por defecto */
+  }
+  
+  .aspect-fallback > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ==========================================================================
+   Animation Keyframes
+   ========================================================================== */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* ==========================================================================
+   Responsive Utilities
+   ========================================================================== */
+
+@layer utilities {
+  /* Mobile-first responsive typography */
+  .text-responsive {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+  
+  .heading-responsive {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  /* Responsive spacing */
+  .responsive-padding {
+    @apply px-4 sm:px-6 md:px-8 lg:px-12;
+  }
+  
+  .responsive-margin {
+    @apply mx-4 sm:mx-6 md:mx-8 lg:mx-12;
+  }
+  
+  /* Grid responsive layouts */
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6;
+  }
+  
+  /* Responsive container */
+  .responsive-container {
+    @apply w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   Accessibility Improvements
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0% 0%;
+    --muted-foreground: 0 0% 0%;
+  }
+}
+
+/* Dark mode transitions */
+@media (prefers-color-scheme: dark) {
+  :root {
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
+}
+
+/* ==========================================================================
+   Debug Utilities (solo para desarrollo)
+   ========================================================================== */
+
+.debug {
+  outline: 1px solid red !important;
+}
+
+.debug-grid {
+  background-image: linear-gradient(to right, #80808030 1px, transparent 1px),
+                    linear-gradient(to bottom, #80808030 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.debug-flex {
+  outline: 2px dashed blue;
+}
+
+.debug-grid > * {
+  outline: 1px solid green;
+}
+
+/* Añade al final de tu archivo index.css */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.8s ease-out forwards;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

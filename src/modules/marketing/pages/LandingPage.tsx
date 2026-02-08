@@ -1,3 +1,4 @@
+// modules/marketing/pages/LandingPage.tsx - Verificar importaciones
 import { Suspense } from "react";
 
 import ProductsSection from "@/modules/catalog/components/products/ProductsSection";
@@ -29,6 +30,7 @@ export default function LandingPage() {
 
       <ProjectsSection />
 
+      {/* Estas secciones ya no necesitan Suspense porque son componentes ligeros */}
       <ClientsSection />
       <PartnersSection />
 

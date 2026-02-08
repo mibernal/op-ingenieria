@@ -3,13 +3,12 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MessageCircle, Mail, X } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
 import type { Product, Spec } from "@/modules/catalog/data/products";
-import { categories } from "@/modules/catalog/data/products";
+import { Card } from "@/components/ui/card";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -17,7 +16,7 @@ interface ProductDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalProps) => {
+export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalProps) => {
   if (!product) return null;
 
   const handleWhatsApp = () => {
@@ -35,55 +34,79 @@ const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalP
     window.open(`mailto:ventas@opingenieria.com?subject=${subject}&body=${body}`, "_blank");
   };
 
-  // Función para obtener el nombre de la categoría (simulación)
-const getCategoryName = () => {
-  const category = categories.find(c => c.id === product.categoryId);
-  return category?.name || product.categoryId || "Sin categoría";
-};
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-xl md:text-2xl font-heading pr-8">
-            {product.title}
-          </DialogTitle>
-          <DialogDescription className="sr-only">
-            Detalles del producto {product.title}
-          </DialogDescription>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0">
+        <DialogHeader className="px-6 pt-6 pb-0">
+          <div>
+            <DialogTitle className="text-xl md:text-2xl font-heading">
+              {product.title}
+            </DialogTitle>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant="secondary" className="text-sm">
+                {product.categoryId}
+              </Badge>
+              {product.subcategory && (
+                <Badge variant="outline" className="text-sm">
+                  {product.subcategory}
+                </Badge>
+              )}
+            </div>
+          </div>
         </DialogHeader>
 
-        <div className="grid md:grid-cols-2 gap-6 mt-4">
+        <div className="grid md:grid-cols-2 gap-6 mt-4 p-6">
           {/* Product Image */}
-          <div className="aspect-square rounded-lg overflow-hidden bg-secondary product-detail-image">
-            <img
-              src={product.images?.[0] || "/placeholder-product.jpg"}
-              alt={product.title}
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                const target = e.currentTarget;
-                if (target.src !== "/placeholder-product.jpg") {
-                  target.src = "/placeholder-product.jpg";
-                }
-              }}
-              className="w-full h-full object-contain block"
-            />
+          <div className="space-y-4">
+            <div className="aspect-square rounded-lg overflow-hidden bg-secondary">
+              <img
+                src={product.images?.[0] || "/placeholder-product.jpg"}
+                alt={product.title}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src !== "/placeholder-product.jpg") {
+                    target.src = "/placeholder-product.jpg";
+                  }
+                }}
+                className="w-full h-full object-contain block"
+              />
+            </div>
+
+            {/* Image Gallery */}
+            {product.images.length > 1 && (
+              <div className="flex gap-2 overflow-x-auto pb-2">
+                {product.images.map((img, index) => (
+                  <button
+                    key={index}
+                    className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border"
+                  >
+                    <img
+                      src={img}
+                      alt={`${product.title} - ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Product Info */}
-          <div className="space-y-4">
-            <Badge variant="secondary" className="text-sm">
-              {getCategoryName()}
-            </Badge>
-
+          <div className="space-y-6">
             {product.price && (
-              <p className="text-2xl font-bold text-accent">{product.price}</p>
+              <div className="text-3xl font-bold text-primary">
+                {product.price}
+              </div>
             )}
 
-            <p className="text-muted-foreground leading-relaxed">
-              {product.description}
-            </p>
+            <Card className="p-4">
+              <h3 className="font-semibold mb-2">Descripción</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {product.description || "Producto de alta calidad para aplicaciones industriales."}
+              </p>
+            </Card>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
@@ -100,30 +123,34 @@ const getCategoryName = () => {
         </div>
 
         {/* Specifications Table */}
-        <div className="mt-6">
-          <h4 className="font-heading font-semibold text-lg mb-3">
-            Especificaciones Técnicas
-          </h4>
-          <div className="bg-secondary rounded-lg overflow-hidden">
-            <table className="w-full">
-              <tbody>
-                {product.specs && product.specs.map((spec: Spec, index: number) => (
-                  <tr
-                    key={spec.label}
-                    className={index % 2 === 0 ? "bg-secondary" : "bg-muted/50"}
-                  >
-                    <td className="px-4 py-3 font-medium text-foreground">
-                      {spec.label}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground text-right">
-                      {spec.value}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {product.specs && product.specs.length > 0 && (
+          <div className="p-6 border-t">
+            <h4 className="font-heading font-semibold text-lg mb-3">
+              Especificaciones Técnicas
+            </h4>
+            <Card>
+              <div className="overflow-hidden">
+                <table className="w-full">
+                  <tbody>
+                    {product.specs.map((spec: Spec, index: number) => (
+                      <tr
+                        key={spec.label}
+                        className={index % 2 === 0 ? "bg-secondary" : "bg-muted/50"}
+                      >
+                        <td className="px-4 py-3 font-medium text-foreground">
+                          {spec.label}
+                        </td>
+                        <td className="px-4 py-3 text-muted-foreground text-right">
+                          {spec.value}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
           </div>
-        </div>
+        )}
       </DialogContent>
     </Dialog>
   );

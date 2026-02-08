@@ -4,122 +4,378 @@ export * from "./data/clients";
 export type { Client, ClientData } from "@/core/domain/client";
 
 # modules/clients/components/ClientCard.tsx
+// modules/clients/components/ClientCard.tsx - CORREGIDO
 import { FC } from "react";
+import { 
+  Card, 
+  CardContent 
+} from "@/components/ui/card";
 import OptimizedImage from "@/shared/components/OptimizedImage";
 import { cn } from "@/lib/utils";
 import type { Client } from "@/core/domain/client";
+import { Building2, Star } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
-interface ClientCardProps {
-  client: Client;
-  className?: string;
+// Tipo extendido para clientes con propiedades adicionales
+interface ExtendedClient extends Client {
+  category?: string;
+  featured?: boolean;
 }
 
-export const ClientCard: FC<ClientCardProps> = ({ client, className }) => {
+interface ClientCardProps {
+  client: ExtendedClient; // USAR ExtendedClient EN LUGAR DE Client
+  className?: string;
+  featured?: boolean;
+  onClick?: (client: ExtendedClient) => void;
+}
+
+export const ClientCard: FC<ClientCardProps> = ({ 
+  client, 
+  className, 
+  featured = false,
+  onClick 
+}) => {
   return (
-    <article 
-      className={cn("p-2", className)}
+    <Card 
+      className={cn(
+        "group relative overflow-hidden transition-all duration-300",
+        "hover:-translate-y-1 hover:shadow-lg",
+        "cursor-pointer hover:border-accent/50",
+        "h-full flex flex-col",
+        onClick && "cursor-pointer",
+        className
+      )}
+      onClick={() => onClick?.(client)}
+      role={onClick ? "button" : "article"}
       aria-label={`Cliente: ${client.name}`}
     >
-      <div 
-        className="bg-card rounded-lg shadow-sm border border-border overflow-hidden hover:shadow-md transition-shadow duration-300"
-        role="region"
-      >
-        <div className="w-full aspect-square flex items-center justify-center p-4">
+      {/* Featured Badge */}
+      {featured && (
+        <div className="absolute top-3 right-3 z-10">
+          <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-600 hover:to-orange-600">
+            <Star className="w-3 h-3 fill-current mr-1" />
+            Destacado
+          </Badge>
+        </div>
+      )}
+
+      {/* Category Badge */}
+      {client.category && (
+        <div className="absolute top-3 left-3 z-10">
+          <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm">
+            {client.category}
+          </Badge>
+        </div>
+      )}
+
+      <CardContent className="p-6 flex-1 flex flex-col">
+        <div className="relative w-full aspect-[4/3] flex items-center justify-center p-6 bg-gradient-to-br from-secondary/30 to-transparent rounded-lg overflow-hidden group-hover:from-secondary/40 transition-colors mb-4">
+          
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.1)_1px,transparent_0)] bg-[size:20px_20px]" />
+          </div>
+
           {client.logo ? (
-            <OptimizedImage
-              src={client.logo}
-              alt={`Logo de ${client.name}`}
-              width={160}
-              height={160}
-              loading="lazy"
-              className="max-w-full max-h-full object-contain"
-              objectFit="contain"
-              fallback={
-                <div className="flex items-center justify-center h-full">
-                  <span className="text-sm font-medium text-foreground text-center px-2">
-                    {client.name}
-                  </span>
-                </div>
-              }
-            />
+            <div className="relative z-10 w-full h-full">
+              <OptimizedImage
+                src={client.logo}
+                alt={`Logo de ${client.name}`}
+                width={200}
+                height={150}
+                loading="lazy"
+                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                fallback={
+                  <div className="flex flex-col items-center justify-center h-full gap-2">
+                    <Building2 className="w-12 h-12 text-muted-foreground" />
+                    <span className="text-sm font-medium text-foreground text-center">
+                      {client.name}
+                    </span>
+                  </div>
+                }
+              />
+            </div>
           ) : (
-            <div className="flex items-center justify-center h-full">
-              <span className="text-sm font-medium text-foreground text-center px-2">
+            <div className="flex flex-col items-center justify-center h-full gap-3">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                <Building2 className="w-8 h-8 text-primary" />
+              </div>
+              <span className="text-base font-semibold text-foreground text-center">
                 {client.name}
               </span>
             </div>
           )}
+
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
+            <span className="text-sm font-medium text-foreground bg-background/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+              Ver detalles
+            </span>
+          </div>
         </div>
-      </div>
-    </article>
+
+        {/* Client Info */}
+        <div className="text-center mt-auto">
+          <h3 className="font-semibold text-foreground line-clamp-1 mb-1">
+            {client.name}
+          </h3>
+          {client.category && (
+            <p className="text-sm text-muted-foreground">
+              {client.category}
+            </p>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
 export default ClientCard;
 
 # modules/clients/components/ClientGrid.tsx
-import { FC } from "react";
+// modules/clients/components/ClientGrid.tsx - CORREGIDO
+import { FC, useState, useMemo } from "react";
 import { ClientCard } from "./ClientCard";
 import type { Client } from "@/core/domain/client";
 import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input"; // CORREGIR RUTA
+import { Button } from "@/components/ui/button"; // CORREGIR RUTA
+import { Search, Filter, X, Grid3x3, List, Building2 } from "lucide-react"; // AÑADIR Building2
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"; // CORREGIR RUTA
+
+// Tipo extendido para clientes
+interface ExtendedClient extends Client {
+  category?: string;
+  featured?: boolean;
+}
 
 interface ClientGridProps {
-  clients: Client[];
+  clients: ExtendedClient[]; // USAR ExtendedClient
   className?: string;
-  gridClassName?: string;
   isLoading?: boolean;
+  showFilters?: boolean;
+  viewMode?: 'grid' | 'list';
+  onViewModeChange?: (mode: 'grid' | 'list') => void;
 }
 
 export const ClientGrid: FC<ClientGridProps> = ({
   clients,
   className,
-  gridClassName,
   isLoading = false,
+  showFilters = true,
+  viewMode = 'grid',
+  onViewModeChange,
 }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [showFeatured, setShowFeatured] = useState(false);
+
+  // Extraer categorías únicas
+  const categories = useMemo(() => {
+    const cats = clients
+      .map(c => c.category)
+      .filter((cat): cat is string => !!cat); // Type guard para filtrar undefined
+    return ['all', ...Array.from(new Set(cats))];
+  }, [clients]);
+
+  // Filtrar clientes
+  const filteredClients = useMemo(() => {
+    return clients.filter(client => {
+      // Buscar por nombre
+      const matchesSearch = !searchTerm || 
+        client.name.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      // Filtrar por categoría
+      const matchesCategory = selectedCategory === 'all' || 
+        client.category === selectedCategory;
+      
+      // Filtrar destacados
+      const matchesFeatured = !showFeatured || client.featured;
+      
+      return matchesSearch && matchesCategory && matchesFeatured;
+    });
+  }, [clients, searchTerm, selectedCategory, showFeatured]);
+
   if (isLoading) {
     return (
-      <div 
-        className={cn("animate-pulse", className)} 
-        role="status" 
-        aria-label="Cargando clientes"
-      >
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={`skeleton-${index}`}
-              className="bg-muted rounded-lg aspect-square"
-              aria-hidden="true"
-            />
+      <div className={cn("animate-pulse", className)}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <div key={index} className="space-y-3">
+              <div className="aspect-[4/3] bg-muted rounded-lg" />
+              <div className="h-4 bg-muted rounded w-3/4" />
+              <div className="h-3 bg-muted rounded w-1/2" />
+            </div>
           ))}
         </div>
       </div>
     );
   }
 
-  if (!clients.length) {
-    return (
-      <div className={cn("text-center py-12", className)}>
-        <p className="text-muted-foreground">No hay clientes para mostrar</p>
-      </div>
-    );
-  }
+  const hasFilters = searchTerm || selectedCategory !== 'all' || showFeatured;
 
   return (
-    <div className={className}>
-      <div
-        className={cn(
-          "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6",
-          gridClassName
-        )}
-        role="list"
-        aria-label="Lista de clientes"
-      >
-        {clients.map((client) => (
-          <div key={client.id} role="listitem">
-            <ClientCard client={client} />
+    <div className={cn("space-y-6", className)}>
+      {/* Filtros */}
+      {showFilters && (
+        <div className="bg-card rounded-xl border p-4 space-y-4">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            {/* Barra de búsqueda */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                placeholder="Buscar clientes..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+
+            {/* Controles de vista */}
+            <div className="flex items-center gap-2">
+              {onViewModeChange && (
+                <div className="flex items-center gap-1 border rounded-lg p-1">
+                  <Button
+                    size="sm"
+                    variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                    onClick={() => onViewModeChange('grid')}
+                    className="h-8 w-8 p-0"
+                  >
+                    <Grid3x3 className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={viewMode === 'list' ? 'default' : 'ghost'}
+                    onClick={() => onViewModeChange('list')}
+                    className="h-8 w-8 p-0"
+                  >
+                    <List className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+
+              {/* Selector de categoría */}
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-[180px]">
+                  <Filter className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Categoría" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map(cat => (
+                    <SelectItem key={cat} value={cat}>
+                      {cat === 'all' ? 'Todas las categorías' : cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Filtro destacados */}
+              <Button
+                variant={showFeatured ? "default" : "outline"}
+                size="sm"
+                onClick={() => setShowFeatured(!showFeatured)}
+              >
+                Destacados
+              </Button>
+            </div>
           </div>
-        ))}
-      </div>
+
+          {/* Resumen de filtros */}
+          {hasFilters && (
+            <div className="flex items-center justify-between pt-4 border-t">
+              <div className="text-sm text-muted-foreground">
+                {filteredClients.length} de {clients.length} clientes
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setSearchTerm('');
+                  setSelectedCategory('all');
+                  setShowFeatured(false);
+                }}
+                className="gap-2"
+              >
+                <X className="h-4 w-4" />
+                Limpiar filtros
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Contenido */}
+      {filteredClients.length === 0 ? (
+        <div className="text-center py-12 space-y-4">
+          <div className="w-20 h-20 mx-auto rounded-full bg-muted flex items-center justify-center">
+            <Search className="h-10 w-10 text-muted-foreground" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold">No se encontraron clientes</h3>
+            <p className="text-muted-foreground">
+              {hasFilters 
+                ? "Intenta con otros filtros de búsqueda"
+                : "No hay clientes para mostrar"}
+            </p>
+          </div>
+          {hasFilters && (
+            <Button
+              variant="outline"
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedCategory('all');
+                setShowFeatured(false);
+              }}
+            >
+              Ver todos los clientes
+            </Button>
+          )}
+        </div>
+      ) : viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredClients.map((client) => (
+            <ClientCard
+              key={client.id}
+              client={client}
+              featured={client.featured}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {filteredClients.map((client) => (
+            <div
+              key={client.id}
+              className="flex items-center gap-4 p-4 border rounded-lg hover:bg-secondary/50 transition-colors"
+            >
+              <div className="w-16 h-16 flex-shrink-0">
+                {client.logo ? (
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <div className="w-full h-full rounded-full bg-primary/10 flex items-center justify-center">
+                    <Building2 className="w-8 h-8 text-primary" />
+                  </div>
+                )}
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold">{client.name}</h3>
+                {client.category && (
+                  <p className="text-sm text-muted-foreground">{client.category}</p>
+                )}
+              </div>
+              {client.featured && (
+                <span className="px-2 py-1 text-xs bg-amber-100 text-amber-800 rounded-full">
+                  Destacado
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -166,8 +422,12 @@ import type { Client } from "@/core/domain/client";
 import data from "./clients.json";
 
 export interface ClientData extends Client {
-  category?: string;
-  featured?: boolean;
+  id: string;
+  name: string;
+  logo?: string;
+  category?: string; // AÑADIR ESTO
+  featured?: boolean; // AÑADIR ESTO
+  
 }
 
 // Datos mock - En producción esto vendría de una API
@@ -198,161 +458,356 @@ export const clients: Client[] = data as Client[];
 export default clients;
 
 # modules/projects/components/ProjectCard.tsx
-// src/modules/projects/components/ProjectCard.tsx
-
+// modules/projects/components/ProjectCard.tsx
 import { type Project } from "@/modules/projects/data/projects";
 import { useState } from "react";
+import { 
+  Card, 
+  CardContent,
+  CardFooter 
+} from "@/components/ui/card";
 import OptimizedImage from "@/shared/components/OptimizedImage";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ProjectCardProps {
   project: Project;
   onClick: (project: Project) => void;
+  variant?: 'default' | 'compact';
 }
 
-const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
+export const ProjectCard = ({ project, onClick, variant = 'default' }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  if (variant === 'compact') {
+    return (
+      <Card
+        className="group cursor-pointer hover:shadow-lg transition-all duration-300"
+        onClick={() => onClick(project)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onClick(project);
+          }
+        }}
+        aria-label={`Ver proyecto: ${project.name}`}
+      >
+        <CardContent className="p-4">
+          <div className="flex items-center gap-4">
+            <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden rounded-lg">
+              <OptimizedImage
+                src={project.images?.[0] || "/placeholder-project.jpg"}
+                alt={project.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-start justify-between gap-2 mb-1">
+                <h3 className="font-semibold text-foreground line-clamp-1">
+                  {project.name}
+                </h3>
+                <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+              </div>
+              <p className="text-sm text-muted-foreground line-clamp-1 mb-2">
+                {project.client}
+              </p>
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-xs">
+                  {project.category}
+                </Badge>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
-    <button
+    <Card
+      className={cn(
+        "group relative overflow-hidden transition-all duration-300",
+        "hover:-translate-y-1 hover:shadow-xl",
+        "h-full flex flex-col cursor-pointer",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      )}
       onClick={() => onClick(project)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative bg-card rounded-lg shadow-sm border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 text-left w-full"
-      aria-label={`Ver detalles de ${project.name}`}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick(project);
+        }
+      }}
+      aria-label={`Ver detalles del proyecto: ${project.name}`}
     >
-      {/* Imagen */}
-      <div className="relative h-48 md:h-56 overflow-hidden rounded-t-lg bg-muted">
+      {/* Image Container */}
+      <div className="relative aspect-video overflow-hidden">
         <OptimizedImage
           src={project.images?.[0] || "/placeholder-project.jpg"}
           alt={project.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          aspectRatio="square"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          aspectRatio="video"
         />
+        
+        {/* Category Badge */}
+        <div className="absolute top-4 left-4 z-20">
+          <Badge className="bg-background/90 backdrop-blur-sm text-foreground hover:bg-background">
+            {project.category}
+          </Badge>
+        </div>
 
-        {/* Overlay hover */}
-        <div className={`
-          absolute inset-0 bg-gradient-to-t from-black/60 to-transparent 
-          opacity-0 group-hover:opacity-100 transition-opacity duration-300
-          flex items-end p-4
-        `}>
-          <span className="text-white text-sm font-medium">
-            Ver proyecto →
-          </span>
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+          <div className="bg-background/90 backdrop-blur-sm px-6 py-3 rounded-full">
+            <span className="font-medium text-foreground">Ver proyecto</span>
+          </div>
         </div>
       </div>
 
-      {/* Contenido */}
-      <div className="p-4 space-y-2">
-        <h3 className="font-heading font-semibold text-card-foreground text-sm leading-tight line-clamp-2">
-          {project.name}
-        </h3>
+      <CardContent className="p-6 flex-1">
+        <div className="space-y-3">
+          <div>
+            <h3 className="text-lg font-semibold text-foreground line-clamp-1 group-hover:text-accent transition-colors">
+              {project.name}
+            </h3>
+            <p className="text-sm text-muted-foreground line-clamp-1">
+              {project.client}
+            </p>
+          </div>
 
-        <p className="text-xs text-muted-foreground line-clamp-2">
-          {project.client}
-        </p>
-      </div>
-    </button>
+          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+            {project.description || "Proyecto desarrollado por OP Ingeniería con los más altos estándares de calidad."}
+          </p>
+        </div>
+      </CardContent>
+
+      <CardFooter className="px-6 pb-6 pt-0 border-t pt-4">
+        <div className="flex items-center justify-between w-full text-xs text-muted-foreground">
+          <div className="text-accent font-medium flex items-center gap-1">
+            Ver detalles
+            <ExternalLink className="w-3 h-3" />
+          </div>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 
 export default ProjectCard;
 
 # modules/projects/components/ProjectDetailModal.tsx
-// src/modules/projects/components/ProjectDetailModal.tsx
-
+// modules/projects/components/ProjectDetailModal.tsx - CORREGIDO
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, X, Building2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import type { Project } from "@/modules/projects/data/projects";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
-interface Props {
+interface ProjectDetailModalProps {
   project: Project | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-const AUTO_SLIDE_INTERVAL = 4500;
+const AUTO_SLIDE_INTERVAL = 5000;
 
-const ProjectDetailModal = ({ project, open, onOpenChange }: Props) => {
-  const [index, setIndex] = useState(0);
+export const ProjectDetailModal = ({ project, open, onOpenChange }: ProjectDetailModalProps) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   useEffect(() => {
-    if (!project || project.images.length <= 1) return;
+    if (!project || project.images.length <= 1 || !isAutoPlaying) return;
 
     const timer = setInterval(() => {
-      setIndex((prev) =>
+      setCurrentImageIndex((prev) =>
         prev === project.images.length - 1 ? 0 : prev + 1
       );
     }, AUTO_SLIDE_INTERVAL);
 
     return () => clearInterval(timer);
-  }, [project]);
+  }, [project, isAutoPlaying]);
 
   if (!project) return null;
 
-  const prev = () =>
-    setIndex((i) => (i === 0 ? project.images.length - 1 : i - 1));
+  const goToPrevious = () => {
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? project.images.length - 1 : prev - 1
+    );
+    setIsAutoPlaying(false);
+  };
 
-  const next = () =>
-    setIndex((i) => (i === project.images.length - 1 ? 0 : i + 1));
+  const goToNext = () => {
+    setCurrentImageIndex((prev) =>
+      prev === project.images.length - 1 ? 0 : prev + 1
+    );
+    setIsAutoPlaying(false);
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto p-0">
+      <DialogContent 
+        className="max-w-6xl max-h-[90vh] overflow-y-auto p-0"
+        aria-describedby="project-description"
+      >
         <DialogHeader className="px-6 pt-6">
-          <DialogTitle className="text-xl md:text-2xl font-heading">
-            {project.name}
-          </DialogTitle>
+          <div className="flex items-start justify-between">
+            <div>
+              <DialogTitle className="text-2xl md:text-3xl font-heading font-bold">
+                {project.name}
+              </DialogTitle>
+              <DialogDescription className="sr-only">
+                Detalles del proyecto {project.name} para el cliente {project.client}
+              </DialogDescription>
+              <div className="flex items-center gap-2 mt-2">
+                <Badge variant="secondary">
+                  <Building2 className="w-3 h-3 mr-1" />
+                  {project.client}
+                </Badge>
+                <Badge variant="outline">
+                  {project.category}
+                </Badge>
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => onOpenChange(false)}
+              className="h-8 w-8"
+              aria-label="Cerrar modal"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
         </DialogHeader>
 
-        {/* Carrusel */}
-        <div className="relative aspect-video bg-black">
-          <img
-            src={project.images[index]}
-            alt={project.name}
-            className="w-full h-full object-contain"
-          />
+        {/* Carrusel de imágenes */}
+        <div className="relative mt-6">
+          <div className="relative aspect-video bg-muted">
+            <img
+              src={project.images[currentImageIndex]}
+              alt={`${project.name} - Imagen ${currentImageIndex + 1}`}
+              className="w-full h-full object-contain"
+              loading="lazy"
+            />
 
+            {project.images.length > 1 && (
+              <>
+                <button
+                  onClick={goToPrevious}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
+                  aria-label="Imagen anterior"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+
+                <button
+                  onClick={goToNext}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
+                  aria-label="Siguiente imagen"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+
+                {/* Indicadores */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {project.images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setCurrentImageIndex(index);
+                        setIsAutoPlaying(false);
+                      }}
+                      className={cn(
+                        "w-2 h-2 rounded-full transition-all",
+                        index === currentImageIndex
+                          ? "bg-primary w-6"
+                          : "bg-primary/50 hover:bg-primary/80"
+                      )}
+                      aria-label={`Ir a imagen ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Contador */}
+                <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm">
+                  {currentImageIndex + 1} / {project.images.length}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Miniaturas */}
           {project.images.length > 1 && (
-            <>
-              <button
-                onClick={prev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 bg-background/80 p-2 rounded-full"
-              >
-                <ChevronLeft />
-              </button>
-
-              <button
-                onClick={next}
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-background/80 p-2 rounded-full"
-              >
-                <ChevronRight />
-              </button>
-            </>
+            <div className="flex gap-2 p-4 overflow-x-auto">
+              {project.images.map((img, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setCurrentImageIndex(index);
+                    setIsAutoPlaying(false);
+                  }}
+                  className={cn(
+                    "flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 transition-all",
+                    index === currentImageIndex
+                      ? "border-accent"
+                      : "border-transparent hover:border-muted-foreground/30"
+                  )}
+                  aria-label={`Ver imagen ${index + 1}`}
+                >
+                  <img
+                    src={img}
+                    alt={`Miniatura ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </button>
+              ))}
+            </div>
           )}
         </div>
 
-        {/* Info */}
-        <div className="p-6 space-y-4">
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary">{project.client}</Badge>
-            <Badge variant="outline">{project.category}</Badge>
-          </div>
+        {/* Información del proyecto */}
+        <div className="p-6 space-y-6">
+          {/* Descripción */}
+          <Card className="p-6" id="project-description">
+            <h3 className="text-lg font-semibold mb-3">Descripción del Proyecto</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              {project.description || "Proyecto desarrollado por OP Ingeniería. Implementación completa con altos estándares técnicos, calidad industrial y cumplimiento normativo."}
+            </p>
+          </Card>
 
-          <div className="text-muted-foreground leading-relaxed">
-            {project.description || (
-              <p>
-                Proyecto desarrollado por OP Ingeniería. Implementación
-                completa con altos estándares técnicos, calidad industrial
-                y cumplimiento normativo.
-              </p>
-            )}
+          {/* Detalles */}
+          <div className="grid md:grid-cols-2 gap-4">
+            <Card className="p-4">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+                <Building2 className="w-4 h-4" />
+                <span>Cliente</span>
+              </div>
+              <p className="font-medium">{project.client}</p>
+            </Card>
+
+            <Card className="p-4">
+              <div className="text-sm text-muted-foreground mb-1">
+                <span>Categoría</span>
+              </div>
+              <p className="font-medium">{project.category}</p>
+            </Card>
           </div>
         </div>
       </DialogContent>
@@ -363,6 +818,7 @@ const ProjectDetailModal = ({ project, open, onOpenChange }: Props) => {
 export default ProjectDetailModal;
 
 # modules/projects/components/ProjectGrid.tsx
+// modules/projects/components/ProjectGrid.tsx
 import { memo } from "react";
 import ProjectCard from "./ProjectCard";
 import type { Project } from "@/modules/projects/data/projects";
@@ -404,11 +860,37 @@ const ProjectGrid = memo(
         <div className={gridClasses}>
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="animate-pulse">
-              <div className="bg-muted rounded-lg aspect-square mb-3" />
+              <div className="bg-muted rounded-lg aspect-video mb-3" />
               <div className="h-4 bg-muted rounded w-3/4 mb-2" />
               <div className="h-3 bg-muted rounded w-1/2" />
             </div>
           ))}
+        </div>
+      );
+    }
+
+    if (projects.length === 0) {
+      return (
+        <div className="text-center py-12">
+          <div className="w-20 h-20 mx-auto rounded-full bg-muted flex items-center justify-center mb-4">
+            <svg
+              className="h-10 w-10 text-muted-foreground"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <h3 className="text-lg font-semibold mb-2">No hay proyectos disponibles</h3>
+          <p className="text-muted-foreground">
+            No se encontraron proyectos con los filtros seleccionados.
+          </p>
         </div>
       );
     }
@@ -430,6 +912,13 @@ const ProjectGrid = memo(
         ))}
       </div>
     );
+  },
+  (prevProps, nextProps) => {
+    // Memoización optimizada
+    return (
+      prevProps.projects === nextProps.projects &&
+      prevProps.loading === nextProps.loading
+    );
   }
 );
 
@@ -439,8 +928,7 @@ export default ProjectGrid;
 
 # modules/projects/components/ProjectsSection.tsx
 // src/modules/projects/components/ProjectsSection.tsx
-
-import { useState, useMemo, lazy, Suspense } from "react";
+import { useState, useMemo } from "react";
 import {
   projects as allProjects,
   projectCategories,
@@ -448,6 +936,15 @@ import {
 } from "@/modules/projects/data/projects";
 import ProjectGrid from "./ProjectGrid";
 import ProjectDetailModal from "./ProjectDetailModal";
+import { Button } from "@/components/ui/button";
+import { Filter } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const ProjectsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -456,29 +953,73 @@ const ProjectsSection = () => {
 
   const filteredProjects = useMemo(() => {
     if (!selectedCategory) return allProjects;
-    return allProjects.filter(
-      (p) => p.category === selectedCategory
-    );
+    return allProjects.filter((p) => p.category === selectedCategory);
   }, [selectedCategory]);
+
+  const handleProjectClick = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCategoryChange = (value: string) => {
+    setSelectedCategory(value === "all" ? null : value);
+  };
 
   return (
     <section id="proyectos" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="section-title text-center mb-4">
-          Proyectos Ejecutados
-        </h2>
-        <p className="section-subtitle text-center mx-auto mb-10">
-          Algunos de nuestros trabajos más representativos.
-        </p>
+        <div className="text-center mb-10">
+          <h2 className="section-title mb-3">Proyectos Ejecutados</h2>
+          <p className="section-subtitle mx-auto mb-6 max-w-2xl">
+            Algunos de nuestros trabajos más representativos en ingeniería eléctrica y energética.
+          </p>
+          
+          {/* Filtro de categorías */}
+          <div className="flex justify-center mb-8">
+            <div className="flex items-center gap-4 w-full max-w-md">
+              <Filter className="h-5 w-5 text-muted-foreground" />
+              <Select value={selectedCategory || "all"} onValueChange={handleCategoryChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Filtrar por categoría" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todos los proyectos</SelectItem>
+                  {projectCategories.map((category) => (
+                    <SelectItem key={category.id} value={category.name}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
 
-        <ProjectGrid
-          projects={filteredProjects}
-          onProjectClick={(project) => {
-            setSelectedProject(project);
-            setIsModalOpen(true);
-          }}
-        />
+        {/* Contador de proyectos */}
+        <div className="mb-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            Mostrando {filteredProjects.length} de {allProjects.length} proyectos
+            {selectedCategory && ` en la categoría "${selectedCategory}"`}
+          </p>
+        </div>
 
+        {/* Grid de proyectos */}
+        <ProjectGrid projects={filteredProjects} onProjectClick={handleProjectClick} />
+
+        {/* Botón para ver todos si hay filtro */}
+        {selectedCategory && (
+          <div className="text-center mt-10">
+            <Button
+              variant="outline"
+              onClick={() => setSelectedCategory(null)}
+              className="mx-auto"
+            >
+              Ver todos los proyectos
+            </Button>
+          </div>
+        )}
+
+        {/* Modal de detalles */}
         <ProjectDetailModal
           project={selectedProject}
           open={isModalOpen}
@@ -535,7 +1076,6 @@ export interface Client {
 
 # modules/projects/data/projects.ts
 // src/modules/projects/data/projects.ts
-
 import projectsData from './projects_normalized.json';
 
 export interface Project {
@@ -548,6 +1088,7 @@ export interface Project {
   image?: string;
   slug?: string;
   source_id?: number;
+  // Se han eliminado date y location
 }
 
 export interface ProjectCategory {
@@ -570,622 +1111,6 @@ export const projectCategories: ProjectCategory[] = [
 
 // Type assertion para los datos importados
 export const projects: Project[] = projectsData as Project[];
-
-[
-  {
-    id: "2621",
-    source_id: 2621,
-    name: "Sistemas Híbridos Residenciales",
-    client: "Sistemas Híbridos Residenciales",
-    category: "Energía Fotovoltaica",
-    description: "Diseño, suministro e instalacion de Sistemas Hibridos de Energia Solar Fotovoltaica de tipo residencial.",
-  images: [
-    
-    "./src/assets/images/uploads/2022/01/20200604_130123-1-scaled.jpg",
-    "./src/assets/images/uploads/2022/01/20200604_130509-scaled.jpg",
-    "./src/assets/images/uploads/2022/01/IMG_20210824_151713-scaled.jpg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-08-24-at-17.08.09.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-08-24-at-17.08.10.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-08-24-at-17.08.11-2.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-08-27-at-16.33.32.png"
-  ],
-    image: "./src/assets/images/uploads/2022/01/20200604_130101-scaled.jpg",
-    slug: "hibridos",
-    date: "2022-01-31",
-  },
-  {
-    id: "2615",
-    source_id: 2615,
-    name: "CENAC",
-    client: "CENAC",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Suministro de planta eléctrica tipo 110A4-44T trifásica con descarga a tierra, potencia de 100 kva en modo StandBy nominales hasta 1000 metros para el equipo fijo de ingenieros por intermedio de la CENAC.",
-  images: [
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-09-27-at-09.03.03.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-09-27-at-09.03.15-4.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-09-29-at-15.39.10-2.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-09-30-at-14.09.58.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-09-30-at-14.10.13-3.jpeg"
-  ],
-    slug: "cenac",
-    date: "2022-01-31",
-  },
-  {
-    id: "2613",
-    source_id: 2613,
-    name: "Fiduprevisora",
-    client: "Fiduprevisora",
-    category: "Transferencias",
-    description: "Suministro de los elementos necesarios, así como el servicio correspondiente para la Transferencia Automática de la Planta Eléctrica ubicada en las instalaciones de Fiduprevisora s.a. Localizada en la oficina regional de la ciudad de barranquilla, con el propósito de mantenerla en buen estado y reducir el riesgo eléctrico para el inmueble y los funcionarios.",
-    images: [
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-11-at-15.18.41.jpeg",
-          "./src/assets/images/uploads/2022/02/WhatsApp-Image-2021-12-06-at-10.26.12.jpeg",
-    "./src/assets/images/uploads/2022/02/WhatsApp-Image-2021-12-14-at-09.01.04.jpeg",
-    "./src/assets/images/uploads/2022/02/WhatsApp-Image-2021-12-14-at-09.01.11.jpeg",
-    "./src/assets/images/uploads/2022/02/WhatsApp-Image-2021-12-14-at-09.01.43-1.jpeg",
-    "./src/assets/images/uploads/2022/02/WhatsApp-Image-2021-12-14-at-09.01.45-2.jpeg",
-    "./src/assets/images/uploads/2022/02/WhatsApp-Image-2021-12-14-at-09.01.49.jpeg",
-    "./src/assets/images/uploads/2022/02/WhatsApp-Image-2021-12-14-at-09.01.50.jpeg"
-    ],
-    slug: "fiduprevisora",
-    date: "2022-01-31",
-  },
-  {
-    id: "2611",
-    source_id: 2611,
-    name: "Escuela de Suboficiales “CT. ANDRÉS M. DÍAZ”",
-    client: "Escuela de Suboficiales",
-    category: "UPS",
-    description: "Suministro, adecuación, instalación y puesta en funcionamiento a todo costo de 01 ups trifásica de 15 kva para el respaldo de energía y corriente regulada en las dependencias del simulador ATC de la escuela de suboficiales FAC “CT. ANDRÉS M. DÍAZ”.",
-    images: [
-      "./src/assets/images/uploads/2022/01/mini_20210707_140704.jpg",
-          "./src/assets/images/uploads/2022/02/mini_20210621_154614.jpg",
-    "./src/assets/images/uploads/2022/02/mini_20210621_154651.jpg",
-    "./src/assets/images/uploads/2022/02/mini_20210707_125701.jpg",
-    "./src/assets/images/uploads/2022/02/mini_20210707_140747.jpg"
-    ],
-    slug: "esufa-ups",
-    date: "2022-01-29",
-  },
-  {
-    id: "2609",
-    source_id: 2609,
-    name: "Aerocivil - Regional Norte de Santander",
-    client: "Aerocivil",
-    category: "Transferencias",
-    description: "Actualizar la transferencia automática red - planta perteneciente a la carga actual de la Aerocivil en el aeropuerto de Barrancabermeja.",
-    images: [
-    "./src/assets/images/uploads/2022/02/20211118_122958-scaled.jpg",
-    "./src/assets/images/uploads/2022/02/20211118_150928-scaled.jpg",
-    "./src/assets/images/uploads/2022/02/20211217_114241-scaled.jpg",
-    "./src/assets/images/uploads/2022/02/20211217_114332-scaled.jpg",
-    "./src/assets/images/uploads/2022/02/20211217_114413-scaled.jpg",
-    "./src/assets/images/uploads/2022/02/20211217_114529-scaled.jpg",
-    "./src/assets/images/uploads/2022/02/20211217_114547-scaled.jpg",
-    "./src/assets/images/uploads/2022/02/20211217_114636-scaled.jpg",
-    "./src/assets/images/uploads/2022/02/20211217_134457-scaled.jpg"
-    ],
-    slug: "aerocivil-santander",
-    date: "2022-01-29",
-  },
-  {
-    id: "2607",
-    source_id: 2607,
-    name: "WWF Colombia",
-    client: "WWF Colombia",
-    category: "Energía Fotovoltaica",
-    description: "Suministro e Instalacion de sistemas fotovoltaicos con Paneles Solares, Inversores Hibridos, Baterias, Salidas e Iluminacion y Alimentacion, Kits para cercas electricas y material de ferreteria para beneficiarios de WWF.",
-    images: [
-          "./src/assets/images/uploads/2022/01/mini_20200918_064712.jpg",
-    "./src/assets/images/uploads/2022/01/mini_20200918_153847.jpg",
-    "./src/assets/images/uploads/2022/01/mini_20200919_120421.jpg",
-    "./src/assets/images/uploads/2022/01/mini_20200920_145336.jpg",
-    "./src/assets/images/uploads/2022/01/mini_20200921_093538_HDR.jpg",
-    "./src/assets/images/uploads/2022/01/mini_20200921_164158.jpg",
-    "./src/assets/images/uploads/2022/01/mini_20200927_161610.jpg",
-    "./src/assets/images/uploads/2022/01/mini_20200928_121805_HDR.jpg",
-    "./src/assets/images/uploads/2022/01/mini_IMG_20200927_161750.jpg",
-    "./src/assets/images/uploads/2022/01/mini_IMG_20200928_072555.jpg"
-    ],
-    slug: "wwf-colombia",
-    date: "2022-01-29",
-  },
-  {
-    id: "2605",
-    source_id: 2605,
-    name: "Comando General de las Fuerzas Militares",
-    client: "Comando General de las Fuerzas Militares",
-    category: "Baterías",
-    description: "Suministro de BANCOS DE BATERÍAS de 1500 Ah, tipo OPZs, 48 VDC, de acuerdo con las especificaciones técnicas.",
-    images: [
-          "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-13-at-11.04.54.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-13-at-11.02.07.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-13-at-10.59.41.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-13-at-09.14.32-1.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-13-at-09.14.31.jpeg",
-    "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-10-05-at-11.22.50.jpeg",
-    "./src/assets/images/uploads/2022/01/20211026_074520-1-scaled.jpg"
-    ],
-    slug: "comando-baterias",
-    date: "2022-01-29",
-  },
-  {
-    id: "2603",
-    source_id: 2603,
-    name: "Parques Nacionales Naturales - Tayrona",
-    client: "Parques Nacionales Naturales",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Contratar a todo costo, la Adquisición, Instalación y puesta en funcionamiento de un generador de energía de combustión interna diésel (planta eléctrica) cabinada de 20 kva, con sus accesorios, para el sector de Bahía Concha - Tayrona, requerido como soporte de energía eléctrica para el funcionamiento de la taquilla.",
-    images: [
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-20-at-15.32.13-1.jpeg",
-      "./src/assets/images/uploads/2022/01/20211026_074520-scaled.jpg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-06-23-at-16.42.51-1.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-07-24-at-18.10.02-1.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-07-24-at-18.17.36-1.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-07-25-at-17.57.55.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-07-29-at-17.04.21-2.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-07-29-at-17.06.23.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-07-29-at-17.06.33.jpeg"
-    ],
-    slug: "parques-tayrona",
-    date: "2022-01-28",
-  },
-  {
-    id: "2601",
-    source_id: 2601,
-    name: "Base Naval ARC “BOLÍVAR”",
-    client: "Base Naval ARC “BOLÍVAR”",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Suministro, instalación y puesta en funcionamiento de 01 Motor Generador eléctrico diésel potencia 23 kVA prime y 25 kVA StandBy para el puesto naval avanzado islas del rosario de la estación de guardacostas de Cartagena.",
-    images: [
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.35.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-06-23-at-16.42.51.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-06-at-17.48.18.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-06-at-17.49.18.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-20-at-15.32.04.jpeg"
-    ],
-    slug: "arc-bolivar",
-    date: "2022-01-28",
-  },
-  {
-    id: "2600",
-    source_id: 2600,
-    name: "Migración Colombia",
-    client: "Migración Colombia",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Obra civil, suministro, instalación y puesta en marcha de Grupo Electrógeno y Transferencia Automática, para suplir la necesidad de la sede de Migración Colombia en Tumaco - Nariño.",
-    images: [
-      "./src/assets/images/uploads/2020/12/16.jpg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-12-20-at-15.32.13-1.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.33-1.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.34-2.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.35-1.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-11-02-at-17.15.34.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-11-02-at-17.16.58-1.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-11-04-at-17.39.25-2.jpeg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-11-04-at-17.39.26-2.jpeg"
-    ],
-    slug: "migracion-colombia",
-    date: "2022-01-28",
-  },
-  {
-    id: "2432",
-    source_id: 2432,
-    name: "Parques Nacionales Naturales de Colombia",
-    client: "Parques Nacionales Naturales",
-    category: "Energía Solar",
-    description: "Suministro e Instalación de equipos fotovoltaicos de doble uso, en diferentes veredas del Huila con el fin de apoyar la conservación y restauración de zonas de gran importancia ambiental para Parques Naturales Nacionales - Nevado del Huila y su zona de influencia.",
-    images: [
-      
-      "./src/assets/images/uploads/2020/12/IMG-20191111-WA0014.jpg",
-      "./src/assets/images/uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.35.jpeg",
-      "./src/assets/images/uploads/2020/12/1-2.jpg",
-      "./src/assets/images/uploads/2020/12/4-2.jpg",
-      "./src/assets/images/uploads/2020/12/6-2.jpg",
-      "./src/assets/images/uploads/2020/12/7-1.jpg",
-      "./src/assets/images/uploads/2020/12/8-1.jpg",
-      "./src/assets/images/uploads/2020/12/9-1.jpg",
-      "./src/assets/images/uploads/2020/12/10-1.jpg",
-      "./src/assets/images/uploads/2020/12/11-1.jpg",
-      "./src/assets/images/uploads/2020/12/13-1.jpg",
-      "./src/assets/images/uploads/2020/12/14-1.jpg",
-      "./src/assets/images/uploads/2020/12/15.jpg",
-      "./src/assets/images/uploads/2020/12/16.jpg",
-      "./src/assets/images/uploads/2020/12/17.jpg"
-    ],
-    slug: "parques-nacionales-naturales",
-    date: "2020-12-17",
-  },
-  {
-    id: "2429",
-    source_id: 2429,
-    name: "Policía Metropolitana de Cali",
-    client: "Policía Metropolitana de Cali",
-    category: "grupos-electrogenos",
-    description: "Suministro, instalación y puesta en funcionamiento de Planta Eléctrica, para suplir la necesidad presentada por el Grupo Telemática - Deval.",
-    images: [
-  
-      "./src/assets/images/uploads/2020/12/3.jpg",
-      "./src/assets/images/uploads/2020/12/16.jpg",
-      "./src/assets/images/uploads/2020/12/1-1.jpg",
-      "./src/assets/images/uploads/2020/12/2-1.jpg",
-      "./src/assets/images/uploads/2020/12/3-1.jpg",
-      "./src/assets/images/uploads/2020/12/4-1.jpg",
-      "./src/assets/images/uploads/2020/12/5-1.jpg",
-      "./src/assets/images/uploads/2020/12/6-1.jpg"
-    ],
-    slug: "policia-cali",
-    date: "2020-12-16",
-  },
-  {
-    id: "2407",
-    source_id: 2407,
-    name: "Inverser Ltda",
-    client: "Inverser Ltda",
-    category: "UPS / Servicios",
-    description: "Servicio de Instalacion de mas de 717 Sistemas Ininterrumpidos de Potencia a Nivel Nacional, incluyendo transporte de equipos, personal tecnico, puesta en servicio, ajuste y pruebas de funcionamiento. Servicio de Mantenimiento preventivo y correctivo a Plantas Electricas a nivel nacional.",
-    images: [
-  
-      "./src/assets/images/uploads/2020/12/IMG-20191111-WA0014.jpg",
-      "./src/assets/images/uploads/2020/12/1.jpg",
-      "./src/assets/images/uploads/2020/12/2-scaled.jpg",
-      "./src/assets/images/uploads/2020/12/3.jpg",
-      "./src/assets/images/uploads/2020/12/4.jpg",
-      "./src/assets/images/uploads/2020/12/5-scaled.jpg",
-      "./src/assets/images/uploads/2020/12/6-scaled.jpg",
-      "./src/assets/images/uploads/2020/12/7.jpg",
-      "./src/assets/images/uploads/2020/12/8.jpg",
-      "./src/assets/images/uploads/2020/12/9.jpg",
-      "./src/assets/images/uploads/2020/12/10.jpg",
-      "./src/assets/images/uploads/2020/12/11.jpg",
-      "./src/assets/images/uploads/2020/12/12.jpg",
-      "./src/assets/images/uploads/2020/12/13.jpg"
-    ],
-    slug: "inverser-ltda",
-    date: "2020-12-16",
-  },
-  {
-    id: "1007",
-    source_id: 1007,
-    name: "Servicio Geologico Colombiano",
-    client: "Servicio Geologico Colombiano",
-    category: "grupos-electrogenos / servicios",
-    description: "Suministro, instalación y mantenimiento de soluciones de energía de respaldo, Planta – Transferencia en Bogota. Diseño, suministro e instalación del sistema de apantallamiento y adecuaciones eléctricas para el Observatorio Vulcanológico y Sismológico de Manizales",
-    images: [
-            "./src/assets/images/uploads/2019/12/SAM_3083-scaled.jpg",
-      "./src/assets/images/uploads/2020/12/3.jpg",
-      "./src/assets/images/uploads/2019/12/1-6.jpg",
-      "./src/assets/images/uploads/2019/12/2-3.jpg",
-      "./src/assets/images/uploads/2019/12/3-4.jpg",
-      "./src/assets/images/uploads/2019/12/4-2.jpg",
-      "./src/assets/images/uploads/2019/12/5-2.jpg",
-      "./src/assets/images/uploads/2019/12/6-2.jpg",
-      "./src/assets/images/uploads/2019/12/7-2.jpg",
-      "./src/assets/images/uploads/2019/12/04809.jpg",
-      "./src/assets/images/uploads/2019/12/04810.jpg",
-      "./src/assets/images/uploads/2019/12/04811.jpg",
-      "./src/assets/images/uploads/2019/12/60924.jpg",
-      "./src/assets/images/uploads/2019/12/73316.jpg",
-      "./src/assets/images/uploads/2019/12/20160629_172412.jpg",
-      "./src/assets/images/uploads/2019/12/20160629_172719.jpg",
-      "./src/assets/images/uploads/2019/12/20160629_172949.jpg",
-      "./src/assets/images/uploads/2019/12/20161211_092345.jpg",
-      "./src/assets/images/uploads/2019/12/20161211_173141.jpg",
-      "./src/assets/images/uploads/2019/12/20161211_180700.jpg"
-    ],
-    slug: "servicio-geologico",
-    date: "2019-12-16",
-  },
-  {
-    id: "973",
-    source_id: 973,
-    name: "Hospital Militar Central",
-    client: "Hospital Militar Central",
-    category: "work",
-    description: "",
-    images: [
-      "./src/assets/images/uploads/2019/12/SAM_3018.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3019.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3020.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3022.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3046.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3083.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3084.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3088.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3108.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3118.jpg"
-    ],
-    slug: "hmc",
-    date: "2019-12-16",
-  },
-  {
-    id: "968",
-    source_id: 968,
-    name: "Hospital Universitario Hernando Moncaleano Perdomo",
-    client: "Hospital Universitario",
-    category: "Baterías",
-    description: "Suministro, instalación y pruebas de Banco de Baterias para UPS en el Hospital de Neiva",
-    images: [
-      "./src/assets/images/uploads/2019/12/IMG-20170906-WA0016-1.jpeg",
-      "./src/assets/images/uploads/2019/12/1-5.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_3083-scaled.jpg",
-      "./src/assets/images/uploads/2019/12/20170907_090740.jpg",
-      "./src/assets/images/uploads/2019/12/20170915_120630.jpg",
-      "./src/assets/images/uploads/2019/12/20170915_184517.jpg",
-      "./src/assets/images/uploads/2019/12/20170915_184529.jpg",
-      "./src/assets/images/uploads/2019/12/20170916_073231.jpg"
-    ],
-    slug: "hospital-neiva",
-    date: "2019-12-16",
-  },
-  {
-    id: "942",
-    source_id: 942,
-    name: "Hospital Central de la Policia",
-    client: "Hospital Central de la Policia",
-    category: "Aire Acondicionado",
-    description: "Diseño, Suministro e instalación con desmonte de equipos existentes del sistema de Aire Acondicionado para el Area de Urgencias del Hospital.",
-    images: [
-      "./src/assets/images/uploads/2019/12/20190814_104253.jpg", 
-    
-      "./src/assets/images/uploads/2019/12/20190913_092008.jpg",
-      "./src/assets/images/uploads/2019/12/20190913_092636.jpg",
-      "./src/assets/images/uploads/2019/12/20190913_092727.jpg",
-      "./src/assets/images/uploads/2019/12/20190913_092847.jpg",
-      "./src/assets/images/uploads/2019/12/20190913_093050.jpg",
-      "./src/assets/images/uploads/2019/12/20190913_103901.jpg",
-      "./src/assets/images/uploads/2019/12/IMG_20190430_125716.jpg",
-      "./src/assets/images/uploads/2019/12/IMG_20190602_024015.jpg",
-      "./src/assets/images/uploads/2019/12/IMG_20190604_110756.jpg",
-      "./src/assets/images/uploads/2019/12/IMG_20190619_162754.jpg",
-      "./src/assets/images/uploads/2019/12/IMG_20190619_172746.jpg",
-      "./src/assets/images/uploads/2019/12/IMG_20190619_181449.jpg",
-      "./src/assets/images/uploads/2019/12/IMG_20190622_133527.jpg",
-      "./src/assets/images/uploads/2019/12/IMG_20190715_163546.jpg",
-      "./src/assets/images/uploads/2019/12/IMG-20190327-WA0026.jpg"
-    ],
-    slug: "hcp",
-    date: "2019-12-16",
-  },
-  {
-    id: "926",
-    source_id: 926,
-    name: "Energia Integral Andina",
-    client: "Energia Integral Andina",
-    category: "Cargadores / Transferencias / Servicios",
-    description: "Suministro e instalación de Cargadores de baterías tiristorizados y de Alta Frecuencia tipo subestación, Transferencias Automáticas, Tableros de Control para Aire Acondicionado.",
-    images: [
-
-      "./src/assets/images/uploads/2019/12/20181217_110506.jpg",
-      "./src/assets/images/uploads/2019/12/20190205_093652.jpg",
-      "./src/assets/images/uploads/2019/12/CIMG0323.jpg",
-      "./src/assets/images/uploads/2019/12/CIMG0326.jpg",
-      "./src/assets/images/uploads/2019/12/CIMG0331.jpg",
-      "./src/assets/images/uploads/2019/12/CIMG0338.jpg",
-      "./src/assets/images/uploads/2019/12/CIMG03233.jpg",
-      "./src/assets/images/uploads/2019/12/IMG-20190207-WA0002.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_1743.jpg",
-      "./src/assets/images/uploads/2019/12/SAM_1752.jpg"
-    ],
-    slug: "eia",
-    date: "2019-12-16",
-  },
-  {
-    id: "923",
-    source_id: 923,
-    name: "Emec",
-    client: "Emec",
-    category: "Rectificadores / Cargadores",
-    description: "Suministro e instalación de Cargadores de baterías de Alta Frecuencia, para la central de Generación Eléctrica de Urrá",
-    images: [
-    "./src/assets/images/uploads/2019/12/1-4.jpg",
-    "./src/assets/images/uploads/2019/12/2-2.jpg",
-    "./src/assets/images/uploads/2019/12/3-3.jpg",
-    "./src/assets/images/uploads/2019/12/SAM_3174.jpg",
-    "./src/assets/images/uploads/2019/12/SAM_3188.jpg",
-    "./src/assets/images/uploads/2019/12/SAM_3217.jpg",
-    "./src/assets/images/uploads/2019/12/SAM_3227.jpg",
-    "./src/assets/images/uploads/2019/12/SAM_3256.jpg",
-    "./src/assets/images/uploads/2019/12/SAM_3719.jpg",
-    "./src/assets/images/uploads/2019/12/SAM_3722.jpg"
-
-    ],
-    slug: "emec",
-    date: "2019-12-14",
-  },
-  {
-    id: "909",
-    source_id: 909,
-    name: "Corpochivor",
-    client: "Corpochivor",
-    category: "Energía Solar",
-    description: "Suministro e instalación de Kits Solares, para generación de energía limpia en Instituciones Educativas e Instituciones de Salud de Boyaca.",
-    images: [
-  
-      "./src/assets/images/uploads/2019/12/7-1.jpg",
-      "./src/assets/images/uploads/2019/12/4-1.jpg",
-      "./src/assets/images/uploads/2019/12/3-2.jpg",
-      "./src/assets/images/uploads/2019/12/1-3.jpg",
-      "./src/assets/images/uploads/2019/12/5-1.jpg",
-      "./src/assets/images/uploads/2019/12/6-1.jpg",
-      "./src/assets/images/uploads/2021/02/WhatsApp-Image-2021-02-10-at-12.07.27-3.jpeg",
-      "./src/assets/images/uploads/2021/02/WhatsApp-Image-2021-02-10-at-12.07.27-4.jpeg",
-      "./src/assets/images/uploads/2021/02/WhatsApp-Image-2021-02-09-at-08.jpg"
-    ],
-    slug: "corpochivor",
-    date: "2019-12-14",
-  },
-  {
-    id: "885",
-    source_id: 885,
-    name: "Coordinadora Mercantil",
-    client: "Coordinadora Mercantil",
-    category: "work",
-    description: "Diseño del Sistema Eléctrico con suministro e instalación de Equipos de iluminación, Aire Acondicionado, Transformador de Media Tensión, Tableros de Potencia y Control, Planta Eléctrica , Cuarto Insonoro, Puesta a Tierra y Obra civil para la terminal de Coordinadora Mercantil ubicada en Bosconia Cesar.",
-    images: [
-      "./src/assets/images/uploads/2019/12/1-2.jpg",
-      "./src/assets/images/uploads/2019/12/2-1.jpg",
-      "./src/assets/images/uploads/2019/12/3-1.jpg",
-      "./src/assets/images/uploads/2019/12/101_4904.jpg",
-      "./src/assets/images/uploads/2019/12/101_4906.jpg",
-      "./src/assets/images/uploads/2019/12/101_4924.jpg",
-      "./src/assets/images/uploads/2019/12/101_4928.jpg",
-      "./src/assets/images/uploads/2019/12/101_4955.jpg",
-      "./src/assets/images/uploads/2019/12/101_4991.jpg",
-      "./src/assets/images/uploads/2019/12/101_5004.jpg",
-      "./src/assets/images/uploads/2019/12/101_5021.jpg",
-      "./src/assets/images/uploads/2019/12/IMG-20141118-WA0066.jpg"
-    ],
-    slug: "coordinadora-mercantil",
-    date: "2019-12-14",
-  },
-  {
-    id: "874",
-    source_id: 874,
-    name: "Rama Judicial",
-    client: "Rama Judicial",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Suministro, instalación y mantenimiento de soluciones de energía de respaldo, Planta – Transferencia en la sede de Cucuta - Norte de Santander.",
-    images: [
-      "./src/assets/images/uploads/2019/12/1.jpg",
-      "./src/assets/images/uploads/2019/12/2.jpg",
-      "./src/assets/images/uploads/2019/12/3.jpg",
-      "./src/assets/images/uploads/2019/12/7.jpg",
-      "./src/assets/images/uploads/2019/12/4.jpg",
-      "./src/assets/images/uploads/2019/12/5.jpg",
-      "./src/assets/images/uploads/2019/12/6.jpg"
-    ],
-    slug: "rama-judicial",
-    date: "2019-12-13",
-  },
-  {
-    id: "206",
-    source_id: 206,
-    name: "Banco Agrario",
-    client: "Banco Agrario",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Suministro, instalación y mantenimiento de mas de (37) treinta y siete soluciones de energía de respaldo, Planta – Transferencia en sedes del Banco Agrario de Colombia, en los departamentos de Choco, Nariño, Cundinamarca, Antioquia, Casanare, Huila, Tolima, Valle del Cauca, Córdoba, Cesar, Guajira, Santander, Boyacá, Caquetá entre otros.",
-    images: [
-      "./src/assets/images/uploads/2019/11/mesa-1-2.jpg",
-      "./src/assets/images/uploads/2019/11/mesa-3-2.jpg",
-      "./src/assets/images/uploads/2019/11/IMG_20180629_110403-1.jpg",
-      "./src/assets/images/uploads/2019/11/Vijes-2-1.jpg",
-      "./src/assets/images/uploads/2019/11/Urumita-1.jpg",
-      "./src/assets/images/uploads/2019/11/Unguia-1.jpg",
-      "./src/assets/images/uploads/2019/11/Tumaco-1.jpg",
-      "./src/assets/images/uploads/2019/11/Tumaco-TA-2.jpg",
-      "./src/assets/images/uploads/2019/11/Tamesis-1.jpg",
-      "./src/assets/images/uploads/2019/11/Sura-Sincelejo-2.jpg",
-      "./src/assets/images/uploads/2019/11/Socorro-1.jpg",
-      "./src/assets/images/uploads/2019/11/Salado-Blanco-2.jpg",
-      "./src/assets/images/uploads/2019/11/Rosas-TA-1-1.jpg",
-      "./src/assets/images/uploads/2019/11/Puerto-Salgar.jpg",
-      "./src/assets/images/uploads/2019/11/Pereira.jpg",
-      "./src/assets/images/uploads/2019/11/Oiba.jpg",
-      "./src/assets/images/uploads/2019/11/Mocoa-1.jpg",  
-      "./src/assets/images/uploads/2019/11/Lerida-1.jpg",
-      "./src/assets/images/uploads/2019/11/La-Plata-1.jpg",
-      "./src/assets/images/uploads/2019/11/Jamundi-1.jpg",
-      "./src/assets/images/uploads/2019/11/Honda-1.jpg",
-      "./src/assets/images/uploads/2019/11/Guayabal-1.jpg",
-      "./src/assets/images/uploads/2019/11/Curillo-1.jpg",
-      "./src/assets/images/uploads/2019/11/CDV-Valledupar-1.jpg",
-      "./src/assets/images/uploads/2019/11/Cavasa-BAC-1.jpg",
-      "./src/assets/images/uploads/2019/11/Carmen-de-Bolivar.jpg",
-      "./src/assets/images/uploads/2019/11/Barbacoas.jpg",
-      "./src/assets/images/uploads/2019/11/Armenia.jpg",
-      "./src/assets/images/uploads/2019/11/Aguazul-1.jpg",
-      "./src/assets/images/uploads/2019/11/20190829_145327.jpg",
-      "./src/assets/images/uploads/2019/11/20190829_123448.jpg"
-    ],
-    slug: "banco-agrario",
-    date: "2018-03-21",
-  },
-  {
-    id: "193",
-    source_id: 193,
-    name: "Medicina Legal",
-    client: "Medicina Legal",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Suministro e instalación de generadores con motor Diesel desde 30kVA hasta 300 kVA, varios con transferencia automática por mandos motorizados.",
-    images: [      
-      "./src/assets/images/uploads/2019/11/1.jpg",
-      "./src/assets/images/uploads/2019/11/11.jpg",
-      "./src/assets/images/uploads/2019/11/12.jpg",
-      "./src/assets/images/uploads/2019/11/15.jpg",
-      "./src/assets/images/uploads/2019/11/16.jpg",
-      "./src/assets/images/uploads/2019/11/5.jpg",
-      "./src/assets/images/uploads/2019/11/8.jpg",
-      "./src/assets/images/uploads/2019/11/6.jpg",
-      "./src/assets/images/uploads/2019/11/7.jpg",
-      "./src/assets/images/uploads/2019/11/4.jpg",
-      "./src/assets/images/uploads/2019/11/9.jpg",
-      "./src/assets/images/uploads/2019/11/13.jpg",
-      "./src/assets/images/uploads/2019/11/10.jpg",
-      "./src/assets/images/uploads/2019/11/2-1.jpg",
-    ],
-    slug: "medicina-legal",
-    date: "2018-02-16",
-  },
-  {
-    id: "190",
-    source_id: 190,
-    name: "Mantenimientos",
-    client: "Mantenimientos",
-    category: "Mantenimientos",
-    description: "Mantenimiento Preventivo y Correctivo, con diagnóstico de fallas para equipos de respaldo de Energía",
-    images: [
-      "./src/assets/images/uploads/2018/02/20170523_104144.jpeg",
-      "./src/assets/images/uploads/2019/09/IMG-20190604-WA0177-1.jpg",
-      "./src/assets/images/uploads/2019/11/1-scaled.jpg",
-      "./src/assets/images/uploads/2018/02/20170523_104134-1-1.jpeg",
-      "./src/assets/images/uploads/2017/12/IMG_20170712_173423.jpg",
-      
-    ],
-    slug: "mantenimientos",
-    date: "2018-02-16",
-  },
-  {
-    id: "186",
-    source_id: 186,
-    name: "Aerocivil - Regional Atlántico",
-    client: "Aerocivil",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Suministro, instalación, puesta en marcha y mantenimiento en cinco predios de sistemas de energía de respaldo con transferencia dual en configuración Red – Planta 1 – Planta 2 con alternancia y monitoreo remoto.",
-    images: [
-      "./src/assets/images/uploads/2019/11/20190530_193341.jpg",
-      "./src/assets/images/uploads/2019/11/20190604-WA0032.jpg",
-      "./src/assets/images/uploads/2019/11/AS-09.jpg",
-      "./src/assets/images/uploads/2019/11/IMG-20181230-WA0000.jpg",
-      "./src/assets/images/uploads/2019/11/IMG-20190604-WA0157.jpg",
-      "./src/assets/images/uploads/2019/11/IMG-20190911-WA0007.jpg",
-      "./src/assets/images/uploads/2019/11/IMG-20191113-WA0008.jpg",
-      "./src/assets/images/uploads/2019/11/SAM_5907.jpg",
-      "./src/assets/images/uploads/2019/11/SAM_5920.jpg"
-    ],
-    slug: "aerocivil",
-    date: "2018-02-16",
-  },
-  {
-    id: "185",
-    source_id: 185,
-    name: "Presidencia de la Republica",
-    client: "Presidencia de la Republica",
-    category: "Grupos Electrógenos / Transferencias",
-    description: "Suministro e instalación de generador con motor Diesel de 250 KVA, ducto de escape con recubrimiento térmico .",
-    images: [
-      "./src/assets/images/uploads/2019/12/20190727_100046.jpg",
-      "./src/assets/images/uploads/2019/12/20181108_100437.jpg",
-      "./src/assets/images/uploads/2019/12/20170721_142616.jpg",
-      "./src/assets/images/uploads/2019/12/20170721_142607.jpg",
-      "./src/assets/images/uploads/2019/12/20170706_170940.jpg",
-      "./src/assets/images/uploads/2019/12/20170701_171117.jpg",
-      "./src/assets/images/uploads/2019/12/20170627_121022.jpg"
-    ],
-    slug: "presidencia-republica",
-    date: "2018-02-16",
-  },
-]
 
 export default projects;
 
@@ -1408,109 +1333,171 @@ export { default as CategoryGrid } from "./CategoryGrid";
 export { default as SubcategoryList } from "./SubcategoryList";
 
 # modules/catalog/components/products/ProductCard.tsx
+// modules/catalog/components/products/ProductCard.tsx
 import { Badge } from "@/components/ui/badge";
+import { 
+  Card, 
+  CardContent,
+  CardFooter 
+} from "@/components/ui/card";
 import type { Product } from "@/modules/catalog/data/products";
 import { useState } from "react";
 import OptimizedImage from "@/shared/components/OptimizedImage";
 import { categories } from "@/modules/catalog/data/products";
+import { ShoppingCart, Eye, BarChart3, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ProductCardProps {
   product: Product;
   onClick: (product: Product) => void;
+  onQuickView?: (product: Product) => void;
+  onAddToCart?: (product: Product) => void;
 }
 
-const ProductCard = ({ product, onClick }: ProductCardProps) => {
+export const ProductCard = ({ 
+  product, 
+  onClick,
+  onQuickView,
+  onAddToCart 
+}: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Función para obtener el nombre de la categoría (simulación)
   const getCategoryName = () => {
     const category = categories.find(c => c.id === product.categoryId);
     return category?.name || product.categoryId || "Sin categoría";
   };
 
+  const mainSpec = product.specs?.[0];
+
   return (
-    <button
-      onClick={() => onClick(product)}
+    <Card
+      className="group relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative bg-card rounded-lg shadow-sm border border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 text-left w-full"
-      aria-label={`Ver detalles de ${product.title}`}
     >
       {/* Imagen del producto */}
-      <div className="relative h-48 md:h-56 overflow-hidden rounded-t-lg bg-muted">
+      <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-secondary/20 to-transparent">
         <OptimizedImage
           src={product.images?.[0] || "/placeholder-product.jpg"}
           alt={product.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-contain p-6 transition-transform duration-700 group-hover:scale-105"
           aspectRatio="square"
         />
         
-        {/* Overlay al hover */}
-        <div className={`
-          absolute inset-0 bg-gradient-to-t from-black/60 to-transparent 
-          opacity-0 group-hover:opacity-100 transition-opacity duration-300
-          flex items-end p-4
-        `}>
-          <span className="text-white text-sm font-medium">
-            Ver especificaciones →
-          </span>
-        </div>
-        
-        {/* Badges de categoría */}
+        {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
-          <Badge className="bg-primary/90 text-primary-foreground text-xs font-medium">
+          <Badge className="bg-background/90 backdrop-blur-sm text-foreground hover:bg-background">
             {getCategoryName()}
           </Badge>
           {product.subcategory && (
-            <Badge className="bg-accent/20 text-accent border-accent/30 text-xs">
+            <Badge variant="outline" className="bg-background/90 backdrop-blur-sm">
               {product.subcategory}
             </Badge>
           )}
         </div>
+
+        {/* Quick Actions */}
+        <div className={`absolute top-3 right-3 flex flex-col gap-2 transition-all duration-300 ${
+          isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
+        }`}>
+          <Button
+            size="icon"
+            variant="outline"
+            onClick={(e) => {
+              e.stopPropagation();
+              onQuickView?.(product);
+            }}
+            className="w-10 h-10 bg-background/90 backdrop-blur-sm hover:bg-background"
+            aria-label="Vista rápida"
+          >
+            <Eye className="w-4 h-4" />
+          </Button>
+          {onAddToCart && (
+            <Button
+              size="icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAddToCart?.(product);
+              }}
+              className="w-10 h-10 bg-primary/90 text-primary-foreground hover:bg-primary"
+              aria-label="Agregar al carrito"
+            >
+              <ShoppingCart className="w-4 h-4" />
+            </Button>
+          )}
+        </div>
       </div>
 
-      {/* Contenido */}
-      <div className="p-4 space-y-3">
-        <h3 className="font-heading font-semibold text-card-foreground text-base leading-tight line-clamp-2">
-          {product.title}
-        </h3>
-        
-        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-          {product.description}
-        </p>
-        
-        {product.price && (
-          <div className="flex items-center justify-between pt-2 border-t border-border">
-            <span className="text-lg font-bold text-accent">
-              {product.price}
-            </span>
-            <span className="text-xs text-muted-foreground">
-              Solicitar cotización
-            </span>
+      <CardContent className="p-6 flex-1">
+        <div className="space-y-4">
+          {/* Título y precio */}
+          <div className="space-y-2">
+            <h3 
+              className="text-lg font-semibold text-foreground line-clamp-2 leading-tight cursor-pointer hover:text-accent transition-colors"
+              onClick={() => onClick(product)}
+            >
+              {product.title}
+            </h3>
+            
+            {product.price && (
+              <div className="flex items-center justify-between">
+                <span className="text-2xl font-bold text-primary">
+                  {product.price}
+                </span>
+                <Badge variant="outline" className="text-xs">
+                  Cotización
+                </Badge>
+              </div>
+            )}
           </div>
-        )}
-        
-        {/* Especificaciones principales */}
-        {product.specs && product.specs.length > 0 && (
-          <div className="pt-3 border-t border-border">
-            <div className="grid grid-cols-2 gap-2">
-              {product.specs.slice(0, 2).map((spec, index) => (
-                <div key={index} className="text-xs">
-                  <span className="text-muted-foreground">{spec.label}: </span>
-                  <span className="font-medium text-foreground">{spec.value}</span>
-                </div>
-              ))}
+
+          {/* Descripción */}
+          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+            {product.description}
+          </p>
+
+          {/* Especificación principal */}
+          {mainSpec && (
+            <div className="flex items-center gap-2 text-sm bg-secondary/50 rounded-lg p-3">
+              <BarChart3 className="w-4 h-4 text-accent" />
+              <div>
+                <div className="font-medium">{mainSpec.label}</div>
+                <div className="text-muted-foreground">{mainSpec.value}</div>
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </button>
+          )}
+        </div>
+      </CardContent>
+
+      <CardFooter className="p-6 pt-0">
+        <div className="flex gap-2 w-full">
+          <Button
+            onClick={() => onClick(product)}
+            className="flex-1 gap-2"
+          >
+            Ver especificaciones
+            <ChevronRight className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="outline"
+            className="gap-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              // Lógica de cotización
+            }}
+          >
+            Cotizar
+          </Button>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 
 export default ProductCard;
 
 # modules/catalog/components/products/ProductDetailModal.tsx
+// modules/catalog/components/products/ProductDetailModal.tsx - SIMPLIFICADO
 import {
   Dialog,
   DialogContent,
@@ -1522,7 +1509,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Mail, X } from "lucide-react";
 import type { Product, Spec } from "@/modules/catalog/data/products";
-import { categories } from "@/modules/catalog/data/products";
+import { Card } from "@/components/ui/card";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -1530,7 +1517,7 @@ interface ProductDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalProps) => {
+export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalProps) => {
   if (!product) return null;
 
   const handleWhatsApp = () => {
@@ -1548,55 +1535,92 @@ const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalP
     window.open(`mailto:ventas@opingenieria.com?subject=${subject}&body=${body}`, "_blank");
   };
 
-  // Función para obtener el nombre de la categoría (simulación)
-const getCategoryName = () => {
-  const category = categories.find(c => c.id === product.categoryId);
-  return category?.name || product.categoryId || "Sin categoría";
-};
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-xl md:text-2xl font-heading pr-8">
-            {product.title}
-          </DialogTitle>
-          <DialogDescription className="sr-only">
-            Detalles del producto {product.title}
-          </DialogDescription>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0">
+        <DialogHeader className="px-6 pt-6">
+          <div className="flex items-start justify-between">
+            <div>
+              <DialogTitle className="text-xl md:text-2xl font-heading pr-8">
+                {product.title}
+              </DialogTitle>
+              <DialogDescription className="sr-only">
+                Detalles del producto {product.title}
+              </DialogDescription>
+              <div className="flex items-center gap-2 mt-2">
+                <Badge variant="secondary" className="text-sm">
+                  {product.categoryId}
+                </Badge>
+                {product.subcategory && (
+                  <Badge variant="outline" className="text-sm">
+                    {product.subcategory}
+                  </Badge>
+                )}
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => onOpenChange(false)}
+              className="h-8 w-8"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
         </DialogHeader>
 
-        <div className="grid md:grid-cols-2 gap-6 mt-4">
+        <div className="grid md:grid-cols-2 gap-6 mt-4 p-6">
           {/* Product Image */}
-          <div className="aspect-square rounded-lg overflow-hidden bg-secondary product-detail-image">
-            <img
-              src={product.images?.[0] || "/placeholder-product.jpg"}
-              alt={product.title}
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                const target = e.currentTarget;
-                if (target.src !== "/placeholder-product.jpg") {
-                  target.src = "/placeholder-product.jpg";
-                }
-              }}
-              className="w-full h-full object-contain block"
-            />
+          <div className="space-y-4">
+            <div className="aspect-square rounded-lg overflow-hidden bg-secondary">
+              <img
+                src={product.images?.[0] || "/placeholder-product.jpg"}
+                alt={product.title}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src !== "/placeholder-product.jpg") {
+                    target.src = "/placeholder-product.jpg";
+                  }
+                }}
+                className="w-full h-full object-contain block"
+              />
+            </div>
+
+            {/* Image Gallery */}
+            {product.images.length > 1 && (
+              <div className="flex gap-2 overflow-x-auto pb-2">
+                {product.images.map((img, index) => (
+                  <button
+                    key={index}
+                    className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border"
+                  >
+                    <img
+                      src={img}
+                      alt={`${product.title} - ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Product Info */}
-          <div className="space-y-4">
-            <Badge variant="secondary" className="text-sm">
-              {getCategoryName()}
-            </Badge>
-
+          <div className="space-y-6">
             {product.price && (
-              <p className="text-2xl font-bold text-accent">{product.price}</p>
+              <div className="text-3xl font-bold text-primary">
+                {product.price}
+              </div>
             )}
 
-            <p className="text-muted-foreground leading-relaxed">
-              {product.description}
-            </p>
+            <Card className="p-4">
+              <h3 className="font-semibold mb-2">Descripción</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {product.description || "Producto de alta calidad para aplicaciones industriales."}
+              </p>
+            </Card>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
@@ -1613,30 +1637,34 @@ const getCategoryName = () => {
         </div>
 
         {/* Specifications Table */}
-        <div className="mt-6">
-          <h4 className="font-heading font-semibold text-lg mb-3">
-            Especificaciones Técnicas
-          </h4>
-          <div className="bg-secondary rounded-lg overflow-hidden">
-            <table className="w-full">
-              <tbody>
-                {product.specs && product.specs.map((spec: Spec, index: number) => (
-                  <tr
-                    key={spec.label}
-                    className={index % 2 === 0 ? "bg-secondary" : "bg-muted/50"}
-                  >
-                    <td className="px-4 py-3 font-medium text-foreground">
-                      {spec.label}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground text-right">
-                      {spec.value}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {product.specs && product.specs.length > 0 && (
+          <div className="p-6 border-t">
+            <h4 className="font-heading font-semibold text-lg mb-3">
+              Especificaciones Técnicas
+            </h4>
+            <Card>
+              <div className="overflow-hidden">
+                <table className="w-full">
+                  <tbody>
+                    {product.specs.map((spec: Spec, index: number) => (
+                      <tr
+                        key={spec.label}
+                        className={index % 2 === 0 ? "bg-secondary" : "bg-muted/50"}
+                      >
+                        <td className="px-4 py-3 font-medium text-foreground">
+                          {spec.label}
+                        </td>
+                        <td className="px-4 py-3 text-muted-foreground text-right">
+                          {spec.value}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
           </div>
-        </div>
+        )}
       </DialogContent>
     </Dialog>
   );

@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+//src/app/routes/Index.tsx
+import { Suspense, lazy, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import LandingPage from "@/modules/marketing/pages/LandingPage";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+
+// Lazy loading para LandingPage
+const LandingPage = lazy(() => import("@/modules/marketing/pages/LandingPage"));
 
 const Index = () => {
   useEffect(() => {
@@ -14,9 +18,13 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
-      <LandingPage />
+      <main className="flex-1">
+        <Suspense fallback={<LoadingSpinner />}>
+          <LandingPage />
+        </Suspense>
+      </main>
       <Footer />
     </div>
   );

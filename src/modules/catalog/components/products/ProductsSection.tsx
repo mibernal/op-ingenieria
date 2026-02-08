@@ -1,7 +1,13 @@
 import { useState, useMemo, lazy, Suspense } from "react";
-import { products as allProducts, categories as allCategories, type Product, type Category } from "@/modules/catalog/data/products";
+import {
+  products as allProducts,
+  categories as allCategories,
+  type Product,
+  type Category,
+} from "@/modules/catalog/data/products";
 import ProductGridSkeleton from "@/shared/skeletons/ProductGridSkeleton";
 import CategoryGrid from "@/modules/catalog/components/CategoryGrid";
+import { cn } from "@/lib/utils";
 
 // Lazy load de componentes pesados
 const ProductGrid = lazy(() => import("@/modules/catalog/components/products/ProductGrid"));
@@ -13,22 +19,20 @@ const ProductsSection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Mapa de categorías optimizado
+  // Mapa de categorías (lookup)
   const categoryMap = useMemo(() => {
     const map = new Map<string, Category>();
-    allCategories.forEach((c) => map.set(c.id, c));
+    for (const c of allCategories) map.set(c.id, c);
     return map;
   }, []);
 
-  // Categoría seleccionada
-  const selectedCategory = selectedCategoryId ? categoryMap.get(selectedCategoryId) : null;
+  const selectedCategory = selectedCategoryId ? categoryMap.get(selectedCategoryId) ?? null : null;
 
   // Productos filtrados por categoría
   const productsInCategory = useMemo(() => {
     if (!selectedCategory) return [];
-    return allProducts.filter((p) => 
-      p.categoryId === selectedCategory.id
-    );
+    const id = selectedCategory.id;
+    return allProducts.filter((p) => p.categoryId === id);
   }, [selectedCategory]);
 
   // Productos visibles (con subcategoría)
@@ -48,15 +52,30 @@ const ProductsSection = () => {
     setSelectedSubcategory(null);
   };
 
-  // Si no hay categoría seleccionada, mostrar grid de categorías
+  const sectionClass = "relative py-10 md:py-14 bg-secondary";
+  const headerWrapClass = "mx-auto mb-8 max-w-3xl text-center";
+  const dividerClass =
+    "mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-primary/25 to-transparent";
+
+  // ✅ Vista 1: Grid de categorías
   if (!selectedCategoryId) {
     return (
-      <section id="productos" className="py-16 md:py-24 bg-secondary">
+      <section id="productos" className={sectionClass}>
+        {/* Fondo / gradientes cortos para evitar “aire muerto” */}
+        <div className="absolute inset-x-0 top-0 -z-10 h-16 bg-gradient-to-b from-background/30 via-transparent to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-16 bg-gradient-to-t from-background/30 via-transparent to-transparent" aria-hidden="true" />
+
         <div className="container mx-auto px-4">
-          <h2 className="section-title text-center mb-4">Nuestros Productos</h2>
-          <p className="section-subtitle text-center mx-auto mb-8">
-            Explore nuestro catálogo de equipos eléctricos de alta calidad para aplicaciones industriales y comerciales.
-          </p>
+          <div className={headerWrapClass}>
+            <p className="text-xs tracking-[0.22em] text-muted-foreground">
+              CATÁLOGO
+            </p>
+            <h2 className="section-title mt-2">Nuestros Productos</h2>
+            <p className="mt-2 text-sm md:text-base text-muted-foreground">
+              Explora soluciones profesionales para respaldo energético, energía solar y equipamiento eléctrico, con soporte técnico y acompañamiento especializado.
+            </p>
+            <div className={dividerClass} />
+          </div>
 
           <CategoryGrid
             categories={allCategories}
@@ -71,38 +90,63 @@ const ProductsSection = () => {
     );
   }
 
-  // Vista de productos de categoría seleccionada
+  // ✅ Vista 2: Productos de categoría seleccionada
   return (
-    <section id="productos" className="py-16 md:py-24 bg-secondary">
+    <section id="productos" className={sectionClass}>
+      <div className="absolute inset-x-0 top-0 -z-10 h-16 bg-gradient-to-b from-background/30 via-transparent to-transparent" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 -z-10 h-16 bg-gradient-to-t from-background/30 via-transparent to-transparent" aria-hidden="true" />
+
       <div className="container mx-auto px-4">
-        {/* Header de categoría */}
-        <div className="mb-8">
-          <button 
+        {/* Header de categoría (compacto + premium) */}
+        <div className="mb-6">
+          <button
             onClick={handleBackToCategories}
-            className="inline-flex items-center text-sm text-accent hover:text-accent/80 mb-3 transition-colors"
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full",
+              "border border-border/60 bg-card/70 px-3.5 py-2",
+              "text-sm text-foreground/90 shadow-sm shadow-black/5",
+              "transition-all duration-300 hover:bg-card hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            )}
             aria-label="Volver a categorías"
           >
-            <span className="mr-2">←</span>
-            Volver a categorías
+            <span aria-hidden className="text-muted-foreground">←</span>
+            <span className="font-medium">Volver a categorías</span>
           </button>
-          
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+
+          <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
+              <p className="text-xs tracking-[0.22em] text-muted-foreground">
+                CATEGORÍA
+              </p>
+              <h2 className="mt-2 text-2xl md:text-3xl font-heading font-bold text-foreground">
                 {selectedCategory?.name}
               </h2>
-              <p className="text-sm text-muted-foreground mt-1">
-                {productsInCategory.length} productos disponibles
+              <p className="mt-1 text-sm text-muted-foreground">
+                {productsInCategory.length} {productsInCategory.length === 1 ? "producto" : "productos"} disponibles
+                {selectedSubcategory ? (
+                  <span className="text-muted-foreground">
+                    {" "}• Filtrado por “{selectedSubcategory}”
+                  </span>
+                ) : null}
               </p>
             </div>
 
-            {selectedCategory?.subcategories && selectedCategory.subcategories.length > 0 && (
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground hidden md:inline">Filtrar por:</span>
+            {/* Filtro subcategorías (si aplica) */}
+            {selectedCategory?.subcategories?.length ? (
+              <div className="flex items-center gap-2 md:justify-end">
+                <span className="text-sm text-muted-foreground hidden md:inline">
+                  Filtrar por
+                </span>
                 <select
                   value={selectedSubcategory || ""}
                   onChange={(e) => setSelectedSubcategory(e.target.value || null)}
-                  className="px-4 py-2 border rounded-lg text-sm bg-white"
+                  className={cn(
+                    "h-10 rounded-xl px-3.5 text-sm",
+                    "border border-border/60 bg-card/80 text-foreground",
+                    "shadow-sm shadow-black/5",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  )}
                   aria-label="Subcategorías"
                 >
                   <option value="">Todas las subcategorías</option>
@@ -113,33 +157,45 @@ const ProductsSection = () => {
                   ))}
                 </select>
               </div>
-            )}
+            ) : null}
           </div>
+
+          <div className="mt-5 h-px w-full bg-border/60" />
         </div>
 
         {/* Grid de productos con suspense */}
         <Suspense fallback={<ProductGridSkeleton count={8} />}>
-          <ProductGrid
-            products={visibleProducts}
-            onProductClick={handleProductClick}
-            loading={false}
-          />
+          <ProductGrid products={visibleProducts} onProductClick={handleProductClick} loading={false} />
         </Suspense>
 
-        {/* Estado vacío */}
+        {/* Estado vacío (compacto) */}
         {visibleProducts.length === 0 && (
-          <div className="text-center py-16">
-            <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center bg-muted rounded-full">
-              <svg className="w-12 h-12 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <div className="text-center py-12">
+            <div className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-2xl bg-muted/60 ring-1 ring-border/60">
+              <svg
+                className="h-10 w-10 text-muted-foreground"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">No se encontraron productos</h3>
+
+            <h3 className="text-lg font-semibold text-foreground mb-2">
+              No se encontraron productos
+            </h3>
+
             <p className="text-muted-foreground max-w-md mx-auto">
-              {selectedSubcategory 
-                ? `No hay productos en la subcategoría "${selectedSubcategory}".`
-                : "Prueba con otra categoría o subcategoría."
-              }
+              {selectedSubcategory
+                ? `No hay productos disponibles en la subcategoría “${selectedSubcategory}”.`
+                : "Prueba con otra categoría o ajusta el filtro para ver resultados."}
             </p>
           </div>
         )}
@@ -147,10 +203,10 @@ const ProductsSection = () => {
         {/* Modal de detalles (lazy loaded) */}
         <Suspense fallback={null}>
           {selectedProduct && (
-            <ProductDetailModal 
-              product={selectedProduct} 
-              open={isModalOpen} 
-              onOpenChange={setIsModalOpen} 
+            <ProductDetailModal
+              product={selectedProduct}
+              open={isModalOpen}
+              onOpenChange={setIsModalOpen}
             />
           )}
         </Suspense>

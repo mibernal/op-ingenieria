@@ -11,12 +11,18 @@ import {
   Instagram,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { NAV_ITEMS, getNavHref } from "@/config/routes";
+import { NAV_ITEMS, getNavHref, ROUTES } from "@/config/routes";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 // ✅ Assets públicos (GitHub Pages friendly)
 const logoSrc = `${import.meta.env.BASE_URL}uploads/logo.png`;
+
+const LEGAL_LINKS = [
+  { label: "Términos", to: `${ROUTES.LEGAL}#terminos` },
+  { label: "Privacidad", to: `${ROUTES.LEGAL}#privacidad` },
+  { label: "Cookies", to: `${ROUTES.LEGAL}#cookies` },
+];
 
 const Footer = () => {
   return (
@@ -201,9 +207,15 @@ const Footer = () => {
             </p>
 
             <div className="flex items-center gap-5 text-xs md:text-sm text-primary-foreground/60">
-              <a href="#" className="hover:text-accent transition-colors">Términos</a>
-              <a href="#" className="hover:text-accent transition-colors">Privacidad</a>
-              <a href="#" className="hover:text-accent transition-colors">Cookies</a>
+              {LEGAL_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.to}
+                  className="hover:text-accent transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

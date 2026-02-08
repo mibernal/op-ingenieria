@@ -1,79 +1,133 @@
+// src/modules/contact/pages/ContactPage.tsx
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, MessageCircle, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import Seo from "@/components/seo/Seo";
 import { contactSeo } from "@/modules/contact/seo";
+import { cn } from "@/lib/utils";
+
+const CONTACT = {
+  email: "info@opingenieria.com",
+  phoneDisplay: "+57 (601) 4732039",
+  phoneHref: "tel:+576014732039",
+  whatsappHref: "https://wa.me/573133638760",
+  city: "Bogotá, Colombia",
+  hours: "Lun–Vie: 8:00–17:00",
+};
 
 const ContactPage = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo {...contactSeo} />
       <Header />
-      <main className="flex-1 py-16">
+
+      <main className="flex-1 py-10 md:py-14">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-heading font-bold mb-4">Contacto</h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Estamos aquí para ayudarte con tus proyectos de ingeniería
+          {/* Header premium compacto */}
+          <div className="mx-auto mb-8 max-w-3xl text-center">
+            <p className="text-xs tracking-[0.22em] text-muted-foreground">CONTACTO</p>
+            <h1 className="mt-2 text-3xl md:text-4xl font-heading font-bold tracking-tight">
+              Hablemos de tu proyecto
+            </h1>
+            <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
+              Cuéntanos qué necesitas y te orientamos con una propuesta técnica.
             </p>
+            <div className="mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6">
             {/* Información de contacto */}
             <div className="space-y-6">
-              <Card>
+              <Card className="rounded-2xl border-border/60 bg-card/70 backdrop-blur-md shadow-sm shadow-black/5">
                 <CardContent className="p-6">
                   <h2 className="text-xl font-heading font-bold mb-4">Información de contacto</h2>
+
                   <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Phone className="h-5 w-5 text-accent" />
-                      <div>
+                    <a
+                      href={CONTACT.phoneHref}
+                      className={cn(
+                        "group flex items-start gap-3 rounded-xl border border-border/60 bg-background/40 p-4",
+                        "transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10 hover:border-primary/25",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                      )}
+                      aria-label={`Llamar al ${CONTACT.phoneDisplay}`}
+                    >
+                      <Phone className="h-5 w-5 text-accent mt-0.5" />
+                      <div className="min-w-0 flex-1">
                         <p className="font-medium">Teléfono</p>
-                        <p className="text-muted-foreground">+57 (601) 4732039</p>
+                        <p className="text-muted-foreground">{CONTACT.phoneDisplay}</p>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Mail className="h-5 w-5 text-accent" />
-                      <div>
+                      <ArrowUpRight className="h-4 w-4 text-muted-foreground mt-1 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </a>
+
+                    <a
+                      href={`mailto:${CONTACT.email}`}
+                      className={cn(
+                        "group flex items-start gap-3 rounded-xl border border-border/60 bg-background/40 p-4",
+                        "transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10 hover:border-primary/25",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                      )}
+                      aria-label={`Enviar correo a ${CONTACT.email}`}
+                    >
+                      <Mail className="h-5 w-5 text-accent mt-0.5" />
+                      <div className="min-w-0 flex-1">
                         <p className="font-medium">Email</p>
-                        <p className="text-muted-foreground">info@opingenieria.com</p>
+                        <p className="text-muted-foreground">{CONTACT.email}</p>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <MapPin className="h-5 w-5 text-accent" />
+                      <ArrowUpRight className="h-4 w-4 text-muted-foreground mt-1 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </a>
+
+                    <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-background/30 p-4">
+                      <MapPin className="h-5 w-5 text-accent mt-0.5" />
                       <div>
                         <p className="font-medium">Ubicación</p>
-                        <p className="text-muted-foreground">Bogotá, Colombia</p>
+                        <p className="text-muted-foreground">{CONTACT.city}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Clock className="h-5 w-5 text-accent" />
+
+                    <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-background/30 p-4">
+                      <Clock className="h-5 w-5 text-accent mt-0.5" />
                       <div>
                         <p className="font-medium">Horario</p>
-                        <p className="text-muted-foreground">Lun-Vie: 8:00-17:00</p>
+                        <p className="text-muted-foreground">{CONTACT.hours}</p>
                       </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="rounded-2xl border-border/60 bg-card/70 backdrop-blur-md shadow-sm shadow-black/5">
                 <CardContent className="p-6">
                   <h2 className="text-xl font-heading font-bold mb-4">Contacto rápido</h2>
                   <div className="space-y-3">
-                    <Button className="w-full gap-2 bg-accent hover:bg-accent/90" asChild>
-                      <a href="https://wa.me/573133638760" target="_blank" rel="noreferrer">
+                    <Button
+                      className="w-full gap-2 bg-accent hover:bg-accent/90 shadow-lg shadow-accent/20"
+                      size="lg"
+                      asChild
+                    >
+                      <a href={CONTACT.whatsappHref} target="_blank" rel="noreferrer">
                         <MessageCircle className="h-4 w-4" />
                         WhatsApp
                       </a>
                     </Button>
-                    <Button variant="outline" className="w-full" asChild>
-                      <a href="tel:+576014732039">Llamar ahora</a>
+
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className={cn(
+                        "w-full",
+                        "border-border/60 bg-background/40",
+                        "hover:bg-background/60",
+                        "transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10"
+                      )}
+                      asChild
+                    >
+                      <a href={CONTACT.phoneHref}>Llamar ahora</a>
                     </Button>
                   </div>
                 </CardContent>
@@ -81,63 +135,65 @@ const ContactPage = () => {
             </div>
 
             {/* Formulario de contacto */}
-            <Card>
+            <Card className="rounded-2xl border-border/60 bg-card/70 backdrop-blur-md shadow-sm shadow-black/5">
               <CardContent className="p-6">
-                <h2 className="text-xl font-heading font-bold mb-4">Envíanos un mensaje</h2>
+                <h2 className="text-xl font-heading font-bold mb-1">Envíanos un mensaje</h2>
+                <p className="text-sm text-muted-foreground mb-5">
+                  Cuéntanos el alcance (planta, solar, baterías, UPS, tableros) y la ciudad. Te respondemos con asesoría técnica.
+                </p>
+
                 <form className="space-y-4">
-                  <div>
-                    <Label htmlFor="contact-name" className="block text-sm font-medium mb-2">
+                  <div className="grid gap-2">
+                    <Label htmlFor="contact-name" className="text-sm font-medium">
                       Nombre
                     </Label>
-                    <Input 
-                      id="contact-name"
-                      type="text" 
-                      placeholder="Tu nombre"
-                      required
-                    />
+                    <Input id="contact-name" type="text" placeholder="Tu nombre" required />
                   </div>
-                  <div>
-                    <Label htmlFor="contact-email" className="block text-sm font-medium mb-2">
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="contact-email" className="text-sm font-medium">
                       Email
                     </Label>
-                    <Input 
-                      id="contact-email"
-                      type="email" 
-                      placeholder="tu@email.com"
-                      required
-                    />
+                    <Input id="contact-email" type="email" placeholder="tu@email.com" required />
                   </div>
-                  <div>
-                    <Label htmlFor="contact-subject" className="block text-sm font-medium mb-2">
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="contact-subject" className="text-sm font-medium">
                       Asunto
                     </Label>
-                    <Input 
-                      id="contact-subject"
-                      type="text" 
-                      placeholder="Asunto del mensaje"
-                      required
-                    />
+                    <Input id="contact-subject" type="text" placeholder="Asunto del mensaje" required />
                   </div>
-                  <div>
-                    <Label htmlFor="contact-message" className="block text-sm font-medium mb-2">
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="contact-message" className="text-sm font-medium">
                       Mensaje
                     </Label>
-                    <Textarea 
+                    <Textarea
                       id="contact-message"
-                      placeholder="¿En qué podemos ayudarte?"
-                      rows={5}
+                      placeholder="Ej: Planta 100 kVA para bodega en Bogotá, con transferencia automática..."
+                      rows={6}
                       required
                     />
                   </div>
-                  <Button type="submit" className="w-full">
+
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20"
+                  >
                     Enviar mensaje
                   </Button>
+
+                  <p className="text-xs text-muted-foreground">
+                    Al enviar, aceptas ser contactado para atender tu solicitud. No compartimos tu información.
+                  </p>
                 </form>
               </CardContent>
             </Card>
           </div>
         </div>
       </main>
+
       <Footer />
     </div>
   );

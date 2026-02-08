@@ -3,7 +3,7 @@ import { NavLink } from "@/components/layout/NavLink";
 import { ROUTES } from "@/config/routes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Phone } from "lucide-react";
 
 export function CTASection() {
   return (
@@ -12,14 +12,14 @@ export function CTASection() {
       className={cn(
         "relative overflow-hidden",
         "bg-primary text-primary-foreground",
-        "py-16 md:py-20"
+        "py-12 md:py-14" // ⬅️ un poco más compacto, premium
       )}
     >
       {/* Fondo decorativo sutil (marca) */}
       <div className="pointer-events-none absolute inset-0 opacity-60">
         <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-accent/15 blur-3xl" />
         <div className="absolute -bottom-28 -left-28 h-96 w-96 rounded-full bg-primary-foreground/10 blur-3xl" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/10 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/10 to-black/25" />
       </div>
 
       <div className="relative container mx-auto px-4">
@@ -41,25 +41,51 @@ export function CTASection() {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            {/* ✅ Botón principal (verde) */}
             <Button
               size="lg"
               asChild
-              className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20"
+              className={cn(
+                "w-full sm:w-auto",
+                "h-14 px-8 rounded-2xl",
+                "bg-accent text-accent-foreground hover:bg-accent/90",
+                "shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30",
+                "transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              )}
             >
               <NavLink to={ROUTES.CONTACT}>Solicitar Cotización</NavLink>
             </Button>
 
+            {/* ✅ Botón secundario (glass como “Ver Proyectos Ejecutados”) */}
             <Button
               size="lg"
               variant="outline"
               asChild
               className={cn(
                 "w-full sm:w-auto",
-                "border-primary-foreground/25 text-primary-foreground",
-                "hover:bg-primary-foreground/10"
+                "h-14 px-8 rounded-2xl",
+
+                // 👇 Esto corrige el “bloque blanco” y hace glass premium
+                "border border-white/20 bg-white/5 text-white/90",
+                "hover:bg-white/10 hover:text-white hover:border-white/30",
+
+                // Interacción
+                "transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0",
+                "shadow-sm hover:shadow-md",
+
+                // Accesibilidad
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
+
+                // Glass
+                "backdrop-blur-md"
               )}
             >
-              <a href="tel:+576014732039">Llamar Ahora</a>
+              <a href="tel:+576014732039" className="inline-flex items-center justify-center gap-2">
+                <Phone className="h-4 w-4 text-white/80" aria-hidden="true" />
+                Llamar Ahora
+                <span aria-hidden className="text-white/70">›</span>
+              </a>
             </Button>
           </div>
 

@@ -4,6 +4,7 @@ export const ROUTES = {
   CATALOG: "/catalogo", // <- mantener consistente con App.tsx
   PROJECTS: "/projects",
   CONTACT: "/contact",
+  LEGAL: "/legal",
 } as const;
 
 export const HOME_SECTIONS = {

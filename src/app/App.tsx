@@ -11,6 +11,7 @@ import NotFound from "./routes/NotFound";
 import CatalogPage from "@/modules/catalog/pages/CatalogPage";
 import ProjectsPage from "@/modules/projects/pages/ProjectsPage";
 import ContactPage from "@/modules/contact/pages/ContactPage";
+import LegalPage from "@/modules/legal/pages/LegalPage";
 import ScrollToHash from "./routes/ScrollToHash";
 
 const queryClient = new QueryClient({
@@ -54,6 +55,7 @@ const App = () => {
             <Route path={ROUTES.CATALOG} element={<CatalogPage />} />
             <Route path={ROUTES.PROJECTS} element={<ProjectsPage />} />
             <Route path={ROUTES.CONTACT} element={<ContactPage />} />
+            <Route path={ROUTES.LEGAL} element={<LegalPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

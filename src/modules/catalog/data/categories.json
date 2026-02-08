@@ -2,18 +2,21 @@
   {
     "id": "aires-acondicionados-y-ventilacion",
     "name": "Aires Acondicionados y Ventilacion",
+    "summary": "Climatización eficiente para hogares y empresas: confort, control de temperatura y ventilación confiable.",
     "subcategories": [],
     "count": 3
   },
   {
     "id": "baterias",
     "name": "Baterias",
+    "summary": "Respaldo energético seguro y duradero: baterías para sistemas críticos, solares y aplicaciones industriales.",
     "subcategories": [],
     "count": 6
   },
   {
     "id": "energia-solar",
     "name": "Energia Solar",
+    "summary": "Soluciones fotovoltaicas para ahorro y autonomía: paneles, componentes y sistemas listos para operar.",
     "subcategories": [
       "Centros Educativos, Energia Solar",
       "Centros de Alto Consumo, Energia Solar"
@@ -23,6 +26,7 @@
   {
     "id": "energia-solar,-energia-solar",
     "name": "Energia Solar, Energia Solar",
+    "summary": "Energía solar para proyectos residenciales y comerciales: eficiencia, ahorro y respaldo inteligente.",
     "subcategories": [
       "Hogares"
     ],
@@ -31,18 +35,21 @@
   {
     "id": "iluminacion-led",
     "name": "Iluminacion LED",
+    "summary": "Iluminación moderna de alto rendimiento: menor consumo, mayor duración y excelente calidad de luz.",
     "subcategories": [],
     "count": 7
   },
   {
     "id": "inversores",
     "name": "Inversores",
+    "summary": "Conversión de energía estable y eficiente: inversores para sistemas solares, respaldo y operación continua.",
     "subcategories": [],
     "count": 3
   },
   {
     "id": "plantas-electricas",
     "name": "Plantas Electricas",
+    "summary": "Generación confiable para continuidad operativa: plantas eléctricas para respaldo y alta demanda.",
     "subcategories": [
       "Grupos Electrógenos a Diesel, Plantas Electricas",
       "Grupos Electrógenos a Gas, Plantas Electricas",
@@ -53,24 +60,28 @@
   {
     "id": "rectificadores---cargadores",
     "name": "Rectificadores - Cargadores",
+    "summary": "Carga y alimentación controlada para sistemas críticos: estabilidad, protección y rendimiento constante.",
     "subcategories": [],
     "count": 6
   },
   {
     "id": "sistemas-ups",
     "name": "Sistemas UPS",
+    "summary": "Respaldo inmediato ante cortes: UPS para proteger equipos y garantizar operación sin interrupciones.",
     "subcategories": [],
     "count": 3
   },
   {
     "id": "tableros-distribucion-y-control",
     "name": "Tableros Distribucion y Control",
+    "summary": "Distribución eléctrica segura y ordenada: control, protección y gestión profesional de cargas.",
     "subcategories": [],
     "count": 3
   },
   {
     "id": "energia-solar,-sistemas-ups,-energia-solar",
     "name": "Energia Solar, Sistemas UPS, Energia Solar",
+    "summary": "Sistemas híbridos para autonomía total: energía solar + respaldo UPS para continuidad y ahorro.",
     "subcategories": [
       "UPS Hibrida"
     ],
@@ -79,12 +90,14 @@
   {
     "id": "estabilizadores-de-tensión",
     "name": "Estabilizadores de tensión",
+    "summary": "Protección contra variaciones eléctricas: regulación estable para cuidar equipos sensibles y costosos.",
     "subcategories": [],
     "count": 1
   },
   {
     "id": "reguladores-electrónicos-y-circuitos-de-control-eléctricos",
     "name": "Reguladores electrónicos y circuitos de control eléctricos",
+    "summary": "Control eléctrico preciso y seguro: regulación y automatización para sistemas técnicos e industriales.",
     "subcategories": [],
     "count": 1
   }

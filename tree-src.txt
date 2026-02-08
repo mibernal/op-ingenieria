@@ -82,6 +82,7 @@ src
 │       ├── productsService.ts
 │       └── projectsService.ts
 ├── lib
+│   ├── assets.ts
 │   └── utils.ts
 ├── modules
 │   ├── catalog
@@ -120,6 +121,10 @@ src
 │   │   │   └── index.ts
 │   │   ├── pages
 │   │   │   └── ContactPage.tsx
+│   │   └── seo.ts
+│   ├── legal
+│   │   ├── pages
+│   │   │   └── LegalPage.tsx
 │   │   └── seo.ts
 │   ├── marketing
 │   │   ├── components

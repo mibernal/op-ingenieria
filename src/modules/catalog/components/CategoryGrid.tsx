@@ -81,9 +81,12 @@ const CategoryGrid = ({ categories, products, onSelectCategory }: CategoryGridPr
                   {count} {count === 1 ? "producto" : "productos"}
                 </span>
               </div>
-              <p className="text-sm text-muted-foreground mt-2">
-                Soluciones confiables, equipos certificados y soporte técnico especializado.
+
+              {/* ✅ Resumen arriba de "Ver catálogo" */}
+              <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                {category.summary}
               </p>
+
               <span className="mt-4 inline-flex items-center text-sm font-medium text-accent">
                 Ver catálogo
                 <ArrowUpRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

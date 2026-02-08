@@ -116,38 +116,70 @@ const Hero = () => {
               transition={{ delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              <Button
-                size="lg"
-                asChild
-                className={cn(
-                  "group bg-accent text-accent-foreground hover:bg-accent/90",
-                  "px-8 py-6 text-lg rounded-xl",
-                  "transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl",
-                  "relative overflow-hidden"
-                )}
-              >
-                <NavLink to={ROUTES.CONTACT}>
-                  <span className="relative z-10 flex items-center gap-2">
-                    Solicitar Cotización
-                    <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </NavLink>
-              </Button>
+<Button
+  size="lg"
+  asChild
+  className={cn(
+    // Base
+    "group h-14 px-8 rounded-2xl",
+    "bg-accent text-accent-foreground",
 
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className={cn(
-                  "border-2 border-primary-foreground/30 text-primary-foreground",
-                  "hover:bg-primary-foreground/10 px-8 py-6 text-lg rounded-xl",
-                  "transform transition-all duration-300 hover:-translate-y-1",
-                  "backdrop-blur-sm"
-                )}
-              >
-                <NavLink to={ROUTES.PROJECTS}>Ver Proyectos Ejecutados</NavLink>
-              </Button>
+    // Profundidad / presencia
+    "shadow-lg shadow-accent/30",
+    "hover:shadow-xl hover:shadow-accent/40",
+
+    // Hover refinado (no ensucia el verde)
+    "hover:bg-accent/90",
+
+    // Interacción
+    "transition-all duration-300",
+    "hover:-translate-y-0.5 active:translate-y-0",
+
+    // Accesibilidad
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
+
+    // Efecto glass sutil (muy leve, elegante)
+    "backdrop-blur-sm",
+    "relative overflow-hidden"
+  )}
+>
+  <NavLink to={ROUTES.CONTACT} className="relative z-10 inline-flex items-center gap-2">
+    Solicitar Cotización
+    <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+  </NavLink>
+</Button>
+
+
+<Button
+  size="lg"
+  variant="outline"
+  asChild
+  className={cn(
+    // Base (legible en fondo oscuro)
+    "h-14 px-8 rounded-2xl",
+    "border border-white/20 bg-white/5 text-white/90",
+
+    // Hover (más claro y moderno)
+    "hover:bg-white/10 hover:text-white hover:border-white/30",
+
+    // Interacción
+    "transition-all duration-300",
+    "hover:-translate-y-0.5 active:translate-y-0",
+    "shadow-sm hover:shadow-md",
+
+    // Accesibilidad / focus
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
+
+    // Efecto glass
+    "backdrop-blur-md"
+  )}
+>
+  <NavLink to={ROUTES.PROJECTS} className="inline-flex items-center justify-center gap-2">
+    Ver Proyectos Ejecutados
+    <span aria-hidden className="text-white/70">›</span>
+  </NavLink>
+</Button>
+
             </motion.div>
 
             {/* Indicadores de confianza */}
@@ -158,9 +190,9 @@ const Hero = () => {
               className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"
             >
               {[
-                { value: "200+", label: "Proyectos Completados" },
-                { value: "15+", label: "Años de Experiencia" },
-                { value: "50+", label: "Clientes Satisfechos" },
+                { value: "300+", label: "Proyectos Completados" },
+                { value: "12+", label: "Años de Experiencia" },
+                { value: "100+", label: "Clientes Satisfechos" },
                 { value: "100%", label: "Compromiso Calidad" }
               ].map((stat, index) => (
                 <div key={index} className="text-center">

@@ -1,5 +1,5 @@
-// src/modules/projects/data/projects.ts
-import projectsData from './projects_normalized.json';
+import projectsData from "./projects_normalized.json";
+import { publicAsset, publicAssets } from "@/lib/assets";
 
 export interface Project {
   id: string;
@@ -11,7 +11,6 @@ export interface Project {
   image?: string;
   slug?: string;
   source_id?: number;
-  // Se han eliminado date y location
 }
 
 export interface ProjectCategory {
@@ -20,7 +19,6 @@ export interface ProjectCategory {
   aliases?: string[];
 }
 
-// Mantengo tu lista de categorías original
 export const projectCategories: ProjectCategory[] = [
   {
     id: "grupos-electrogenos",
@@ -42,34 +40,24 @@ export const projectCategories: ProjectCategory[] = [
     name: "Sistemas Ininterrumpidos de Potencia (UPS)",
     aliases: ["UPS", "UPS / Servicios"],
   },
-  {
-    id: "baterias",
-    name: "Baterías",
-    aliases: ["Baterías"],
-  },
+  { id: "baterias", name: "Baterías", aliases: ["Baterías"] },
   {
     id: "rectificadores",
     name: "Rectificadores - Cargadores",
     aliases: ["Rectificadores / Cargadores", "Cargadores / Transferencias / Servicios"],
   },
-  {
-    id: "obras-electricas",
-    name: "Obras Eléctricas e Iluminación",
-    aliases: ["Obras Electricas"],
-  },
-  {
-    id: "mantenimientos",
-    name: "Mantenimientos",
-    aliases: ["Mantenimientos"],
-  },
-  {
-    id: "aire-acondicionado",
-    name: "Aire Acondicionado",
-    aliases: ["Aire Acondicionado"],
-  },
+  { id: "obras-electricas", name: "Obras Eléctricas e Iluminación", aliases: ["Obras Electricas"] },
+  { id: "mantenimientos", name: "Mantenimientos", aliases: ["Mantenimientos"] },
+  { id: "aire-acondicionado", name: "Aire Acondicionado", aliases: ["Aire Acondicionado"] },
 ];
 
-// Type assertion para los datos importados
-export const projects: Project[] = projectsData as Project[];
+export const projects: Project[] = (projectsData as any[]).map((p: any) => {
+  const imagesRaw = Array.isArray(p.images) ? p.images : [];
+  return {
+    ...p,
+    images: publicAssets(imagesRaw),            // ✅ GH Pages OK
+    image: p.image ? publicAsset(p.image) : undefined, // ✅ por si lo usan
+  };
+}) as Project[];
 
 export default projects;

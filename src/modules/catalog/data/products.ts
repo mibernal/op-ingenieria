@@ -1,19 +1,17 @@
-// modules/catalog/data/products.ts
 import productsData from "../data/products_normalized.json";
 import categoriesData from "../data/categories.json";
 import * as LucideIcons from "lucide-react";
 import type { Product as CoreProduct } from "@/core/domain/product";
+import { publicAssets } from "@/lib/assets";
 
 export type Spec = { label: string; value: string };
 
 // Extender el tipo del core con campos específicos del catálogo
 export type Product = CoreProduct & {
-  // Campos requeridos específicos del catálogo
   slug: string;
   categoryId: string;
   images: string[];
   specs: Spec[];
-  // Hacer campos opcionales que podrían no estar en todos los productos
   sku?: string;
   subcategory?: string | null;
   price?: string;
@@ -54,24 +52,25 @@ export const categories: Category[] = rawCategories.map((c) => ({
 
 // Crear un mapa de nombres de categoría a IDs para búsqueda más fácil
 const categoryNameToIdMap: Record<string, string> = {};
-categories.forEach(cat => {
+categories.forEach((cat) => {
   categoryNameToIdMap[cat.name] = cat.id;
 });
 
 // Procesar productos del JSON
-export const products: Product[] = productsData.map((item: any) => {
-  // Determinar categoryId basado en el campo 'category' del JSON
+export const products: Product[] = (productsData as any[]).map((item: any) => {
   const categoryName = item.category || "";
   const categoryId = categoryNameToIdMap[categoryName] || categoryName || "uncategorized";
-  
+
+  const imagesRaw = Array.isArray(item.images) ? item.images : [];
+  const images = publicAssets(imagesRaw); // ✅ aquí se corrige para GH Pages
+
   return {
     ...item,
     categoryId,
-    images: Array.isArray(item.images) ? item.images : [],
+    images,
     specs: Array.isArray(item.specs) ? item.specs : [],
-    // Asegurar que los campos requeridos existan
-    id: item.id || String(Math.random()),
-    slug: item.slug || item.id || String(Math.random()),
+    id: item.id || crypto.randomUUID?.() || String(Math.random()),
+    slug: item.slug || item.id || crypto.randomUUID?.() || String(Math.random()),
     title: item.title || "Producto sin nombre",
     description: item.description || "",
   };

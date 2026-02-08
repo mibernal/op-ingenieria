@@ -1,4 +1,4 @@
-// components/layout/Header.tsx
+// src/components/layout/Header.tsx
 import { useEffect, useMemo, useRef, useState, type FocusEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, ChevronDown, Sparkles } from "lucide-react";
@@ -17,7 +17,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import logoSrc from "@/assets/images/uploads/logo.png";
+// ✅ GitHub Pages friendly: assets públicos (NO import desde src/assets)
+const logoSrc = `${import.meta.env.BASE_URL}uploads/logo.png`;
 
 const isSearchMatch = (targetSearch: string, currentSearch: string) => {
   if (!targetSearch) return true;
@@ -154,22 +155,21 @@ const Header = () => {
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 320 }}
             >
-<div
-  className={cn(
-    // ✅ Tamaño del recuadro SIEMPRE dentro del navbar (64px mobile / 72px md)
-    "flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl transition-all duration-500 overflow-hidden",
-    scrolled
-      ? "bg-accent/10 border border-accent/20"
-      : "bg-primary-foreground/10 border border-primary-foreground/20"
-  )}
->
-<img
-    src={logoSrc}
-    alt="OP Ingeniería"
-    className="w-full h-full object-contain p-0.5 md:p-1 scale-110"
-    loading="eager"
-    decoding="async"
-/>
+              <div
+                className={cn(
+                  "flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl transition-all duration-500 overflow-hidden",
+                  scrolled
+                    ? "bg-accent/10 border border-accent/20"
+                    : "bg-primary-foreground/10 border border-primary-foreground/20"
+                )}
+              >
+                <img
+                  src={logoSrc}
+                  alt="OP Ingeniería"
+                  className="w-full h-full object-contain p-0.5 md:p-1 scale-110"
+                  loading="eager"
+                  decoding="async"
+                />
               </div>
 
               <motion.div
@@ -348,7 +348,9 @@ const Header = () => {
             <SheetContent side="right" className="w-full sm:max-w-sm">
               <SheetHeader className="mb-6">
                 <SheetTitle>Menú</SheetTitle>
-                <SheetDescription>Navega por las secciones principales de OP Ingeniería.</SheetDescription>
+                <SheetDescription>
+                  Navega por las secciones principales de OP Ingeniería.
+                </SheetDescription>
               </SheetHeader>
 
               <nav className="flex flex-col gap-1" aria-label="Menú móvil">

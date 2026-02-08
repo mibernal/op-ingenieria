@@ -15,8 +15,8 @@ import { NAV_ITEMS, getNavHref } from "@/config/routes";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
-// ✅ logo local
-import logoSrc from "@/assets/images/uploads/logo.png";
+// ✅ Assets públicos (GitHub Pages friendly)
+const logoSrc = `${import.meta.env.BASE_URL}uploads/logo.png`;
 
 const Footer = () => {
   return (
@@ -42,13 +42,12 @@ const Footer = () => {
           {/* Logo y descripción */}
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              {/* ✅ Contenedor de logo corporativo (FONDO BLANCO) */}
+              {/* ✅ Contenedor de logo corporativo con fondo blanco */}
               <div
                 className={cn(
                   "w-14 h-14 rounded-xl overflow-hidden",
-                  // ✅ AQUÍ: fondo blanco + borde sutil + sombra ligera para separarlo del footer oscuro
-                  "bg-white border border-black/10 shadow-sm",
-                  "flex items-center justify-center"
+                  "bg-white border border-primary-foreground/15",
+                  "flex items-center justify-center shadow-sm"
                 )}
               >
                 <img
@@ -112,7 +111,7 @@ const Footer = () => {
             <h4 className="font-heading font-semibold mb-4 text-base">Contacto</h4>
             <ul className="space-y-3.5">
               <li className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <Clock className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium">Horario</p>
                   <p className="text-sm text-primary-foreground/70">Lun–Vie: 8:00–17:00</p>
@@ -120,7 +119,7 @@ const Footer = () => {
               </li>
 
               <li className="flex items-start gap-3">
-                <Phone className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <Phone className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium">Teléfono</p>
                   <a
@@ -133,7 +132,7 @@ const Footer = () => {
               </li>
 
               <li className="flex items-start gap-3">
-                <Mail className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <Mail className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium">Email</p>
                   <a
@@ -146,7 +145,7 @@ const Footer = () => {
               </li>
 
               <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium">Ubicación</p>
                   <p className="text-sm text-primary-foreground/70">Bogotá, Colombia</p>
@@ -202,15 +201,9 @@ const Footer = () => {
             </p>
 
             <div className="flex items-center gap-5 text-xs md:text-sm text-primary-foreground/60">
-              <a href="#" className="hover:text-accent transition-colors">
-                Términos
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">
-                Privacidad
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">
-                Cookies
-              </a>
+              <a href="#" className="hover:text-accent transition-colors">Términos</a>
+              <a href="#" className="hover:text-accent transition-colors">Privacidad</a>
+              <a href="#" className="hover:text-accent transition-colors">Cookies</a>
             </div>
           </div>
         </div>

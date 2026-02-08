@@ -1,7 +1,7 @@
 import type { Client } from "@/core/domain/client";
 import data from "./clients.json";
+import { publicAsset } from "@/lib/assets";
 
-// Exportar ClientData como extensión de Client
 export type ClientData = Client & {
   id: string;
   name: string;
@@ -10,7 +10,6 @@ export type ClientData = Client & {
   featured?: boolean;
 };
 
-// Cargar datos del JSON
 const jsonData = data as ClientData[];
 
 // Datos de ejemplo para desarrollo
@@ -18,33 +17,37 @@ const fallbackData: ClientData[] = [
   {
     id: "1",
     name: "Empresa Ejemplo 1",
-    logo: "/images/clients/client-1.png",
+    logo: "images/clients/client-1.png",
     category: "Tecnología",
     featured: true,
   },
   {
     id: "2",
     name: "Empresa Ejemplo 2",
-    logo: "/images/clients/client-2.png",
+    logo: "images/clients/client-2.png",
     category: "Manufactura",
     featured: false,
   },
 ];
 
-// Usar datos del JSON o los de ejemplo
-export const clientsData: ClientData[] = jsonData.length > 0 ? jsonData : fallbackData;
+// ✅ Normaliza logos para GH Pages (BASE_URL)
+const normalizeClient = (c: ClientData): ClientData => ({
+  ...c,
+  logo: c.logo ? publicAsset(c.logo) : undefined,
+});
 
-export const getClients = (): ClientData[] => {
-  return clientsData;
-};
+const raw = (jsonData.length > 0 ? jsonData : fallbackData) as ClientData[];
 
-export const getFeaturedClients = (): ClientData[] => {
-  return clientsData.filter((client) => client.featured);
-};
+export const clientsData: ClientData[] = raw.map(normalizeClient);
 
-export const getClientsByCategory = (category: string): ClientData[] => {
-  return clientsData.filter((client) => client.category === category);
-};
+export const getClients = (): ClientData[] => clientsData;
+
+export const getFeaturedClients = (): ClientData[] =>
+  clientsData.filter((client) => client.featured);
+
+export const getClientsByCategory = (category: string): ClientData[] =>
+  clientsData.filter((client) => client.category === category);
 
 export const clients: ClientData[] = clientsData;
+
 export default clients;

@@ -5,41 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <meta name="theme-color" content="#1e3a8a" />
 
-    <title>O&P Ingeniería | Soluciones Eléctricas e Industriales en Colombia</title>
+    <title>O&amp;P Ingeniería | Soluciones Eléctricas e Industriales en Colombia</title>
 
-    <meta name="description" content="Proveedor líder en ingeniería eléctrica, energía solar, sistemas UPS y automatización industrial en Colombia. Cotizaciones técnicas por WhatsApp.">
-    <meta name="author" content="O&P Ingeniería S.A.S.">
-    <meta name="robots" content="index, follow">
-
-    <link rel="canonical" href="https://www.opingenieria.com/" />
+    <meta
+      name="description"
+      content="Proveedor líder en ingeniería eléctrica, energía solar, sistemas UPS y automatización industrial en Colombia. Cotizaciones técnicas por WhatsApp."
+    />
+    <meta name="author" content="O&amp;P Ingeniería S.A.S." />
+    <meta name="robots" content="index, follow" />
 
     <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <!-- ✅ Favicons (relativos; Vite los reescribe bien en dist con base) -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-192x192.png" />
 
-    <!-- PWA -->
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="O&P Ingeniería SAS">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- ❌ NO pongas manifest aquí.
+         ✅ VitePWA lo inyecta con la ruta correcta /op-ingenieria/manifest.webmanifest -->
 
     <!-- Open Graph -->
-    <meta property="og:site_name" content="O&P Ingeniería SAS">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="es_CO">
+    <meta property="og:site_name" content="O&amp;P Ingeniería SAS" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
 
-    <!-- Critical CSS -->
     <style>
       .critical-hidden { opacity: 0; }
       .critical-visible { animation: fadeIn .25s ease-out forwards; }
@@ -50,23 +49,14 @@
   <body class="font-body antialiased bg-white text-gray-900">
     <noscript>
       <div style="padding:2rem;text-align:center">
-        <h1>O&P Ingeniería</h1>
+        <h1>O&amp;P Ingeniería</h1>
         <p>JavaScript es requerido para ejecutar esta aplicación.</p>
       </div>
     </noscript>
 
-    <div id="root" class="critical-hidden"></div>
+    <div id="root"></div>
 
-    <!-- Bootstrap React (sin async, sin defer, sin preload) -->
+    <!-- Dev only -->
     <script type="module" src="/src/main.tsx"></script>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXX');
-    </script>
   </body>
 </html>

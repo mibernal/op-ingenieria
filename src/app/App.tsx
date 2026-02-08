@@ -1,4 +1,4 @@
-//src/app/App.tsx
+// src/app/App.tsx
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -9,15 +9,15 @@ import { ROUTES } from "@/config/routes";
 import Index from "./routes/Index";
 import NotFound from "./routes/NotFound";
 import CatalogPage from "@/modules/catalog/pages/CatalogPage";
-import ProjectsPage from "@/modules/projects/pages/ProjectsPage"; // NUEVO
-import ContactPage from "@/modules/contact/pages/ContactPage"; // NUEVO
+import ProjectsPage from "@/modules/projects/pages/ProjectsPage";
+import ContactPage from "@/modules/contact/pages/ContactPage";
 import ScrollToHash from "./routes/ScrollToHash";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutos
-      gcTime: 1000 * 60 * 10, // 10 minutos
+      staleTime: 1000 * 60 * 5,
+      gcTime: 1000 * 60 * 10,
       retry: 1,
       refetchOnWindowFocus: false,
     },
@@ -26,10 +26,10 @@ const queryClient = new QueryClient({
 
 const App = () => {
   useEffect(() => {
-    const root = document.getElementById('root');
+    const root = document.getElementById("root");
     if (root) {
-      root.classList.remove('critical-hidden');
-      root.classList.add('critical-visible');
+      root.classList.remove("critical-hidden");
+      root.classList.add("critical-visible");
     }
   }, []);
 
@@ -38,18 +38,22 @@ const App = () => {
       <TooltipProvider delayDuration={300}>
         <Toaster />
         <Sonner />
+
         <BrowserRouter
+          // ✅ CLAVE: en GH Pages tu app vive bajo /op-ingenieria/
+          // import.meta.env.BASE_URL vale "/op-ingenieria/" en build si tu vite base está bien.
+          basename={import.meta.env.BASE_URL}
           future={{
             v7_startTransition: true,
-            v7_relativeSplatPath: true
+            v7_relativeSplatPath: true,
           }}
         >
           <ScrollToHash />
           <Routes>
             <Route path={ROUTES.HOME} element={<Index />} />
             <Route path={ROUTES.CATALOG} element={<CatalogPage />} />
-            <Route path={ROUTES.PROJECTS} element={<ProjectsPage />} /> {/* NUEVO */}
-            <Route path={ROUTES.CONTACT} element={<ContactPage />} /> {/* NUEVO */}
+            <Route path={ROUTES.PROJECTS} element={<ProjectsPage />} />
+            <Route path={ROUTES.CONTACT} element={<ContactPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

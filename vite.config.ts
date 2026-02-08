@@ -1,4 +1,4 @@
-// vite.config.ts — CONFIGURACIÓN PRODUCTION READY
+// vite.config.ts — PRODUCTION READY + GitHub Pages (op-ingenieria)
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -7,23 +7,24 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import { VitePWA } from "vite-plugin-pwa";
 import type { PluginConfig } from "svgo";
 
+const GH_PAGES_REPO = "op-ingenieria";
+
 export default defineConfig(({ mode }) => {
   const isProduction = mode === "production";
   const isAnalyze = mode === "analyze";
 
   return {
+    base: isProduction ? `/${GH_PAGES_REPO}/` : "/",
+
     server: {
-      host: "::",
+      host: "0.0.0.0",
       port: 8080,
-      hmr: {
-        overlay: false,
-      },
+      hmr: { overlay: false },
     },
 
     plugins: [
       react(),
 
-      // Optimización de imágenes
       ViteImageOptimizer({
         jpg: { quality: 80 },
         png: { quality: 80 },
@@ -31,45 +32,40 @@ export default defineConfig(({ mode }) => {
         avif: { quality: 70 },
         svg: {
           plugins: [
-            {
-              name: "preset-default",
-              params: {
-                overrides: {
-                  // 🔥 CRÍTICO: mantener responsive SVG
-                  removeViewBox: false,
-                },
-              },
-            } as PluginConfig,
+            { name: "preset-default" } as PluginConfig,
+            // ✅ en tu setup lo que quieres es NO eliminar viewBox:
+            // ojo: si svgo te insiste, lo mejor es NO tocar removeViewBox aquí.
           ],
         },
       }),
 
-      // PWA
       VitePWA({
         registerType: "autoUpdate",
-        includeAssets: ["favicon.ico", "apple-touch-icon.png"],
+        includeAssets: [
+          "favicon.ico",
+          "favicon.svg",
+          "apple-touch-icon.png",
+          "favicon-16x16.png",
+          "favicon-32x32.png",
+          "favicon-192x192.png",
+          "pwa-192x192.png",
+          "pwa-512x512.png",
+        ],
         manifest: {
           name: "O&P Ingeniería - Catálogo Profesional",
           short_name: "O&P Catálogo",
           theme_color: "#1e3a8a",
           background_color: "#ffffff",
           display: "standalone",
+          start_url: ".", // ✅ GH Pages
+          scope: ".",     // ✅ GH Pages
           icons: [
-            {
-              src: "pwa-192x192.png",
-              sizes: "192x192",
-              type: "image/png",
-            },
-            {
-              src: "pwa-512x512.png",
-              sizes: "512x512",
-              type: "image/png",
-            },
+            { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
+            { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
           ],
         },
       }),
 
-      // Bundle Analyzer
       isAnalyze &&
         visualizer({
           open: true,
@@ -80,9 +76,9 @@ export default defineConfig(({ mode }) => {
     ].filter(Boolean),
 
     resolve: {
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
-      },
+      alias: { "@": path.resolve(__dirname, "./src") },
+      // ✅ IMPORTANTÍSIMO: evita React duplicado / createContext undefined
+      dedupe: ["react", "react-dom"],
     },
 
     build: {
@@ -93,21 +89,16 @@ export default defineConfig(({ mode }) => {
 
       rollupOptions: {
         output: {
+          // ✅ simplificado y estable
           manualChunks(id) {
-            // Vendor splitting
-            if (id.includes("node_modules")) {
-              if (id.includes("react")) return "react-vendor";
-              if (id.includes("@radix-ui")) return "ui-vendor";
-              if (id.includes("recharts")) return "charts-vendor";
-              if (id.includes("date-fns") || id.includes("zod")) return "utils-vendor";
-              return "vendor";
-            }
-
-            // Feature splitting real
+            if (id.includes("node_modules")) return "vendor";
             if (id.includes("/src/modules/catalog")) return "catalog";
             if (id.includes("/src/modules/projects")) return "projects";
+            if (id.includes("/src/modules/clients")) return "clients";
+            if (id.includes("/src/modules/partners")) return "partners";
+            if (id.includes("/src/modules/marketing")) return "marketing";
+            if (id.includes("/src/modules/contact")) return "contact";
           },
-
           entryFileNames: "assets/[name]-[hash].js",
           chunkFileNames: "assets/[name]-[hash].js",
           assetFileNames: "assets/[name]-[hash].[ext]",
@@ -115,18 +106,16 @@ export default defineConfig(({ mode }) => {
       },
 
       terserOptions: {
-        compress: {
-          drop_console: isProduction,
-          drop_debugger: isProduction,
-        },
+        compress: { drop_console: isProduction, drop_debugger: isProduction },
       },
 
       reportCompressedSize: true,
       chunkSizeWarningLimit: 1000,
     },
 
+    // Dev optimizer: ok
     optimizeDeps: {
-      include: ["react", "react-dom", "react-router-dom", "@tanstack/react-query"],
+      force: true,
     },
   };
 });

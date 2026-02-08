@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ChevronRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { NavLink } from "@/components/layout/NavLink";
+import { ROUTES } from "@/config/routes";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -116,6 +118,7 @@ const Hero = () => {
             >
               <Button
                 size="lg"
+                asChild
                 className={cn(
                   "group bg-accent text-accent-foreground hover:bg-accent/90",
                   "px-8 py-6 text-lg rounded-xl",
@@ -123,16 +126,19 @@ const Hero = () => {
                   "relative overflow-hidden"
                 )}
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  Solicitar Cotización
-                  <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <NavLink to={ROUTES.CONTACT}>
+                  <span className="relative z-10 flex items-center gap-2">
+                    Solicitar Cotización
+                    <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </NavLink>
               </Button>
 
               <Button
                 size="lg"
                 variant="outline"
+                asChild
                 className={cn(
                   "border-2 border-primary-foreground/30 text-primary-foreground",
                   "hover:bg-primary-foreground/10 px-8 py-6 text-lg rounded-xl",
@@ -140,7 +146,7 @@ const Hero = () => {
                   "backdrop-blur-sm"
                 )}
               >
-                Ver Proyectos Ejecutados
+                <NavLink to={ROUTES.PROJECTS}>Ver Proyectos Ejecutados</NavLink>
               </Button>
             </motion.div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useCallback, useEffect, memo } from "react";
 import { cn } from "@/lib/utils";
 
 export interface OptimizedImageProps
@@ -31,6 +31,8 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
   style,
   onError: externalOnError,
   onLoad: externalOnLoad,
+  width,
+  height,
   ...imgProps
 }) => {
   const [imageSrc, setImageSrc] = useState<string | undefined>(src);
@@ -52,10 +54,20 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
     "scale-down": "object-scale-down",
   };
 
+  useEffect(() => {
+    const resolvedSrc = src ?? fallbackSrc;
+    setImageSrc(resolvedSrc);
+    setIsLoading(Boolean(resolvedSrc));
+    setHasError(false);
+  }, [src, fallbackSrc]);
+
   const handleError = useCallback(() => {
     setHasError(true);
-    if (imageSrc !== fallbackSrc) {
+    if (imageSrc && imageSrc !== fallbackSrc) {
       setImageSrc(fallbackSrc);
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
     }
     externalOnError?.();
   }, [externalOnError, fallbackSrc, imageSrc]);
@@ -66,6 +78,22 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
   }, [externalOnLoad]);
 
   const computedLoading = loading ?? (priority ? "eager" : "lazy");
+
+  const numericWidth =
+    typeof width === "number" ? width : typeof width === "string" && !Number.isNaN(Number(width)) ? Number(width) : undefined;
+  const numericHeight =
+    typeof height === "number"
+      ? height
+      : typeof height === "string" && !Number.isNaN(Number(height))
+        ? Number(height)
+        : undefined;
+
+  const wrapperStyle: React.CSSProperties = {
+    ...style,
+    ...(aspectRatio === "auto" && numericWidth && numericHeight
+      ? { aspectRatio: `${numericWidth} / ${numericHeight}` }
+      : {}),
+  };
 
   // Si hay fallback personalizado y ocurrió error
   if (hasError && fallback) {
@@ -79,7 +107,7 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
         aspectRatio !== "custom" && aspectRatioClasses[aspectRatio],
         className
       )}
-      style={style}
+      style={wrapperStyle}
     >
       {/* Placeholder mientras carga */}
       {isLoading && (
@@ -91,23 +119,27 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
       )}
 
       {/* Imagen */}
-      <img
-        src={imageSrc}
-        alt={alt}
-        loading={computedLoading}
-        decoding="async"
-        onLoad={handleLoad}
-        onError={handleError}
-        sizes={sizes}
-        className={cn(
-          "w-full h-full transition-opacity duration-300",
-          objectFitClasses[objectFit],
-          isLoading ? "opacity-0" : "opacity-100",
-          "select-none" // Previene selección accidental
-        )}
-        draggable="false"
-        {...imgProps}
-      />
+      {imageSrc && (
+        <img
+          src={imageSrc}
+          alt={alt}
+          loading={computedLoading}
+          decoding="async"
+          onLoad={handleLoad}
+          onError={handleError}
+          sizes={sizes}
+          width={width}
+          height={height}
+          className={cn(
+            "w-full h-full transition-opacity duration-300",
+            objectFitClasses[objectFit],
+            isLoading ? "opacity-0" : "opacity-100",
+            "select-none" // Previene selección accidental
+          )}
+          draggable="false"
+          {...imgProps}
+        />
+      )}
 
       {/* Estado de error (solo si no hay fallback personalizado) */}
       {hasError && !fallback && (

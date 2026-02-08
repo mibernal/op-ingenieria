@@ -304,8 +304,8 @@
     "source_id": 973,
     "name": "Hospital Militar Central",
     "client": "Hospital Militar Central",
-    "category": "work",
-    "description": "",
+    "category": "Baterías",
+    "description": "Suministro, instalación y pruebas de Banco de Baterias para UPS de 80kVA",
     "images": [
       "./src/assets/images/uploads/2019/12/SAM_3018.jpg",
       "./src/assets/images/uploads/2019/12/SAM_3019.jpg",
@@ -439,7 +439,7 @@
     "source_id": 885,
     "name": "Coordinadora Mercantil",
     "client": "Coordinadora Mercantil",
-    "category": "work",
+    "category": "Obras Electricas",
     "description": "Diseño del Sistema Eléctrico con suministro e instalación de Equipos de iluminación, Aire Acondicionado, Transformador de Media Tensión, Tableros de Potencia y Control, Planta Eléctrica , Cuarto Insonoro, Puesta a Tierra y Obra civil para la terminal de Coordinadora Mercantil ubicada en Bosconia Cesar.",
     "images": [
       "./src/assets/images/uploads/2019/12/1-2.jpg",

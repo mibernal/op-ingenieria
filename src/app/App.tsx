@@ -5,10 +5,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { ROUTES } from "@/config/routes";
 import Index from "./routes/Index";
 import NotFound from "./routes/NotFound";
 import CatalogPage from "@/modules/catalog/pages/CatalogPage";
+import ProjectsPage from "@/modules/projects/pages/ProjectsPage"; // NUEVO
+import ContactPage from "@/modules/contact/pages/ContactPage"; // NUEVO
+import ScrollToHash from "./routes/ScrollToHash";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +26,6 @@ const queryClient = new QueryClient({
 
 const App = () => {
   useEffect(() => {
-    // Remover clase crítica cuando la app se monte
     const root = document.getElementById('root');
     if (root) {
       root.classList.remove('critical-hidden');
@@ -36,16 +38,18 @@ const App = () => {
       <TooltipProvider delayDuration={300}>
         <Toaster />
         <Sonner />
-
         <BrowserRouter
           future={{
             v7_startTransition: true,
             v7_relativeSplatPath: true
           }}
         >
+          <ScrollToHash />
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/catalogo" element={<CatalogPage />} />
+            <Route path={ROUTES.HOME} element={<Index />} />
+            <Route path={ROUTES.CATALOG} element={<CatalogPage />} />
+            <Route path={ROUTES.PROJECTS} element={<ProjectsPage />} /> {/* NUEVO */}
+            <Route path={ROUTES.CONTACT} element={<ContactPage />} /> {/* NUEVO */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -1,21 +1,23 @@
+// modules/catalog/data/products.ts
 import productsData from "../data/products_normalized.json";
 import categoriesData from "../data/categories.json";
 import * as LucideIcons from "lucide-react";
+import type { Product as CoreProduct } from "@/core/domain/product";
 
 export type Spec = { label: string; value: string };
 
-export type Product = {
-  id: string;
-  sku?: string;
-  title: string;
+// Extender el tipo del core con campos específicos del catálogo
+export type Product = CoreProduct & {
+  // Campos requeridos específicos del catálogo
   slug: string;
   categoryId: string;
-  subcategory?: string | null;
-  description?: string;
-  longDescription?: string;
   images: string[];
-  price?: string;
   specs: Spec[];
+  // Hacer campos opcionales que podrían no estar en todos los productos
+  sku?: string;
+  subcategory?: string | null;
+  price?: string;
+  longDescription?: string;
 };
 
 export type Category = {
@@ -41,13 +43,6 @@ const categoryIcons: Record<string, keyof typeof LucideIcons> = {
   sensores: "CircleDot",
 };
 
-export const products: Product[] = productsData.map((p) => ({
-  ...p,
-  categoryId: p.category || "uncategorized",
-  images: Array.isArray(p.images) ? p.images : [],
-  specs: Array.isArray(p.specs) ? p.specs : [],
-}));
-
 const rawCategories = categoriesData as RawCategory[];
 
 export const categories: Category[] = rawCategories.map((c) => ({
@@ -56,3 +51,28 @@ export const categories: Category[] = rawCategories.map((c) => ({
   subcategories: Array.isArray(c.subcategories) ? c.subcategories : [],
   icon: categoryIcons[c.id] ?? "LayoutGrid",
 }));
+
+// Crear un mapa de nombres de categoría a IDs para búsqueda más fácil
+const categoryNameToIdMap: Record<string, string> = {};
+categories.forEach(cat => {
+  categoryNameToIdMap[cat.name] = cat.id;
+});
+
+// Procesar productos del JSON
+export const products: Product[] = productsData.map((item: any) => {
+  // Determinar categoryId basado en el campo 'category' del JSON
+  const categoryName = item.category || "";
+  const categoryId = categoryNameToIdMap[categoryName] || categoryName || "uncategorized";
+  
+  return {
+    ...item,
+    categoryId,
+    images: Array.isArray(item.images) ? item.images : [],
+    specs: Array.isArray(item.specs) ? item.specs : [],
+    // Asegurar que los campos requeridos existan
+    id: item.id || String(Math.random()),
+    slug: item.slug || item.id || String(Math.random()),
+    title: item.title || "Producto sin nombre",
+    description: item.description || "",
+  };
+});

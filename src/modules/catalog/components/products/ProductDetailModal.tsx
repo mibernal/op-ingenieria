@@ -2,6 +2,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -23,7 +24,7 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
     const message = encodeURIComponent(
       `Hola, me interesa obtener información sobre: ${product.title}`
     );
-    window.open(`https://wa.me/573001234567?text=${message}`, "_blank");
+    window.open(`https://wa.me/573133638760?text=${message}`, "_blank");
   };
 
   const handleEmail = () => {
@@ -31,7 +32,7 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
     const body = encodeURIComponent(
       `Hola,\n\nMe interesa obtener información y cotización del producto:\n\n${product.title}\n\nQuedo atento a su respuesta.`
     );
-    window.open(`mailto:ventas@opingenieria.com?subject=${subject}&body=${body}`, "_blank");
+    window.open(`mailto:info@opingenieria.com?subject=${subject}&body=${body}`, "_blank");
   };
 
   return (
@@ -42,6 +43,9 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
             <DialogTitle className="text-xl md:text-2xl font-heading">
               {product.title}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              Información detallada y especificaciones del producto seleccionado.
+            </DialogDescription>
             <div className="flex items-center gap-2 mt-2">
               <Badge variant="secondary" className="text-sm">
                 {product.categoryId}

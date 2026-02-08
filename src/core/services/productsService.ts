@@ -1,3 +1,4 @@
+// core/services/productsService.ts
 import data from '@/modules/catalog/data/products_normalized.json'
 import type { Product } from '@/core/domain/product'
 

@@ -17,19 +17,56 @@ export interface Project {
 export interface ProjectCategory {
   id: string;
   name: string;
+  aliases?: string[];
 }
 
 // Mantengo tu lista de categorías original
 export const projectCategories: ProjectCategory[] = [
-  { id: "grupos-electrogenos", name: "Grupos Electrógenos / Transferencias" },
-  { id: "energia-fotovoltaica", name: "Energía Fotovoltaica" },
-  { id: "ups", name: "Sistemas Ininterrumpidos de Potencia (UPS)" },
-  { id: "baterias", name: "Baterías" },
-  { id: "rectificadores", name: "Rectificadores - Cargadores" },
-  { id: "obras-electricas", name: "Obras Eléctricas e Iluminación" },
-  { id: "mantenimientos", name: "Mantenimientos" },
-  { id: "aire-acondicionado", name: "Aire Acondicionado" },
-  { id: "work", name: "Work / Portfolio (importado)" },
+  {
+    id: "grupos-electrogenos",
+    name: "Grupos Electrógenos / Transferencias",
+    aliases: [
+      "Grupos Electrógenos / Transferencias",
+      "Transferencias",
+      "grupos-electrogenos",
+      "grupos-electrogenos / servicios",
+    ],
+  },
+  {
+    id: "energia-fotovoltaica",
+    name: "Energía Fotovoltaica",
+    aliases: ["Energía Fotovoltaica", "Energía Solar"],
+  },
+  {
+    id: "ups",
+    name: "Sistemas Ininterrumpidos de Potencia (UPS)",
+    aliases: ["UPS", "UPS / Servicios"],
+  },
+  {
+    id: "baterias",
+    name: "Baterías",
+    aliases: ["Baterías"],
+  },
+  {
+    id: "rectificadores",
+    name: "Rectificadores - Cargadores",
+    aliases: ["Rectificadores / Cargadores", "Cargadores / Transferencias / Servicios"],
+  },
+  {
+    id: "obras-electricas",
+    name: "Obras Eléctricas e Iluminación",
+    aliases: ["Obras Electricas"],
+  },
+  {
+    id: "mantenimientos",
+    name: "Mantenimientos",
+    aliases: ["Mantenimientos"],
+  },
+  {
+    id: "aire-acondicionado",
+    name: "Aire Acondicionado",
+    aliases: ["Aire Acondicionado"],
+  },
 ];
 
 // Type assertion para los datos importados

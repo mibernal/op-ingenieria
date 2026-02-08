@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Battery, Gauge, Zap, Power, CircleDot, LayoutGrid } from "lucide-react";
 import type { Category } from "@/modules/catalog/data/products";
+import type { ComponentType } from "react";
 
 interface CategoryFilterProps {
   categories: Category[];
@@ -9,7 +10,7 @@ interface CategoryFilterProps {
   variant?: "default" | "compact";
 }
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   Battery,
   Gauge,
   Zap,
@@ -21,36 +22,40 @@ const CategoryFilter = ({
   categories,
   selectedCategoryId,
   onSelectCategory,
-  variant = 'default',
+  variant = "default",
 }: CategoryFilterProps) => {
   return (
-    <div className={`flex ${variant === 'compact' ? 'flex-col gap-2' : 'flex-wrap justify-center gap-2 md:gap-3'}`}>
+    <div
+      className={`flex ${variant === "compact" ? "flex-col gap-2" : "flex-wrap justify-center gap-2 md:gap-3"}`}
+    >
       <Button
         variant={selectedCategoryId === null ? "default" : "outline"}
-        size={variant === 'compact' ? 'sm' : 'default'}
+        size={variant === "compact" ? "sm" : "default"}
         onClick={() => onSelectCategory(null)}
         className="gap-2"
         aria-label="Mostrar todos los productos"
+        aria-pressed={selectedCategoryId === null}
       >
         <LayoutGrid className="h-4 w-4" />
         Todos
       </Button>
-      
-{categories.map((category) => {
-  const Icon = iconMap[category.icon as unknown as string] || CircleDot;
 
-  return (
-    <Button
-      key={category.id}
-      variant={selectedCategoryId === category.id ? "default" : "outline"}
-      onClick={() => onSelectCategory(category.id)}
-      className="gap-2"
-    >
-      <Icon className="h-4 w-4" />
-      {category.name}
-    </Button>
-  );
-})}
+      {categories.map((category) => {
+        const Icon = iconMap[category.icon as unknown as string] || CircleDot;
+
+        return (
+          <Button
+            key={category.id}
+            variant={selectedCategoryId === category.id ? "default" : "outline"}
+            onClick={() => onSelectCategory(category.id)}
+            className="gap-2"
+            aria-pressed={selectedCategoryId === category.id}
+          >
+            <Icon className="h-4 w-4" />
+            {category.name}
+          </Button>
+        );
+      })}
     </div>
   );
 };

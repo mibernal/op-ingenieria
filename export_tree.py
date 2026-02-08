@@ -15,7 +15,7 @@ EXCLUDE_DIRS = {
     "build",
     "coverage"
     "assets",
-    "ui",
+    
     "assets"
 }
 

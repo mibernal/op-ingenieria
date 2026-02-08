@@ -21,6 +21,7 @@ export function ClientsSection() {
           variant="clients"
           responsive={{ base: 2, sm: 3, md: 4, lg: 5, xl: 6 }}
           gapPx={20}
+          className="bg-gradient-to-b from-transparent via-muted/10 to-transparent"
         />
       </div>
     </section>

@@ -4,32 +4,38 @@ const services = [
   {
     icon: Zap,
     title: "Productos Eléctricos",
-    description: "Comercialización de productos eléctricos y electromecánicos de alta calidad.",
+    description:
+      "Suministro integral de equipos eléctricos certificados, con respaldo técnico, garantías y soporte postventa.",
   },
   {
     icon: Sun,
     title: "Energía Fotovoltaica",
-    description: "Sistemas de energía solar para proyectos residenciales e industriales.",
+    description:
+      "Ingeniería, instalación y puesta en marcha de sistemas solares con dimensionamiento, monitoreo y ahorro energético.",
   },
   {
     icon: Settings,
     title: "Tableros Eléctricos",
-    description: "Diseño y fabricación de tableros eléctricos personalizados.",
+    description:
+      "Diseño, fabricación y pruebas de tableros de potencia y control bajo normativa y especificaciones del proyecto.",
   },
   {
     icon: Wrench,
     title: "Mantenimiento",
-    description: "Servicios de mantenimiento preventivo y correctivo.",
+    description:
+      "Planes preventivos y correctivos para continuidad operativa, con reportes técnicos y repuestos certificados.",
   },
   {
     icon: Lightbulb,
     title: "Iluminación",
-    description: "Soluciones de iluminación LED e instrumentación.",
+    description:
+      "Diseño lumínico eficiente, retrofit LED y automatización para reducir consumo y mejorar confort visual.",
   },
   {
     icon: Cable,
     title: "Telecomunicaciones",
-    description: "Infraestructura y sistemas de telecomunicaciones.",
+    description:
+      "Redes estructuradas, canalizaciones y sistemas de respaldo para comunicaciones críticas y seguras.",
   },
 ];
 

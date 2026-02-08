@@ -1,5 +1,7 @@
 // modules/marketing/pages/LandingPage.tsx - Verificar importaciones
 import { Suspense } from "react";
+import Seo from "@/components/seo/Seo";
+import { landingSeo } from "@/modules/marketing/seo";
 
 import ProductsSection from "@/modules/catalog/components/products/ProductsSection";
 import ProjectsSection from "@/modules/projects/components/ProjectsSection";
@@ -19,23 +21,26 @@ import { ProductGridSkeleton } from "@/shared/skeletons";
 
 export default function LandingPage() {
   return (
-    <main className="flex flex-col gap-24">
-      <Hero />
-      <AboutSection />
-      <ServicesSection />
+    <>
+      <Seo {...landingSeo} />
+      <div className="flex flex-col gap-24">
+        <Hero />
+        <AboutSection />
+        <ServicesSection />
 
-      <Suspense fallback={<ProductGridSkeleton />}>
-        <ProductsSection />
-      </Suspense>
+        <Suspense fallback={<ProductGridSkeleton />}>
+          <ProductsSection />
+        </Suspense>
 
-      <ProjectsSection />
+        <ProjectsSection />
 
-      {/* Estas secciones ya no necesitan Suspense porque son componentes ligeros */}
-      <ClientsSection />
-      <PartnersSection />
+        {/* Estas secciones ya no necesitan Suspense porque son componentes ligeros */}
+        <ClientsSection />
+        <PartnersSection />
 
-      <ContactSection />
-      <CTASection />
-    </main>
+        <ContactSection />
+        <CTASection />
+      </div>
+    </>
   );
 }

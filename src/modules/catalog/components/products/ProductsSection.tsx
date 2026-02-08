@@ -23,25 +23,6 @@ const ProductsSection = () => {
   // Categoría seleccionada
   const selectedCategory = selectedCategoryId ? categoryMap.get(selectedCategoryId) : null;
 
-  const getRepresentativeImage = (categoryId: string) => {
-    // Busca productos en esta categoría
-    const productsInCat = allProducts.filter(p => {
-      // Asegurar que el categoryId coincida
-      const productCategoryId = allCategories.find(c => c.name === p.categoryId)?.id || p.categoryId;
-      return productCategoryId === categoryId;
-    });
-    
-    // Toma la primera imagen del primer producto que tenga imágenes
-    for (const product of productsInCat) {
-      if (product.images && product.images.length > 0 && product.images[0]) {
-        return product.images[0];
-      }
-    }
-    
-    // Si no hay imágenes, usa un placeholder
-    return "/placeholder-category.jpg";
-  };
-
   // Productos filtrados por categoría
   const productsInCategory = useMemo(() => {
     if (!selectedCategory) return [];
@@ -107,9 +88,9 @@ const ProductsSection = () => {
           
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
                 {selectedCategory?.name}
-              </h1>
+              </h2>
               <p className="text-sm text-muted-foreground mt-1">
                 {productsInCategory.length} productos disponibles
               </p>

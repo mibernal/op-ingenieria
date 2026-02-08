@@ -17,7 +17,7 @@ def export_clean(src_path, output_file):
             root_path = Path(root)
             
             # Saltar directorios no deseados
-            if any(d in str(root_path) for d in ['.git', 'node_modules', 'dist','ui','assets', '.json']):
+            if any(d in str(root_path) for d in ['.git', 'node_modules', 'dist','ui','assets', '.json', 'vite-env.d.ts', 'setup.ts', 'seo.ts', 'utils.ts']):
                 continue
             
             # Verificar si es un directorio objetivo

@@ -1,5 +1,12 @@
 // src/components/layout/Header.tsx
-import { useEffect, useMemo, useRef, useState, type FocusEvent } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FocusEvent,
+  type MouseEvent,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, ChevronDown, Sparkles } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,7 +14,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { NavLink } from "@/components/layout/NavLink";
-import { ROUTES, NAV_ITEMS, getNavHref, HOME_SECTIONS } from "@/config/routes";
+import {
+  ROUTES,
+  HOME_SECTIONS,
+  getNavHref,
+  buildNavItems,
+  type NavItem,
+} from "@/config/routes";
+
+import { categories as productCategories } from "@/modules/catalog/data/products";
+import { projectCategories } from "@/modules/projects/data/projects";
+
 import {
   Sheet,
   SheetContent,
@@ -17,6 +34,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+// ✅ GitHub Pages friendly: assets públicos (NO import desde src/assets)
 const logoSrc = `${import.meta.env.BASE_URL}uploads/logo.png`;
 
 const isSearchMatch = (targetSearch: string, currentSearch: string) => {
@@ -36,14 +54,41 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  // ✅ Menú abierto (solo nivel 1)
+  const [openRoot, setOpenRoot] = useState<string | null>(null);
   const submenuTimeoutRef = useRef<number | null>(null);
 
   const [activeSection, setActiveSection] = useState<string>(HOME_SECTIONS.HERO);
 
+  /**
+   * ✅ Nav dinámico (REFactor):
+   * - Eliminamos por completo el "nivel 2" (subcategorías).
+   * - En Productos y Proyectos mostramos SOLO categorías principales.
+   * - buildNavItems seguirá construyendo el nav, pero le pasamos subcategories: []
+   */
+  const navItems = useMemo<NavItem[]>(() => {
+    const productMenuCats = productCategories.map((c) => ({
+      id: c.id,
+      name: c.name,
+      subcategories: [] as string[], // ✅ sin subcategorías
+    }));
+
+    const projectMenuCats = projectCategories.map((c) => ({
+      id: c.id,
+      name: c.name,
+      subcategories: [] as string[], // ✅ sin subcategorías
+    }));
+
+    return buildNavItems({
+      productCategories: productMenuCats,
+      projectCategories: projectMenuCats,
+    });
+  }, []);
+
+  // Secciones para “activeSection”
   const sectionItems = useMemo(
-    () => NAV_ITEMS.filter((item) => item.type === "section" && item.hash),
-    []
+    () => navItems.filter((item) => item.type === "section" && item.hash),
+    [navItems]
   );
 
   const sectionIds = useMemo(
@@ -63,13 +108,14 @@ const Header = () => {
 
   useEffect(() => {
     return () => {
-      if (submenuTimeoutRef.current) window.clearTimeout(submenuTimeoutRef.current);
+      if (submenuTimeoutRef.current)
+        window.clearTimeout(submenuTimeoutRef.current);
     };
   }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setActiveSubmenu(null);
+    setOpenRoot(null);
   }, [location.pathname, location.search, location.hash]);
 
   useEffect(() => {
@@ -102,7 +148,7 @@ const Header = () => {
             .filter((entry) => entry.isIntersecting)
             .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-          const id = visible[0]?.target?.id;
+          const id = (visible[0]?.target as HTMLElement | undefined)?.id;
           if (id) setActiveSection(id);
         },
         { rootMargin: "-30% 0px -60% 0px", threshold: [0.2, 0.5, 0.75] }
@@ -119,26 +165,33 @@ const Header = () => {
     };
   }, [location.pathname, sectionIds]);
 
-  const openSubmenu = (label: string) => {
+  const cancelCloseMenus = () => {
     if (submenuTimeoutRef.current) window.clearTimeout(submenuTimeoutRef.current);
-    setActiveSubmenu(label);
+    submenuTimeoutRef.current = null;
   };
 
-  const scheduleCloseSubmenu = () => {
-    if (submenuTimeoutRef.current) window.clearTimeout(submenuTimeoutRef.current);
-    submenuTimeoutRef.current = window.setTimeout(() => setActiveSubmenu(null), 120);
+  const openMenuRoot = (label: string) => {
+    cancelCloseMenus();
+    setOpenRoot(label);
+  };
+
+  const scheduleCloseMenus = () => {
+    cancelCloseMenus();
+    submenuTimeoutRef.current = window.setTimeout(() => {
+      setOpenRoot(null);
+    }, 220);
   };
 
   const handleSubmenuBlur = (event: FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget as Node)) {
-      setActiveSubmenu(null);
+      setOpenRoot(null);
     }
   };
 
-  const handleLogoClick = (e: React.MouseEvent) => {
+  const handleLogoClick = (e: MouseEvent) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    setActiveSubmenu(null);
+    setOpenRoot(null);
 
     if (location.pathname !== ROUTES.HOME) {
       navigate(ROUTES.HOME);
@@ -148,6 +201,13 @@ const Header = () => {
     if (location.hash) navigate(ROUTES.HOME, { replace: true });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // ✅ Mobile expand: SOLO nivel 1 (sin subnivel)
+  const [mobileOpenRoot, setMobileOpenRoot] = useState<Record<string, boolean>>(
+    {}
+  );
+  const toggleMobileRoot = (key: string) =>
+    setMobileOpenRoot((prev) => ({ ...prev, [key]: !prev[key] }));
 
   return (
     <header
@@ -172,7 +232,6 @@ const Header = () => {
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 320 }}
             >
-              {/* ✅ Contenedor horizontal (como pediste) */}
               <div
                 className={cn(
                   "flex items-center justify-center overflow-hidden",
@@ -209,8 +268,11 @@ const Header = () => {
           </NavLink>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
-            {NAV_ITEMS.map((item) => {
+          <nav
+            className="hidden lg:flex items-center gap-1"
+            aria-label="Navegación principal"
+          >
+            {navItems.map((item) => {
               const href = getNavHref(item);
 
               const isSectionActive =
@@ -220,25 +282,26 @@ const Header = () => {
                 activeSection === item.hash.replace("#", "");
 
               const hasSubmenu = Boolean(item.submenu?.length);
+              const isRootOpen = hasSubmenu && openRoot === item.label;
               const submenuId = hasSubmenu ? `submenu-${item.label}` : undefined;
-              const isOpen = hasSubmenu && activeSubmenu === item.label;
 
               return (
                 <div
                   key={item.label}
                   className="relative"
-                  onMouseEnter={() => hasSubmenu && openSubmenu(item.label)}
-                  onMouseLeave={scheduleCloseSubmenu}
-                  onFocus={() => hasSubmenu && openSubmenu(item.label)}
+                  onMouseEnter={() => hasSubmenu && openMenuRoot(item.label)}
+                  onMouseLeave={scheduleCloseMenus}
+                  onFocus={() => hasSubmenu && openMenuRoot(item.label)}
                   onBlur={handleSubmenuBlur}
                 >
                   <NavLink
                     to={href}
                     end={item.end}
-                    forceActive={item.type === "section" ? Boolean(isSectionActive) : undefined}
+                    forceActive={
+                      item.type === "section" ? Boolean(isSectionActive) : undefined
+                    }
                     className={({ isActive }) =>
                       cn(
-                        // ✅ OJO: ahora sí es "group/nav" para que el underline responda a hover
                         "group/nav relative flex items-center gap-1 px-4 py-2.5 text-sm font-medium rounded-xl outline-none",
                         "transition-all duration-300",
                         "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -248,39 +311,39 @@ const Header = () => {
                       )
                     }
                     aria-haspopup={hasSubmenu ? "menu" : undefined}
-                    aria-expanded={hasSubmenu ? isOpen : undefined}
+                    aria-expanded={hasSubmenu ? isRootOpen : undefined}
                     aria-controls={hasSubmenu ? submenuId : undefined}
                     aria-current={isSectionActive ? "page" : undefined}
                     onKeyDown={(event) => {
                       if (!hasSubmenu) return;
-
                       if (event.key === "Escape") {
-                        setActiveSubmenu(null);
+                        setOpenRoot(null);
                         return;
                       }
-
-                      if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
+                      if (
+                        event.key === "Enter" ||
+                        event.key === " " ||
+                        event.key === "ArrowDown"
+                      ) {
                         event.preventDefault();
-                        setActiveSubmenu(item.label);
+                        setOpenRoot(item.label);
                       }
                     }}
                   >
                     {item.label}
-
                     {hasSubmenu && (
                       <ChevronDown
-                        className={cn("h-4 w-4 transition-transform duration-300", isOpen && "rotate-180")}
+                        className={cn(
+                          "h-4 w-4 transition-transform duration-300",
+                          isRootOpen && "rotate-180"
+                        )}
                         aria-hidden="true"
                       />
                     )}
-
-                    {/* ✅ FIX: underline NO usa isActive (porque no existe aquí).
-                        Usa isSectionActive (sí existe) + hover del group/nav */}
                     <span
                       className={cn(
                         "pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2",
-                        "h-px bg-accent/80 rounded-full",
-                        "w-0 opacity-0",
+                        "h-px bg-accent/80 rounded-full w-0 opacity-0",
                         "transition-all duration-300 ease-out",
                         "group-hover/nav:w-4/5 group-hover/nav:opacity-100",
                         isSectionActive && "w-4/5 opacity-100"
@@ -288,8 +351,9 @@ const Header = () => {
                     />
                   </NavLink>
 
+                  {/* ✅ Dropdown SOLO nivel 1 (categorías principales) */}
                   <AnimatePresence>
-                    {hasSubmenu && isOpen && (
+                    {hasSubmenu && isRootOpen && (
                       <motion.div
                         id={submenuId}
                         initial={{ opacity: 0, y: 10, scale: 0.98 }}
@@ -297,33 +361,42 @@ const Header = () => {
                         exit={{ opacity: 0, y: 10, scale: 0.98 }}
                         transition={{ duration: 0.18, ease: [0.33, 1, 0.68, 1] }}
                         className={cn(
-                          "absolute top-full left-0 mt-2 w-64",
+                          "absolute top-full left-0 mt-2",
+                          "w-[340px]",
                           "bg-background/95 backdrop-blur-xl",
                           "rounded-2xl shadow-2xl",
-                          "border border-border/60 overflow-hidden z-50"
+                          "border border-border/60 z-50",
+                          // ✅ Importante: ahora sí podemos recortar sin problemas
+                          "overflow-hidden"
                         )}
                         role="menu"
+                        onMouseEnter={cancelCloseMenus}
+                        onMouseLeave={scheduleCloseMenus}
                       >
                         <div className="p-2">
                           {item.submenu?.map((sub, i) => {
-                            const [subPath, subSearch = ""] = sub.to.split("?");
+                            const subHref = sub.to;
+                            const [subPath, subSearch = ""] = subHref.split("?");
                             const isSubActive =
                               location.pathname === subPath &&
-                              isSearchMatch(subSearch, location.search.replace("?", ""));
+                              isSearchMatch(
+                                subSearch,
+                                location.search.replace("?", "")
+                              );
 
                             return (
                               <motion.div
                                 key={sub.label}
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: i * 0.04 }}
+                                transition={{ delay: i * 0.02 }}
                               >
                                 <NavLink
-                                  to={sub.to}
+                                  to={subHref}
                                   forceActive={isSubActive}
                                   className={({ isActive }) =>
                                     cn(
-                                      "flex items-center rounded-xl px-3 py-2.5 text-sm outline-none",
+                                      "flex items-center justify-between rounded-xl px-3 py-2.5 text-sm outline-none",
                                       "transition-colors",
                                       "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                                       isActive || isSubActive
@@ -333,16 +406,20 @@ const Header = () => {
                                   }
                                   role="menuitem"
                                   aria-current={isSubActive ? "page" : undefined}
-                                  onClick={() => setActiveSubmenu(null)}
+                                  onClick={() => {
+                                    setOpenRoot(null);
+                                  }}
                                 >
-                                  <span
-                                    className={cn(
-                                      "mr-3 h-1.5 w-1.5 rounded-full bg-accent",
-                                      isSubActive ? "opacity-100" : "opacity-0"
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                  {sub.label}
+                                  <span className="flex items-center">
+                                    <span
+                                      className={cn(
+                                        "mr-3 h-1.5 w-1.5 rounded-full bg-accent",
+                                        isSubActive ? "opacity-100" : "opacity-0"
+                                      )}
+                                      aria-hidden="true"
+                                    />
+                                    {sub.label}
+                                  </span>
                                 </NavLink>
                               </motion.div>
                             );
@@ -388,7 +465,12 @@ const Header = () => {
           {/* Mobile */}
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Abrir menú">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                aria-label="Abrir menú"
+              >
                 <Menu />
               </Button>
             </SheetTrigger>
@@ -402,7 +484,7 @@ const Header = () => {
               </SheetHeader>
 
               <nav className="flex flex-col gap-1" aria-label="Menú móvil">
-                {NAV_ITEMS.map((item) => {
+                {navItems.map((item) => {
                   const href = getNavHref(item);
 
                   const isSectionActive =
@@ -411,37 +493,66 @@ const Header = () => {
                     location.pathname === ROUTES.HOME &&
                     activeSection === item.hash.replace("#", "");
 
+                  const hasSubmenu = Boolean(item.submenu?.length);
+                  const rootKey = `root:${item.label}`;
+                  const isRootExpanded = Boolean(mobileOpenRoot[rootKey]);
+
                   return (
                     <div key={item.label} className="space-y-1">
-                      <NavLink
-                        to={href}
-                        end={item.end}
-                        forceActive={item.type === "section" ? Boolean(isSectionActive) : undefined}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={({ isActive }) =>
-                          cn(
-                            "flex items-center justify-between rounded-xl px-3 py-3 text-base font-medium transition-colors outline-none",
-                            "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                            isActive || isSectionActive
-                              ? "bg-accent/10 text-accent"
-                              : "text-foreground hover:bg-secondary/50"
-                          )
-                        }
-                        aria-current={isSectionActive ? "page" : undefined}
-                      >
-                        {item.label}
-                        {item.submenu && (
-                          <ChevronDown className="h-4 w-4 opacity-60" aria-hidden="true" />
-                        )}
-                      </NavLink>
+                      <div className="flex items-stretch gap-1">
+                        <NavLink
+                          to={href}
+                          end={item.end}
+                          forceActive={
+                            item.type === "section" ? Boolean(isSectionActive) : undefined
+                          }
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={({ isActive }) =>
+                            cn(
+                              "flex-1 flex items-center justify-between rounded-xl px-3 py-3 text-base font-medium transition-colors outline-none",
+                              "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                              isActive || isSectionActive
+                                ? "bg-accent/10 text-accent"
+                                : "text-foreground hover:bg-secondary/50"
+                            )
+                          }
+                          aria-current={isSectionActive ? "page" : undefined}
+                        >
+                          {item.label}
+                        </NavLink>
 
-                      {item.submenu && (
+                        {hasSubmenu ? (
+                          <button
+                            type="button"
+                            onClick={() => toggleMobileRoot(rootKey)}
+                            className={cn(
+                              "shrink-0 rounded-xl px-3",
+                              "border border-border/60 bg-background/40 hover:bg-background/60",
+                              "transition-colors"
+                            )}
+                            aria-label={`Expandir ${item.label}`}
+                            aria-expanded={isRootExpanded}
+                          >
+                            <ChevronDown
+                              className={cn(
+                                "h-4 w-4 opacity-70 transition-transform",
+                                isRootExpanded && "rotate-180"
+                              )}
+                            />
+                          </button>
+                        ) : null}
+                      </div>
+
+                      {hasSubmenu && isRootExpanded ? (
                         <div className="ml-4 space-y-1 border-l border-border/60 pl-4">
-                          {item.submenu.map((sub) => {
+                          {item.submenu!.map((sub) => {
                             const [subPath, subSearch = ""] = sub.to.split("?");
                             const isSubActive =
                               location.pathname === subPath &&
-                              isSearchMatch(subSearch, location.search.replace("?", ""));
+                              isSearchMatch(
+                                subSearch,
+                                location.search.replace("?", "")
+                              );
 
                             return (
                               <NavLink
@@ -465,15 +576,21 @@ const Header = () => {
                             );
                           })}
                         </div>
-                      )}
+                      ) : null}
                     </div>
                   );
                 })}
               </nav>
 
               <div className="mt-6 space-y-3">
-                <Button className="w-full bg-accent hover:bg-accent/90 shadow-lg shadow-accent/20" asChild>
-                  <NavLink to={ROUTES.CONTACT} onClick={() => setIsMobileMenuOpen(false)}>
+                <Button
+                  className="w-full bg-accent hover:bg-accent/90 shadow-lg shadow-accent/20"
+                  asChild
+                >
+                  <NavLink
+                    to={ROUTES.CONTACT}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
                     Solicitar Cotización
                   </NavLink>
                 </Button>

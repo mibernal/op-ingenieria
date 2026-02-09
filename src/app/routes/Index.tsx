@@ -8,15 +8,6 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 const LandingPage = lazy(() => import("@/modules/marketing/pages/LandingPage"));
 
 const Index = () => {
-  useEffect(() => {
-    // Remover la clase critical-hidden cuando el componente se monte
-    const root = document.getElementById('root');
-    if (root) {
-      root.classList.remove('critical-hidden');
-      root.classList.add('critical-visible');
-    }
-  }, []);
-
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />

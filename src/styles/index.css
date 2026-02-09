@@ -6,58 +6,49 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   O&P Ingeniería Design System - Variables CSS Modernas (Imagen Corporativa)
+   O&P Ingeniería Design System - Variables CSS (HSL)
    ========================================================================== */
 
 @layer base {
   :root {
-    /* Core brand colors - Industrial Engineering Theme */
     --background: 0 0% 100%;
     --foreground: 220 20% 20%;
 
-    /* Navy Blue - Primary brand color */
+    /* Primary (navy) */
     --primary: 218 40% 15%;
     --primary-foreground: 0 0% 100%;
 
-    /* Corporate Green - Accent color */
+    /* Accent (corporate green) */
     --accent: 122 39% 49%;
     --accent-foreground: 0 0% 100%;
 
-    /* Secondary - Light gray backgrounds */
     --secondary: 210 20% 96%;
     --secondary-foreground: 220 20% 20%;
 
-    /* Muted colors */
     --muted: 210 15% 93%;
     --muted-foreground: 215 15% 45%;
 
-    /* Card styling */
     --card: 0 0% 100%;
     --card-foreground: 220 20% 20%;
 
-    /* Popover */
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 20%;
 
-    /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders and inputs */
     --border: 214 20% 88%;
     --input: 214 20% 88%;
     --ring: 122 39% 49%;
 
-    --radius: 0.5rem; /* ligeramente más moderno que 0.375 */
+    --radius: 0.5rem;
 
-    /* Hero section dark background */
     --hero-bg: 218 40% 15%;
     --hero-overlay: 218 50% 12%;
 
-    /* Navigation */
     --nav-active: 122 39% 49%;
 
-    /* Sidebar */
+    /* Sidebar (shadcn) */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -71,25 +62,35 @@
   .dark {
     --background: 218 40% 10%;
     --foreground: 210 40% 98%;
+
     --primary: 122 39% 49%;
     --primary-foreground: 0 0% 100%;
+
     --secondary: 217 32% 17%;
     --secondary-foreground: 210 40% 98%;
+
     --muted: 217 32% 17%;
     --muted-foreground: 215 20% 65%;
+
     --accent: 122 39% 49%;
     --accent-foreground: 0 0% 100%;
+
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 217 32% 17%;
     --input: 217 32% 17%;
     --ring: 122 39% 49%;
+
     --card: 218 40% 12%;
     --card-foreground: 210 40% 98%;
+
     --popover: 218 40% 12%;
     --popover-foreground: 210 40% 98%;
+
     --hero-bg: 218 50% 8%;
     --hero-overlay: 218 60% 5%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 122 39% 49%;
@@ -102,7 +103,7 @@
 }
 
 /* ==========================================================================
-   Base Styles (Ajuste de “aire” vertical + tipografía profesional)
+   Base Styles (tipografía + scroll anchors)
    ========================================================================== */
 
 @layer base {
@@ -113,15 +114,21 @@
   html {
     scroll-behavior: smooth;
 
-    /* ✅ Antes: 6rem -> Mucho aire por header sticky */
-    scroll-padding-top: 5rem; /* 80px */
+    /* Ajuste fino para sticky header:
+       - mobile header ~64px -> 4.5rem (72px) evita corte
+       - desktop header ~80px -> 5rem (80px) */
+    scroll-padding-top: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
   }
 
   body {
     @apply bg-background text-foreground font-body antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-
-    /* ✅ Reduce sensación de “aire” sin afectar legibilidad */
     line-height: 1.45;
   }
 
@@ -134,27 +141,28 @@
     @apply font-heading font-semibold tracking-tight;
   }
 
-  /* ✅ Scroll anchors más compactos */
   section[id] {
-    scroll-margin-top: 5rem;
+    scroll-margin-top: 4.5rem;
   }
 
-  /* Better focus styles */
+  @media (min-width: 768px) {
+    section[id] {
+      scroll-margin-top: 5rem;
+    }
+  }
+
   :focus-visible {
     @apply outline-2 outline-accent outline-offset-2;
   }
 
-  /* Remove focus styles for mouse users */
   :focus:not(:focus-visible) {
     @apply outline-none;
   }
 
-  /* Improve text rendering */
   .text-balance {
     text-wrap: balance;
   }
 
-  /* (Opcional) reduce el espacio extra que algunos browsers ponen a imágenes inline */
   img {
     display: block;
     max-width: 100%;
@@ -163,25 +171,25 @@
 }
 
 /* ==========================================================================
-   Components (Reducir espacios verticales y mejorar consistencia)
+   Components
    ========================================================================== */
 
 @layer components {
-  /* Navigation */
+  /* Optional legacy nav-link (si aún lo usas en algún lado) */
   .nav-link {
-    @apply relative px-4 py-2 font-medium text-foreground/80 transition-colors hover:text-foreground;
+    @apply relative px-4 py-2 font-medium text-foreground/80 transition-colors hover:text-foreground rounded-xl;
   }
 
   .nav-link.active {
-    @apply text-foreground;
+    @apply text-accent bg-accent/10;
   }
 
   .nav-link.active::after {
     content: "";
-    @apply absolute bottom-0 left-0 right-0 h-1 bg-accent rounded-t-sm;
+    @apply absolute left-1/2 -translate-x-1/2 bottom-1 h-px w-4/5 bg-accent/80 rounded-full;
   }
 
-  /* ✅ Hero más compacto en desktop (evita exceso de blanco) */
+  /* Hero */
   .hero-section {
     @apply relative bg-primary min-h-[56vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden;
   }
@@ -190,13 +198,13 @@
     @apply absolute inset-0 bg-gradient-to-b from-primary/90 to-primary;
   }
 
-  /* Section Styles */
+  /* Section typography helpers */
   .section-title {
-    @apply text-2xl md:text-3xl font-heading font-bold text-foreground mb-3;
+    @apply text-2xl md:text-3xl font-heading font-bold text-foreground;
   }
 
   .section-subtitle {
-    @apply text-base md:text-lg text-muted-foreground max-w-2xl;
+    @apply text-base md:text-lg text-muted-foreground max-w-2xl mx-auto;
   }
 
   /* Product Cards */
@@ -216,12 +224,12 @@
     @apply font-heading font-semibold text-card-foreground text-center;
   }
 
-  /* ✅ Contact Section menos alto */
+  /* Contact Section */
   .contact-section {
     @apply bg-secondary py-12 md:py-14;
   }
 
-  /* ✅ Footer menos alto */
+  /* Footer */
   .footer-section {
     @apply bg-primary text-primary-foreground py-10 md:py-12;
   }
@@ -235,7 +243,7 @@
     @apply border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground font-medium px-6 py-3 rounded-lg transition-all duration-200;
   }
 
-  /* Form Elements */
+  /* Form */
   .form-input {
     @apply w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent transition-all;
   }
@@ -244,12 +252,11 @@
     @apply block text-sm font-medium text-foreground mb-1;
   }
 
-  /* Cards */
+  /* Cards (legacy helper) */
   .card {
     @apply bg-card rounded-xl border border-border shadow-sm transition-all duration-300 hover:shadow-md;
   }
 
-  /* ✅ Reduce padding vertical para evitar “aire” */
   .card-header {
     @apply p-5 pb-0;
   }
@@ -267,72 +274,60 @@
    Image Utilities - Optimizadas y Responsivas
    ========================================================================== */
 
-/* Product images: responsive, safe and consistent */
-.product-card-image {
-  height: 12rem; /* equivalente a h-48 */
-  overflow: hidden;
-  position: relative;
-  background-color: hsl(var(--secondary));
-}
+@layer utilities {
+  .category-image,
+  .logo-carousel img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 
-.product-card-image img,
-.category-image,
-.logo-carousel img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
+  .product-detail-image,
+  .aspect-square img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 
-/* Imagen dentro de modal / aspecto cuadrado */
-.product-detail-image,
-.aspect-square img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+  .img-placeholder {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--secondary) / 0.9) 0%,
+      hsl(var(--muted) / 0.9) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.9rem;
+  }
 
-/* Placeholder para imágenes rotas */
-.img-placeholder {
-  background: linear-gradient(
-    180deg,
-    hsl(var(--secondary) / 0.9) 0%,
-    hsl(var(--muted) / 0.9) 100%
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: hsl(var(--muted-foreground));
-  font-size: 0.9rem;
-}
-
-/* Aspect ratio helpers usando aspect-ratio moderno */
-.aspect-4-3 {
-  aspect-ratio: 4 / 3;
-}
-.aspect-square {
-  aspect-ratio: 1 / 1;
-}
-.aspect-video {
-  aspect-ratio: 16 / 9;
+  .aspect-4-3 {
+    aspect-ratio: 4 / 3;
+  }
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 /* ==========================================================================
-   Utility Classes - Optimizadas (Espaciado y layout profesional)
+   Utility Classes - Optimizadas (layout + efectos)
    ========================================================================== */
 
 @layer utilities {
-  /* ✅ La clave para quitar “aire” en todo el sitio */
   .section-spacing {
-    @apply py-10 md:py-12 lg:py-14;
-  }
-
-  .section-spacing-compact {
     @apply py-8 md:py-10 lg:py-12;
   }
 
-  /* Containers consistentes */
+  .section-spacing-compact {
+    @apply py-6 md:py-8 lg:py-10;
+  }
+
   .container-narrow {
     @apply max-w-4xl mx-auto px-4;
   }
@@ -341,12 +336,10 @@
     @apply max-w-7xl mx-auto px-4;
   }
 
-  /* Responsive container */
   .responsive-container {
     @apply w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto;
   }
 
-  /* Animaciones (mantener, pero con reduced-motion abajo) */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -371,7 +364,6 @@
     animation: scaleIn 0.2s ease-out;
   }
 
-  /* Efectos de gradiente (corporativo: primary + accent) */
   .gradient-text {
     background: linear-gradient(
       90deg,
@@ -410,7 +402,6 @@
     background-size: 20px 20px;
   }
 
-  /* Scrollbar personalizado */
   .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--muted-foreground) / 0.35) hsl(var(--secondary));
@@ -434,7 +425,6 @@
     background: hsl(var(--muted-foreground) / 0.55);
   }
 
-  /* Shimmer */
   .shimmer {
     background: linear-gradient(
       90deg,
@@ -446,7 +436,6 @@
     animation: shimmer 2s infinite linear;
   }
 
-  /* Glass */
   .glass-effect {
     background: hsl(var(--background) / 0.82);
     backdrop-filter: blur(12px);
@@ -492,7 +481,6 @@
     height: 100%;
   }
 
-  /* Responsive typography */
   .text-responsive {
     @apply text-base sm:text-lg md:text-xl;
   }
@@ -501,7 +489,6 @@
     @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
   }
 
-  /* Responsive spacing */
   .responsive-padding {
     @apply px-4 sm:px-6 md:px-8 lg:px-12;
   }
@@ -510,14 +497,13 @@
     @apply mx-4 sm:mx-6 md:mx-8 lg:mx-12;
   }
 
-  /* Grid responsive layouts */
   .responsive-grid {
     @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6;
   }
 }
 
 /* ==========================================================================
-   Animation Keyframes (sin duplicados)
+   Animation Keyframes
    ========================================================================== */
 
 @keyframes float {
@@ -637,7 +623,6 @@
   }
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {
     --border: 0 0% 0%;
@@ -645,7 +630,6 @@
   }
 }
 
-/* Dark mode transitions */
 @media (prefers-color-scheme: dark) {
   :root {
     transition: color 0.3s ease, background-color 0.3s ease;
@@ -653,7 +637,7 @@
 }
 
 /* ==========================================================================
-   Debug Utilities (solo desarrollo)
+   Debug Utilities (ideal mover a dev-only)
    ========================================================================== */
 
 .debug {

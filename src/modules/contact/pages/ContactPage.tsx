@@ -26,18 +26,22 @@ const ContactPage = () => {
       <Seo {...contactSeo} />
       <Header />
 
-      <main className="flex-1 py-10 md:py-14">
+      {/* ✅ Menos espacio arriba/abajo */}
+      <main className="flex-1 py-6 md:py-10">
         <div className="container mx-auto px-4">
-          {/* Header premium compacto */}
-          <div className="mx-auto mb-8 max-w-3xl text-center">
+          {/* Header premium (más compacto) */}
+          <div className="mx-auto mb-6 md:mb-7 max-w-3xl text-center">
             <p className="text-xs tracking-[0.22em] text-muted-foreground">CONTACTO</p>
-            <h1 className="mt-2 text-3xl md:text-4xl font-heading font-bold tracking-tight">
+
+            <h1 className="mt-1 text-3xl md:text-4xl font-heading font-bold tracking-tight">
               Hablemos de tu proyecto
             </h1>
+
             <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
               Cuéntanos qué necesitas y te orientamos con una propuesta técnica.
             </p>
-            <div className="mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
+
+            <div className="mx-auto mt-3 h-px w-16 bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -45,7 +49,9 @@ const ContactPage = () => {
             <div className="space-y-6">
               <Card className="rounded-2xl border-border/60 bg-card/70 backdrop-blur-md shadow-sm shadow-black/5">
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-heading font-bold mb-4">Información de contacto</h2>
+                  <h2 className="text-xl font-heading font-bold mb-4">
+                    Información de contacto
+                  </h2>
 
                   <div className="space-y-4">
                     <a
@@ -138,7 +144,7 @@ const ContactPage = () => {
             <Card className="rounded-2xl border-border/60 bg-card/70 backdrop-blur-md shadow-sm shadow-black/5">
               <CardContent className="p-6">
                 <h2 className="text-xl font-heading font-bold mb-1">Envíanos un mensaje</h2>
-                <p className="text-sm text-muted-foreground mb-5">
+                <p className="text-sm text-muted-foreground mb-4">
                   Cuéntanos el alcance (planta, solar, baterías, UPS, tableros) y la ciudad. Te respondemos con asesoría técnica.
                 </p>
 

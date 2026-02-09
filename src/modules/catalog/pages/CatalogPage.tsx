@@ -1,17 +1,26 @@
-import { useEffect, useMemo, useState } from "react";
+// src/modules/catalog/pages/CatalogPage.tsx
+import { useEffect, useMemo, useState, lazy, Suspense } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { products, categories, type Product } from "../data/products";
 import CategoryFilter from "../components/CategoryFilter";
 import SubcategoryList from "../components/SubcategoryList";
-import ProductGrid from "@/modules/catalog/components/products/ProductGrid";
-import ProductDetailModal from "@/modules/catalog/components/products/ProductDetailModal";
 import Seo from "@/components/seo/Seo";
 import { catalogSeo } from "@/modules/catalog/seo";
+import ProductGridSkeleton from "@/shared/skeletons/ProductGridSkeleton";
+
+// ✅ Lazy para que NO haya import estático (y se quite el warning de Vite/Rollup)
+const ProductGrid = lazy(
+  () => import("@/modules/catalog/components/products/ProductGrid")
+);
+const ProductDetailModal = lazy(
+  () => import("@/modules/catalog/components/products/ProductDetailModal")
+);
 
 const CatalogPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [categoryId, setCategoryId] = useState<string | null>(null);
   const [subcategory, setSubcategory] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -21,7 +30,7 @@ const CatalogPage = () => {
   const initialCategoryId = searchParams.get("cat");
   const initialSubcategory = searchParams.get("sub");
 
-  // Usar useMemo para evitar recreaciones innecesarias
+  // Productos filtrados (memo)
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
       if (categoryId && p.categoryId !== categoryId) return false;
@@ -31,10 +40,10 @@ const CatalogPage = () => {
   }, [categoryId, subcategory]);
 
   const activeCategory = useMemo(() => {
-    return categories.find((c) => c.id === categoryId);
+    return categories.find((c) => c.id === categoryId) ?? null;
   }, [categoryId]);
 
-  // Inicializar desde URL
+  // Inicializar desde URL (cat)
   useEffect(() => {
     if (!initialCategoryId) {
       setCategoryId(null);
@@ -42,44 +51,40 @@ const CatalogPage = () => {
     }
 
     const category = categories.find(
-      (c) => c.id === initialCategoryId || c.name.toLowerCase() === initialCategoryId.toLowerCase()
+      (c) =>
+        c.id === initialCategoryId ||
+        c.name.toLowerCase() === initialCategoryId.toLowerCase()
     );
+
     setCategoryId(category ? category.id : initialCategoryId);
   }, [initialCategoryId]);
 
+  // Inicializar desde URL (sub)
   useEffect(() => {
-    if (!initialSubcategory) {
-      setSubcategory(null);
-      return;
-    }
-    setSubcategory(initialSubcategory);
+    setSubcategory(initialSubcategory || null);
   }, [initialSubcategory]);
 
   const handleCategorySelect = (id: string | null) => {
     setCategoryId(id);
     setSubcategory(null);
-    
+
     // Actualizar URL
     const params = new URLSearchParams(searchParams);
-    if (id) {
-      params.set("cat", id);
-    } else {
-      params.delete("cat");
-    }
+    if (id) params.set("cat", id);
+    else params.delete("cat");
+
     params.delete("sub");
     setSearchParams(params);
   };
 
   const handleSubcategorySelect = (sub: string | null) => {
     setSubcategory(sub);
-    
+
     // Actualizar URL
     const params = new URLSearchParams(searchParams);
-    if (sub) {
-      params.set("sub", sub);
-    } else {
-      params.delete("sub");
-    }
+    if (sub) params.set("sub", sub);
+    else params.delete("sub");
+
     setSearchParams(params);
   };
 
@@ -88,10 +93,17 @@ const CatalogPage = () => {
     setIsModalOpen(true);
   };
 
+  const handleClearFilters = () => {
+    setCategoryId(null);
+    setSubcategory(null);
+    setSearchParams({});
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo {...catalogSeo} />
       <Header />
+
       <main className="flex-1 py-8 md:py-12">
         <div className="container mx-auto px-4">
           <div className="mb-8 text-center">
@@ -99,7 +111,8 @@ const CatalogPage = () => {
               Catálogo de Productos
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Encuentra los mejores productos eléctricos e industriales para tus proyectos
+              Encuentra los mejores productos eléctricos e industriales para tus
+              proyectos
             </p>
           </div>
 
@@ -127,20 +140,17 @@ const CatalogPage = () => {
               </div>
             )}
 
-            {/* Contador de productos */}
+            {/* Contador de productos + limpiar */}
             <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground">
                 {filteredProducts.length} productos encontrados
-                {categoryId && ` en ${activeCategory?.name}`}
+                {categoryId && ` en ${activeCategory?.name ?? ""}`}
                 {subcategory && ` > ${subcategory}`}
               </p>
+
               {(categoryId || subcategory) && (
                 <button
-                  onClick={() => {
-                    setCategoryId(null);
-                    setSubcategory(null);
-                    setSearchParams({});
-                  }}
+                  onClick={handleClearFilters}
                   className="text-sm text-accent hover:text-accent/80 transition-colors"
                 >
                   Limpiar filtros
@@ -148,32 +158,48 @@ const CatalogPage = () => {
               )}
             </div>
 
-            {/* Grid de productos */}
+            {/* Grid de productos (lazy) */}
             {filteredProducts.length > 0 ? (
-              <ProductGrid
-                products={filteredProducts}
-                onProductClick={handleProductClick}
-                columns={{
-                  mobile: 1,
-                  tablet: 2,
-                  desktop: 3,
-                  wide: 4
-                }}
-              />
+              <Suspense fallback={<ProductGridSkeleton count={8} />}>
+                <ProductGrid
+                  products={filteredProducts}
+                  onProductClick={handleProductClick}
+                  columns={{ mobile: 1, tablet: 2, desktop: 3, wide: 4 }}
+                />
+              </Suspense>
             ) : (
               <div className="text-center py-16">
                 <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center bg-muted rounded-full">
-                  <svg className="w-12 h-12 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-12 h-12 text-muted-foreground"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">No se encontraron productos</h3>
+
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  No se encontraron productos
+                </h3>
+
                 <p className="text-muted-foreground max-w-md mx-auto mb-4">
-                  {categoryId 
-                    ? `No hay productos ${subcategory ? `en la subcategoría "${subcategory}"` : `en la categoría "${activeCategory?.name}"`}.`
-                    : "Prueba seleccionando una categoría."
-                  }
+                  {categoryId
+                    ? `No hay productos ${
+                        subcategory
+                          ? `en la subcategoría "${subcategory}"`
+                          : `en la categoría "${activeCategory?.name ?? ""}"`
+                      }.`
+                    : "Prueba seleccionando una categoría."}
                 </p>
+
                 {categoryId && (
                   <button
                     onClick={() => handleCategorySelect(null)}
@@ -187,16 +213,19 @@ const CatalogPage = () => {
           </div>
         </div>
 
-        {/* Modal de detalles */}
-        <ProductDetailModal
-          product={selectedProduct}
-          open={isModalOpen}
-          onOpenChange={(open) => {
-            setIsModalOpen(open);
-            if (!open) setSelectedProduct(null);
-          }}
-        />
+        {/* Modal de detalles (lazy) */}
+        <Suspense fallback={null}>
+          <ProductDetailModal
+            product={selectedProduct}
+            open={isModalOpen}
+            onOpenChange={(open) => {
+              setIsModalOpen(open);
+              if (!open) setSelectedProduct(null);
+            }}
+          />
+        </Suspense>
       </main>
+
       <Footer />
     </div>
   );

@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState, type FocusEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, ChevronDown, Sparkles } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -17,7 +17,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-// ✅ GitHub Pages friendly: assets públicos (NO import desde src/assets)
 const logoSrc = `${import.meta.env.BASE_URL}uploads/logo.png`;
 
 const isSearchMatch = (targetSearch: string, currentSearch: string) => {
@@ -32,6 +31,7 @@ const isSearchMatch = (targetSearch: string, currentSearch: string) => {
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -77,9 +77,7 @@ const Header = () => {
       setActiveSection(HOME_SECTIONS.HERO);
       return;
     }
-    if (location.hash) {
-      setActiveSection(location.hash.replace("#", ""));
-    }
+    if (location.hash) setActiveSection(location.hash.replace("#", ""));
   }, [location.hash, location.pathname]);
 
   useEffect(() => {
@@ -128,13 +126,27 @@ const Header = () => {
 
   const scheduleCloseSubmenu = () => {
     if (submenuTimeoutRef.current) window.clearTimeout(submenuTimeoutRef.current);
-    submenuTimeoutRef.current = window.setTimeout(() => setActiveSubmenu(null), 100);
+    submenuTimeoutRef.current = window.setTimeout(() => setActiveSubmenu(null), 120);
   };
 
   const handleSubmenuBlur = (event: FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget as Node)) {
       setActiveSubmenu(null);
     }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    setActiveSubmenu(null);
+
+    if (location.pathname !== ROUTES.HOME) {
+      navigate(ROUTES.HOME);
+      return;
+    }
+
+    if (location.hash) navigate(ROUTES.HOME, { replace: true });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -149,24 +161,31 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <NavLink to={ROUTES.HOME} className="flex items-center gap-3 group" end>
+          <NavLink
+            to={ROUTES.HOME}
+            className="flex items-center gap-3 group"
+            end
+            onClick={handleLogoClick as unknown as never}
+          >
             <motion.div
               className="relative"
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 320 }}
             >
+              {/* ✅ Contenedor horizontal (como pediste) */}
               <div
                 className={cn(
-                  "flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl transition-all duration-500 overflow-hidden",
+                  "flex items-center justify-center overflow-hidden",
+                  "w-20 h-14 md:w-24 md:h-16 rounded-2xl transition-all duration-500",
                   scrolled
-                    ? "bg-accent/10 border border-accent/20"
+                    ? "bg-white border border-border/60 shadow-sm shadow-black/5"
                     : "bg-primary-foreground/10 border border-primary-foreground/20"
                 )}
               >
                 <img
                   src={logoSrc}
                   alt="OP Ingeniería"
-                  className="w-full h-full object-contain p-0.5 md:p-1 scale-110"
+                  className="w-full h-full object-contain px-2 py-1.5 md:px-2.5 md:py-2"
                   loading="eager"
                   decoding="async"
                 />
@@ -219,10 +238,12 @@ const Header = () => {
                     forceActive={item.type === "section" ? Boolean(isSectionActive) : undefined}
                     className={({ isActive }) =>
                       cn(
-                        "relative flex items-center gap-1 px-4 py-2.5 text-sm font-medium transition-all duration-300 rounded-lg group/nav outline-none",
+                        // ✅ OJO: ahora sí es "group/nav" para que el underline responda a hover
+                        "group/nav relative flex items-center gap-1 px-4 py-2.5 text-sm font-medium rounded-xl outline-none",
+                        "transition-all duration-300",
                         "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                         isActive || isSectionActive
-                          ? "text-accent"
+                          ? "text-accent bg-accent/10"
                           : "text-foreground/80 hover:text-foreground hover:bg-secondary/50"
                       )
                     }
@@ -248,12 +269,23 @@ const Header = () => {
 
                     {hasSubmenu && (
                       <ChevronDown
-                        className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")}
+                        className={cn("h-4 w-4 transition-transform duration-300", isOpen && "rotate-180")}
                         aria-hidden="true"
                       />
                     )}
 
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent group-hover/nav:w-4/5 transition-all" />
+                    {/* ✅ FIX: underline NO usa isActive (porque no existe aquí).
+                        Usa isSectionActive (sí existe) + hover del group/nav */}
+                    <span
+                      className={cn(
+                        "pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2",
+                        "h-px bg-accent/80 rounded-full",
+                        "w-0 opacity-0",
+                        "transition-all duration-300 ease-out",
+                        "group-hover/nav:w-4/5 group-hover/nav:opacity-100",
+                        isSectionActive && "w-4/5 opacity-100"
+                      )}
+                    />
                   </NavLink>
 
                   <AnimatePresence>
@@ -264,42 +296,58 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.98 }}
                         transition={{ duration: 0.18, ease: [0.33, 1, 0.68, 1] }}
-                        className="absolute top-full left-0 mt-2 w-60 bg-background/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border overflow-hidden z-50"
+                        className={cn(
+                          "absolute top-full left-0 mt-2 w-64",
+                          "bg-background/95 backdrop-blur-xl",
+                          "rounded-2xl shadow-2xl",
+                          "border border-border/60 overflow-hidden z-50"
+                        )}
                         role="menu"
                       >
-                        {item.submenu?.map((sub, i) => {
-                          const [subPath, subSearch = ""] = sub.to.split("?");
-                          const isSubActive =
-                            location.pathname === subPath &&
-                            isSearchMatch(subSearch, location.search.replace("?", ""));
+                        <div className="p-2">
+                          {item.submenu?.map((sub, i) => {
+                            const [subPath, subSearch = ""] = sub.to.split("?");
+                            const isSubActive =
+                              location.pathname === subPath &&
+                              isSearchMatch(subSearch, location.search.replace("?", ""));
 
-                          return (
-                            <motion.div
-                              key={sub.label}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: i * 0.04 }}
-                            >
-                              <NavLink
-                                to={sub.to}
-                                forceActive={isSubActive}
-                                className={({ isActive }) =>
-                                  cn(
-                                    "flex items-center px-4 py-3 text-sm text-foreground/80 hover:text-foreground hover:bg-secondary/50 transition-colors group/submenu outline-none",
-                                    "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                                    (isActive || isSubActive) && "text-accent"
-                                  )
-                                }
-                                role="menuitem"
-                                aria-current={isSubActive ? "page" : undefined}
-                                onClick={() => setActiveSubmenu(null)}
+                            return (
+                              <motion.div
+                                key={sub.label}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.04 }}
                               >
-                                <span className="w-1.5 h-1.5 rounded-full bg-accent opacity-0 group-hover/submenu:opacity-100 mr-3" />
-                                {sub.label}
-                              </NavLink>
-                            </motion.div>
-                          );
-                        })}
+                                <NavLink
+                                  to={sub.to}
+                                  forceActive={isSubActive}
+                                  className={({ isActive }) =>
+                                    cn(
+                                      "flex items-center rounded-xl px-3 py-2.5 text-sm outline-none",
+                                      "transition-colors",
+                                      "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                                      isActive || isSubActive
+                                        ? "bg-accent/10 text-accent"
+                                        : "text-foreground/80 hover:text-foreground hover:bg-secondary/50"
+                                    )
+                                  }
+                                  role="menuitem"
+                                  aria-current={isSubActive ? "page" : undefined}
+                                  onClick={() => setActiveSubmenu(null)}
+                                >
+                                  <span
+                                    className={cn(
+                                      "mr-3 h-1.5 w-1.5 rounded-full bg-accent",
+                                      isSubActive ? "opacity-100" : "opacity-0"
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                  {sub.label}
+                                </NavLink>
+                              </motion.div>
+                            );
+                          })}
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -372,7 +420,7 @@ const Header = () => {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={({ isActive }) =>
                           cn(
-                            "flex items-center justify-between rounded-lg px-3 py-3 text-base font-medium transition-colors outline-none",
+                            "flex items-center justify-between rounded-xl px-3 py-3 text-base font-medium transition-colors outline-none",
                             "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                             isActive || isSectionActive
                               ? "bg-accent/10 text-accent"
@@ -403,7 +451,7 @@ const Header = () => {
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className={({ isActive }) =>
                                   cn(
-                                    "block rounded-md px-3 py-2 text-sm transition-colors outline-none",
+                                    "block rounded-xl px-3 py-2 text-sm transition-colors outline-none",
                                     "focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                                     isActive || isSubActive
                                       ? "bg-accent/10 text-accent"
@@ -424,13 +472,17 @@ const Header = () => {
               </nav>
 
               <div className="mt-6 space-y-3">
-                <Button className="w-full bg-accent hover:bg-accent/90" asChild>
+                <Button className="w-full bg-accent hover:bg-accent/90 shadow-lg shadow-accent/20" asChild>
                   <NavLink to={ROUTES.CONTACT} onClick={() => setIsMobileMenuOpen(false)}>
                     Solicitar Cotización
                   </NavLink>
                 </Button>
 
-                <Button variant="outline" className="w-full" asChild>
+                <Button
+                  variant="outline"
+                  className="w-full border-border/60 bg-background/40 hover:bg-background/60"
+                  asChild
+                >
                   <a href="tel:+576014732039">Llamar Ahora</a>
                 </Button>
               </div>

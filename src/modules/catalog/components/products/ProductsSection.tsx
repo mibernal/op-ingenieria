@@ -1,4 +1,5 @@
-import { useState, useMemo, lazy, Suspense } from "react";
+// src/modules/catalog/components/products/ProductsSection.tsx
+import { useEffect, useMemo, useState, lazy, Suspense } from "react";
 import {
   products as allProducts,
   categories as allCategories,
@@ -9,15 +10,37 @@ import ProductGridSkeleton from "@/shared/skeletons/ProductGridSkeleton";
 import CategoryGrid from "@/modules/catalog/components/CategoryGrid";
 import { cn } from "@/lib/utils";
 
-// Lazy load de componentes pesados
-const ProductGrid = lazy(() => import("@/modules/catalog/components/products/ProductGrid"));
-const ProductDetailModal = lazy(() => import("@/modules/catalog/components/products/ProductDetailModal"));
+// ✅ Lazy load de componentes pesados (ok para code-splitting)
+const ProductGrid = lazy(
+  () => import("@/modules/catalog/components/products/ProductGrid")
+);
+const ProductDetailModal = lazy(
+  () => import("@/modules/catalog/components/products/ProductDetailModal")
+);
 
-const ProductsSection = () => {
+type ProductsSectionProps = {
+  /** Permite que una página (ej. CatalogPage) controle el estado inicial desde URL */
+  initialCategoryId?: string | null;
+  initialSubcategory?: string | null;
+};
+
+const ProductsSection = ({
+  initialCategoryId = null,
+  initialSubcategory = null,
+}: ProductsSectionProps) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // ✅ Sincronizar el estado interno con lo que venga desde URL/página
+  useEffect(() => {
+    setSelectedCategoryId(initialCategoryId || null);
+  }, [initialCategoryId]);
+
+  useEffect(() => {
+    setSelectedSubcategory(initialSubcategory || null);
+  }, [initialSubcategory]);
 
   // Mapa de categorías (lookup)
   const categoryMap = useMemo(() => {
@@ -26,7 +49,9 @@ const ProductsSection = () => {
     return map;
   }, []);
 
-  const selectedCategory = selectedCategoryId ? categoryMap.get(selectedCategoryId) ?? null : null;
+  const selectedCategory = selectedCategoryId
+    ? categoryMap.get(selectedCategoryId) ?? null
+    : null;
 
   // Productos filtrados por categoría
   const productsInCategory = useMemo(() => {
@@ -50,6 +75,8 @@ const ProductsSection = () => {
   const handleBackToCategories = () => {
     setSelectedCategoryId(null);
     setSelectedSubcategory(null);
+    setSelectedProduct(null);
+    setIsModalOpen(false);
   };
 
   const sectionClass = "relative py-10 md:py-14 bg-secondary";
@@ -62,8 +89,14 @@ const ProductsSection = () => {
     return (
       <section id="productos" className={sectionClass}>
         {/* Fondo / gradientes cortos para evitar “aire muerto” */}
-        <div className="absolute inset-x-0 top-0 -z-10 h-16 bg-gradient-to-b from-background/30 via-transparent to-transparent" aria-hidden="true" />
-        <div className="absolute inset-x-0 bottom-0 -z-10 h-16 bg-gradient-to-t from-background/30 via-transparent to-transparent" aria-hidden="true" />
+        <div
+          className="absolute inset-x-0 top-0 -z-10 h-16 bg-gradient-to-b from-background/30 via-transparent to-transparent"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 -z-10 h-16 bg-gradient-to-t from-background/30 via-transparent to-transparent"
+          aria-hidden="true"
+        />
 
         <div className="container mx-auto px-4">
           <div className={headerWrapClass}>
@@ -72,7 +105,8 @@ const ProductsSection = () => {
             </p>
             <h2 className="section-title mt-2">Nuestros Productos</h2>
             <p className="mt-2 text-sm md:text-base text-muted-foreground">
-              Explora soluciones profesionales para respaldo energético, energía solar y equipamiento eléctrico, con soporte técnico y acompañamiento especializado.
+              Explora soluciones profesionales para respaldo energético, energía solar y
+              equipamiento eléctrico, con soporte técnico y acompañamiento especializado.
             </p>
             <div className={dividerClass} />
           </div>
@@ -81,7 +115,9 @@ const ProductsSection = () => {
             categories={allCategories}
             products={allProducts}
             onSelectCategory={(nameOrId) => {
-              const cat = allCategories.find((c) => c.id === nameOrId || c.name === nameOrId);
+              const cat = allCategories.find(
+                (c) => c.id === nameOrId || c.name === nameOrId
+              );
               if (cat) setSelectedCategoryId(cat.id);
             }}
           />
@@ -93,8 +129,14 @@ const ProductsSection = () => {
   // ✅ Vista 2: Productos de categoría seleccionada
   return (
     <section id="productos" className={sectionClass}>
-      <div className="absolute inset-x-0 top-0 -z-10 h-16 bg-gradient-to-b from-background/30 via-transparent to-transparent" aria-hidden="true" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-16 bg-gradient-to-t from-background/30 via-transparent to-transparent" aria-hidden="true" />
+      <div
+        className="absolute inset-x-0 top-0 -z-10 h-16 bg-gradient-to-b from-background/30 via-transparent to-transparent"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 -z-10 h-16 bg-gradient-to-t from-background/30 via-transparent to-transparent"
+        aria-hidden="true"
+      />
 
       <div className="container mx-auto px-4">
         {/* Header de categoría (compacto + premium) */}
@@ -110,7 +152,9 @@ const ProductsSection = () => {
             )}
             aria-label="Volver a categorías"
           >
-            <span aria-hidden className="text-muted-foreground">←</span>
+            <span aria-hidden className="text-muted-foreground">
+              ←
+            </span>
             <span className="font-medium">Volver a categorías</span>
           </button>
 
@@ -123,10 +167,12 @@ const ProductsSection = () => {
                 {selectedCategory?.name}
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                {productsInCategory.length} {productsInCategory.length === 1 ? "producto" : "productos"} disponibles
+                {productsInCategory.length}{" "}
+                {productsInCategory.length === 1 ? "producto" : "productos"} disponibles
                 {selectedSubcategory ? (
                   <span className="text-muted-foreground">
-                    {" "}• Filtrado por “{selectedSubcategory}”
+                    {" "}
+                    • Filtrado por “{selectedSubcategory}”
                   </span>
                 ) : null}
               </p>
@@ -140,7 +186,9 @@ const ProductsSection = () => {
                 </span>
                 <select
                   value={selectedSubcategory || ""}
-                  onChange={(e) => setSelectedSubcategory(e.target.value || null)}
+                  onChange={(e) => {
+                    setSelectedSubcategory(e.target.value || null);
+                  }}
                   className={cn(
                     "h-10 rounded-xl px-3.5 text-sm",
                     "border border-border/60 bg-card/80 text-foreground",
@@ -165,7 +213,11 @@ const ProductsSection = () => {
 
         {/* Grid de productos con suspense */}
         <Suspense fallback={<ProductGridSkeleton count={8} />}>
-          <ProductGrid products={visibleProducts} onProductClick={handleProductClick} loading={false} />
+          <ProductGrid
+            products={visibleProducts}
+            onProductClick={handleProductClick}
+            loading={false}
+          />
         </Suspense>
 
         {/* Estado vacío (compacto) */}
@@ -202,13 +254,14 @@ const ProductsSection = () => {
 
         {/* Modal de detalles (lazy loaded) */}
         <Suspense fallback={null}>
-          {selectedProduct && (
-            <ProductDetailModal
-              product={selectedProduct}
-              open={isModalOpen}
-              onOpenChange={setIsModalOpen}
-            />
-          )}
+          <ProductDetailModal
+            product={selectedProduct}
+            open={isModalOpen}
+            onOpenChange={(open) => {
+              setIsModalOpen(open);
+              if (!open) setSelectedProduct(null);
+            }}
+          />
         </Suspense>
       </div>
     </section>

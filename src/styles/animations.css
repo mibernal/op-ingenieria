@@ -1,24 +1,13 @@
-/* styles/animations.css - Archivo nuevo */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(1deg);
-  }
-}
+/* ==========================================================================
+   styles/animations.css (producción)
+   - Sin duplicar utilidades ya definidas en index.css
+   - Compatible con variables HSL: hsl(var(--accent) / alpha)
+   ========================================================================== */
 
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
+/* ✅ Animación suave para fondos/gradientes */
 @keyframes gradient-shift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -26,19 +15,28 @@
   }
 }
 
+/* ✅ Glow premium usando tus variables HSL (sin --accent-rgb) */
 @keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.3);
+  0%,
+  100% {
+    box-shadow:
+      0 10px 28px -18px rgba(0, 0, 0, 0.25),
+      0 0 0 0 hsl(var(--accent) / 0.00),
+      0 0 18px -10px hsl(var(--accent) / 0.25);
   }
   50% {
-    box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.6);
+    box-shadow:
+      0 16px 40px -22px rgba(0, 0, 0, 0.28),
+      0 0 0 0 hsl(var(--accent) / 0.00),
+      0 0 26px -10px hsl(var(--accent) / 0.38);
   }
 }
 
-@keyframes slide-in-up {
+/* ✅ Entrada elegante (no duplicar fadeIn/slideUp si ya los usas) */
+@keyframes slide-in-up-soft {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -46,10 +44,10 @@
   }
 }
 
-@keyframes fade-in-scale {
+@keyframes fade-in-scale-soft {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.985);
   }
   to {
     opacity: 1;
@@ -57,86 +55,60 @@
   }
 }
 
-/* Clases de utilidad */
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 100%
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite linear;
-}
+/* ==========================================================================
+   Utilidades (solo las NUEVAS / no duplicadas)
+   ========================================================================== */
 
 .animate-gradient-shift {
   background-size: 200% 200%;
-  animation: gradient-shift 5s ease infinite;
+  animation: gradient-shift 6s ease-in-out infinite;
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 2.6s ease-in-out infinite;
 }
 
-.animate-slide-in-up {
-  animation: slide-in-up 0.6s ease-out forwards;
+.animate-slide-in-up-soft {
+  animation: slide-in-up-soft 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.animate-fade-in-scale {
-  animation: fade-in-scale 0.4s ease-out forwards;
+.animate-fade-in-scale-soft {
+  animation: fade-in-scale-soft 0.35s ease-out both;
 }
 
-/* Stagger animations */
-.stagger-child > * {
+/* ✅ Stagger (más escalable, sin hardcodear 6 items)
+   Uso: <div class="stagger-up" style={{"--stagger": "80ms"}}>...</div>
+*/
+.stagger-up > * {
   opacity: 0;
-  animation: slide-in-up 0.5s ease-out forwards;
+  animation: slide-in-up-soft 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger, 70ms));
 }
 
-.stagger-child > *:nth-child(1) { animation-delay: 0.1s; }
-.stagger-child > *:nth-child(2) { animation-delay: 0.2s; }
-.stagger-child > *:nth-child(3) { animation-delay: 0.3s; }
-.stagger-child > *:nth-child(4) { animation-delay: 0.4s; }
-.stagger-child > *:nth-child(5) { animation-delay: 0.5s; }
-.stagger-child > *:nth-child(6) { animation-delay: 0.6s; }
+/* Aplica índices automáticos hasta 12 hijos (ajusta si quieres más) */
+.stagger-up > *:nth-child(1) { --i: 1; }
+.stagger-up > *:nth-child(2) { --i: 2; }
+.stagger-up > *:nth-child(3) { --i: 3; }
+.stagger-up > *:nth-child(4) { --i: 4; }
+.stagger-up > *:nth-child(5) { --i: 5; }
+.stagger-up > *:nth-child(6) { --i: 6; }
+.stagger-up > *:nth-child(7) { --i: 7; }
+.stagger-up > *:nth-child(8) { --i: 8; }
+.stagger-up > *:nth-child(9) { --i: 9; }
+.stagger-up > *:nth-child(10) { --i: 10; }
+.stagger-up > *:nth-child(11) { --i: 11; }
+.stagger-up > *:nth-child(12) { --i: 12; }
 
-/* Hover effects */
-.hover-lift {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* ==========================================================================
+   Accesibilidad: reduced motion
+   ========================================================================== */
 
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1),
-              0 0 20px rgba(var(--accent-rgb), 0.1);
-}
-
-/* Glass morphism */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dark .glass-effect {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-/* Gradient borders */
-.gradient-border {
-  position: relative;
-  border: double 1px transparent;
-  background-image: linear-gradient(white, white),
-                    linear-gradient(to right, var(--accent), transparent);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-}
-
-.dark .gradient-border {
-  background-image: linear-gradient(var(--background), var(--background)),
-                    linear-gradient(to right, var(--accent), transparent);
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient-shift,
+  .animate-pulse-glow,
+  .animate-slide-in-up-soft,
+  .animate-fade-in-scale-soft,
+  .stagger-up > * {
+    animation: none !important;
+  }
 }

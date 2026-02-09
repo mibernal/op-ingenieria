@@ -33,14 +33,16 @@ export default defineConfig(({ mode }) => {
         svg: {
           plugins: [
             { name: "preset-default" } as PluginConfig,
-            // ✅ en tu setup lo que quieres es NO eliminar viewBox:
-            // ojo: si svgo te insiste, lo mejor es NO tocar removeViewBox aquí.
+            // Nota: para preservar viewBox, en svgo normalmente se configura así:
+            // { name: "preset-default", params: { overrides: { removeViewBox: false } } }
+            // Pero depende de versión; si no te da problemas, déjalo como está.
           ],
         },
       }),
 
       VitePWA({
         registerType: "autoUpdate",
+        // Asegúrate de que estos archivos EXISTAN en /public
         includeAssets: [
           "favicon.ico",
           "favicon.svg",
@@ -57,8 +59,8 @@ export default defineConfig(({ mode }) => {
           theme_color: "#1e3a8a",
           background_color: "#ffffff",
           display: "standalone",
-          start_url: ".", // ✅ GH Pages
-          scope: ".",     // ✅ GH Pages
+          start_url: ".", // GH Pages friendly
+          scope: ".", // GH Pages friendly
           icons: [
             { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
             { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
@@ -77,27 +79,25 @@ export default defineConfig(({ mode }) => {
 
     resolve: {
       alias: { "@": path.resolve(__dirname, "./src") },
-      // ✅ IMPORTANTÍSIMO: evita React duplicado / createContext undefined
       dedupe: ["react", "react-dom"],
     },
 
     build: {
       target: "es2022",
-      minify: isProduction ? "terser" : false,
+      // ✅ esbuild suele ser más estable que terser para evitar edge cases
+      // Si necesitas terserOptions sí o sí, puedes volver a "terser".
+      minify: isProduction ? "esbuild" : false,
+
       cssMinify: isProduction,
       sourcemap: isProduction ? false : true,
 
       rollupOptions: {
         output: {
-          // ✅ simplificado y estable
           manualChunks(id) {
             if (id.includes("node_modules")) return "vendor";
+            // separa solo lo realmente pesado; evita ciclos TDZ entre módulos de app
             if (id.includes("/src/modules/catalog")) return "catalog";
-            if (id.includes("/src/modules/projects")) return "projects";
-            if (id.includes("/src/modules/clients")) return "clients";
-            if (id.includes("/src/modules/partners")) return "partners";
-            if (id.includes("/src/modules/marketing")) return "marketing";
-            if (id.includes("/src/modules/contact")) return "contact";
+            return undefined;
           },
           entryFileNames: "assets/[name]-[hash].js",
           chunkFileNames: "assets/[name]-[hash].js",
@@ -105,15 +105,15 @@ export default defineConfig(({ mode }) => {
         },
       },
 
-      terserOptions: {
-        compress: { drop_console: isProduction, drop_debugger: isProduction },
-      },
+      // Si vuelves a terser, puedes reactivar esto:
+      // terserOptions: {
+      //   compress: { drop_console: isProduction, drop_debugger: isProduction },
+      // },
 
       reportCompressedSize: true,
       chunkSizeWarningLimit: 1000,
     },
 
-    // Dev optimizer: ok
     optimizeDeps: {
       force: true,
     },

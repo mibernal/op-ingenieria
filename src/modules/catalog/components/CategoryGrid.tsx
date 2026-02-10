@@ -40,15 +40,10 @@ const CategoryGrid = ({ categories, products, onSelectCategory }: CategoryGridPr
     return withImage?.images?.[0] || "/placeholder-category.jpg";
   };
 
-  const getCategoryCount = (categoryId: string) => {
-    return productsByCategory.get(categoryId)?.length ?? 0;
-  };
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {categories.map((category) => {
         const image = getCategoryImage(category.id);
-        const count = getCategoryCount(category.id);
 
         return (
           <button
@@ -77,9 +72,6 @@ const CategoryGrid = ({ categories, products, onSelectCategory }: CategoryGridPr
                 <h3 className="font-heading font-semibold text-lg text-foreground group-hover:text-accent transition-colors">
                   {category.name}
                 </h3>
-                <span className="shrink-0 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
-                  {count} {count === 1 ? "producto" : "productos"}
-                </span>
               </div>
 
               {/* ✅ Resumen arriba de "Ver catálogo" */}

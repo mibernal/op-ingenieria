@@ -1,4 +1,5 @@
 // src/modules/contact/pages/ContactPage.tsx
+import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,7 +21,39 @@ const CONTACT = {
   hours: "Lun–Vie: 8:00–17:00",
 };
 
+const FORM_ACTION = `https://formsubmit.co/${CONTACT.email}`;
+const FORM_AJAX = `https://formsubmit.co/ajax/${CONTACT.email}`;
+
 const ContactPage = () => {
+  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormStatus("loading");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(FORM_AJAX, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      setFormStatus("success");
+      form.reset();
+    } catch (error) {
+      setFormStatus("error");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo {...contactSeo} />
@@ -148,26 +181,41 @@ const ContactPage = () => {
                   Cuéntanos el alcance (planta, solar, baterías, UPS, tableros) y la ciudad. Te respondemos con asesoría técnica.
                 </p>
 
-                <form className="space-y-4">
+                <form
+                  className="space-y-4"
+                  action={FORM_ACTION}
+                  method="POST"
+                  onSubmit={handleSubmit}
+                >
+                  <input type="hidden" name="_subject" value="Nuevo mensaje desde opingenieria.com" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input
+                    type="text"
+                    name="_honey"
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+
                   <div className="grid gap-2">
                     <Label htmlFor="contact-name" className="text-sm font-medium">
                       Nombre
                     </Label>
-                    <Input id="contact-name" type="text" placeholder="Tu nombre" required />
+                    <Input id="contact-name" name="name" type="text" placeholder="Tu nombre" required />
                   </div>
 
                   <div className="grid gap-2">
                     <Label htmlFor="contact-email" className="text-sm font-medium">
                       Email
                     </Label>
-                    <Input id="contact-email" type="email" placeholder="tu@email.com" required />
+                    <Input id="contact-email" name="email" type="email" placeholder="tu@email.com" required />
                   </div>
 
                   <div className="grid gap-2">
                     <Label htmlFor="contact-subject" className="text-sm font-medium">
                       Asunto
                     </Label>
-                    <Input id="contact-subject" type="text" placeholder="Asunto del mensaje" required />
+                    <Input id="contact-subject" name="subject" type="text" placeholder="Asunto del mensaje" required />
                   </div>
 
                   <div className="grid gap-2">
@@ -176,6 +224,7 @@ const ContactPage = () => {
                     </Label>
                     <Textarea
                       id="contact-message"
+                      name="message"
                       placeholder="Ej: Planta 100 kVA para bodega en Bogotá, con transferencia automática..."
                       rows={6}
                       required
@@ -186,9 +235,27 @@ const ContactPage = () => {
                     type="submit"
                     size="lg"
                     className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20"
+                    disabled={formStatus === "loading"}
                   >
-                    Enviar mensaje
+                    {formStatus === "loading" ? "Enviando..." : "Enviar mensaje"}
                   </Button>
+
+                  <div aria-live="polite">
+                    {formStatus === "success" && (
+                      <p className="text-sm text-emerald-600">
+                        Mensaje enviado correctamente. Te responderemos pronto.
+                      </p>
+                    )}
+                    {formStatus === "error" && (
+                      <p className="text-sm text-rose-600">
+                        No pudimos enviar el mensaje. Inténtalo de nuevo o escríbenos a{" "}
+                        <a className="underline" href={`mailto:${CONTACT.email}`}>
+                          {CONTACT.email}
+                        </a>
+                        .
+                      </p>
+                    )}
+                  </div>
 
                   <p className="text-xs text-muted-foreground">
                     Al enviar, aceptas ser contactado para atender tu solicitud. No compartimos tu información.

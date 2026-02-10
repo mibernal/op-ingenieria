@@ -191,10 +191,6 @@ const ProjectsSection = ({
     return p0?.images?.[0] || p0?.image || "/placeholder-project.jpg";
   };
 
-  const getCategoryCount = (categoryId: string) => {
-    return categoryProjectsMap.get(categoryId)?.length ?? 0;
-  };
-
   const HeadingTag = headingLevel;
 
   return (
@@ -212,7 +208,6 @@ const ProjectsSection = ({
         {!selectedCategoryId ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {categoriesWithAliases.map((category) => {
-              const count = getCategoryCount(category.id);
               const image = getCategoryImage(category.id);
 
               return (
@@ -240,9 +235,6 @@ const ProjectsSection = ({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-85" aria-hidden="true" />
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2">
-                      <span className="inline-flex items-center rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground shadow-sm">
-                        {count} {count === 1 ? "proyecto" : "proyectos"}
-                      </span>
                       <span className="inline-flex items-center rounded-full bg-primary/85 px-3 py-1 text-xs font-medium text-primary-foreground shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
                         Ver casos
                       </span>
@@ -285,8 +277,7 @@ const ProjectsSection = ({
                   {selectedCategory?.name}
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {visibleProjects.length}{" "}
-                  {visibleProjects.length === 1 ? "proyecto encontrado" : "proyectos encontrados"}
+                  Proyectos relacionados con esta categoría.
                 </p>
               </div>
 

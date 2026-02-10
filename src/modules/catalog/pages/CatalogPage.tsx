@@ -143,7 +143,7 @@ const CatalogPage = () => {
             {/* Contador de productos + limpiar */}
             <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground">
-                {filteredProducts.length} productos encontrados
+                Resultados del catálogo
                 {categoryId && ` en ${activeCategory?.name ?? ""}`}
                 {subcategory && ` > ${subcategory}`}
               </p>

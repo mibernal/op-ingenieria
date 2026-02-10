@@ -1,7 +1,7 @@
 export const catalogSeo = {
-  title: "Catálogo eléctrico | UPS, grupos electrógenos y energía solar",
+  title: "Catálogo de productos eléctricos e industriales",
   description:
-    "Explora productos eléctricos e industriales confiables: UPS, plantas eléctricas, tableros, iluminación y soluciones de energía.",
+    "Catálogo eléctrico con UPS, grupos electrógenos, tableros, iluminación, baterías y energía solar para proyectos industriales y comerciales.",
   path: "/catalogo",
   type: "website" as const,
 };

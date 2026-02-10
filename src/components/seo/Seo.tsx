@@ -30,6 +30,19 @@ const ensureLink = (rel: string, href: string) => {
   element.setAttribute("href", href);
 };
 
+const ensureJsonLd = (id: string, data: Record<string, unknown>) => {
+  let element = document.head.querySelector<HTMLScriptElement>(
+    `script[type="application/ld+json"][data-jsonld="${id}"]`
+  );
+  if (!element) {
+    element = document.createElement("script");
+    element.type = "application/ld+json";
+    element.setAttribute("data-jsonld", id);
+    document.head.appendChild(element);
+  }
+  element.textContent = JSON.stringify(data);
+};
+
 export const Seo = ({
   title,
   description = SITE_META.description,
@@ -46,6 +59,9 @@ export const Seo = ({
 
     const resolvedUrl = new URL(path, SITE_META.url).toString();
     const resolvedImage = image ? new URL(image, SITE_META.url).toString() : undefined;
+    const resolvedLogo = SITE_META.logoPath
+      ? new URL(SITE_META.logoPath, SITE_META.url).toString()
+      : undefined;
 
     document.title = resolvedTitle;
 
@@ -55,6 +71,13 @@ export const Seo = ({
     ensureMeta("property", "og:url", resolvedUrl);
     ensureMeta("property", "og:type", type);
     ensureMeta("property", "og:site_name", SITE_META.title);
+    if (SITE_META.locale) {
+      ensureMeta("property", "og:locale", SITE_META.locale);
+    }
+
+    if (SITE_META.author) {
+      ensureMeta("name", "author", SITE_META.author);
+    }
 
     if (resolvedImage) {
       ensureMeta("property", "og:image", resolvedImage);
@@ -67,6 +90,23 @@ export const Seo = ({
 
     ensureLink("canonical", resolvedUrl);
     ensureMeta("name", "robots", noIndex ? "noindex, nofollow" : "index, follow");
+
+    const organizationJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: SITE_META.title,
+      url: SITE_META.url,
+      logo: resolvedLogo,
+      email: SITE_META.email,
+      telephone: SITE_META.phone,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: SITE_META.city,
+        addressCountry: SITE_META.country,
+      },
+    };
+
+    ensureJsonLd("organization", organizationJsonLd);
   }, [title, description, path, image, type, noIndex]);
 
   return null;

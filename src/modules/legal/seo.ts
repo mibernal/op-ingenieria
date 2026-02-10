@@ -1,7 +1,7 @@
 export const legalSeo = {
-  title: "Términos, Privacidad y Cookies | O&P Ingeniería S.A.S.",
+  title: "Términos, privacidad y cookies",
   description:
-    "Consulta la información legal sobre el uso del sitio, tratamiento de datos y cookies de O&P Ingeniería S.A.S.",
+    "Información legal sobre el uso del sitio, tratamiento de datos personales y política de cookies de O&P Ingeniería.",
   path: "/legal",
   type: "website" as const,
 };

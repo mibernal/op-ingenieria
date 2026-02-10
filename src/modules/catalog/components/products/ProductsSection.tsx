@@ -167,8 +167,7 @@ const ProductsSection = ({
                 {selectedCategory?.name}
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                {productsInCategory.length}{" "}
-                {productsInCategory.length === 1 ? "producto" : "productos"} disponibles
+                Productos disponibles
                 {selectedSubcategory ? (
                   <span className="text-muted-foreground">
                     {" "}

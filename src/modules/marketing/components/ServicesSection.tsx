@@ -4,39 +4,51 @@ import { cn } from "@/lib/utils";
 const services = [
   {
     icon: Zap,
-    title: "Energía de Respaldo",
+    title: "Respaldo y Continuidad Energética",
     description:
-      "Soluciones para continuidad operativa: plantas eléctricas, bancos de baterías y respaldo crítico con ingeniería, instalación y puesta en marcha.",
+      "Aseguramos la operación con soluciones de respaldo para cargas críticas: plantas eléctricas, bancos de baterías y sistemas de transferencia. Incluye ingeniería, suministro, instalación, pruebas y puesta en marcha.",
+    idealFor:
+      "Industrias, comercios, clínicas, data centers que requieren continuidad y seguridad energética.",
   },
   {
     icon: Sun,
-    title: "Energía Fotovoltaica",
+    title: "Energía Solar Fotovoltaica",
     description:
-      "Diseño e implementación de sistemas solares para industria, comercio y hogares: dimensionamiento, protección, monitoreo y optimización del ahorro.",
+      "Diseñamos e implementamos sistemas solares para industria, comercio y hogares: dimensionamiento técnico, protecciones, monitoreo y optimización para maximizar ahorro y desempeño.",
+    idealFor:
+      "Empresas, proyectos comerciales y residenciales que buscan eficiencia energética y sostenibilidad.",
   },
   {
     icon: Settings,
-    title: "Tableros Eléctricos",
+    title: "Tableros de Potencia y Control",
     description:
-      "Diseño y fabricación de tableros de potencia y control con pruebas, documentación y cumplimiento normativo según cada proyecto.",
+      "Diseño y fabricación de tableros eléctricos a la medida: potencia, control y automatización. Entregamos con pruebas, documentación técnica y cumplimiento normativo según el alcance del proyecto.",
+    idealFor:
+      "Plantas industriales, edificios comerciales y desarrollos residenciales con requerimientos técnicos específicos.",
   },
   {
     icon: Wrench,
     title: "Mantenimiento Especializado",
     description:
-      "Planes preventivos y correctivos con diagnóstico técnico, reportes, repuestos certificados y enfoque en disponibilidad y seguridad.",
+      "Planes preventivos y correctivos orientados a disponibilidad y seguridad: diagnóstico, reporte técnico, intervención en sitio y repuestos certificados para prolongar la vida útil de los equipos.",
+    idealFor:
+      "Operaciones industriales y comerciales que priorizan confiabilidad y reducción de fallas.",
   },
   {
     icon: Lightbulb,
     title: "Iluminación Eficiente",
     description:
-      "Retrofit LED, diseño lumínico y automatización para reducir consumo, elevar el confort visual y mejorar la calidad del espacio.",
+      "Diseño lumínico y retrofit LED para reducir consumo y mejorar el confort visual. Implementamos soluciones eficientes con criterios técnicos, estética cuidada y resultados medibles.",
+    idealFor:
+      "Oficinas, bodegas, áreas industriales, comercios y espacios residenciales.",
   },
   {
     icon: Cable,
-    title: "Telecomunicaciones",
+    title: "Telecomunicaciones y Cableado Estructurado",
     description:
-      "Redes estructuradas, canalizaciones y soporte para comunicaciones confiables, con enfoque en orden, seguridad y escalabilidad.",
+      "Redes estructuradas, canalizaciones y organización técnica para comunicaciones confiables. Enfoque en orden, seguridad y escalabilidad para crecer sin reprocesos.",
+    idealFor:
+      "Edificios corporativos y centros operativos que requieren infraestructura ordenada y escalable.",
   },
 ];
 
@@ -46,7 +58,7 @@ const ServicesSection = () => {
       {/* Fondo base */}
       <div className="absolute inset-0 -z-10 bg-background" />
 
-      {/* Gradientes reducidos */}
+      {/* Gradientes */}
       <div
         className="absolute inset-x-0 top-0 -z-10 h-16 bg-gradient-to-b from-background via-muted/10 to-transparent"
         aria-hidden="true"
@@ -57,12 +69,14 @@ const ServicesSection = () => {
       />
 
       <div className="container mx-auto px-4">
-        {/* Header compacto */}
+        {/* Header */}
         <div className="mx-auto mb-8 max-w-3xl text-center">
           <h2 className="section-title mt-1">Nuestros Servicios</h2>
 
           <p className="mt-2 text-sm md:text-base text-muted-foreground">
-            Ingeniería y ejecución para sistemas de respaldo, energía solar y soluciones eléctricas confiables en entornos industriales, comerciales y residenciales.
+            Soluciones integrales de ingeniería eléctrica, electromecánica y energía limpia.
+            Diseñamos, implementamos y mantenemos infraestructura confiable, eficiente y segura
+            para entornos industriales, comerciales y residenciales.
           </p>
 
           <div className="mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
@@ -112,6 +126,14 @@ const ServicesSection = () => {
 
                 <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground">
                   {service.description}
+                </p>
+
+                {/* Ideal para */}
+                <p className="relative mt-4 text-xs leading-relaxed text-muted-foreground">
+                  <span className="font-medium text-foreground">
+                    Ideal para:
+                  </span>{" "}
+                  {service.idealFor}
                 </p>
               </article>
             );

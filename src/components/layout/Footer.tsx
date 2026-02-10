@@ -30,8 +30,8 @@ const SOCIAL_LINKS: Array<{
   label: string;
   href?: string;
 }> = [
-  { Icon: Facebook, label: "Facebook", href: undefined },
-  { Icon: Linkedin, label: "LinkedIn", href: undefined },
+  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/opingenieria" },
+  { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/o&p-ingenier%C3%ADa-sas/" },
   { Icon: Instagram, label: "Instagram", href: undefined },
 ];
 

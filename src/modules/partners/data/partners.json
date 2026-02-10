@@ -1,10 +1,34 @@
 [
-  { "id": "1", "name": "Schneider Electric", "logo": "" },
-  { "id": "2", "name": "ABB", "logo": "" },
-  { "id": "3", "name": "Siemens", "logo": "" },
-  { "id": "4", "name": "Eaton", "logo": "" },
-  { "id": "5", "name": "Legrand", "logo": "" },
-  { "id": "6", "name": "General Electric", "logo": "" },
-  { "id": "7", "name": "Caterpillar", "logo": "" },
-  { "id": "8", "name": "Cummins", "logo": "" }
+  { "id": "1", "name": "Schneider Electric", "logo": "/uploads/logos/Schneider-Electric.jpg" },
+  { "id": "3", "name": "Siemens", "logo": "/uploads/logos/Siemens.png" },
+  { "id": "2", "name": "ABB", "logo": "/uploads/logos/abb.png" },
+  { "id": "6", "name": "General Electric", "logo": "/uploads/logos/General-Electric.png" },
+  { "id": "4", "name": "Eaton", "logo": "/uploads/logos/eaton.png" },
+  { "id": "5", "name": "Legrand", "logo": "/uploads/logos/legrand.png" },
+
+  { "id": "7", "name": "Caterpillar", "logo": "/uploads/logos/Caterpillar.png" },
+  { "id": "8", "name": "Cummins", "logo": "/uploads/logos/Cummins.png" },
+  { "id": "10", "name": "Perkins", "logo": "/uploads/logos/perkins.png" },
+  { "id": "21", "name": "ComAp", "logo": "/uploads/logos/comap.gif" },
+
+  { "id": "15", "name": "Victron", "logo": "/uploads/logos/Victron.webp" },
+  { "id": "16", "name": "Pylontech", "logo": "/uploads/logos/Pylontech.jpg" },
+  { "id": "17", "name": "Deye", "logo": "/uploads/logos/Deye.jpg" },
+  { "id": "18", "name": "JAsolar", "logo": "/uploads/logos/JAsolar.png" },
+  { "id": "23", "name": "SRNE", "logo": "/uploads/logos/SRNE.webp" },
+  { "id": "27", "name": "Epever", "logo": "/uploads/logos/Epever.png" },
+  { "id": "22", "name": "Must", "logo": "/uploads/logos/must.png" },
+  { "id": "9", "name": "Chint", "logo": "/uploads/logos/Chint.png" },
+
+  { "id": "24", "name": "York", "logo": "/uploads/logos/York.jpg" },
+  { "id": "25", "name": "Midea", "logo": "/uploads/logos/Midea.png" },
+  { "id": "26", "name": "LG", "logo": "/uploads/logos/LG.webp" },
+
+  { "id": "20", "name": "Sylvania", "logo": "/uploads/logos/Sylvania.png" },
+  { "id": "19", "name": "Trojan", "logo": "/uploads/logos/trojan.png" },
+
+  { "id": "14", "name": "Coexito", "logo": "/uploads/logos/Coexito.webp" },
+  { "id": "13", "name": "Powest", "logo": "/uploads/logos/powest.webp" },
+  { "id": "12", "name": "Fawde", "logo": "/uploads/logos/Fawde.jpeg" },
+  { "id": "11", "name": "Doosan", "logo": "/uploads/logos/Doosan.png" }
 ]

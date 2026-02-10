@@ -1,29 +1,67 @@
-import React, { useState, useCallback, useEffect, memo } from "react";
+import React, { useEffect, useMemo, useState, memo, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
 export interface OptimizedImageProps
-  extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src" | "onError" | "onLoad"> {
+  extends Omit<
+    React.ImgHTMLAttributes<HTMLImageElement>,
+    "src" | "onError" | "onLoad"
+  > {
   src?: string;
   alt?: string;
+
+  /** Clases del WRAPPER (contenedor) */
   className?: string;
+
+  /** Clases del IMG (la etiqueta <img>) */
+  imgClassName?: string;
+
   aspectRatio?: "square" | "video" | "auto" | "custom";
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
+
+  /** Si true, el browser prioriza la descarga */
   priority?: boolean;
+
+  /** Placeholder/skeleton mientras carga */
+  disablePlaceholder?: boolean;
+
+  /** Fade-in al cargar (para fotos grandes sí, para logos generalmente NO) */
+  fadeIn?: boolean;
+
   fallback?: React.ReactNode;
   fallbackSrc?: string;
+
   sizes?: string;
   loading?: "lazy" | "eager";
+
   onError?: () => void;
   onLoad?: () => void;
 }
+
+const aspectRatioClasses: Record<string, string> = {
+  square: "aspect-square",
+  video: "aspect-video",
+  auto: "",
+  custom: "",
+};
+
+const objectFitClasses: Record<string, string> = {
+  cover: "object-cover",
+  contain: "object-contain",
+  fill: "object-fill",
+  none: "object-none",
+  "scale-down": "object-scale-down",
+};
 
 const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
   src,
   alt = "",
   className = "",
+  imgClassName = "",
   aspectRatio = "auto",
   objectFit = "cover",
   priority = false,
+  disablePlaceholder = false,
+  fadeIn = true,
   fallback,
   fallbackSrc = "/placeholder-image.jpg",
   sizes,
@@ -35,70 +73,65 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
   height,
   ...imgProps
 }) => {
-  const [imageSrc, setImageSrc] = useState<string | undefined>(src);
-  const [isLoading, setIsLoading] = useState(true);
+  // Resuelve src final (sin estado extra)
+  const resolvedSrc = src ?? fallbackSrc;
+
   const [hasError, setHasError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const aspectRatioClasses: Record<string, string> = {
-    square: "aspect-square",
-    video: "aspect-video",
-    auto: "",
-    custom: "",
-  };
-
-  const objectFitClasses: Record<string, string> = {
-    cover: "object-cover",
-    contain: "object-contain",
-    fill: "object-fill",
-    none: "object-none",
-    "scale-down": "object-scale-down",
-  };
-
+  // Reset cuando cambia el src
   useEffect(() => {
-    const resolvedSrc = src ?? fallbackSrc;
-    setImageSrc(resolvedSrc);
-    setIsLoading(Boolean(resolvedSrc));
     setHasError(false);
-  }, [src, fallbackSrc]);
-
-  const handleError = useCallback(() => {
-    setHasError(true);
-    if (imageSrc && imageSrc !== fallbackSrc) {
-      setImageSrc(fallbackSrc);
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
-    externalOnError?.();
-  }, [externalOnError, fallbackSrc, imageSrc]);
-
-  const handleLoad = useCallback(() => {
-    setIsLoading(false);
-    externalOnLoad?.();
-  }, [externalOnLoad]);
+    setIsLoaded(false);
+  }, [resolvedSrc]);
 
   const computedLoading = loading ?? (priority ? "eager" : "lazy");
 
+  // Convertir width/height a número cuando aplique (para aspectRatio)
   const numericWidth =
-    typeof width === "number" ? width : typeof width === "string" && !Number.isNaN(Number(width)) ? Number(width) : undefined;
+    typeof width === "number"
+      ? width
+      : typeof width === "string" && !Number.isNaN(Number(width))
+      ? Number(width)
+      : undefined;
+
   const numericHeight =
     typeof height === "number"
       ? height
       : typeof height === "string" && !Number.isNaN(Number(height))
-        ? Number(height)
-        : undefined;
+      ? Number(height)
+      : undefined;
 
-  const wrapperStyle: React.CSSProperties = {
-    ...style,
-    ...(aspectRatio === "auto" && numericWidth && numericHeight
-      ? { aspectRatio: `${numericWidth} / ${numericHeight}` }
-      : {}),
-  };
+  const wrapperStyle: React.CSSProperties = useMemo(
+    () => ({
+      ...style,
+      ...(aspectRatio === "auto" && numericWidth && numericHeight
+        ? { aspectRatio: `${numericWidth} / ${numericHeight}` }
+        : {}),
+    }),
+    [style, aspectRatio, numericWidth, numericHeight]
+  );
 
-  // Si hay fallback personalizado y ocurrió error
-  if (hasError && fallback) {
-    return <>{fallback}</>;
-  }
+  const handleError = useCallback(() => {
+    setHasError(true);
+    externalOnError?.();
+  }, [externalOnError]);
+
+  const handleLoad = useCallback(() => {
+    setIsLoaded(true);
+    externalOnLoad?.();
+  }, [externalOnLoad]);
+
+  // Si hay fallback personalizado y falló la carga
+  if (hasError && fallback) return <>{fallback}</>;
+
+  // Si falló y no hay fallback: usamos fallbackSrc (si el src original no era fallbackSrc)
+  const finalSrc =
+    hasError && resolvedSrc !== fallbackSrc ? fallbackSrc : resolvedSrc;
+
+  // Para logos (eager/priority): ayudar al navegador
+  const fetchPriority: "high" | "low" | "auto" =
+    priority || computedLoading === "eager" ? "high" : "auto";
 
   return (
     <div
@@ -109,37 +142,38 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
       )}
       style={wrapperStyle}
     >
-      {/* Placeholder mientras carga */}
-      {isLoading && (
+      {/* Placeholder (opcional) */}
+      {!disablePlaceholder && !isLoaded && (
         <div
-          className="absolute inset-0 bg-gradient-to-br from-muted via-muted/50 to-muted animate-pulse"
+          className="absolute inset-0 bg-muted/40 animate-pulse"
           role="status"
           aria-label="Cargando imagen"
         />
       )}
 
-      {/* Imagen */}
-      {imageSrc && (
-        <img
-          src={imageSrc}
-          alt={alt}
-          loading={computedLoading}
-          decoding="async"
-          onLoad={handleLoad}
-          onError={handleError}
-          sizes={sizes}
-          width={width}
-          height={height}
-          className={cn(
-            "w-full h-full transition-opacity duration-300",
-            objectFitClasses[objectFit],
-            isLoading ? "opacity-0" : "opacity-100",
-            "select-none" // Previene selección accidental
-          )}
-          draggable="false"
-          {...imgProps}
-        />
-      )}
+      <img
+        src={finalSrc}
+        alt={alt}
+        loading={computedLoading}
+        decoding="async"
+        
+        fetchPriority={fetchPriority}
+        onLoad={handleLoad}
+        onError={handleError}
+        sizes={sizes}
+        width={width}
+        height={height}
+        className={cn(
+          "w-full h-full",
+          objectFitClasses[objectFit],
+          "select-none",
+          fadeIn ? "transition-opacity duration-200" : "",
+          fadeIn ? (isLoaded ? "opacity-100" : "opacity-0") : "opacity-100",
+          imgClassName
+        )}
+        draggable="false"
+        {...imgProps}
+      />
 
       {/* Estado de error (solo si no hay fallback personalizado) */}
       {hasError && !fallback && (
@@ -163,7 +197,9 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
-            <span className="text-sm text-muted-foreground">Imagen no disponible</span>
+            <span className="text-sm text-muted-foreground">
+              Imagen no disponible
+            </span>
           </div>
         </div>
       )}

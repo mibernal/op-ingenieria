@@ -69,7 +69,7 @@ const ContactSection = () => {
           <p className="text-xs tracking-[0.22em] text-muted-foreground">CONTACTO</p>
           <h2 className="section-title mt-2">Hablemos de tu proyecto</h2>
           <p className="mt-2 text-sm md:text-base text-muted-foreground">
-            Te acompañamos con ingeniería y ejecución confiable en respaldo energético, energía solar y soluciones eléctricas.
+            Cuéntanos tu necesidad técnica y te respondemos con una propuesta clara y viable.
           </p>
           <div className="mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
         </div>

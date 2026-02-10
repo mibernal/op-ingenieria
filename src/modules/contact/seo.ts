@@ -1,7 +1,7 @@
 export const contactSeo = {
-  title: "Contacto",
+  title: "Contacto y cotizaciones | O&P Ingeniería S.A.S.",
   description:
-    "Contáctanos para cotizaciones, soporte técnico y soluciones de ingeniería eléctrica a la medida de tu proyecto.",
+    "Solicita asesoría técnica y propuestas para proyectos eléctricos, energía solar y soluciones de respaldo.",
   path: "/contact",
   type: "website" as const,
 };

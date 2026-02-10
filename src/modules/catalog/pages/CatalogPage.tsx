@@ -111,8 +111,8 @@ const CatalogPage = () => {
               Catálogo de Productos
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Encuentra los mejores productos eléctricos e industriales para tus
-              proyectos
+              Selecciona soluciones confiables para proyectos industriales, comerciales y
+              de infraestructura eléctrica.
             </p>
           </div>
 
@@ -197,7 +197,7 @@ const CatalogPage = () => {
                           ? `en la subcategoría "${subcategory}"`
                           : `en la categoría "${activeCategory?.name ?? ""}"`
                       }.`
-                    : "Prueba seleccionando una categoría."}
+                    : "Prueba seleccionando una categoría o solicita asesoría técnica."}
                 </p>
 
                 {categoryId && (

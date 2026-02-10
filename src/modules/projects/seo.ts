@@ -1,7 +1,7 @@
 export const projectsSeo = {
-  title: "Proyectos Ejecutados",
+  title: "Proyectos eléctricos ejecutados | O&P Ingeniería S.A.S.",
   description:
-    "Conoce proyectos de ingeniería eléctrica y energética realizados por OP Ingeniería con altos estándares de calidad.",
+    "Casos reales de ingeniería eléctrica, respaldo y mantenimiento con resultados verificables.",
   path: "/projects",
   type: "website" as const,
 };

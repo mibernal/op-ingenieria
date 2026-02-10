@@ -38,7 +38,7 @@ const ContactPage = () => {
             </h1>
 
             <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
-              Cuéntanos qué necesitas y te orientamos con una propuesta técnica.
+              Cuéntanos tu necesidad técnica y te responderemos con una propuesta clara y viable.
             </p>
 
             <div className="mx-auto mt-3 h-px w-16 bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
@@ -109,7 +109,7 @@ const ContactPage = () => {
 
               <Card className="rounded-2xl border-border/60 bg-card/70 backdrop-blur-md shadow-sm shadow-black/5">
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-heading font-bold mb-4">Contacto rápido</h2>
+                  <h2 className="text-xl font-heading font-bold mb-4">Contacto rápido y cotizaciones</h2>
                   <div className="space-y-3">
                     <Button
                       className="w-full gap-2 bg-accent hover:bg-accent/90 shadow-lg shadow-accent/20"

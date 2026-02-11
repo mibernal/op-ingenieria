@@ -1,546 +1,251 @@
+
 [
   {
-    "id": "1233",
-    "sku": "",
-    "title": "Cassette",
-    "slug": "cassette",
-    "category": "Aires Acondicionados y Ventilacion",
-    "subcategory": null,
-    "description": "Sistema de aire acondicionado tipo cassette diseñado para instalación en cielos falsos, ideal para espacios comerciales que requieren distribución uniforme del aire y alto confort térmico.",
-    "longDescription": "<p align=justify> 4 rejillas de inyección en las orillas y un retorno por el centro. Inyección de aire curveado hacia las orillas, evitando el retorno. Incluye parrilla frontal, filtro y ganchos para su colocación y aseguramiento. Incluye control remoto inalámbrico. Ventiladores con tres velocidades - alta, media y baja. Funciones de enfriamiento, calefacción, ventilación y dehumidificación. Juegos sólo frío deben incluir tubo de expansión y transformador. Condensadora de descarga horizontal (YKJA) y vertical (AC0). Condensadoras incluyen rejillas para mayor protección del serpentín.</p>",
-    "images": [
-      "uploads/2019/11/Casette-Boton.jpg",
-      "uploads/2019/11/002B.jpg",
-      "uploads/2019/11/cassette-1-via-samsug4.jpg"
-    ],
-    "image": "uploads/2019/11/Casette-Boton.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1234",
-    "sku": "",
-    "title": "MiniSplit",
-    "slug": "minisplit",
-    "category": "Aires Acondicionados y Ventilacion",
-    "subcategory": null,
-    "description": "Equipo de aire acondicionado tipo MiniSplit para aplicaciones residenciales y comerciales, reconocido por su eficiencia energética, operación silenciosa y control preciso de temperatura.",
-    "longDescription": "<p align=justify> Tipo:\taire acondicionado inverter v inverter v de 9.000 btu, capacidad\t9.000 btu /hr ó 0.75 tr/hr, refrigerante r-410a, voltaje 220v / 110v, todas las unidades incluyen refrigerante r-410a, control remoto infrarrojo, ventilador con tres velocidades - alta, media y baja. 1 año de garantía en partes y 5 en compresor.</p>",
-    "images": [
-      "uploads/2019/11/Mini-BOTON.jpg",
-      "uploads/2019/04/001A.jpg",
-      "uploads/2019/04/001B.jpg"
-    ],
-    "image": "uploads/2019/11/Mini-BOTON.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1235",
-    "sku": "",
-    "title": "Tipo Paquete",
-    "slug": "tipo-paquete",
-    "category": "Aires Acondicionados y Ventilacion",
-    "subcategory": null,
-    "description": "Sistema de aire acondicionado tipo paquete, compacto y robusto, ideal para aplicaciones industriales y comerciales que requieren alta capacidad y distribución por ductos.",
-    "longDescription": "<p align=justify> El Aire Acondicionado tipo Paquete es un equipo compacto, y como su nombre lo indica viene empaquetado en una sola unidad la unidad condensadora y la evaporadora, tal como viene el aire acondicionado tipo ventana, solo que mucho mas grande. Su instalación exige una área muy ventilada y bien soportada, en caso de ser instalada sobre una construcción. Requiere de ductos los que transportaran el aire frio al interior del espacio a refrigerar, permitiendo así una muy eficiente distribución de frío y un uso muy silencioso. </p>",
-    "images": [
-      "uploads/2019/04/Paquete-Boton-e1555361447463.jpg",
-      "uploads/2019/04/paquete-lennox-raider.jpg",
-      "uploads/2019/04/large01.jpg"
-    ],
-    "image": "uploads/2019/04/Paquete-Boton-e1555361447463.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1236",
-    "sku": "",
-    "title": "Baterías Gel Solar",
-    "slug": "baterías-gel-solar",
-    "category": "Baterias",
-    "subcategory": null,
-    "description": "Baterías selladas de gel diseñadas para sistemas solares y eólicos, ideales para descargas profundas y aplicaciones donde se requiere bajo mantenimiento y alta confiabilidad.",
-    "longDescription": "<p align=justify> Las baterías son herméticas, no precisan mantenimiento. Diseñadas para descargas profundas, propias de las instalaciones solares y eólicas. Los modelos grandes se conectan mediante tornillo, los pequeños con terminales enchufables standard Las baterías PLOM-GEL no desprenden gases. Son aptas para entornos habitados y embarcaciones </p>",
-    "images": [
-      "uploads/2019/12/GEL-SOLAR-BOTON.jpg",
-      "uploads/2019/12/004A.jpg",
-      "uploads/2019/12/004B.jpg"
-    ],
-    "image": "uploads/2019/12/GEL-SOLAR-BOTON.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1237",
-    "sku": "",
-    "title": "Baterías Níquel - Cadmio",
-    "slug": "baterías-níquel---cadmio",
-    "category": "Baterias",
-    "subcategory": null,
-    "description": "Baterías industriales de alta confiabilidad, diseñadas para operar en ambientes extremos y aplicaciones críticas donde se requiere máxima durabilidad y estabilidad.",
-    "longDescription": "<p align=justify> La batería de níquel-cadmio es altamente confiable disponible para un gran número de aplicaciones industriales. Sus características únicas la hacen capaz de ser utilizada en aplicaciones y ambientes agresivos donde no es posible tener una temperatura controlada. Son ideales para aplicaciones en trenes subestaciones electricas, plantas industriales etc. (colocar foto de baterías de mayor capacidad). </p>",
-    "images": [
-      "uploads/2019/11/BATERIA-NIQUEL-CADMIO-BOTON.jpg",
-      "uploads/2019/12/006A.jpg",
-      "uploads/2019/12/006B.jpg"
-    ],
-    "image": "uploads/2019/11/BATERIA-NIQUEL-CADMIO-BOTON.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1238",
-    "sku": "",
-    "title": "Baterías Tracción",
-    "slug": "baterías-tracción",
-    "category": "Baterias",
-    "subcategory": null,
-    "description": "Baterías diseñadas para aplicaciones de tracción eléctrica, capaces de suministrar alta potencia de forma continua en vehículos eléctricos y sistemas industriales móviles.",
-    "longDescription": "<p align=justify> Las baterías de tracción están diseñadas para soportar aplicaciones que requieren un alto nivel de fiabilidad y potencia. Ellas son utilizadas en vehículos eléctricos y otros. </p>",
-    "images": [
-      "uploads/2019/11/BATERIA-TRACCION-BOTON.jpg",
-      "uploads/2019/11/002A-1.png",
-      "uploads/2019/11/002B-1.png"
-    ],
-    "image": "uploads/2019/11/BATERIA-TRACCION-BOTON.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1239",
-    "sku": "",
-    "title": "Baterías Estacionarias OPzS",
-    "slug": "baterías-estacionarias-opzs",
-    "category": "Baterias",
-    "subcategory": null,
-    "description": "Baterías estacionarias de tecnología OPzS, ideales para almacenamiento de energía en aplicaciones críticas que demandan larga vida útil y alta fiabilidad.",
-    "longDescription": "<p align=justify> Las baterías OPzS son la solución más robusta para almacenar energía con una probada tecnología, Son diseñadas y fabricadas de acuerdo con las normas DIN, para aplicaciones donde se requiere una batería segura y fiable con larga vida en servicio, como telecomunicaciones, grupos electrógenos, subestaciones eléctricas, estaciones de ferrocarril, entre otros. </p>",
-    "images": [
-      "uploads/2019/11/bateria-abierta-2v-350ah-refopzs-2v-350ah-cebat-7249-D_NQ_NP_614542-MCO30039138141_042019-F-1.jpg",
-      "uploads/2019/11/002B-1.png",
-      "uploads/2019/11/OPZS-BOTON-1.png"
-    ],
-    "image": "uploads/2019/11/bateria-abierta-2v-350ah-refopzs-2v-350ah-cebat-7249-D_NQ_NP_614542-MCO30039138141_042019-F-1.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1240",
-    "sku": "",
-    "title": "Baterías Estacionarias Tubular OPzV",
-    "slug": "baterías-estacionarias-tubular-opzv",
-    "category": "Baterias",
-    "subcategory": null,
-    "description": "Baterías selladas de tecnología OPzV con placas tubulares, diseñadas para aplicaciones estacionarias que requieren alta confiabilidad y mínimo mantenimiento.",
-    "longDescription": "<p align=justify> Principalmente estas baterías se utilizan para conseguir una conexión sin interrupciones en campos de telecomunicaciones como centrales telefónicas o estaciones base de telefonía móvil. Entre el resto de sus aplicaciones se incluyen alumbrados de emergencia, seguridad, ferrocarriles, servicios y otros suministros de energía para sistemas de seguridad.\r\\n\r\\nCaracterísticas: Robusta tecnología de placas tubulares. Muy bajo índice de gaseo gracias a la recombinación de gases interna. Larga vida en circuito abierto, debido al bajo índice de auto descarga. </p>",
-    "images": [
-      "uploads/2019/11/OPZV-BOTON.png",
-      "uploads/2019/11/003A.jpg",
-      "uploads/2019/11/003B.jpg"
-    ],
-    "image": "uploads/2019/11/OPZV-BOTON.png",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1241",
-    "sku": "",
-    "title": "Baterías VRLA",
-    "slug": "baterías-vrla",
-    "category": "Baterias",
-    "subcategory": null,
-    "description": "Baterías selladas VRLA de bajo mantenimiento, adecuadas para respaldo energético en sistemas de telecomunicaciones, UPS y aplicaciones industriales.",
-    "longDescription": "<p align=justify> La batería de plomo ácido de Válvula Regulada (VRLA) es un tipo de acumulador (secundario) recargable, con válvula de seguridad, que permite la evacuación de la presión interna en caso de una sobrecarga. Los acumuladores de este tipo son de bajo mantenimiento, no requiere adicion de electrolito durante su vida en servicio. Diseñadas para aplicaciones tales como: telecomunicaciones, SAI-UPS, grupos electrógenos, sistemas fotovoltaicos, centros de control, de sistemas de información y datos, de los sistemas de seguridad, maquinaría etc... </p>",
-    "images": [
-      "uploads/2019/11/VRLA-BOTON2.png",
-      "uploads/2019/04/VRLA2.png",
-      "uploads/2019/04/VRLA1.png"
-    ],
-    "image": "uploads/2019/11/VRLA-BOTON2.png",
-    "price": "",
-    "specs": []
-  },
-  {
     "id": "1242",
-    "sku": "",
     "title": "Centros de Alto Consumo",
     "slug": "centros-de-alto-consumo",
-    "category": "Energia Solar",
-    "subcategory": "Centros de Alto Consumo, Energia Solar",
-    "description": "Soluciones de energía solar diseñadas para instalaciones de alto consumo energético, integrando generación, almacenamiento y gestión eficiente de la energía.",
-    "longDescription": "<p align=justify> La generación de energía eléctrica (AC/DC) se obtiene a través de la transformación de la energía solar usando celdas solares que se conectan formando un arreglo que se conecta a un controlador de carga. Esta energía se puede almacenar en baterías, se usa de forma directa o se transforma a corriente alterna. </p>",
+    "category": "Energía Solar",
+    "subcategory": "Centros de Alto Consumo",
+    "description": "Soluciones solares de alta capacidad para industrias, comercios y grandes instalaciones, integrando generación fotovoltaica, inversores avanzados, almacenamiento y gestión inteligente de energía.",
+    "longDescription": "<p align=justify>Diseñamos sistemas de energía solar para centros de alto consumo energético que requieren máxima confiabilidad, eficiencia y escalabilidad. Estas soluciones integran campos fotovoltaicos de gran potencia, inversores solares de última generación y sistemas de almacenamiento para optimizar el uso de la energía producida.</p>\r\n\r\n<p align=justify>Los inversores utilizados incorporan tecnología <strong>MPPT múltiple</strong>, alta eficiencia de conversión (&gt;97%), sincronización precisa con la red eléctrica y capacidad de operación en sistemas <strong>on-grid, híbridos u off-grid</strong>. Permiten la gestión dinámica de cargas críticas, autoconsumo, inyección controlada a red y respaldo energético ante fallas.</p>\r\n\r\n<p align=justify>Los sistemas pueden complementarse con bancos de baterías (plomo o litio LiFePO₄), controladores inteligentes y plataformas de <strong>monitoreo remoto en tiempo real</strong>, facilitando la supervisión, el análisis de consumo y la optimización energética. Son ideales para industrias, centros comerciales, hospitales, hoteles y complejos de gran demanda eléctrica.</p>",
     "images": [
       "uploads/2019/12/003A.jpg",
       "uploads/2019/12/CAC-Boton.jpg",
       "uploads/2019/12/20160629_172949-1-scaled.jpg"
-    ],
-    "image": "uploads/2019/12/003A.jpg",
-    "price": "",
-    "specs": []
+    ]
   },
   {
     "id": "1243",
-    "sku": "",
     "title": "Centros Educativos",
     "slug": "centros-educativos",
-    "category": "Energia Solar",
-    "subcategory": "Centros Educativos, Energia Solar",
-    "description": "Sistemas de energía solar orientados a centros educativos, enfocados en eficiencia energética, sostenibilidad y reducción de costos operativos.",
-    "longDescription": "<p align=justify> Los sistemas de energía solar para uso educativo pueden ser instalado prácticamente en cualquier centro educativo. Casi todos los gobiernos del mundo cuentan actualmente con programas de apoyo para la adquisición e instalación de sistemas solares, así como el apoyo para su adopción en nuevas construcciones de casas y edificios. </p>",
+    "category": "Energía Solar",
+    "subcategory": "Centros Educativos",
+    "description": "Sistemas solares inteligentes para instituciones educativas, enfocados en eficiencia energética, sostenibilidad, reducción de costos y formación ambiental.",
+    "longDescription": "<p align=justify>Implementamos soluciones de energía solar adaptadas a centros educativos, integrando generación fotovoltaica, inversores solares eficientes y sistemas de monitoreo que permiten reducir costos operativos y promover el uso responsable de la energía.</p>\r\n\r\n<p align=justify>Los sistemas incorporan inversores con <strong>control MPPT</strong>, alta eficiencia y capacidad de sincronización con la red eléctrica, permitiendo el autoconsumo y la inyección de excedentes cuando la normativa lo permite. Su diseño modular facilita la ampliación futura según el crecimiento de la institución.</p>\r\n\r\n<p align=justify>Adicionalmente, pueden incluir plataformas de <strong>monitoreo visual</strong> para uso pedagógico, donde estudiantes y docentes pueden observar en tiempo real la producción solar, el ahorro energético y la reducción de emisiones de CO₂, reforzando el compromiso con la sostenibilidad.</p>",
     "images": [
       "uploads/2019/11/Educativos-Boton.jpeg",
       "uploads/2019/08/002A.jpg",
       "uploads/2019/12/002B.jpg"
-    ],
-    "image": "uploads/2019/11/Educativos-Boton.jpeg",
-    "price": "",
-    "specs": []
+    ]
   },
   {
     "id": "1244",
-    "sku": "",
-    "title": "Hogares",
-    "slug": "hogares",
-    "category": "Energia Solar, Energia Solar",
-    "subcategory": "Hogares",
-    "description": "Soluciones de energía solar residencial diseñadas para reducir el consumo eléctrico, optimizar costos y promover el uso de energías renovables.",
-    "longDescription": "<p align=justify> La energía solar en el hogar puede usarse de dos formas distintas. La primera es el uso calentadores solares para transformar la energía del sol en calor, para producir agua caliente. La segunda es el uso de paneles o módulos de celdas fotovoltaicas para generar electricidad que se usará en cubrir las necesidades del hogar. Los sistemas solares fotovoltaicos son generalmente más caros que los sistemas de calentamiento de agua, pero en última instancia los dos tipos de sistemas conducen a un ahorro significativo en el largo plazo, además de contribuir a reducir las emisiones de gases contaminantes. </p>",
+    "title": "Residencial",
+    "slug": "residencial",
+    "category": "Energía Solar",
+    "subcategory": "Residencial",
+    "description": "Sistemas solares residenciales con inversores inteligentes, diseñados para reducir el consumo eléctrico, aumentar la autonomía y aprovechar al máximo la energía solar.",
+    "longDescription": "<p align=justify>Las soluciones solares residenciales permiten transformar la energía del sol en electricidad limpia y confiable para el hogar, reduciendo significativamente el consumo de la red eléctrica y los costos asociados.</p>\r\n\r\n<p align=justify>Estos sistemas integran inversores solares de alta eficiencia con <strong>seguimiento MPPT</strong>, operación silenciosa y compatibilidad con sistemas <strong>on-grid, híbridos u off-grid</strong>. Pueden funcionar con o sin baterías, permitiendo respaldo energético ante cortes de red.</p>\r\n\r\n<p align=justify>Los inversores residenciales modernos ofrecen <strong>monitoreo remoto</strong> mediante aplicaciones móviles, protección avanzada contra sobrecargas y sobretensiones, y compatibilidad con baterías de litio, brindando mayor autonomía, confort y seguridad energética al usuario.</p>",
     "images": [
       "uploads/2019/11/Solar-Boton.jpg",
       "uploads/2019/12/001A.jpg",
       "uploads/2019/12/001B.jpg"
-    ],
-    "image": "uploads/2019/11/Solar-Boton.jpg",
-    "price": "",
-    "specs": []
+    ]
   },
   {
-    "id": "1246",
-    "sku": "",
-    "title": "Alumbrado Publico",
-    "slug": "alumbrado-publico",
-    "category": "Iluminacion LED",
-    "subcategory": null,
-    "description": "Soluciones de iluminación LED para alumbrado público, diseñadas para ofrecer alta eficiencia energética, larga vida útil y resistencia a condiciones exteriores.",
-    "longDescription": "<p align=justify>  </p>",
+    "id": "3002",
+    "title": "Paneles Solares Fotovoltaicos",
+    "slug": "paneles-solares-fotovoltaicos",
+    "category": "Energía Solar",
+    "subcategory": "Paneles Solares Fotovoltaicos",
+    "description": "Módulos fotovoltaicos de alta eficiencia para sistemas residenciales, comerciales e industriales, diseñados para maximizar la generación y la confiabilidad del sistema.",
+    "longDescription": "<p align=justify>Suministramos e instalamos paneles solares fotovoltaicos para proyectos de autoconsumo, respaldo e inyección a red. Seleccionamos el tipo de módulo según la necesidad del proyecto, condiciones del sitio y objetivos de generación.</p>\r\n\r\n<p align=justify>Integramos el diseño del arreglo, protecciones, cableado, estructura y puesta en marcha, garantizando un sistema confiable y optimizado para el rendimiento a lo largo del tiempo.</p>",
     "images": [
-      "uploads/2019/11/lampara-solar-led-15w-alumbrado-publico-con-panel-solar-D_NQ_NP_750115-MLM25215351409_122016-F.jpg",
-      "uploads/2019/12/Alumbrado-BOTON.jpg",
-      "uploads/2019/12/lampara-led-para-alumbrado-publico-180w-envio-gratis-D_NQ_NP_187225-MCO25405283434_032017-F.jpg"
-    ],
-    "image": "uploads/2019/11/lampara-solar-led-15w-alumbrado-publico-con-panel-solar-D_NQ_NP_750115-MLM25215351409_122016-F.jpg",
-    "price": "",
-    "specs": []
+      "uploads/productos/paneles.png",
+      "uploads/productos/paneles1.webp",
+      "uploads/productos/paneles2.avif"
+    ]
   },
   {
-    "id": "1247",
-    "sku": "",
-    "title": "Bombillos",
-    "slug": "bombillos",
-    "category": "Iluminacion LED",
-    "subcategory": null,
-    "description": "Bombillos LED de alta eficiencia, ideales para reemplazar tecnologías tradicionales ofreciendo ahorro energético, mayor durabilidad y encendido instantáneo.",
-    "longDescription": "<p align=justify> Bombillos adaptados LED ofrecen una gran posibilidad de sustituir incandescentes , fluorescentes compactas o lámparas halógenas con un extra calienta la lámpara 2700K LED blanco con distribución de luz de ancho ( 220 ° ) para la iluminación general . LED de GE son muy económicos y respetuosos con el medio ambiente : son libres de mercurio , utilizan mucha menos energía que las luces halógenas o incandescentes , y duran más. Caben en accesorios de iluminación de todos los días y la luz entra en el instante en que encender el interruptor.  </p>",
+    "id": "3003",
+    "title": "Estructuras de Montaje Solar",
+    "slug": "estructuras-de-montaje-solar",
+    "category": "Energía Solar",
+    "subcategory": "Estructuras de Montaje Solar",
+    "description": "Estructuras y sistemas de montaje para paneles solares en techo o piso, diseñados para resistencia, durabilidad y correcta inclinación y orientación.",
+    "longDescription": "<p align=justify>Diseñamos y suministramos estructuras de montaje para paneles solares en cubiertas y superficies en suelo, considerando tipo de techo, cargas de viento, corrosión y requerimientos del proyecto.</p>\r\n\r\n<p align=justify>Incluye herrajes, fijaciones y accesorios para una instalación segura y estética. Ideal para proyectos residenciales, comerciales e industriales.</p>",
     "images": [
-      "uploads/2019/11/Bombillo-Boton.jpg",
-      "uploads/2019/12/001A-1.jpg",
-      "uploads/2019/12/001B-1.jpg"
-    ],
-    "image": "uploads/2019/11/Bombillo-Boton.jpg",
-    "price": "",
-    "specs": []
+      "uploads/productos/estructura.png",
+      "uploads/productos/estructura1.jpg"
+    ]
   },
   {
-    "id": "1248",
-    "sku": "",
-    "title": "Lamparas",
-    "slug": "lamparas",
-    "category": "Iluminacion LED",
+    "id": "2456",
+    "title": "Kit Cerca Eléctrica Solar",
+    "slug": "kit-cerca-electrica-solar",
+    "category": "Energía Solar",
     "subcategory": null,
-    "description": "Lámparas LED para aplicaciones interiores y exteriores, diseñadas para iluminación arquitectónica, comercial e industrial con alto rendimiento lumínico.",
-    "longDescription": "<p align=justify> Ideales para aplicaciones de interior y exterior Hoteles/Restaurantes/Supermercados Edificios comerciales Iluminación arquitectónica de exterior /spot Notas de aplicación Rango de temperatura de operación es de -20 ° ~ +40 ° Sólo para aplicaciones de interior No utilizar con reguladores Para uso en dispositivos que pueden tolerar una lámpara de 0.32kg Características y Especificaciones Distribución similar de intensidad de iluminación como PAR38 75W Hal Ángulo de haz múltiple: 25 ° / 40 ° Larga vida útil 25.000 horas (L70, B10) * CCT: 2700K, 3000K, 6500K Dimensión IEC estándar, fácil para la instalación IP64, adecuada para luz spot al aire libre y luz arquitectónica.  </p>",
+    "description": "Kit de cerca eléctrica solar autónomo, diseñado para protección perimetral eficiente en zonas rurales, ganaderas, agrícolas y áreas remotas sin acceso a red eléctrica.",
+    "longDescription": "<p align=justify>El kit de cerca eléctrica solar es una solución autónoma y confiable para la protección perimetral de fincas, potreros, cultivos e instalaciones rurales, donde no se dispone de red eléctrica.</p>\r\n\r\n<p align=justify>El sistema integra un <strong>energizador solar</strong>, panel fotovoltaico, batería de respaldo y accesorios de instalación, permitiendo operación continua día y noche. La energía solar se almacena en la batería, garantizando funcionamiento estable incluso en condiciones climáticas adversas.</p>\r\n\r\n<p align=justify>Estos kits están diseñados para cubrir perímetros de <strong>hasta 10 km, 20 km o 30 km</strong> según el modelo, con bajo consumo y alta eficiencia. Son de fácil instalación, requieren mínimo mantenimiento y ofrecen una solución segura, económica y sostenible.</p>",
     "images": [
-      "uploads/2019/11/Lamparas-Boton.jpg",
-      "uploads/2019/12/003A-1.jpg",
-      "uploads/2019/12/003B.jpg"
-    ],
-    "image": "uploads/2019/11/Lamparas-Boton.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2021/01/D_NQ_NP_784381-MCO31561290379_072019-O.jpg",
+      "uploads/2021/01/863.jpg",
+      "uploads/2021/01/IMPULSOR-SOLAR-SUPER-FOX-30KM.jpg",
+      "uploads/2021/01/Sin-titulo-2.jpg",
+      "uploads/2021/01/Sin-titulo.png"
+    ]
   },
   {
-    "id": "1249",
-    "sku": "",
-    "title": "Paneles LED",
-    "slug": "paneles-led",
-    "category": "Iluminacion LED",
-    "subcategory": null,
-    "description": "Paneles LED de diseño moderno, ideales para iluminación interior en espacios comerciales y corporativos, con distribución uniforme de la luz.",
-    "longDescription": "<p align=justify>  </p>",
+    "id": "3008",
+    "title": "Controladores de Carga MPPT y PWM",
+    "slug": "controladores-de-carga-mppt-y-pwm",
+    "category": "Energía Solar",
+    "subcategory": "Controladores",
+    "description": "Controladores solares MPPT para sistemas aislados y expansión, optimizando la carga de baterías y maximizando la producción del arreglo fotovoltaico.",
+    "longDescription": "<p align=justify>Los controladores de carga <strong>MPPT</strong> (Maximum Power Point Tracking) optimizan la energía entregada por los paneles solares ajustando continuamente el punto de operación para obtener la máxima potencia disponible, mejorando el rendimiento frente a controladores PWM, especialmente con irradiación y temperatura variables.</p>\r\n\r\n<p align=justify>Son ideales para sistemas <strong>off-grid</strong> y proyectos con expansión por etapas. Permiten trabajar con arreglos fotovoltaicos a tensiones superiores y convertirlas eficientemente a la tensión del banco (12/24/48 V y configuraciones según el proyecto).</p>\r\n\r\n<p align=justify>Incluyen protecciones contra sobrecarga, sobredescarga, polaridad inversa y sobretemperatura, y pueden integrarse con monitoreo local o remoto según el modelo.</p>",
     "images": [
-      "uploads/2019/11/paneles-led-BOTON.jpg",
-      "uploads/2019/12/panel-led-3w-6w-9w-12w-18w-y-24w-incrustar-y-sobreponer-D_NQ_NP_852225-MCO25403012841_022017-F.jpg",
-      "uploads/2019/12/panel-led-cuadrado-embutido.jpg"
-    ],
-    "image": "uploads/2019/11/paneles-led-BOTON.jpg",
-    "price": "",
-    "specs": []
+      "uploads/productos/mppt.jpg",
+      "uploads/productos/mppt.webp",
+      "uploads/productos/pwm.jpg",
+      "uploads/productos/pwm.webp"
+    ]
   },
-  {
-    "id": "1250",
-    "sku": "",
-    "title": "Reflectores",
-    "slug": "reflectores",
-    "category": "Iluminacion LED",
-    "subcategory": null,
-    "description": "Reflectores LED de alta potencia diseñados para iluminación exterior, industrial y de grandes áreas, con alta eficiencia y resistencia ambiental.",
-    "longDescription": "<p align=justify>  </p>",
-    "images": [
-      "uploads/2019/11/Reflectores-Boton.jpg",
-      "uploads/2019/12/171114_Foto-Reflector-100W-Gris.png",
-      "uploads/2019/12/reflector-led-100w-bajo-consumo-alta-potencia-exterior-frio-D_NQ_NP_784259-MLA26250663164_102017-F.jpg"
-    ],
-    "image": "uploads/2019/11/Reflectores-Boton.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1251",
-    "sku": "",
-    "title": "Tubos Led",
-    "slug": "tubos-led",
-    "category": "Iluminacion LED",
-    "subcategory": null,
-    "description": "Tubos LED diseñados para reemplazo directo de fluorescentes, ofreciendo ahorro energético, encendido instantáneo y alta durabilidad.",
-    "longDescription": "<p align=justify> Reemplazo rápido, simple y seguro sin recablear, ahorro de energía de hasta un 65 % (en comparación con una lámpara fluorescente en CCG). Luz de encendido instantáneo, por lo que resulta especialmente adecuada en combinación con la tecnología de sensores, resistencia frente a cargas de conmutación muy elevada, también apto para el funcionamiento a bajas temperaturas. Extremadamente resistente a la rotura gracias al disipador de calor de aluminio y a la cubierta de policarbonato. </p>",
-    "images": [
-      "uploads/2019/11/Tubos-Boton.jpg",
-      "uploads/2019/12/002A.jpg",
-      "uploads/2019/12/002B-1.jpg"
-    ],
-    "image": "uploads/2019/11/Tubos-Boton.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1252",
-    "sku": "",
-    "title": "Generadores de Red",
-    "slug": "generadores-de-red",
-    "category": "Inversores",
-    "subcategory": null,
-    "description": "Inversores diseñados para sincronizar y generar energía compatible con la red eléctrica, asegurando estabilidad en magnitud y frecuencia.",
-    "longDescription": "<p align=justify> El inversor generador de red coloca la referencia de la red en magnitud, amplitud y frecuencia, para sistemas monofásicos y/o trifásicos, posibilidad de sincronización con un grupo electrógeno de pendiendo de la potencia de trabajo. </p>",
-    "images": [
-      "uploads/2019/12/inversor-quattro.png",
-      "uploads/2019/12/001A-2.jpg"
-    ],
-    "image": "uploads/2019/12/inversor-quattro.png",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1253",
-    "sku": "",
-    "title": "Inversores CC / CA",
-    "slug": "inversores-cc-/-ca",
-    "category": "Inversores",
-    "subcategory": null,
-    "description": "Inversores que convierten energía de corriente continua a corriente alterna, adaptándose a múltiples aplicaciones y rangos de tensión.",
-    "longDescription": "<p align=justify> Los inversores o convertidores CC-CA, son equipos que transforman la energía de una fuente continua en alterna dependiendo de las necesidades del usuario. Amplia gama de tensiones de entrada 12-24-48-125 Vcc y potencia de salida. </p>",
-    "images": [
-      "uploads/2019/11/INVERSOR-CC-CA-BOTON.png",
-      "uploads/2019/12/002A-1.jpg",
-      "uploads/2019/12/002B-2.jpg"
-    ],
-    "image": "uploads/2019/11/INVERSOR-CC-CA-BOTON.png",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1254",
-    "sku": "",
-    "title": "Seguidores de Red",
-    "slug": "seguidores-de-red",
-    "category": "Inversores",
-    "subcategory": null,
-    "description": "Inversores fotovoltaicos diseñados para inyectar energía generada por sistemas solares directamente a la red eléctrica.",
-    "longDescription": "<p align=justify> El inversor seguidor de red es un equipo diseñado para inyectar en la red eléctrica la energía producida por un campo de generacion fotovoltáico. Estos inversores trabajan con una tensión de entrada en corriente continua y generan una tensión de alterna de la misma amplitud y frecuencia que la tensión de la red eléctrica a la que se conectan.\r\\n010\r\\nGeneradores de Red\r\\n010\r\\nSeguidores de Red </p>",
-    "images": [
-      "uploads/2019/11/SEGUIDOR-RED-BOTON.jpg",
-      "uploads/2019/12/003A-2.jpg",
-      "uploads/2019/12/003B-1.jpg"
-    ],
-    "image": "uploads/2019/11/SEGUIDOR-RED-BOTON.jpg",
-    "price": "",
-    "specs": []
-  },
+
   {
     "id": "1255",
-    "sku": "DIESEL01",
-    "title": "Grupos Electrógenos a Diesel",
-    "slug": "grupos-electrógenos-a-diesel",
-    "category": "Plantas Electricas",
-    "subcategory": "Grupos Electrógenos a Diesel, Plantas Electricas",
-    "description": "Grupos electrógenos a diésel diseñados para operación continua o de emergencia, adecuados para aplicaciones industriales y comerciales.",
-    "longDescription": "<p align=justify> Diseño, suministro, instalación, puesta en marcha, montajes de grupos electrógenos desde 1 kVA hasta 3450 kVA a diesel, equipos para operacion en paralero, trabajo continuo o de emergencia. </p>",
+    "title": "Grupos Electrógenos a Diésel",
+    "slug": "grupos-electrogenos-a-diesel",
+    "category": "Plantas Eléctricas",
+    "subcategory": "Grupos Electrógenos a Diésel",
+    "description": "Grupos electrógenos a diésel diseñados para operación continua o de emergencia, adecuados para aplicaciones industriales y comerciales desde 10 kVA hasta 2250 kVA.",
+    "longDescription": "<p align=justify>Diseño, suministro, instalación, puesta en marcha y montajes de grupos electrógenos desde 1 kVA hasta 2250 kVA a diésel, equipos para operación en paralelo, trabajo continuo o de emergencia.</p>",
     "images": [
       "uploads/2019/12/Planta-Diesel-Boton.png",
       "uploads/2019/12/20190611_162657-scaled.jpg",
       "uploads/2019/12/Diesel-1.png",
       "uploads/2019/12/Diesel-2.png"
-    ],
-    "image": "uploads/2019/12/Planta-Diesel-Boton.png",
-    "price": "",
-    "specs": []
+    ]
   },
   {
     "id": "1256",
-    "sku": "",
     "title": "Grupos Electrógenos a Gas",
-    "slug": "grupos-electrógenos-a-gas",
-    "category": "Plantas Electricas",
-    "subcategory": "Grupos Electrógenos a Gas, Plantas Electricas",
+    "slug": "grupos-electrogenos-a-gas",
+    "category": "Plantas Eléctricas",
+    "subcategory": "Grupos Electrógenos a Gas",
     "description": "Grupos electrógenos a gas para generación eléctrica confiable, ideales para aplicaciones industriales y comerciales de mediana y alta potencia.",
-    "longDescription": "<p align=justify> Suministro, instalación y montajes de grupos electrógenos desde 1 Kva hasta 2Mva a gas. </p>",
+    "longDescription": "<p align=justify>Suministro, instalación y montajes de grupos electrógenos desde 1 kVA hasta 2 MVA a gas.</p>",
     "images": [
       "uploads/2019/11/Planta-Gas-Boton.png",
       "uploads/2019/12/001A-3.jpg",
       "uploads/2019/12/001B-2.jpg"
-    ],
-    "image": "uploads/2019/11/Planta-Gas-Boton.png",
-    "price": "",
-    "specs": []
+    ]
   },
   {
     "id": "1257",
-    "sku": "",
     "title": "Grupos Electrógenos a Gasolina",
-    "slug": "grupos-electrógenos-a-gasolina",
-    "category": "Plantas Electricas",
-    "subcategory": "Grupos Electrógenos a Gasolina, Plantas Electricas",
+    "slug": "grupos-electrogenos-a-gasolina",
+    "category": "Plantas Eléctricas",
+    "subcategory": "Grupos Electrógenos a Gasolina",
     "description": "Grupos electrógenos a gasolina diseñados para respaldo energético y aplicaciones portátiles, con fácil instalación y mantenimiento.",
-    "longDescription": "<p align=justify> Diseño, suministro, instalación, puesta en marcha, montajes y mantenimientos de grupos electrógenos desde 700 W hasta 10 kVA. Equipos para trabajo en stand by. Alquiler de equipos. </p>",
+    "longDescription": "<p align=justify>Diseño, suministro, instalación, puesta en marcha, montajes y mantenimientos de grupos electrógenos desde 700 W hasta 10 kVA. Equipos para trabajo en stand by. Alquiler de equipos.</p>",
     "images": [
       "uploads/2019/11/Planta-Gasolina-Boton.png",
       "uploads/2019/12/002A-2.jpg",
       "uploads/2019/12/002B-3.jpg"
-    ],
-    "image": "uploads/2019/11/Planta-Gasolina-Boton.png",
-    "price": "",
-    "specs": []
+    ]
   },
   {
-    "id": "1258",
-    "sku": "",
-    "title": "Alta Frecuencia",
-    "slug": "alta-frecuencia",
-    "category": "Rectificadores - Cargadores",
+    "id": "1236",
+    "title": "Baterías Gel Solar",
+    "slug": "baterias-gel-solar",
+    "category": "Baterías",
     "subcategory": null,
-    "description": "Rectificadores de alta frecuencia diseñados para aplicaciones industriales críticas que requieren alta eficiencia y control avanzado.",
-    "longDescription": "<p align=justify> Equipos con la más moderna tecnología de diseño vanguardista ideales para trabajo en subestaciones eléctricas, centrales de generación de energía, casas de máquinas, centros de control y comunicaciones. Módulos compactos de diferentes potencias flexibilizan las diversas configuraciones posibles, reemplazables en caliente, niveles de tensión y corriente de salida configurables de acuerdo con las necesidades del cliente (24- 48 – 110- 125 - 220 Vcc) mediante su control por microprocesador, amplia y completa gestión, local y remota, del estado del equipo y del banco de baterías asociado. Normativa UNE21000-6-5 IN:2002 de compatibilidad electromagnética CEM (parte 6) de inmunidad para los entornos de Centrales Eléctricas y Subestaciones. </p>",
+    "description": "Baterías selladas de gel diseñadas para sistemas solares y eólicos, ideales para descargas profundas y aplicaciones donde se requiere bajo mantenimiento y alta confiabilidad.",
+    "longDescription": "<p align=justify>Las baterías son herméticas y no precisan mantenimiento. Diseñadas para descargas profundas, propias de instalaciones solares y eólicas. Los modelos grandes se conectan mediante tornillo; los pequeños, con terminales enchufables estándar. Las baterías PLOM-GEL no desprenden gases. Son aptas para entornos habitados y embarcaciones.</p>",
     "images": [
-      "uploads/2019/11/Alta-Fre-Boton.jpg",
-      "uploads/2019/12/003A-3.jpg",
-      "uploads/2019/12/003B-2.jpg"
-    ],
-    "image": "uploads/2019/11/Alta-Fre-Boton.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/12/GEL-SOLAR-BOTON.jpg",
+      "uploads/2019/12/004A.jpg",
+      "uploads/2019/12/004B.jpg"
+    ]
   },
   {
-    "id": "1259",
-    "sku": "",
-    "title": "Análogos",
-    "slug": "análogos",
-    "category": "Rectificadores - Cargadores",
+    "id": "1237",
+    "title": "Baterías Níquel-Cadmio",
+    "slug": "baterias-niquel-cadmio",
+    "category": "Baterías",
     "subcategory": null,
-    "description": "Rectificadores análogos robustos y confiables, ideales para carga de baterías en entornos industriales exigentes.",
-    "longDescription": "<p align=justify> Equipos para carga de grupos de baterías en tensiones de 24 – 48 – 125 Vcc tres regímenes de trabajo (carga Excepcional, igualación y flotación), modo de operación manual o automático, entrada monofásico o trifásica dependiendo de la disponibilidad del cliente, opcional salida de alarmas o grupos de medida de entrada y/o salida. Gran robustez y confiabilidad apto para trabajó en ambientes industriales. Control por medio de tarjetas electrónicas y/o microprocesador de la tarjeta de control principal, con puerto de comunicaciones. </p>",
+    "description": "Baterías industriales de alta confiabilidad, diseñadas para operar en ambientes extremos y aplicaciones críticas donde se requiere máxima durabilidad y estabilidad.",
+    "longDescription": "<p align=justify>La batería de níquel-cadmio es altamente confiable y está disponible para un gran número de aplicaciones industriales. Sus características únicas permiten su uso en ambientes agresivos donde no es posible mantener temperatura controlada. Son ideales para trenes, subestaciones eléctricas, plantas industriales, entre otros (recomendado incluir foto de baterías de mayor capacidad).</p>",
     "images": [
-      "uploads/2019/11/Analogos-Boton.jpg",
-      "uploads/2019/12/002A-1-1.jpg",
-      "uploads/2019/12/002B-4.jpg"
-    ],
-    "image": "uploads/2019/11/Analogos-Boton.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/11/BATERIA-NIQUEL-CADMIO-BOTON.jpg",
+      "uploads/2019/12/006A.jpg",
+      "uploads/2019/12/006B.jpg"
+    ]
   },
   {
-    "id": "1260",
-    "sku": "",
-    "title": "Microprocesados",
-    "slug": "microprocesados",
-    "category": "Rectificadores - Cargadores",
+    "id": "1238",
+    "title": "Baterías de Tracción",
+    "slug": "baterias-de-traccion",
+    "category": "Baterías",
     "subcategory": null,
-    "description": "Rectificadores microprocesados con control avanzado, diseñados para sistemas industriales que requieren monitoreo y gestión precisa.",
-    "longDescription": "<p align=justify> Equipos para carga de grupos de baterías en tensiones de 24 – 48 – 125 Vcc tres regímenes de trabajo (carga Excepcional, igualación y flotación), modo de operación manual o automático, entrada monofásico o trifásica dependiendo de la disponibilidad del cliente, opcional salida de alarmas o grupos de medida de entrada y/o salida. Gran robustez y confiabilidad apto para trabajó en ambientes industriales. Control por medio de tarjetas electrónicas y/o microprocesador de la tarjeta de control principal, con puerto de comunicaciones. </p>",
+    "description": "Baterías diseñadas para aplicaciones de tracción eléctrica, capaces de suministrar alta potencia de forma continua en vehículos eléctricos y sistemas industriales móviles.",
+    "longDescription": "<p align=justify>Las baterías de tracción están diseñadas para soportar aplicaciones que requieren un alto nivel de fiabilidad y potencia. Son utilizadas en vehículos eléctricos y aplicaciones industriales móviles.</p>",
     "images": [
-      "uploads/2019/11/MicroPro-Boton.jpg",
-      "uploads/2019/12/004A-1.jpg",
-      "uploads/2019/12/004B-1.jpg"
-    ],
-    "image": "uploads/2019/11/MicroPro-Boton.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/11/BATERIA-TRACCION-BOTON.jpg",
+      "uploads/2019/11/002A-1.png",
+      "uploads/2019/11/002B-1.png"
+    ]
   },
   {
-    "id": "1261",
-    "sku": "",
-    "title": "Protección Catódica",
-    "slug": "protección-catódica",
-    "category": "Rectificadores - Cargadores",
+    "id": "1239",
+    "title": "Baterías Estacionarias OPzS",
+    "slug": "baterias-estacionarias-opzs",
+    "category": "Baterías",
     "subcategory": null,
-    "description": "Equipos especializados para sistemas de protección catódica, diseñados para prevenir la corrosión de estructuras metálicas.",
-    "longDescription": "<p align=justify> Estos equipos están diseñados específicamente para Protección Catódica, cuya función es la de mantener inmune a la corrosión a las superficies metálicas que se encuentran inmersas en un electrolito corrosivo. Su función básica consiste en aplicar una corriente eléctrica continua que, partiendo de un electrodo auxiliar, circula por el electrolito y es recibida por la superficie metálica a proteger. En el circuito eléctrico de protección, el electrodo auxiliar (ánodo) y la superficie metálica a proteger (cátodo) deberán estar rodeados por el mismo electrolito (tierra, agua) y conectados entre sí a través de un circuito eléctrico externo. La protección catódica, es el método más efectivo de controlar la corrosión de metales inmersos en un electrolito </p>",
+    "description": "Baterías estacionarias de tecnología OPzS, ideales para almacenamiento de energía en aplicaciones críticas que demandan larga vida útil y alta fiabilidad.",
+    "longDescription": "<p align=justify>Las baterías OPzS son una solución robusta para almacenar energía con tecnología probada. Están diseñadas y fabricadas según normas DIN para aplicaciones donde se requiere una batería segura y fiable, con larga vida en servicio, como telecomunicaciones, grupos electrógenos, subestaciones eléctricas, estaciones de ferrocarril, entre otros.</p>",
     "images": [
-      "uploads/2019/11/Catodica-boton.jpg",
-      "uploads/2019/12/005B.jpg"
-    ],
-    "image": "uploads/2019/11/Catodica-boton.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/11/bateria-abierta-2v-350ah-refopzs-2v-350ah-cebat-7249-D_NQ_NP_614542-MCO30039138141_042019-F-1.jpg",
+      "uploads/2019/11/002B-1.png",
+      "uploads/2019/11/OPZS-BOTON-1.png"
+    ]
   },
   {
-    "id": "1262",
-    "sku": "",
-    "title": "Tiristores",
-    "slug": "tiristores",
-    "category": "Rectificadores - Cargadores",
+    "id": "1240",
+    "title": "Baterías Estacionarias Tubulares OPzV",
+    "slug": "baterias-estacionarias-tubulares-opzv",
+    "category": "Baterías",
     "subcategory": null,
-    "description": "Componentes electrónicos de potencia utilizados para control y rectificación de corriente en aplicaciones industriales.",
-    "longDescription": "<p align=justify> Los tiristores son unos componentes electrónicos parecidos a los diodos. Están compuestos por cuatro capas de silicio, dos de tipo N y otras dos de tipo P. Su utilización esta muy extendida, porque se puede controlar la corriente que por él circula, además de poder rectificar la corriente alterna. Su funcionamiento requiere de un cebado entre la puerta (G) y el cátodo (-), el cebado se realiza suministrando una pequeña corriente entre las dos patas del semiconductor que hemos mencionado. Llegado a este instante, decimos que el tiristor a entrado en fase de conducción, dejando pasar la corriente entre el ánodo y el cátodo, en esta fase se comporta como cualquier otro diodo </p>",
+    "description": "Baterías selladas de tecnología OPzV con placas tubulares, diseñadas para aplicaciones estacionarias que requieren alta confiabilidad y mínimo mantenimiento.",
+    "longDescription": "<p align=justify>Principalmente estas baterías se utilizan para garantizar suministro sin interrupciones en telecomunicaciones, como centrales telefónicas o estaciones base de telefonía móvil. Otras aplicaciones incluyen alumbrado de emergencia, seguridad, ferrocarriles, servicios y otros suministros para sistemas críticos.\r\n\r\nCaracterísticas: robusta tecnología de placas tubulares. Muy bajo índice de gaseo gracias a la recombinación interna. Larga vida en circuito abierto debido al bajo índice de autodescarga.</p>",
     "images": [
-      "uploads/2019/11/TIRISTORES-BOTON.jpg",
-      "uploads/2019/12/001A-4.jpg",
-      "uploads/2019/12/002A-3.jpg"
-    ],
-    "image": "uploads/2019/11/TIRISTORES-BOTON.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/11/OPZV-BOTON.png",
+      "uploads/2019/11/003A.jpg",
+      "uploads/2019/11/003B.jpg"
+    ]
   },
   {
-    "id": "1263",
-    "sku": "",
-    "title": "Bifásicas",
-    "slug": "bifásicas",
-    "category": "Sistemas UPS",
+    "id": "1241",
+    "title": "Baterías VRLA",
+    "slug": "baterias-vrla",
+    "category": "Baterías",
     "subcategory": null,
-    "description": "Sistemas UPS bifásicos diseñados para aplicaciones críticas como telecomunicaciones, servidores y centros de datos.",
-    "longDescription": "<p align=justify> Ups ideal para servidores, telecomunicaciones, voz ip, laboratorios y datacenter. Cuenta con pantalla LED en los modelos de 1KVA a 3KVA y con pantalla LCD en modelos de 6 y 10 KVA. Tiempo de transferencia 0. Incluye puerto de comunicación RS-232, software de administración y monitoreo con cableado. Los modelos de 6 y 10 KVA son Paralelizables con opción de redundancia N+1 y poseen transformador de aislamiento a la salida </p>",
+    "description": "Baterías selladas VRLA de bajo mantenimiento, adecuadas para respaldo energético en sistemas de telecomunicaciones, UPS y aplicaciones industriales.",
+    "longDescription": "<p align=justify>La batería de plomo-ácido de válvula regulada (VRLA) es un acumulador recargable con válvula de seguridad que evacua presión interna ante sobrecarga. Es de bajo mantenimiento y no requiere adición de electrolito durante su vida útil. Diseñadas para telecomunicaciones, SAI/UPS, grupos electrógenos, sistemas fotovoltaicos, centros de control, sistemas de información y datos, sistemas de seguridad, maquinaria, entre otros.</p>",
     "images": [
-      "uploads/2019/11/Bifasica-Boton.jpg",
-      "uploads/2019/04/002A.jpg",
-      "uploads/2019/04/002B-1.jpg"
-    ],
-    "image": "uploads/2019/11/Bifasica-Boton.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/11/VRLA-BOTON2.png",
+      "uploads/2019/04/VRLA2.png",
+      "uploads/2019/04/VRLA1.png"
+    ]
   },
+  {
+    "id": "3001",
+    "title": "Baterías de Litio LiFePO₄",
+    "slug": "baterias-de-litio-lifepo4",
+    "category": "Baterías",
+    "subcategory": "Baterías de Litio LiFePO₄",
+    "description": "Baterías de litio LiFePO₄ para almacenamiento solar y respaldo crítico, con alta vida útil, alta eficiencia y mayor seguridad térmica.",
+    "longDescription": "<p align=justify>Las baterías de litio LiFePO₄ (fosfato de hierro y litio) son ideales para sistemas solares, UPS híbridas y aplicaciones de respaldo donde se requiere alta eficiencia y larga vida útil. Ofrecen mayor densidad energética, carga/descarga rápida y un desempeño superior frente a tecnologías tradicionales.</p>\r\n\r\n<p align=justify>Incluyen <strong>BMS inteligente</strong> para protección y balanceo de celdas, con funciones contra sobrecarga, sobredescarga, sobrecorriente y temperatura. Son compatibles con inversores híbridos y sistemas de monitoreo, permitiendo una gestión energética más eficiente y predecible.</p>\r\n\r\n<p align=justify>Recomendadas para hogares, comercios, telecomunicaciones y sistemas críticos que buscan mayor autonomía y un costo total de operación más bajo a largo plazo.</p>",
+    "images": [
+      "uploads/productos/litio.jpg",
+      "uploads/productos/litio1.webp",
+      "uploads/productos/litio2.webp",
+      "uploads/productos/litio3.webp"
+    ]
+  },
+
   {
     "id": "1264",
-    "sku": "",
     "title": "Monofásicas",
     "slug": "monofásicas",
     "category": "Sistemas UPS",
@@ -551,14 +256,24 @@
       "uploads/2019/11/Mono-boton.png",
       "uploads/2019/04/001A-1.jpg",
       "uploads/2019/04/001B-1.jpg"
-    ],
-    "image": "uploads/2019/11/Mono-boton.png",
-    "price": "",
-    "specs": []
+    ]
+  },
+  {
+    "id": "1263",
+    "title": "UPS Bifásicas",
+    "slug": "ups-bifasicas",
+    "category": "Sistemas UPS",
+    "subcategory": null,
+    "description": "Sistemas UPS bifásicos de alta confiabilidad, diseñados para proteger cargas críticas en telecomunicaciones, servidores, laboratorios y centros de datos.",
+    "longDescription": "<p align=justify>Las UPS bifásicas están diseñadas para garantizar un suministro eléctrico continuo y estable en aplicaciones críticas donde la calidad de la energía es fundamental, como telecomunicaciones, servidores, laboratorios y data centers.</p>\r\n\r\n<p align=justify>Operan bajo topología <strong>online de doble conversión</strong>, ofreciendo <strong>tiempo de transferencia cero (0 ms)</strong> y protección total frente a variaciones de tensión, picos, armónicos y fallas de la red. Están disponibles en rangos típicos de potencia desde <strong>1 kVA hasta 10 kVA</strong>.</p>\r\n\r\n<p align=justify>Incorporan interfaces de comunicación <strong>RS-232, USB y opciones SNMP</strong>, junto con software de monitoreo y gestión remota. Los modelos de <strong>6 y 10 kVA</strong> permiten operación en paralelo con opción de <strong>redundancia N+1</strong> e incluyen <strong>transformador de aislamiento</strong> para mayor protección de cargas sensibles.</p>",
+    "images": [
+      "uploads/2019/11/Bifasica-Boton.jpg",
+      "uploads/2019/04/002A.jpg",
+      "uploads/2019/04/002B-1.jpg"
+    ]
   },
   {
     "id": "1265",
-    "sku": "",
     "title": "Trifásicas",
     "slug": "trifásicas",
     "category": "Sistemas UPS",
@@ -569,217 +284,231 @@
       "uploads/2019/11/Trifasica-Boton.jpg",
       "uploads/2019/04/003A.jpg",
       "uploads/2019/04/003B.jpg"
-    ],
-    "image": "uploads/2019/11/Trifasica-Boton.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1266",
-    "sku": "",
-    "title": "Control",
-    "slug": "control",
-    "category": "Tableros Distribucion y Control",
-    "subcategory": null,
-    "description": "Tableros de control diseñados para monitoreo, protección y automatización de sistemas eléctricos y electromecánicos.",
-    "longDescription": "<p align=justify> Sistemas de control, monitoreo, protección, alarma, señalización de equipos esenciales o críticos, conforme los requerimientos o necesidades del cliente. Control de bombas, protección sistemas de aire Acondicionado, entre otros. </p>",
-    "images": [
-      "uploads/2019/11/T-Control-Boton-scaled.jpg",
-      "uploads/2019/12/CIMG0662.jpg",
-      "uploads/2019/12/SAM_1008.jpg"
-    ],
-    "image": "uploads/2019/11/T-Control-Boton-scaled.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1267",
-    "sku": "",
-    "title": "Distribución",
-    "slug": "distribución",
-    "category": "Tableros Distribucion y Control",
-    "subcategory": null,
-    "description": "Tableros de distribución eléctrica diseñados para separación y protección de cargas en instalaciones industriales y comerciales.",
-    "longDescription": "<p align=justify> Tableros de distribución para separación de cargas críticas o equipos con alta potencia, aplicaciones con características especiales dependiendo de la necesidad del cliente conforme a la normatividad vigente en Colombia. </p>",
-    "images": [
-      "uploads/2019/11/Distribucion-Boton-scaled.jpg",
-      "uploads/2019/12/002A-4.jpg",
-      "uploads/2019/12/002B-5.jpg"
-    ],
-    "image": "uploads/2019/11/Distribucion-Boton-scaled.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "1268",
-    "sku": "",
-    "title": "Transferencias",
-    "slug": "transferencias",
-    "category": "Tableros Distribucion y Control",
-    "subcategory": null,
-    "description": "Sistemas de transferencia eléctrica automática o manual, diseñados para garantizar continuidad del suministro energético.",
-    "longDescription": "<p align=justify> Transferencias automáticas con señalización y monitoreo del estado de la tensión de entrada, dependiendo de los requerimientos de la carga se dimensiona su capacidad, maniobra por contactores o interruptores motorizados.\r\\n\r\\nTransferencias manuales, ajustadas a las necesidades del cliente, recomendadas para baja potencia sobre cargas no esenciales. Trifásicas, bifásicas o monofásicas. </p>",
-    "images": [
-      "uploads/2019/08/Transferencias-Boton.jpg",
-      "uploads/2019/11/Transferencias-scaled.jpg",
-      "uploads/2019/12/003B-3.jpg"
-    ],
-    "image": "uploads/2019/08/Transferencias-Boton.jpg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "2340",
-    "sku": "",
-    "title": "Planta Electrica 20KW",
-    "slug": "planta-electrica-20kw",
-    "category": "Plantas Electricas",
-    "subcategory": "Grupos Electrógenos a Diesel, Plantas Electricas",
-    "description": "Planta eléctrica diésel de 20KW diseñada para respaldo energético confiable en aplicaciones comerciales e industriales.",
-    "longDescription": "<p align=\"justify\">Planta Electrica DE 20 KW/ 25 KVA STANDBY.</p>\r\\n\r\\n<ul>\r\\n \t<li>MOTOR PERKINS 404D-22G</li>\r\\n \t<li>GENERADOR LEROY-SOMER LSA40M7</li>\r\\n \t<li>TABLERO DE CONTROL COMAP AMF20</li>\r\\n \t<li>BREAKER DE PROTECCION</li>\r\\n \t<li>INCLUYE FILTROS, BATERIAS, CARGADOR DE BATERIAS, ACOPLE FLEXIBLE Y SILENCIADOR, BASE TANQUE, CABINA INSONORA EN LAMINA GALVANIZADA CON PINTURA ELECTROSTATICA ANTICORROSION.</li>\r\\n \t<li>SISTEMA DE ATENUACION BlackTheater DE 2\" DOBLE CON MALLA DE PROTECCION</li>\r\\n \t<li>SISTEMA DE ESCAPE (EXOSTO)</li>\r\\n \t<li>RESPUESTA DE ATENUACION 75dBA 1MTS</li>\r\\n \t<li>RESISTENTE A LA INTEMPERIE</li>\r\\n</ul>",
-    "images": [
-      "uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.44-1.jpeg",
-      "uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.46-1.jpeg",
-      "uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.47-1.jpeg",
-      "uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.58.57-1.jpeg"
-    ],
-    "image": "uploads/2020/04/WhatsApp-Image-2020-05-11-at-11.59.44-1.jpeg",
-    "price": "",
-    "specs": []
-  },
-  {
-    "id": "2341",
-    "sku": "",
-    "title": "Planta Electrica 30KW",
-    "slug": "planta-electrica-30kw",
-    "category": "Plantas Electricas",
-    "subcategory": "Grupos Electrógenos a Diesel, Plantas Electricas",
-    "description": "Planta eléctrica diésel de 30KW para aplicaciones de mayor demanda energética, diseñada para operación segura y continua.",
-    "longDescription": "<p align=\"justify\">Planta Electrica DE 30 KW/ 37,5 KVA STANDBY.</p>\r\\n\r\\n<ul>\r\\n \t<li>MOTOR PERKINS 404D-22TG</li>\r\\n \t<li>GENERADOR LEROY-SOMER LSA 42,3 VS2</li>\r\\n \t<li>TABLERO DE CONTROL COMAP AMF20</li>\r\\n \t<li>BREAKER DE PROTECCION</li>\r\\n \t<li>INCLUYE FILTROS, BATERIAS, CARGADOR DE BATERIAS, ACOPLE FLEXIBLE Y SILENCIADOR, BASE TANQUE, CABINA INSONORA EN LAMINA GALVANIZADA CON PINTURA ELECTROSTATICA ANTICORROSION.</li>\r\\n \t<li>SISTEMA DE ATENUACION BlackTheater DE 2″ DOBLE CON MALLA DE PROTECCION</li>\r\\n \t<li>SISTEMA DE ESCAPE (EXOSTO)</li>\r\\n \t<li>RESPUESTA DE ATENUACION 75dBA 1MTS</li>\r\\n \t<li>RESISTENTE A LA INTEMPERIE</li>\r\\n</ul>",
-    "images": [
-      "uploads/2020/04/20190601_190508.png",
-      "uploads/2020/04/20190522_092117-copia-scaled.jpg",
-      "uploads/2020/04/20190601_190508.png"
-    ],
-    "image": "uploads/2020/04/20190601_190508.png",
-    "price": "",
-    "specs": []
+    ]
   },
   {
     "id": "2354",
-    "sku": "",
-    "title": "UPS Hibridas",
+    "title": "UPS Híbridas",
     "slug": "ups-hibridas",
-    "category": "Energia Solar, Sistemas UPS, Energia Solar",
-    "subcategory": "UPS Hibrida",
-    "description": "UPS híbridas que integran energía solar, baterías y red eléctrica para garantizar suministro continuo y eficiente.",
-    "longDescription": "Los sistemas inteligentes de gestión de energía POWEST están equipados con un controlador MPTT que gestiona de manera eficiente la energía de sistemas de baterías, paneles solares, generadores eólicos y red eléctrica; logrando un sistema aislado sin cortes de luz, capaz de trabajar en 19 modos diferentes según la necesidad y la prioridad, equipado con un cargador inteligente que detecta el tipo de batería que se esté implementando.\r\\n\r\\n• Señal de salida onda senoidal pura\r\\n• Capacidad de carga solar MPPT controlador\r\\n• Rango de tensión de entrada seleccionable para los electrodomésticos y ordenadores personales\r\\n• Selección de corriente para carga basado en aplicaciones\r\\n• Configurable AC / prioridad de entrada solar a través de ajuste de LCD\r\\n• Compatible con la tensión de red o de un generador\r\\n• Auto reinicio mientras que el AC se está recuperando\r\\n• Protección de sobrecarga y cortocircuito\r\\n• Diseño del cargador de batería inteligente, para un rendimiento optimizado de la batería\r\\n• Función de arranque en frío\r\\n• Funcionamiento en paralelo hasta con 6 unidades",
+    "category": "Sistemas UPS",
+    "subcategory": "Híbridas",
+    "description": "Sistemas UPS híbridos que integran energía solar, baterías y red eléctrica, proporcionando respaldo continuo, gestión inteligente de energía y alta eficiencia operativa.",
+    "longDescription": "<p align=justify>Las UPS híbridas combinan las funciones de un sistema UPS tradicional con un inversor solar inteligente, permitiendo integrar paneles fotovoltaicos, bancos de baterías y la red eléctrica en una sola solución energética.</p>\r\n\r\n<p align=justify>Incorporan controladores solares <strong>MPPT</strong> de alta eficiencia, capaces de gestionar múltiples fuentes como paneles, red eléctrica, generadores auxiliares y almacenamiento. Su arquitectura permite operar en modos <strong>on-grid, off-grid e híbrido</strong>, garantizando suministro continuo incluso ante cortes prolongados.</p>\r\n\r\n<p align=justify>Ofrecen <strong>onda senoidal pura</strong>, cargador inteligente compatible con baterías de plomo-ácido y litio LiFePO₄, protecciones contra sobrecarga, cortocircuito y sobretemperatura, además de <strong>arranque en frío</strong> y auto-reinicio.</p>\r\n\r\n<p align=justify>Disponibles típicamente desde <strong>1 kVA hasta 10 kVA</strong>, con posibilidad de <strong>operación en paralelo</strong> según modelo, ideales para residencial avanzado, comercios, telecomunicaciones y sistemas críticos.</p>",
     "images": [
       "uploads/2020/05/POWEST-UPS-HIBRIDA-1KVA.jpg",
       "uploads/2020/05/ups-hibrida-powest-5kva-on-grid-220v-inversor-carga-solar-D_NQ_NP_968033-MCO32461399236_102019-F.jpg",
       "uploads/2020/05/nicomar-ups-hibrida-powest-original-1kva-carga-solar-tdcex-D_NQ_NP_619567-MCO32381560460_102019-F.jpg",
       "uploads/2020/05/3kva-hybrid-110v-24v-inverter-3.jpg"
-    ],
-    "image": "uploads/2020/05/POWEST-UPS-HIBRIDA-1KVA.jpg",
-    "price": "",
-    "specs": []
+    ]
   },
+
   {
-    "id": "2382",
-    "sku": "",
-    "title": "ESTABILIZADORES DE TENSIÓN",
-    "slug": "estabilizadores-de-tensión",
-    "category": "Estabilizadores de tensión",
+    "id": "1252",
+    "title": "Generadores de Red",
+    "slug": "generadores-de-red",
+    "category": "Inversores",
     "subcategory": null,
-    "description": "Estabilizadores de tensión diseñados para proteger equipos eléctricos frente a fluctuaciones de voltaje y mejorar la calidad de la energía.",
-    "longDescription": "<p class=\"p1\" style=\"text-align: justify;\">Ministab y Sterostab son los nombres registrados de dos series de estabilizadores de tensión que constituyen la solución fiable, aprobada y económica contra los mal servicios debidos a las fluctuaciones de tensión. El uso de estabilizadores de tensión aumenta el nivel de calidad de la energía y representa una inversión real porque eliminar los problemas de servicio significa bajar los costes y aumentar la productividad. Muy a menudo, en las aplicaciones industriales, es suficiente evitar algunos minutos de parada de las máquinas o una sola avería para cubrir el precio de los estabilizadores de tensión.</p>\r\\nMinistab y Sterostab son muy apropiados para las aplicaciones donde se requiere:\r\\n\r\\n✔ gran fiabilidad. Por ejemplo, por instalaciones en localidades donde es difícil llegar y sujetas a condiciones ambientales críticas por el frío, la temperatura elevada, la humedad, las descargas atmosféricas;\r\\n\r\\n✔ capacidad de compensación de grandes variaciones de la tensión de red. Ésta es una exigencia típica de las instalaciones que están lejos de las cabinas de distribución o instaladas en países en desarrollo;\r\\n\r\\n✔ elevada precisión de la tensión estabilizada. Condición ideal para bancos de calibración y ensayo, hornos eléctricos y aparatos de alumbrado profesional;\r\\n\r\\n✔ estabilización de la tensión de dispositivos de potencia elevada o con grandes corrientes de arranque como motores, acondicionadores de aire, compresores y bombas;\r\\n\r\\n✔ mantenimiento sencillo y limitado, característica indispensable cuando es difícil encontrar personal calificado capaz de realizar las intervenciones;\r\\n\r\\n✔ amplia variedad de versiones. Según las condiciones ambientales, se ofrecen armarios con grado de protección IP00, IP21, IP54 INDOOR, IP54 OUTDOOR.",
+    "description": "Inversores solares avanzados diseñados para generar, sincronizar y estabilizar energía eléctrica compatible con la red y sistemas de generación auxiliar.",
+    "longDescription": "<p align=justify>Los inversores generadores de red establecen referencias precisas de tensión, frecuencia y fase, permitiendo la integración eficiente de sistemas solares con la red eléctrica y grupos electrógenos.</p>\r\n\r\n<p align=justify>Incorporan control digital avanzado, <strong>sincronización automática</strong>, bajo contenido armónico (THD) y alta eficiencia, siendo aptos para sistemas monofásicos y trifásicos. Su arquitectura permite operación continua, respaldo energético y estabilidad del sistema eléctrico.</p>\r\n\r\n<p align=justify>Son ideales para aplicaciones industriales, comerciales y microredes donde se requiere un control robusto de la generación y la calidad de la energía suministrada.</p>",
     "images": [
-      "uploads/2020/05/Estabilizadores-de-Tension.png",
-      "uploads/2020/05/Minista.jpg",
-      "uploads/2020/05/stabilizzatori-di-tensione-IREM-Sterostab.png"
-    ],
-    "image": "uploads/2020/05/Estabilizadores-de-Tension.png",
-    "price": "",
-    "specs": []
+      "uploads/2019/12/inversor-quattro.png",
+      "uploads/2019/12/001A-2.jpg"
+    ]
   },
   {
-    "id": "2456",
-    "sku": "",
-    "title": "Kit Cerca Eléctrica Solar",
-    "slug": "kit-cerca-eléctrica-solar",
-    "category": "Energia Solar",
+    "id": "1253",
+    "title": "Inversores CC/CA",
+    "slug": "inversores-cc-ca",
+    "category": "Inversores",
     "subcategory": null,
-    "description": "Kit de cerca eléctrica alimentado por energía solar, diseñado para fácil instalación y operación autónoma en zonas rurales o remotas.",
-    "longDescription": "",
+    "description": "Inversores que convierten energía de corriente continua en corriente alterna, adaptándose a múltiples aplicaciones solares, industriales y de respaldo.",
+    "longDescription": "<p align=justify>Los inversores CC/CA transforman la energía proveniente de baterías, paneles solares u otras fuentes en corriente alterna estable y de alta calidad.</p>\r\n\r\n<p align=justify>Disponibles en amplios rangos de tensión de entrada (12, 24, 48, 110 y 125 Vcc), incorporan protección electrónica avanzada, alta eficiencia y compatibilidad con cargas sensibles. Pueden operar en sistemas aislados, híbridos o de respaldo.</p>\r\n\r\n<p align=justify>Su diseño robusto y modular los hace adecuados para aplicaciones residenciales, comerciales, telecomunicaciones e industriales.</p>",
     "images": [
-      "uploads/2021/01/D_NQ_NP_784381-MCO31561290379_072019-O.jpg",
-      "uploads/2021/01/863.jpg",
-      "uploads/2021/01/IMPULSOR-SOLAR-SUPER-FOX-30KM.jpg",
-      "uploads/2021/01/Sin-titulo-2.jpg",
-      "uploads/2021/01/Sin-titulo.png"
-    ],
-    "image": "uploads/2021/01/D_NQ_NP_784381-MCO31561290379_072019-O.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/11/INVERSOR-CC-CA-BOTON.png",
+      "uploads/2019/12/002A-1.jpg",
+      "uploads/2019/12/002B-2.jpg"
+    ]
   },
   {
-    "id": "2483",
-    "sku": "",
-    "title": "Lampara Alumbrado Publico 100W",
-    "slug": "lampara-alumbrado-publico-100w",
-    "category": "Iluminacion LED",
+    "id": "1254",
+    "title": "Seguidores de Red",
+    "slug": "seguidores-de-red",
+    "category": "Inversores",
     "subcategory": null,
-    "description": "Luminaria LED de 100W para alumbrado público, diseñada para ofrecer alta eficiencia, durabilidad y rendimiento en exteriores.",
-    "longDescription": "Luminaria con un excelente diseño especialmente para exteriores y alta eficiencia para una iluminación optima.\r\\n<ul>\r\\n \t<li>Características:</li>\r\\n \t<li>Alta eficiencia Lumínica</li>\r\\n \t<li>Excelente Diseño</li>\r\\n \t<li>Excelente Disipación</li>\r\\n \t<li>Especificaciones:</li>\r\\n \t<li>Potencia: 30W</li>\r\\n \t<li>Voltaje: 100-240V</li>\r\\n \t<li>Frecuencia: 50/60Hz</li>\r\\n \t<li>Lúmenes: 2700lm</li>\r\\n \t<li>Vida Útil: 30000 hrs</li>\r\\n \t<li>Tº De Trabajo: Material: -20º a 40º</li>\r\\n \t<li>Material: ALU + PC</li>\r\\n \t<li>Dimensiones: 325 x 124 x 50mm</li>\r\\n \t<li>Diámetro Tubo: 4 cm *Tornillo ajustable</li>\r\\n</ul>",
+    "description": "Inversores fotovoltaicos grid-tie diseñados para inyectar energía solar a la red eléctrica con alta eficiencia y control avanzado.",
+    "longDescription": "<p align=justify>Los inversores seguidores de red convierten la energía generada por los paneles solares en corriente alterna sincronizada en amplitud, frecuencia y fase con la red eléctrica.</p>\r\n\r\n<p align=justify>Incorporan tecnología <strong>MPPT</strong>, protecciones anti-isla, monitoreo continuo de la red y eficiencia superior al 97%, permitiendo maximizar la producción solar y cumplir con normativas eléctricas vigentes.</p>\r\n\r\n<p align=justify>Son ideales para sistemas de autoconsumo con inyección de excedentes, aplicaciones comerciales, industriales y residenciales conectadas a red.</p>",
     "images": [
-      "uploads/2021/01/D_NQ_NP_799815-MCO43364381753_092020-O.jpg",
-      "uploads/2021/01/LR008-2-scaled.jpg",
-      "uploads/2021/01/LR008-4-scaled.jpg",
-      "uploads/2021/01/LR008-1-scaled.jpg"
-    ],
-    "image": "uploads/2021/01/D_NQ_NP_799815-MCO43364381753_092020-O.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/11/SEGUIDOR-RED-BOTON.jpg",
+      "uploads/2019/12/003A-2.jpg",
+      "uploads/2019/12/003B-1.jpg"
+    ]
   },
   {
-    "id": "2500",
-    "sku": "",
-    "title": "Regulador Trifásico 30kVA",
-    "slug": "regulador-trifásico-30kva",
-    "category": "Reguladores electrónicos y circuitos de control eléctricos",
-    "subcategory": null,
-    "description": "Regulador de voltaje trifásico de 30kVA diseñado para estabilizar la tensión en instalaciones industriales y comerciales.",
-    "longDescription": "Regulador de Voltaje trifásico de 30KVA con transformador de aislamiento, entrada 180-250 salida 208Vca o 220Vca. Regulación de carga +/- 4,5%. Onda Sinusoidal. Factor de Potencia +/- 0,8. Eficiencia 85%. Distorsión y contenidos armónicos &lt;1%. Conmutación por TRIAC`S.",
+    "id": "3007",
+    "title": "Inversores Híbridos Solares",
+    "slug": "inversores-hibridos-solares",
+    "category": "Inversores",
+    "subcategory": "Híbridos",
+    "description": "Inversores solares híbridos que integran paneles, baterías y red/planta para autoconsumo, respaldo y gestión inteligente de energía en sistemas residenciales, comerciales e industriales.",
+    "longDescription": "<p align=justify>Los inversores híbridos solares combinan funciones de inversor fotovoltaico y cargador de baterías en un solo equipo, permitiendo operar en <strong>modo on-grid, off-grid e híbrido</strong>. Están diseñados para maximizar el autoconsumo, reducir costos de energía y mantener continuidad ante fallas de la red.</p>\r\n\r\n<p align=justify>Incorporan <strong>MPPT</strong> (seguimiento del punto de máxima potencia) para optimizar la producción del arreglo fotovoltaico, con alta eficiencia de conversión (típicamente &gt;97%) y capacidad de priorizar fuentes según la estrategia del cliente: solar primero, baterías, red o planta eléctrica.</p>\r\n\r\n<p align=justify>Compatibles con bancos de baterías de <strong>plomo-ácido y litio LiFePO₄</strong> (con BMS), ofrecen protecciones avanzadas, medición y monitoreo, además de escalabilidad según el proyecto.</p>",
     "images": [
-      "uploads/2021/01/IMG_20210205_113050-scaled.jpg",
-      "uploads/2021/01/IMG_20210205_112419-scaled.jpg",
-      "uploads/2021/01/IMG_20210205_112701-scaled.jpg",
-      "uploads/2021/01/IMG_20210205_112533-scaled.jpg",
-      "uploads/2021/01/IMG_20210205_112712-scaled.jpg"
-    ],
-    "image": "uploads/2021/01/IMG_20210205_113050-scaled.jpg",
-    "price": "",
-    "specs": []
+      "uploads/productos/hibrido.webp",
+      "uploads/productos/hibrido1.webp",
+      "uploads/productos/hibrido2.webp"
+    ]
   },
+
   {
-    "id": "2512",
-    "sku": "",
-    "title": "Cargador de Alta Fracuencia 48Vcc-3200W",
-    "slug": "cargador-de-alta-fracuencia-48vcc-3200w",
+    "id": "1258",
+    "title": "Rectificadores de Alta Frecuencia",
+    "slug": "rectificadores-alta-frecuencia",
     "category": "Rectificadores - Cargadores",
     "subcategory": null,
-    "description": "Cargador industrial de alta frecuencia diseñado para carga eficiente de bancos de baterías en sistemas críticos.",
-    "longDescription": "",
+    "description": "Rectificadores de alta frecuencia diseñados para aplicaciones industriales críticas que requieren alta eficiencia y control avanzado.",
+    "longDescription": "<p align=justify>Equipos con moderna tecnología y diseño vanguardista, ideales para trabajo en subestaciones eléctricas, centrales de generación, casas de máquinas, centros de control y comunicaciones. Módulos compactos de diferentes potencias permiten configuraciones flexibles, reemplazables en caliente, con niveles de tensión y corriente de salida configurables (24, 48, 110, 125 y 220 Vcc) mediante control por microprocesador, con gestión local y remota del estado del equipo y del banco de baterías asociado. Normativa UNE21000-6-5 IN:2002 de compatibilidad electromagnética (CEM) de inmunidad para entornos de centrales eléctricas y subestaciones.</p>",
     "images": [
-      "uploads/2021/02/IMG_20210205_113752-scaled.jpg",
-      "uploads/2021/02/IMG_20210205_113631-scaled.jpg",
-      "uploads/2021/02/IMG_20210205_113701-scaled.jpg",
-      "uploads/2021/02/IMG_20210205_113829-scaled.jpg"
-    ],
-    "image": "uploads/2021/02/IMG_20210205_113752-scaled.jpg",
-    "price": "",
-    "specs": []
+      "uploads/2019/11/Alta-Fre-Boton.jpg",
+      "uploads/2019/12/003A-3.jpg",
+      "uploads/2019/12/003B-2.jpg"
+    ]
+  },
+  {
+    "id": "1260",
+    "title": "Rectificadores Microprocesados",
+    "slug": "rectificadores-microprocesados",
+    "category": "Rectificadores - Cargadores",
+    "subcategory": null,
+    "description": "Rectificadores microprocesados con control avanzado, diseñados para sistemas industriales que requieren monitoreo y gestión precisa.",
+    "longDescription": "<p align=justify>Equipos para carga de grupos de baterías en tensiones de 24, 48 y 125 Vcc. Tres regímenes de trabajo: carga excepcional, igualación y flotación; operación manual o automática. Entrada monofásica o trifásica según disponibilidad. Opcional: salida de alarmas o grupos de medida de entrada y/o salida. Alta robustez y confiabilidad para ambientes industriales. Control mediante tarjetas electrónicas y/o microprocesador con puerto de comunicaciones.</p>",
+    "images": [
+      "uploads/2019/11/MicroPro-Boton.jpg",
+      "uploads/2019/12/004A-1.jpg",
+      "uploads/2019/12/004B-1.jpg"
+    ]
+  },
+  {
+    "id": "1261",
+    "title": "Protección Catódica",
+    "slug": "proteccion-catodica",
+    "category": "Rectificadores - Cargadores",
+    "subcategory": null,
+    "description": "Equipos especializados para sistemas de protección catódica, diseñados para prevenir la corrosión de estructuras metálicas.",
+    "longDescription": "<p align=justify>Estos equipos están diseñados específicamente para protección catódica, cuya función es mantener inmune a la corrosión a superficies metálicas inmersas en un electrolito corrosivo. Su función básica consiste en aplicar una corriente eléctrica continua que, partiendo de un electrodo auxiliar, circula por el electrolito y es recibida por la superficie metálica a proteger. El electrodo auxiliar (ánodo) y la estructura a proteger (cátodo) deben estar rodeados por el mismo electrolito (tierra, agua) y conectados mediante un circuito externo. La protección catódica es uno de los métodos más efectivos para controlar la corrosión en metales inmersos en un electrolito.</p>",
+    "images": [
+      "uploads/2019/11/Catodica-boton.jpg",
+      "uploads/2019/12/005B.jpg"
+    ]
+  },
+  {
+    "id": "1262",
+    "title": "Tiristores",
+    "slug": "tiristores",
+    "category": "Rectificadores - Cargadores",
+    "subcategory": null,
+    "description": "Componentes electrónicos de potencia utilizados para control y rectificación de corriente en aplicaciones industriales.",
+    "longDescription": "<p align=justify>Los tiristores son componentes electrónicos de potencia similares a los diodos. Están compuestos por cuatro capas de silicio (dos tipo N y dos tipo P). Se utilizan ampliamente porque permiten controlar la corriente que circula por ellos y rectificar corriente alterna. Su funcionamiento requiere un cebado entre la puerta (G) y el cátodo (-), suministrando una pequeña corriente. En ese instante entra en conducción, dejando pasar corriente entre ánodo y cátodo, comportándose como un diodo.</p>",
+    "images": [
+      "uploads/2019/11/TIRISTORES-BOTON.jpg",
+      "uploads/2019/12/001A-4.jpg",
+      "uploads/2019/12/002A-3.jpg"
+    ]
+  },
+  {
+    "id": "1266",
+    "title": "Tableros de Control",
+    "slug": "tableros-de-control",
+    "category": "Tableros de Distribución y Control",
+    "subcategory": null,
+    "description": "Tableros de control diseñados para monitoreo, protección y automatización de sistemas eléctricos y electromecánicos.",
+    "longDescription": "<p align=justify>Sistemas de control, monitoreo, protección, alarma y señalización de equipos esenciales o críticos, conforme a los requerimientos del cliente. Control de bombas, protección de sistemas de aire acondicionado, entre otros.</p>",
+    "images": [
+      "uploads/2019/11/T-Control-Boton-scaled.jpg",
+      "uploads/2019/12/CIMG0662.jpg",
+      "uploads/2019/12/SAM_1008.jpg"
+    ]
+  },
+  {
+    "id": "1267",
+    "title": "Tableros de Distribución",
+    "slug": "tableros-de-distribucion",
+    "category": "Tableros de Distribución y Control",
+    "subcategory": null,
+    "description": "Tableros de distribución eléctrica diseñados para separación y protección de cargas en instalaciones industriales y comerciales.",
+    "longDescription": "<p align=justify>Tableros de distribución para separación de cargas críticas o equipos de alta potencia, con características especiales según necesidad del cliente y conforme a la normatividad vigente en Colombia.</p>",
+    "images": [
+      "uploads/2019/11/Distribucion-Boton-scaled.jpg",
+      "uploads/2019/12/002A-4.jpg",
+      "uploads/2019/12/002B-5.jpg"
+    ]
+  },
+  {
+    "id": "1268",
+    "title": "Tableros de Transferencia (ATS/AMF)",
+    "slug": "tableros-de-transferencia-ats-amf",
+    "category": "Tableros de Distribución y Control",
+    "subcategory": null,
+    "description": "Sistemas de transferencia eléctrica automática o manual (ATS/AMF) diseñados para garantizar continuidad de suministro entre red, planta eléctrica u otras fuentes.",
+    "longDescription": "<p align=justify>Diseñamos y fabricamos sistemas de transferencia eléctrica automática y manual que permiten un cambio seguro y confiable entre diferentes fuentes de energía, asegurando continuidad del servicio ante fallas de la red principal.</p>\r\n\r\n<p align=justify>Las transferencias automáticas (ATS/AMF) incorporan señalización, monitoreo de tensión y frecuencia, lógica de control y maniobra mediante contactores o interruptores motorizados, permitiendo el arranque y conexión automática de grupos electrógenos. Se dimensionan según la carga, con capacidades típicas desde <strong>40 A hasta 3200 A</strong>, aptas para potencias desde <strong>10 kVA hasta más de 2000 kVA</strong>, en sistemas monofásicos, bifásicos o trifásicos.</p>\r\n\r\n<p align=justify>Las transferencias manuales están orientadas a aplicaciones de baja y media potencia, recomendadas para cargas no críticas o instalaciones donde se requiere una solución robusta y económica. Rangos habituales desde <strong>40 A hasta 400 A</strong>.</p>\r\n\r\n<p align=justify>Todos los sistemas pueden integrarse en tableros metálicos normalizados, con protecciones, enclavamientos de seguridad y personalización según normativa vigente y requerimientos del proyecto.</p>",
+    "images": [
+      "uploads/2019/08/Transferencias-Boton.jpg",
+      "uploads/2019/11/Transferencias-scaled.jpg",
+      "uploads/2019/12/003B-3.jpg"
+    ]
+  },
+  {
+    "id": "3004",
+    "title": "Protecciones y Tableros Solares DC/AC",
+    "slug": "protecciones-y-tableros-solares-dc-ac",
+    "category": "Tableros de Distribución y Control",
+    "subcategory": "Energía Solar",
+    "description": "Tableros y protecciones para sistemas fotovoltaicos, integrando seccionamiento, protecciones DC/AC y dispositivos contra sobretensiones para operación segura y normativa.",
+    "longDescription": "<p align=justify>Fabricamos e integramos tableros para sistemas solares fotovoltaicos con protecciones en corriente continua (DC) y corriente alterna (AC), incluyendo interruptores, seccionadores, fusibles (cuando aplica) y supresores de sobretensión (SPD) para proteger equipos y reducir riesgos.</p>\r\n\r\n<p align=justify>Los tableros pueden incluir medición, señalización y selección según el tipo de sistema (on-grid, híbrido u off-grid), facilitando mantenimiento y operación segura. Solución ideal para proyectos residenciales, comerciales e industriales.</p>",
+    "images": [
+      "uploads/productos/proteccion.webp",
+      "uploads/productos/proteccion1.jpg",
+      "uploads/productos/proteccion2.jpeg"
+    ]
+  },
+  {
+    "id": "1233",
+    "title": "Cassette",
+    "slug": "cassette",
+    "category": "Aires Acondicionados y Ventilación",
+    "subcategory": null,
+    "description": "Sistema de aire acondicionado tipo cassette diseñado para instalación en cielos falsos, ideal para espacios comerciales que requieren distribución uniforme del aire y alto confort térmico.",
+    "longDescription": "<p align=justify>4 rejillas de inyección en las orillas y un retorno por el centro. Inyección de aire curvado hacia las orillas, evitando el retorno. Incluye parrilla frontal, filtro y ganchos para su colocación y aseguramiento. Incluye control remoto inalámbrico. Ventiladores con tres velocidades: alta, media y baja. Funciones de enfriamiento, calefacción, ventilación y deshumidificación. Juegos solo frío deben incluir tubo de expansión y transformador. Condensadora de descarga horizontal (YKJA) y vertical (AC0). Condensadoras incluyen rejillas para mayor protección del serpentín.</p>",
+    "images": [
+      "uploads/2019/11/Casette-Boton.jpg",
+      "uploads/2019/11/002B.jpg",
+      "uploads/2019/11/cassette-1-via-samsug4.jpg"
+    ]
+  },
+  {
+    "id": "1234",
+    "title": "MiniSplit",
+    "slug": "minisplit",
+    "category": "Aires Acondicionados y Ventilación",
+    "subcategory": null,
+    "description": "Equipo de aire acondicionado tipo MiniSplit para aplicaciones residenciales y comerciales, reconocido por su eficiencia energética, operación silenciosa y control preciso de temperatura.",
+    "longDescription": "<p align=justify>Tipo: aire acondicionado inverter de 9.000 BTU. Capacidad: 9.000 BTU/h (0,75 TR/h). Refrigerante R-410A. Voltaje 220 V / 110 V. Incluye control remoto infrarrojo. Ventilador con tres velocidades: alta, media y baja. 1 año de garantía en partes y 5 años en compresor.</p>",
+    "images": [
+      "uploads/2019/11/Mini-BOTON.jpg",
+      "uploads/2019/04/001A.jpg",
+      "uploads/2019/04/001B.jpg"
+    ]
+  },
+  {
+    "id": "1235",
+    "title": "Tipo Paquete",
+    "slug": "tipo-paquete",
+    "category": "Aires Acondicionados y Ventilación",
+    "subcategory": null,
+    "description": "Sistema de aire acondicionado tipo paquete, compacto y robusto, ideal para aplicaciones industriales y comerciales que requieren alta capacidad y distribución por ductos.",
+    "longDescription": "<p align=justify>El aire acondicionado tipo paquete es un equipo compacto y, como su nombre lo indica, viene empaquetado en una sola unidad: condensadora y evaporadora, similar a un aire acondicionado tipo ventana, pero de mayor capacidad. Su instalación exige un área muy ventilada y bien soportada, especialmente si se instala sobre una construcción. Requiere ductos que transportan el aire frío al interior del espacio a refrigerar, permitiendo una distribución eficiente y una operación más silenciosa.</p>",
+    "images": [
+      "uploads/2019/04/Paquete-Boton-e1555361447463.jpg",
+      "uploads/2019/04/paquete-lennox-raider.jpg",
+      "uploads/2019/04/large01.jpg"
+    ]
   }
 ]
-
-

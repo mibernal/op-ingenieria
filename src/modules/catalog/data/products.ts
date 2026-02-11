@@ -1,27 +1,23 @@
+// src/modules/catalog/data/products.ts
 import productsData from "../data/products_normalized.json";
 import categoriesData from "../data/categories.json";
 import * as LucideIcons from "lucide-react";
 import type { Product as CoreProduct } from "@/core/domain/product";
 import { publicAssets } from "@/lib/assets";
 
-export type Spec = { label: string; value: string };
-
 // Extender el tipo del core con campos específicos del catálogo
 export type Product = CoreProduct & {
   slug: string;
   categoryId: string;
   images: string[];
-  specs: Spec[];
-  sku?: string;
   subcategory?: string | null;
-  price?: string;
   longDescription?: string;
 };
 
 export type Category = {
   id: string;
   name: string;
-  summary: string; // ✅ nuevo
+  summary: string;
   icon: keyof typeof LucideIcons;
   subcategories: string[];
 };
@@ -29,10 +25,22 @@ export type Category = {
 type RawCategory = {
   id: string;
   name: string;
-  summary?: string; // ✅ nuevo (opcional para compatibilidad)
+  summary?: string;
   subcategories: string[];
   count: number;
 };
+
+// ---- helpers ----
+const normalizeKey = (value: unknown) => {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // quita tildes
+    .replace(/\s+/g, " ");
+};
+
+const safeId = () => crypto.randomUUID?.() ?? String(Math.random());
 
 // Iconos definidos por arquitectura frontend
 const categoryIcons: Record<string, keyof typeof LucideIcons> = {
@@ -74,33 +82,49 @@ const summaryFallbacks: Record<string, string> = {
 export const categories: Category[] = rawCategories.map((c) => ({
   id: c.id,
   name: c.name,
-  summary: (c.summary?.trim() || summaryFallbacks[c.id] || "Explora equipos y soluciones profesionales para tu proyecto.").trim(),
+  summary: (
+    c.summary?.trim() ||
+    summaryFallbacks[c.id] ||
+    "Explora equipos y soluciones profesionales para tu proyecto."
+  ).trim(),
   subcategories: Array.isArray(c.subcategories) ? c.subcategories : [],
   icon: categoryIcons[c.id] ?? "LayoutGrid",
 }));
 
-// Crear un mapa de nombres de categoría a IDs para búsqueda más fácil
-const categoryNameToIdMap: Record<string, string> = {};
-categories.forEach((cat) => {
-  categoryNameToIdMap[cat.name] = cat.id;
-});
+// ✅ Mapas robustos: por id y por nombre normalizado
+const categoryIdSet = new Set(categories.map((c) => c.id));
+const categoryNameToIdMap = new Map<string, string>();
+for (const cat of categories) {
+  categoryNameToIdMap.set(normalizeKey(cat.name), cat.id);
+}
 
-// Procesar productos del JSON
+// Procesar productos del JSON (limpio)
 export const products: Product[] = (productsData as any[]).map((item: any) => {
-  const categoryName = item.category || "";
-  const categoryId = categoryNameToIdMap[categoryName] || categoryName || "uncategorized";
+  const rawCategory = String(item.category ?? "").trim();
+
+  // 1) si viene un id válido, úsalo
+  // 2) si viene un nombre, normaliza y busca id
+  // 3) fallback: "uncategorized"
+  const maybeId = normalizeKey(rawCategory);
+  const categoryId =
+    (categoryIdSet.has(rawCategory) ? rawCategory : undefined) ||
+    categoryNameToIdMap.get(maybeId) ||
+    "uncategorized";
 
   const imagesRaw = Array.isArray(item.images) ? item.images : [];
-  const images = publicAssets(imagesRaw); // ✅ aquí se corrige para GH Pages
+  const images = publicAssets(imagesRaw);
+
+  const id = String(item.id ?? "").trim() || safeId();
+  const slug = String(item.slug ?? "").trim() || id || safeId();
 
   return {
-    ...item,
+    id,
+    title: String(item.title ?? "Producto sin nombre"),
+    description: String(item.description ?? ""),
+    slug,
     categoryId,
+    subcategory: item.subcategory ?? null,
+    longDescription: item.longDescription ?? "",
     images,
-    specs: Array.isArray(item.specs) ? item.specs : [],
-    id: item.id || crypto.randomUUID?.() || String(Math.random()),
-    slug: item.slug || item.id || crypto.randomUUID?.() || String(Math.random()),
-    title: item.title || "Producto sin nombre",
-    description: item.description || "",
   };
 });

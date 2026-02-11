@@ -143,8 +143,6 @@
     "category": "Grupos Electrógenos / Transferencias",
     "description": "Contratar a todo costo, la Adquisición, Instalación y puesta en funcionamiento de un generador de energía de combustión interna diésel (planta eléctrica) cabinada de 20 kva, con sus accesorios, para el sector de Bahía Concha - Tayrona, requerido como soporte de energía eléctrica para el funcionamiento de la taquilla.",
     "images": [
-      "uploads/2022/01/WhatsApp-Image-2021-12-20-at-15.32.13-1.jpeg",
-      "uploads/2022/01/20211026_074520-scaled.jpg",
       "uploads/2022/01/WhatsApp-Image-2021-06-23-at-16.42.51-1.jpeg",
       "uploads/2022/01/WhatsApp-Image-2021-07-24-at-18.10.02-1.jpeg",
       "uploads/2022/01/WhatsApp-Image-2021-07-24-at-18.17.36-1.jpeg",
@@ -164,8 +162,7 @@
     "category": "Grupos Electrógenos / Transferencias",
     "description": "Suministro, instalación y puesta en funcionamiento de 01 Motor Generador eléctrico diésel potencia 23 kVA prime y 25 kVA StandBy para el puesto naval avanzado islas del rosario de la estación de guardacostas de Cartagena.",
     "images": [
-      "uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.35.jpeg",
-      "uploads/2022/01/WhatsApp-Image-2021-06-23-at-16.42.51.jpeg",
+
       "uploads/2022/01/WhatsApp-Image-2021-12-06-at-17.48.18.jpeg",
       "uploads/2022/01/WhatsApp-Image-2021-12-06-at-17.49.18.jpeg",
       "uploads/2022/01/WhatsApp-Image-2021-12-20-at-15.32.04.jpeg"
@@ -181,8 +178,7 @@
     "category": "Grupos Electrógenos / Transferencias",
     "description": "Obra civil, suministro, instalación y puesta en marcha de Grupo Electrógeno y Transferencia Automática, para suplir la necesidad de la sede de Migración Colombia en Tumaco - Nariño.",
     "images": [
-      "uploads/2020/12/16.jpg",
-      "uploads/2022/01/WhatsApp-Image-2021-12-20-at-15.32.13-1.jpeg",
+
       "uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.33-1.jpeg",
       "uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.34-2.jpeg",
       "uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.35-1.jpeg",
@@ -202,8 +198,7 @@
     "category": "Energía Solar",
     "description": "Suministro e Instalación de equipos fotovoltaicos de doble uso, en diferentes veredas del Huila con el fin de apoyar la conservación y restauración de zonas de gran importancia ambiental para Parques Naturales Nacionales - Nevado del Huila y su zona de influencia.",
     "images": [
-      "uploads/2020/12/IMG-20191111-WA0014.jpg",
-      "uploads/2022/01/WhatsApp-Image-2021-10-19-at-14.44.35.jpeg",
+
       "uploads/2020/12/1-2.jpg",
       "uploads/2020/12/4-2.jpg",
       "uploads/2020/12/6-2.jpg",
@@ -229,8 +224,7 @@
     "category": "grupos-electrogenos",
     "description": "Suministro, instalación y puesta en funcionamiento de Planta Eléctrica, para suplir la necesidad presentada por el Grupo Telemática - Deval.",
     "images": [
-      "uploads/2020/12/3.jpg",
-      "uploads/2020/12/16.jpg",
+
       "uploads/2020/12/1-1.jpg",
       "uploads/2020/12/2-1.jpg",
       "uploads/2020/12/3-1.jpg",
@@ -249,9 +243,7 @@
     "category": "UPS / Servicios",
     "description": "Servicio de Instalacion de mas de 717 Sistemas Ininterrumpidos de Potencia a Nivel Nacional, incluyendo transporte de equipos, personal tecnico, puesta en servicio, ajuste y pruebas de funcionamiento. Servicio de Mantenimiento preventivo y correctivo a Plantas Electricas a nivel nacional.",
     "images": [
-      "uploads/2020/12/IMG-20191111-WA0014.jpg",
-      "uploads/2020/12/1.jpg",
-      "uploads/2020/12/2-scaled.jpg",
+
       "uploads/2020/12/3.jpg",
       "uploads/2020/12/4.jpg",
       "uploads/2020/12/5-scaled.jpg",
@@ -275,8 +267,7 @@
     "category": "grupos-electrogenos / servicios",
     "description": "Suministro, instalación y mantenimiento de soluciones de energía de respaldo, Planta – Transferencia en Bogota. Diseño, suministro e instalación del sistema de apantallamiento y adecuaciones eléctricas para el Observatorio Vulcanológico y Sismológico de Manizales",
     "images": [
-      "uploads/2019/12/SAM_3083-scaled.jpg",
-      "uploads/2020/12/3.jpg",
+
       "uploads/2019/12/1-6.jpg",
       "uploads/2019/12/2-3.jpg",
       "uploads/2019/12/3-4.jpg",
@@ -374,7 +365,7 @@
     "source_id": 926,
     "name": "Energia Integral Andina",
     "client": "Energia Integral Andina",
-    "category": "Cargadores / Transferencias / Servicios",
+    "category": "Transferencias / Servicios",
     "description": "Suministro e instalación de Cargadores de baterías tiristorizados y de Alta Frecuencia tipo subestación, Transferencias Automáticas, Tableros de Control para Aire Acondicionado.",
     "images": [
       "uploads/2019/12/20181217_110506.jpg",
@@ -603,5 +594,16 @@
     "slug": "presidencia-republica",
     "date": "2018-02-16"
   }
+
+
+
+
+
+
+
+
+
+
+
 ]
 

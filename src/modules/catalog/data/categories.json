@@ -1,36 +1,33 @@
 [
   {
     "id": "aires-acondicionados-y-ventilacion",
-    "name": "Aires Acondicionados y Ventilacion",
+    "name": "Aires Acondicionados y Ventilación",
     "summary": "Climatización eficiente para hogares y empresas: confort, control de temperatura y ventilación confiable.",
     "subcategories": [],
     "count": 3
   },
   {
     "id": "baterias",
-    "name": "Baterias",
+    "name": "Baterías",
     "summary": "Respaldo energético seguro y duradero: baterías para sistemas críticos, solares y aplicaciones industriales.",
-    "subcategories": [],
-    "count": 6
+    "subcategories": ["Baterías de Litio LiFePO₄"],
+    "count": 7
   },
   {
     "id": "energia-solar",
-    "name": "Energia Solar",
+    "name": "Energía Solar",
     "summary": "Soluciones fotovoltaicas para ahorro y autonomía: paneles, componentes y sistemas listos para operar.",
     "subcategories": [
-      "Centros Educativos",
       "Centros de Alto Consumo",
-      "Hogares",
-      "UPS Hibrida"
+      "Centros Educativos",
+      "Controladores",
+      "Estructuras de Montaje Solar",
+      "Híbridas",
+      "Híbridos",
+      "Paneles Solares Fotovoltaicos",
+      "Residencial"
     ],
-    "count": 5
-  },
-  {
-    "id": "iluminacion-led",
-    "name": "Iluminacion LED",
-    "summary": "Iluminación moderna de alto rendimiento: menor consumo, mayor duración y excelente calidad de luz.",
-    "subcategories": [],
-    "count": 7
+    "count": 9
   },
   {
     "id": "inversores",
@@ -41,48 +38,34 @@
   },
   {
     "id": "plantas-electricas",
-    "name": "Plantas Electricas",
+    "name": "Plantas Eléctricas",
     "summary": "Generación confiable para continuidad operativa: plantas eléctricas para respaldo y alta demanda.",
     "subcategories": [
-      "Grupos Electrógenos a Diesel",
+      "Grupos Electrógenos a Diésel",
       "Grupos Electrógenos a Gas",
       "Grupos Electrógenos a Gasolina"
     ],
-    "count": 5
+    "count": 3
   },
   {
-    "id": "rectificadores---cargadores",
+    "id": "rectificadores-cargadores",
     "name": "Rectificadores - Cargadores",
     "summary": "Carga y alimentación controlada para sistemas críticos: estabilidad, protección y rendimiento constante.",
     "subcategories": [],
-    "count": 6
+    "count": 4
   },
   {
     "id": "sistemas-ups",
     "name": "Sistemas UPS",
     "summary": "Respaldo inmediato ante cortes: UPS para proteger equipos y garantizar operación sin interrupciones.",
     "subcategories": [],
-    "count": 3
+    "count": 1
   },
   {
     "id": "tableros-distribucion-y-control",
-    "name": "Tableros Distribucion y Control",
+    "name": "Tableros de Distribución y Control",
     "summary": "Distribución eléctrica segura y ordenada: control, protección y gestión profesional de cargas.",
-    "subcategories": [],
-    "count": 3
-  },
-  {
-    "id": "estabilizadores-de-tensión",
-    "name": "Estabilizadores de tensión",
-    "summary": "Protección contra variaciones eléctricas: regulación estable para cuidar equipos sensibles y costosos.",
-    "subcategories": [],
-    "count": 1
-  },
-  {
-    "id": "reguladores-electrónicos-y-circuitos-de-control-eléctricos",
-    "name": "Reguladores electrónicos y circuitos de control eléctricos",
-    "summary": "Control eléctrico preciso y seguro: regulación y automatización para sistemas técnicos e industriales.",
-    "subcategories": [],
-    "count": 1
+    "subcategories": ["Energía Solar"],
+    "count": 4
   }
 ]

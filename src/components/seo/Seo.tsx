@@ -1,3 +1,4 @@
+// src/components/seo/Seo.tsx
 import { useEffect } from "react";
 import { SITE_META } from "@/config/seo";
 
@@ -71,13 +72,9 @@ export const Seo = ({
     ensureMeta("property", "og:url", resolvedUrl);
     ensureMeta("property", "og:type", type);
     ensureMeta("property", "og:site_name", SITE_META.title);
-    if (SITE_META.locale) {
-      ensureMeta("property", "og:locale", SITE_META.locale);
-    }
+    if (SITE_META.locale) ensureMeta("property", "og:locale", SITE_META.locale);
 
-    if (SITE_META.author) {
-      ensureMeta("name", "author", SITE_META.author);
-    }
+    if (SITE_META.author) ensureMeta("name", "author", SITE_META.author);
 
     if (resolvedImage) {
       ensureMeta("property", "og:image", resolvedImage);
@@ -91,12 +88,11 @@ export const Seo = ({
     ensureLink("canonical", resolvedUrl);
     ensureMeta("name", "robots", noIndex ? "noindex, nofollow" : "index, follow");
 
-    const organizationJsonLd = {
+    const organizationJsonLd: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: SITE_META.title,
       url: SITE_META.url,
-      logo: resolvedLogo,
       email: SITE_META.email,
       telephone: SITE_META.phone,
       address: {
@@ -105,6 +101,8 @@ export const Seo = ({
         addressCountry: SITE_META.country,
       },
     };
+
+    if (resolvedLogo) organizationJsonLd.logo = resolvedLogo;
 
     ensureJsonLd("organization", organizationJsonLd);
   }, [title, description, path, image, type, noIndex]);

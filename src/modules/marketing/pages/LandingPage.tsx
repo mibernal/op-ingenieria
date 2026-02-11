@@ -12,9 +12,13 @@ import ServicesSection from "@/modules/marketing/components/ServicesSection";
 import CTASection from "@/modules/marketing/components/CTASection";
 import { ProductGridSkeleton } from "@/shared/skeletons";
 
-// ✅ Lazy load: ahora sí Suspense aplica
-const ProductsSection = lazy(() => import("@/modules/catalog/components/products/ProductsSection"));
-const ProjectsSection = lazy(() => import("@/modules/projects/components/ProjectsSection"));
+// ✅ Lazy load: se deja listo por si luego se reactiva
+const ProductsSection = lazy(
+  () => import("@/modules/catalog/components/products/ProductsSection")
+);
+const ProjectsSection = lazy(
+  () => import("@/modules/projects/components/ProjectsSection")
+);
 
 export default function LandingPage() {
   return (
@@ -25,13 +29,25 @@ export default function LandingPage() {
         <AboutSection />
         <ServicesSection />
 
+        {/*
+        // 🚫 Oculto en Landing (no eliminar): Productos ahora se verán solo en /catalogo
         <Suspense fallback={<ProductGridSkeleton count={8} />}>
           <ProductsSection />
         </Suspense>
+        */}
 
-        <Suspense fallback={<div className="container mx-auto px-4 py-10 md:py-14">Cargando proyectos…</div>}>
+        {/*
+        // 🚫 Oculto en Landing (no eliminar): Proyectos ahora se verán solo en /projects
+        <Suspense
+          fallback={
+            <div className="container mx-auto px-4 py-10 md:py-14">
+              Cargando proyectos…
+            </div>
+          }
+        >
           <ProjectsSection />
         </Suspense>
+        */}
 
         <ClientsSection />
         <PartnersSection />

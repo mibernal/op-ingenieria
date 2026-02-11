@@ -1,3 +1,5 @@
+// src/modules/catalog/components/products/ProductDetailModal.tsx
+import { useEffect, useMemo, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -8,8 +10,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Mail } from "lucide-react";
-import type { Product, Spec } from "@/modules/catalog/data/products";
+import type { Product } from "@/modules/catalog/data/products";
 import { Card } from "@/components/ui/card";
+import { categories } from "@/modules/catalog/data/products";
+import { cn } from "@/lib/utils";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -17,8 +21,30 @@ interface ProductDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalProps) => {
+export const ProductDetailModal = ({
+  product,
+  open,
+  onOpenChange,
+}: ProductDetailModalProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Reset cuando cambia el producto o cuando se abre
+  useEffect(() => {
+    if (product) setActiveIndex(0);
+  }, [product, open]);
+
+  const images = useMemo(() => {
+    const list = product?.images ?? [];
+    return Array.isArray(list) ? list.filter(Boolean) : [];
+  }, [product]);
+
   if (!product) return null;
+
+  const categoryName =
+    categories.find((c) => c.id === product.categoryId)?.name ??
+    product.categoryId;
+
+  const activeSrc = images[activeIndex] || "/placeholder-product.jpg";
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent(
@@ -32,7 +58,10 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
     const body = encodeURIComponent(
       `Hola,\n\nMe interesa obtener información y cotización del producto:\n\n${product.title}\n\nQuedo atento a su respuesta.`
     );
-    window.open(`mailto:info@opingenieria.com?subject=${subject}&body=${body}`, "_blank");
+    window.open(
+      `mailto:info@opingenieria.com?subject=${subject}&body=${body}`,
+      "_blank"
+    );
   };
 
   return (
@@ -44,11 +73,12 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
               {product.title}
             </DialogTitle>
             <DialogDescription className="sr-only">
-              Información detallada y especificaciones del producto seleccionado.
+              Información detallada del producto seleccionado.
             </DialogDescription>
+
             <div className="flex items-center gap-2 mt-2">
               <Badge variant="secondary" className="text-sm">
-                {product.categoryId}
+                {categoryName}
               </Badge>
               {product.subcategory && (
                 <Badge variant="outline" className="text-sm">
@@ -60,101 +90,98 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
         </DialogHeader>
 
         <div className="grid md:grid-cols-2 gap-6 mt-4 p-6">
-          {/* Product Image */}
+          {/* Imagen + galería */}
           <div className="space-y-4">
-            <div className="aspect-square rounded-lg overflow-hidden bg-secondary">
+            <div className="aspect-square rounded-lg overflow-hidden bg-secondary ring-1 ring-border/60">
               <img
-                src={product.images?.[0] || "/placeholder-product.jpg"}
+                key={`${product.id}-active-${activeIndex}`} // fuerza refresh cuando cambias
+                src={activeSrc}
                 alt={product.title}
                 loading="lazy"
                 decoding="async"
                 onError={(e) => {
                   const target = e.currentTarget;
-                  if (target.src !== "/placeholder-product.jpg") {
-                    target.src = "/placeholder-product.jpg";
-                  }
+                  target.src = "/placeholder-product.jpg";
                 }}
                 className="w-full h-full object-contain block"
               />
             </div>
 
-            {/* Image Gallery */}
-            {product.images.length > 1 && (
+            {images.length > 1 && (
               <div className="flex gap-2 overflow-x-auto pb-2">
-                {product.images.map((img, index) => (
-                  <button
-                    key={index}
-                    className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border"
-                  >
-                    <img
-                      src={img}
-                      alt={`${product.title} - ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
+                {images.map((img, index) => {
+                  const isActive = index === activeIndex;
+                  return (
+                    <button
+                      key={`${product.id}-img-${index}`}
+                      type="button"
+                      onClick={() => setActiveIndex(index)}
+                      className={cn(
+                        "flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border transition",
+                        isActive
+                          ? "border-primary ring-2 ring-primary/30"
+                          : "border-border/60 hover:border-primary/50"
+                      )}
+                      aria-label={`Ver imagen ${index + 1} de ${product.title}`}
+                      aria-pressed={isActive}
+                    >
+                      <img
+                        src={img}
+                        alt={`${product.title} - ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          target.src = "/placeholder-product.jpg";
+                        }}
+                      />
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
 
-          {/* Product Info */}
+          {/* Info */}
           <div className="space-y-6">
-            {product.price && (
-              <div className="text-3xl font-bold text-primary">
-                {product.price}
-              </div>
-            )}
-
             <Card className="p-4">
               <h3 className="font-semibold mb-2">Descripción</h3>
               <p className="text-muted-foreground leading-relaxed">
-                {product.description || "Producto de alta calidad para aplicaciones industriales."}
+                {product.description ||
+                  "Producto de alta calidad para aplicaciones industriales."}
               </p>
             </Card>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-4">
-              <Button onClick={handleWhatsApp} className="flex-1 gap-2 bg-accent hover:bg-accent/90">
+            {product.longDescription && product.longDescription.trim() && (
+              <Card className="p-4">
+                <h3 className="font-semibold mb-2">Detalles</h3>
+                <div
+                  className="prose prose-sm max-w-none text-muted-foreground"
+                  dangerouslySetInnerHTML={{ __html: product.longDescription }}
+                />
+              </Card>
+            )}
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <Button
+                onClick={handleWhatsApp}
+                className="flex-1 gap-2 bg-accent hover:bg-accent/90"
+              >
                 <MessageCircle className="h-4 w-4" />
                 Cotizar por WhatsApp
               </Button>
-              <Button onClick={handleEmail} variant="outline" className="flex-1 gap-2">
+              <Button
+                onClick={handleEmail}
+                variant="outline"
+                className="flex-1 gap-2"
+              >
                 <Mail className="h-4 w-4" />
                 Cotizar por Email
               </Button>
             </div>
           </div>
         </div>
-
-        {/* Specifications Table */}
-        {product.specs && product.specs.length > 0 && (
-          <div className="p-6 border-t">
-            <h4 className="font-heading font-semibold text-lg mb-3">
-              Especificaciones Técnicas
-            </h4>
-            <Card>
-              <div className="overflow-hidden">
-                <table className="w-full">
-                  <tbody>
-                    {product.specs.map((spec: Spec, index: number) => (
-                      <tr
-                        key={spec.label}
-                        className={index % 2 === 0 ? "bg-secondary" : "bg-muted/50"}
-                      >
-                        <td className="px-4 py-3 font-medium text-foreground">
-                          {spec.label}
-                        </td>
-                        <td className="px-4 py-3 text-muted-foreground text-right">
-                          {spec.value}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Card>
-          </div>
-        )}
       </DialogContent>
     </Dialog>
   );

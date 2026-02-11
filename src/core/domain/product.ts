@@ -1,17 +1,13 @@
-// core/domain/product.ts
+// src/core/domain/product.ts
 export interface Product {
-  id: string
-  title: string
-  description?: string
-  image?: string
-  categories?: string[]
-  // Campos extendidos para compatibilidad con el catálogo
-  sku?: string
-  slug?: string
-  categoryId?: string
-  subcategory?: string
-  images?: string[]
-  price?: string
-  specs?: Array<{ label: string; value: string }>
-  longDescription?: string
+  id: string;
+  title: string;
+  description?: string;
+
+  // Catálogo (front)
+  slug?: string;
+  categoryId?: string;
+  subcategory?: string | null;
+  images?: string[];
+  longDescription?: string;
 }

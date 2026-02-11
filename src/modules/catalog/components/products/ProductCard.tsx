@@ -1,9 +1,10 @@
+// src/modules/catalog/components/products/ProductCard.tsx
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import type { Product } from "@/modules/catalog/data/products";
 import OptimizedImage from "@/shared/components/OptimizedImage";
 import { categories } from "@/modules/catalog/data/products";
-import { BarChart3, ChevronRight, Eye, Zap } from "lucide-react";
+import { ChevronRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -25,8 +26,6 @@ export const ProductCard = ({
     return category?.name || product.categoryId || "Sin categoría";
   };
 
-  const mainSpec = product.specs?.[0];
-
   return (
     <Card
       className={cn(
@@ -46,15 +45,6 @@ export const ProductCard = ({
       }}
       aria-label={`Ver detalles del producto ${product.title}`}
     >
-      {product.sku?.includes("PREMIUM") && (
-        <div className="absolute top-4 left-4 z-20">
-          <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 shadow-sm">
-            <Zap className="h-3 w-3 mr-1" />
-            PREMIUM
-          </Badge>
-        </div>
-      )}
-
       <div className="relative">
         <OptimizedImage
           src={product.images?.[0] || "/placeholder-product.jpg"}
@@ -94,22 +84,6 @@ export const ProductCard = ({
             {product.description}
           </p>
         </div>
-
-        {mainSpec && (
-          <div className="flex items-center gap-3 rounded-lg border border-border/60 bg-secondary/30 p-3">
-            <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-              <BarChart3 className="w-5 h-5 text-accent" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="font-medium text-foreground text-sm">
-                {mainSpec.label}
-              </div>
-              <div className="text-muted-foreground text-sm truncate">
-                {mainSpec.value}
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="flex flex-wrap gap-2">
           <Badge variant="secondary" className="text-xs">

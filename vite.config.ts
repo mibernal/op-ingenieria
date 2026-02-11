@@ -1,4 +1,4 @@
-// vite.config.ts — PRODUCTION READY + GitHub Pages (op-ingenieria)
+// vite.config.ts — PRODUCTION READY (ColombiaHosting / Apache / www.opingenieria.com)
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -7,14 +7,13 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import { VitePWA } from "vite-plugin-pwa";
 import type { PluginConfig } from "svgo";
 
-const GH_PAGES_REPO = "op-ingenieria";
-
 export default defineConfig(({ mode }) => {
   const isProduction = mode === "production";
   const isAnalyze = mode === "analyze";
 
   return {
-    base: isProduction ? `/${GH_PAGES_REPO}/` : "/",
+    // ✅ Para dominio raíz (www.opingenieria.com)
+    base: "/",
 
     server: {
       host: "0.0.0.0",
@@ -32,10 +31,8 @@ export default defineConfig(({ mode }) => {
         avif: { quality: 70 },
         svg: {
           plugins: [
+            // Si necesitas preservar viewBox, ajusta preset-default con overrides
             { name: "preset-default" } as PluginConfig,
-            // Nota: para preservar viewBox, en svgo normalmente se configura así:
-            // { name: "preset-default", params: { overrides: { removeViewBox: false } } }
-            // Pero depende de versión; si no te da problemas, déjalo como está.
           ],
         },
       }),
@@ -59,11 +56,15 @@ export default defineConfig(({ mode }) => {
           theme_color: "#1e3a8a",
           background_color: "#ffffff",
           display: "standalone",
-          start_url: ".", // GH Pages friendly
-          scope: ".", // GH Pages friendly
+
+          // ✅ Para dominio raíz
+          start_url: "/",
+          scope: "/",
+
+          // ✅ Rutas absolutas evitan problemas en producción
           icons: [
-            { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
-            { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
+            { src: "/pwa-192x192.png", sizes: "192x192", type: "image/png" },
+            { src: "/pwa-512x512.png", sizes: "512x512", type: "image/png" },
           ],
         },
       }),
@@ -85,7 +86,6 @@ export default defineConfig(({ mode }) => {
     build: {
       target: "es2022",
       // ✅ esbuild suele ser más estable que terser para evitar edge cases
-      // Si necesitas terserOptions sí o sí, puedes volver a "terser".
       minify: isProduction ? "esbuild" : false,
 
       cssMinify: isProduction,
@@ -95,7 +95,6 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks(id) {
             if (id.includes("node_modules")) return "vendor";
-            // separa solo lo realmente pesado; evita ciclos TDZ entre módulos de app
             if (id.includes("/src/modules/catalog")) return "catalog";
             return undefined;
           },
@@ -104,11 +103,6 @@ export default defineConfig(({ mode }) => {
           assetFileNames: "assets/[name]-[hash].[ext]",
         },
       },
-
-      // Si vuelves a terser, puedes reactivar esto:
-      // terserOptions: {
-      //   compress: { drop_console: isProduction, drop_debugger: isProduction },
-      // },
 
       reportCompressedSize: true,
       chunkSizeWarningLimit: 1000,

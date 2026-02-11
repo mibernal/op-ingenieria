@@ -10,7 +10,6 @@ import ProductGridSkeleton from "@/shared/skeletons/ProductGridSkeleton";
 import CategoryGrid from "@/modules/catalog/components/CategoryGrid";
 import { cn } from "@/lib/utils";
 
-// ✅ Lazy load de componentes pesados (ok para code-splitting)
 const ProductGrid = lazy(
   () => import("@/modules/catalog/components/products/ProductGrid")
 );
@@ -19,7 +18,6 @@ const ProductDetailModal = lazy(
 );
 
 type ProductsSectionProps = {
-  /** Permite que una página (ej. CatalogPage) controle el estado inicial desde URL */
   initialCategoryId?: string | null;
   initialSubcategory?: string | null;
 };
@@ -33,7 +31,6 @@ const ProductsSection = ({
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // ✅ Sincronizar el estado interno con lo que venga desde URL/página
   useEffect(() => {
     setSelectedCategoryId(initialCategoryId || null);
   }, [initialCategoryId]);
@@ -42,7 +39,6 @@ const ProductsSection = ({
     setSelectedSubcategory(initialSubcategory || null);
   }, [initialSubcategory]);
 
-  // Mapa de categorías (lookup)
   const categoryMap = useMemo(() => {
     const map = new Map<string, Category>();
     for (const c of allCategories) map.set(c.id, c);
@@ -53,20 +49,26 @@ const ProductsSection = ({
     ? categoryMap.get(selectedCategoryId) ?? null
     : null;
 
-  // Productos filtrados por categoría
   const productsInCategory = useMemo(() => {
     if (!selectedCategory) return [];
-    const id = selectedCategory.id;
-    return allProducts.filter((p) => p.categoryId === id);
+    return allProducts.filter((p) => p.categoryId === selectedCategory.id);
   }, [selectedCategory]);
 
-  // Productos visibles (con subcategoría)
+  // ✅ subcategorías reales (derivadas de productos)
+  const availableSubcategories = useMemo(() => {
+    const set = new Set<string>();
+    for (const p of productsInCategory) {
+      const s = (p.subcategory ?? "").trim();
+      if (s) set.add(s);
+    }
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
+  }, [productsInCategory]);
+
   const visibleProducts = useMemo(() => {
     if (!selectedSubcategory) return productsInCategory;
-    return productsInCategory.filter((p) => p.subcategory === selectedSubcategory);
+    return productsInCategory.filter((p) => (p.subcategory ?? "").trim() === selectedSubcategory);
   }, [productsInCategory, selectedSubcategory]);
 
-  // Handlers
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -84,11 +86,9 @@ const ProductsSection = ({
   const dividerClass =
     "mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-primary/25 to-transparent";
 
-  // ✅ Vista 1: Grid de categorías
   if (!selectedCategoryId) {
     return (
       <section id="productos" className={sectionClass}>
-        {/* Fondo / gradientes cortos para evitar “aire muerto” */}
         <div
           className="absolute inset-x-0 top-0 -z-10 h-16 bg-gradient-to-b from-background/30 via-transparent to-transparent"
           aria-hidden="true"
@@ -126,7 +126,6 @@ const ProductsSection = ({
     );
   }
 
-  // ✅ Vista 2: Productos de categoría seleccionada
   return (
     <section id="productos" className={sectionClass}>
       <div
@@ -139,7 +138,6 @@ const ProductsSection = ({
       />
 
       <div className="container mx-auto px-4">
-        {/* Header de categoría (compacto + premium) */}
         <div className="mb-6">
           <button
             onClick={handleBackToCategories}
@@ -177,17 +175,15 @@ const ProductsSection = ({
               </p>
             </div>
 
-            {/* Filtro subcategorías (si aplica) */}
-            {selectedCategory?.subcategories?.length ? (
+            {/* ✅ Filtro subcategorías REAL */}
+            {availableSubcategories.length ? (
               <div className="flex items-center gap-2 md:justify-end">
                 <span className="text-sm text-muted-foreground hidden md:inline">
                   Filtrar por
                 </span>
                 <select
                   value={selectedSubcategory || ""}
-                  onChange={(e) => {
-                    setSelectedSubcategory(e.target.value || null);
-                  }}
+                  onChange={(e) => setSelectedSubcategory(e.target.value || null)}
                   className={cn(
                     "h-10 rounded-xl px-3.5 text-sm",
                     "border border-border/60 bg-card/80 text-foreground",
@@ -197,7 +193,7 @@ const ProductsSection = ({
                   aria-label="Subcategorías"
                 >
                   <option value="">Todas las subcategorías</option>
-                  {selectedCategory.subcategories.map((sub) => (
+                  {availableSubcategories.map((sub) => (
                     <option key={sub} value={sub}>
                       {sub}
                     </option>
@@ -210,7 +206,6 @@ const ProductsSection = ({
           <div className="mt-5 h-px w-full bg-border/60" />
         </div>
 
-        {/* Grid de productos con suspense */}
         <Suspense fallback={<ProductGridSkeleton count={8} />}>
           <ProductGrid
             products={visibleProducts}
@@ -219,7 +214,6 @@ const ProductsSection = ({
           />
         </Suspense>
 
-        {/* Estado vacío (compacto) */}
         {visibleProducts.length === 0 && (
           <div className="text-center py-12">
             <div className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-2xl bg-muted/60 ring-1 ring-border/60">
@@ -251,7 +245,6 @@ const ProductsSection = ({
           </div>
         )}
 
-        {/* Modal de detalles (lazy loaded) */}
         <Suspense fallback={null}>
           <ProductDetailModal
             product={selectedProduct}

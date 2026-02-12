@@ -103,7 +103,7 @@
 }
 
 /* ==========================================================================
-   Base Styles (tipografía + scroll anchors)
+   Base Styles (tipografía + scroll anchors) — FIX ANCHORS (Opción B)
    ========================================================================== */
 
 @layer base {
@@ -114,16 +114,19 @@
   html {
     scroll-behavior: smooth;
 
-    /* Ajuste fino para sticky header:
-       - mobile header ~64px -> 4.5rem (72px) evita corte
-       - desktop header ~80px -> 5rem (80px) */
-    scroll-padding-top: 4rem;
-  }
+    /* ✅ Opción B: NO usamos scroll-padding-top.
+       El offset vive en scroll-margin-top de los targets (section[id]). */
+    scroll-padding-top: 0;
 
-  @media (min-width: 768px) {
-    html {
-      scroll-padding-top: 5rem;
-    }
+    /* ✅ iOS notch / safe area */
+    --safe-top: env(safe-area-inset-top, 0px);
+
+    /* ✅ fallback sensato; Header.tsx lo sobreescribe en runtime */
+    --header-h: 64px;
+
+    /* ✅ aire extra (si quieres más o menos, ajusta aquí)
+       Recomendado 10–14px */
+    --anchor-gap: 12px;
   }
 
   body {
@@ -141,14 +144,10 @@
     @apply font-heading font-semibold tracking-tight;
   }
 
+  /* ✅ El target real del hash es el elemento con id.
+     Esto asegura que SIEMPRE quede visible bajo el header sticky. */
   section[id] {
-    scroll-margin-top: 4.5rem;
-  }
-
-  @media (min-width: 768px) {
-    section[id] {
-      scroll-margin-top: 5rem;
-    }
+    scroll-margin-top: calc(var(--safe-top) + var(--header-h) + var(--anchor-gap));
   }
 
   :focus-visible {
@@ -169,6 +168,7 @@
     height: auto;
   }
 }
+
 
 /* ==========================================================================
    Components

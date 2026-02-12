@@ -186,7 +186,12 @@ export const buildNavItems = (input?: {
       type: "section",
       hash: `#${HOME_SECTIONS.CLIENTS}`,
     },
-    { label: "Contacto", to: ROUTES.CONTACT, type: "route" },
+    {
+  label: "Contacto",
+  to: ROUTES.HOME,
+  type: "section",
+  hash: `#${HOME_SECTIONS.CONTACT}`, // #contacto
+},
   ];
 };
 

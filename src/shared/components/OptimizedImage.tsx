@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState, memo, useCallback } from "react";
+// src/shared/components/OptimizedImage.tsx
+import React, { useEffect, useMemo, useState, memo, useCallback, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 export interface OptimizedImageProps
@@ -73,7 +74,9 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
   height,
   ...imgProps
 }) => {
-  // Resuelve src final (sin estado extra)
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  // Resuelve src final
   const resolvedSrc = src ?? fallbackSrc;
 
   const [hasError, setHasError] = useState(false);
@@ -125,13 +128,29 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
   // Si hay fallback personalizado y falló la carga
   if (hasError && fallback) return <>{fallback}</>;
 
-  // Si falló y no hay fallback: usamos fallbackSrc (si el src original no era fallbackSrc)
+  // Si falló y no hay fallback: usamos fallbackSrc
   const finalSrc =
     hasError && resolvedSrc !== fallbackSrc ? fallbackSrc : resolvedSrc;
 
-  // Para logos (eager/priority): ayudar al navegador
+  // ✅ prioridad real
   const fetchPriority: "high" | "low" | "auto" =
     priority || computedLoading === "eager" ? "high" : "auto";
+
+  /**
+   * ✅ FIX: NO pasar `fetchPriority` como prop React
+   * React no lo reconoce y genera warning.
+   * En su lugar, seteamos el atributo HTML en minúsculas: `fetchpriority`.
+   */
+  useEffect(() => {
+    const el = imgRef.current;
+    if (!el) return;
+    try {
+      // setAttribute espera string
+      el.setAttribute("fetchpriority", fetchPriority);
+    } catch {
+      // noop (en navegadores muy viejos no importa)
+    }
+  }, [fetchPriority, finalSrc]);
 
   return (
     <div
@@ -152,12 +171,11 @@ const OptimizedImageComponent: React.FC<OptimizedImageProps> = ({
       )}
 
       <img
+        ref={imgRef}
         src={finalSrc}
         alt={alt}
         loading={computedLoading}
         decoding="async"
-        
-        fetchPriority={fetchPriority}
         onLoad={handleLoad}
         onError={handleError}
         sizes={sizes}

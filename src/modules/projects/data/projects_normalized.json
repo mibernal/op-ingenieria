@@ -593,6 +593,103 @@
     ],
     "slug": "presidencia-republica",
     "date": "2018-02-16"
+  },
+  {
+    "id": "3001",
+    "source_id": 3001,
+    "name": "Instituto Colombiano de Bienestar Familiar - ICBF",
+    "client": "ICBF",
+    "category": "Grupos Electrógenos / Transferencias",
+    "description": "Suministro e instalación de grupos electrógenos para respaldo energético en instalaciones del ICBF a nivel nacional.",
+    "images": [
+      "uploads/2026/icbf.jpg",
+      "uploads/2026/icbf1.jpg",
+      "uploads/2026/icbf2.jpg",
+      "uploads/2026/icbf3.jpg",
+      "uploads/2026/icbf4.jpg",
+      "uploads/2026/icbf5.jpg",
+      "uploads/2026/icbf6.jpg",
+      "uploads/2026/icbf7.jpg",
+      "uploads/2026/icbf8.jpg",
+      "uploads/2026/icbf9.jpg",
+      "uploads/2026/icbf10.jpg",
+      "uploads/2026/icbf11.jpg",
+      "uploads/2026/icbf12.jpg",
+      "uploads/2026/icbf13.jpg",
+      "uploads/2026/icbf14.jpg",
+      "uploads/2026/icbf15.jpg",
+      "uploads/2026/icbf16.jpg",
+      "uploads/2026/icbf17.jpg",
+      "uploads/2026/icbf18.jpg",
+      "uploads/2026/icbf19.jpg",
+      "uploads/2026/icbf20.jpg",
+      "uploads/2026/icbf21.jpg",
+      "uploads/2026/icbf22.jpg",
+      "uploads/2026/icbf23.jpg",
+      "uploads/2026/icbf24.jpg",
+      "uploads/2026/icbf25.jpg",
+      "uploads/2026/icbf30.jpg",
+      "uploads/2026/icbf31.jpeg",
+      "uploads/2026/icbf32.jpeg",
+      "uploads/2026/icbf33.jpg",
+      "uploads/2026/icbf34.jpeg",
+      "uploads/2026/icbf35.jpeg"
+    ],
+    "image": "uploads/2026/icbf.jpg",
+    "slug": "icbf"
+  },
+  {
+    "id": "3002",
+    "source_id": 3002,
+    "name": "ING LTDA",
+    "client": "ING LTDA",
+    "category": "Transferencias",
+    "description": "Suministro de transferencia automática de 1250A con mandos motorizados y modulo de control ComAp.",
+    "images": [
+      "uploads/2026/ing.jpg",
+      "uploads/2026/ing1.jpg",
+      "uploads/2026/ing2.jpg"
+    ],
+    "image": "uploads/2026/ing.jpg",
+    "slug": "ing-transferencia"
+  },
+  {
+    "id": "3003",
+    "source_id": 3003,
+    "name": "Registraduría Nacional del Estado Civil - Sede Siapana Guajira",
+    "client": "RNEC - Siapana",
+    "category": "Energía Fotovoltaica",
+    "description": "Sistema fotovoltaico para generación de energía en operación continua.",
+    "images": [
+      "uploads/2026/siapana.jpeg",
+      "uploads/2026/siapana1.jpeg",
+      "uploads/2026/siapana2.jpeg",
+      "uploads/2026/siapana3.jpeg"
+    ],
+    "image": "uploads/2026/siapana.jpeg",
+    "slug": "siapana"
+  },
+  {
+    "id": "3004",
+    "source_id": 3004,
+    "name": "Subred Integrada de Servicios de Salud Sur",
+    "client": "Subred",
+    "category": "Energía Fotovoltaica",
+    "description": "Mantenimiento a sistemas fotovoltaicos, paneles, inversores, baterías, estructuras metálicas, cableado y demás componentes del sistema fotovoltaico.",
+    "images": [
+      "uploads/2026/subred.jpg",
+      "uploads/2026/subred1.jpg",
+      "uploads/2026/subred2.jpg",
+      "uploads/2026/subred3.jpg",
+      "uploads/2026/subred4.jpg",
+      "uploads/2026/subred5.jpg",
+      "uploads/2026/subred6.jpg",
+      "uploads/2026/subred7.jpg",
+      "uploads/2026/subred8.jpg",
+      "uploads/2026/subred9.jpg"
+    ],
+    "image": "uploads/2026/subred.jpg",
+    "slug": "subred"
   }
 
 
@@ -606,4 +703,3 @@
 
 
 ]
-

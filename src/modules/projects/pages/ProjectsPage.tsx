@@ -18,6 +18,7 @@ const ProjectsPage = () => {
         />
       </main>
       <Footer />
+      <i className="fas fa-file-spreadsheet"></i> {/* ✅ Corregido: class → className */}
     </div>
   );
 };

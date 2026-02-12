@@ -24,7 +24,7 @@ interface LogoCarouselProps {
   subtitle?: string;
   variant?: "clients" | "partners";
   autoPlay?: boolean;
-  /** segundos */
+  /** segundos (intervalo por slide) */
   speed?: number;
   responsive?: {
     base?: number;
@@ -38,6 +38,22 @@ interface LogoCarouselProps {
 }
 
 const SWIPE_THRESHOLD = 50;
+const RESUME_AFTER_INTERACTION_MS = 9000;
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReduced(!!mq.matches);
+    onChange();
+    mq.addEventListener?.("change", onChange);
+    return () => mq.removeEventListener?.("change", onChange);
+  }, []);
+
+  return reduced;
+}
 
 export default function LogoCarousel({
   items,
@@ -45,11 +61,13 @@ export default function LogoCarousel({
   subtitle = "",
   variant = "clients",
   autoPlay = true,
-  speed = 30,
+  speed = 4, // ✅ antes 30, ahora se nota y se siente premium
   responsive = { base: 2, sm: 3, md: 4, lg: 5, xl: 6 },
   gapPx = 32,
   className,
 }: LogoCarouselProps) {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(responsive.base || 2);
 
@@ -61,7 +79,11 @@ export default function LogoCarousel({
   const pointerId = useRef<number | null>(null);
   const didSwipe = useRef(false);
 
-  const isPaused = isHovered || isFocused || isDragging;
+  // ✅ pausa premium: si el usuario interactúa (flecha/dots/swipe), pausamos un rato y luego reanudamos
+  const [interactionPause, setInteractionPause] = useState(false);
+  const resumeTimerRef = useRef<number | null>(null);
+
+  const isPaused = isHovered || isFocused || isDragging || interactionPause;
 
   const resolveVisibleItems = useCallback(
     (width: number) => {
@@ -112,25 +134,66 @@ export default function LogoCarousel({
     });
   }, [totalSlides]);
 
+  const scheduleResume = useCallback(() => {
+    if (!autoPlay) return;
+    if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+    setInteractionPause(true);
+    resumeTimerRef.current = window.setTimeout(() => {
+      setInteractionPause(false);
+    }, RESUME_AFTER_INTERACTION_MS);
+  }, [autoPlay]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+    };
+  }, []);
+
   const handlePrev = useCallback(() => {
     if (!canNavigate) return;
+    scheduleResume();
     setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
-  }, [canNavigate, totalSlides]);
+  }, [canNavigate, totalSlides, scheduleResume]);
 
   const handleNext = useCallback(() => {
     if (!canNavigate) return;
+    scheduleResume();
     setCurrentIndex((prev) => (prev + 1) % totalSlides);
-  }, [canNavigate, totalSlides]);
+  }, [canNavigate, totalSlides, scheduleResume]);
+
+  // ✅ pausa cuando pestaña no visible (evita “saltos” al volver)
+  const [tabHidden, setTabHidden] = useState(false);
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const onVis = () => setTabHidden(document.hidden);
+    onVis();
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, []);
 
   useEffect(() => {
-    if (!autoPlay || isPaused || !canNavigate) return;
+    if (!autoPlay) return;
+    if (prefersReducedMotion) return;
+    if (tabHidden) return;
+    if (isPaused) return;
+    if (!canNavigate) return;
+
+    const intervalMs = Math.max(2, speed) * 1000;
 
     const interval = window.setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % totalSlides);
-    }, speed * 1000);
+    }, intervalMs);
 
     return () => window.clearInterval(interval);
-  }, [autoPlay, isPaused, canNavigate, totalSlides, speed]);
+  }, [
+    autoPlay,
+    prefersReducedMotion,
+    tabHidden,
+    isPaused,
+    canNavigate,
+    totalSlides,
+    speed,
+  ]);
 
   const finishDrag = useCallback((el?: HTMLDivElement) => {
     pointerStartX.current = null;
@@ -165,6 +228,7 @@ export default function LogoCarousel({
     const delta = event.clientX - pointerStartX.current;
     if (!didSwipe.current && Math.abs(delta) > SWIPE_THRESHOLD) {
       didSwipe.current = true;
+      scheduleResume();
       delta > 0 ? handlePrev() : handleNext();
     }
   };
@@ -208,6 +272,20 @@ export default function LogoCarousel({
       )}
 
       <div className="relative">
+        {/* ✅ máscaras laterales (premium) */}
+        {canNavigate && (
+          <>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 md:w-14 bg-gradient-to-r from-background to-transparent"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 md:w-14 bg-gradient-to-l from-background to-transparent"
+            />
+          </>
+        )}
+
         {canNavigate && (
           <>
             <button
@@ -256,7 +334,10 @@ export default function LogoCarousel({
           style={{ touchAction: "pan-y" }}
         >
           <div
-            className="flex transition-transform duration-500 ease-out will-change-transform"
+            className={cn(
+              "flex will-change-transform",
+              prefersReducedMotion ? "transition-none" : "transition-transform duration-700 ease-out"
+            )}
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {slides.map((slide, slideIndex) => {
@@ -277,20 +358,17 @@ export default function LogoCarousel({
                           <div
                             key={item.id}
                             className={cn(
-                              // ✅ CARD ULTRA PREMIUM (más horizontal)
                               "group relative overflow-hidden rounded-2xl",
                               "border border-border/40 bg-card/70 backdrop-blur",
                               "ring-1 ring-white/5",
                               "shadow-[0_10px_30px_-22px_rgba(0,0,0,0.55)]",
                               "transition-all duration-500",
                               "hover:shadow-[0_22px_60px_-34px_rgba(0,0,0,0.65)] hover:border-accent/30",
-                              // ✅ más ancho visual: menos alto + padding horizontal
                               "px-6 py-4 md:px-7 md:py-5",
                               "flex items-center justify-center",
                               "h-32 md:h-34 lg:h-36"
                             )}
                           >
-                            {/* glow sutil */}
                             <div
                               aria-hidden="true"
                               className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -313,9 +391,7 @@ export default function LogoCarousel({
                                 fadeIn={false}
                                 className="w-full h-full"
                                 imgClassName={cn(
-                                  // ✅ más “relleno” dentro del card horizontal
                                   "w-full h-full max-h-20 md:max-h-24 object-contain",
-                                  "filter-none grayscale-0 saturate-100 brightness-100 opacity-100",
                                   "transition-transform duration-700 group-hover:scale-[1.05]",
                                   variant === "partners" &&
                                     "group-hover:saturate-110 group-hover:contrast-110"
@@ -376,7 +452,10 @@ export default function LogoCarousel({
             <button
               key={index}
               type="button"
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => {
+                scheduleResume();
+                setCurrentIndex(index);
+              }}
               className={cn(
                 "w-2 h-2 rounded-full transition-all duration-300",
                 index === currentIndex

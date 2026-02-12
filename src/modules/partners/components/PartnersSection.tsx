@@ -45,16 +45,18 @@ export function PartnersSection() {
             "px-3 sm:px-4 py-4"
           )}
         >
-          <LogoCarousel
-            items={carouselItems}
-            // ✅ Evita doble título si ya renderizas el header aquí arriba
-            title={undefined}
-            subtitle={undefined}
-            variant="partners"
-            responsive={{ base: 2, sm: 3, md: 4, lg: 5, xl: 8 }}
-            gapPx={16}
-            className={cn("bg-transparent rounded-xl")}
-          />
+<LogoCarousel
+  items={carouselItems}
+  title={undefined}
+  subtitle={undefined}
+  variant="partners"
+  autoPlay
+  speed={3}                 // ✅ antes quedaba en 30s por defecto
+  responsive={{ base: 2, sm: 3, md: 4, lg: 5, xl: 8 }}
+  gapPx={16}
+  className={cn("bg-transparent rounded-xl")}
+/>
+
         </div>
       </div>
     </section>

@@ -1,16 +1,22 @@
+// src/modules/projects/components/ProjectDetailModal.tsx
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, X, Building2 } from "lucide-react";
-import { useState, useEffect } from "react";
-import type { Project } from "@/modules/projects/data/projects";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import {
+  Building2,
+  FolderKanban,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import type { Project } from "@/modules/projects/data/projects";
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -18,183 +24,283 @@ interface ProjectDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const AUTO_SLIDE_INTERVAL = 5000;
+const FALLBACK_PROJECT_IMAGE = "/placeholder-project.jpg";
+const AUTO_SLIDE_INTERVAL = 6000;
 
-export const ProjectDetailModal = ({ project, open, onOpenChange }: ProjectDetailModalProps) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+export const ProjectDetailModal = ({
+  project,
+  open,
+  onOpenChange,
+}: ProjectDetailModalProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const thumbsRef = useRef<HTMLDivElement | null>(null);
 
+  // Normaliza imágenes (por si viene algo raro)
+  const images = useMemo(() => {
+    const list = project?.images ?? [];
+    return Array.isArray(list) ? list.filter(Boolean) : [];
+  }, [project]);
+
+  // Reset al abrir/cambiar proyecto (y reactivar autoplay)
   useEffect(() => {
-    if (!project || project.images.length <= 1 || !isAutoPlaying) return;
+    if (!open || !project) return;
+    setActiveIndex(0);
+    setIsAutoPlaying(true);
+  }, [project, open]);
 
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) =>
-        prev === project.images.length - 1 ? 0 : prev + 1
-      );
+  // Autoplay
+  useEffect(() => {
+    if (!open) return;
+    if (!project) return;
+    if (!isAutoPlaying) return;
+    if (images.length <= 1) return;
+
+    const t = window.setInterval(() => {
+      setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     }, AUTO_SLIDE_INTERVAL);
 
-    return () => clearInterval(timer);
-  }, [project, isAutoPlaying]);
+    return () => window.clearInterval(t);
+  }, [open, project, isAutoPlaying, images.length]);
 
+  // Centrar miniatura activa
   useEffect(() => {
-    // Resetear índice cuando cambia el proyecto
-    setCurrentImageIndex(0);
-  }, [project]);
+    const el = thumbsRef.current;
+    if (!el) return;
+
+    const active = el.querySelector<HTMLButtonElement>(
+      `button[data-thumb="${activeIndex}"]`
+    );
+    if (!active) return;
+
+    active.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [activeIndex]);
 
   if (!project) return null;
 
-  const goToPrevious = () => {
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? project.images.length - 1 : prev - 1
-    );
+  const activeSrc = images[activeIndex] || FALLBACK_PROJECT_IMAGE;
+
+  const pauseAnd = (fn: () => void) => {
     setIsAutoPlaying(false);
+    fn();
   };
 
-  const goToNext = () => {
-    setCurrentImageIndex((prev) =>
-      prev === project.images.length - 1 ? 0 : prev + 1
+  const goPrev = () =>
+    pauseAnd(() =>
+      setActiveIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
     );
-    setIsAutoPlaying(false);
-  };
+
+  const goNext = () =>
+    pauseAnd(() =>
+      setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+    );
+
+  const selectIndex = (idx: number) =>
+    pauseAnd(() => setActiveIndex(idx));
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent 
-        className="max-w-6xl max-h-[90vh] overflow-y-auto p-0 gap-0"
-        aria-describedby="project-description"
-      >
-        {/* DialogHeader se encarga del botón de cerrar automáticamente */}
-        <DialogHeader className="px-6 pt-6 pb-0">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <DialogTitle className="text-2xl md:text-3xl font-heading font-bold">
+      {/* ✅ dejamos el botón X nativo de DialogContent (shadcn)
+          y quitamos el botón X custom del header para evitar duplicado */}
+      <DialogContent className="max-w-6xl max-h-[92vh] overflow-y-auto overflow-x-hidden p-0 rounded-2xl border-border/60">
+        {/* HEADER */}
+        <DialogHeader className="px-6 pt-5 pb-4">
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <DialogTitle className="text-2xl md:text-3xl font-heading font-bold tracking-tight">
                 {project.name}
               </DialogTitle>
-              <div className="flex items-center gap-2 mt-2">
-                <Badge variant="secondary">
-                  <Building2 className="w-3 h-3 mr-1" />
+
+              <DialogDescription className="sr-only">
+                Información detallada del proyecto seleccionado.
+              </DialogDescription>
+
+              <div className="flex flex-wrap items-center gap-2 mt-2">
+                <Badge variant="secondary" className="text-sm gap-1.5 py-1.5">
+                  <Building2 className="w-3.5 h-3.5" />
                   {project.client}
                 </Badge>
-                <Badge variant="outline">
+
+                <Badge variant="outline" className="text-sm gap-1.5 py-1.5">
+                  <FolderKanban className="w-3.5 h-3.5" />
                   {project.category}
                 </Badge>
+
+                {images.length > 1 && (
+                  <Badge
+                    variant="outline"
+                    className="text-sm py-1.5 text-muted-foreground"
+                  >
+                    {activeIndex + 1} / {images.length}
+                  </Badge>
+                )}
               </div>
             </div>
           </div>
+
+          <div className="mt-4 h-px w-full bg-border/60" />
         </DialogHeader>
 
-        {/* Carrusel de imágenes */}
-        <div className="relative mt-6">
-          <div className="relative aspect-video bg-muted">
-            <img
-              src={project.images[currentImageIndex]}
-              alt={`${project.name} - Imagen ${currentImageIndex + 1}`}
-              className="w-full h-full object-contain"
-              loading="lazy"
-            />
-
-            {project.images.length > 1 && (
-              <>
-                <button
-                  onClick={goToPrevious}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
-                  aria-label="Imagen anterior"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-
-                <button
-                  onClick={goToNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
-                  aria-label="Siguiente imagen"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-
-                {/* Indicadores */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                  {project.images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        setCurrentImageIndex(index);
-                        setIsAutoPlaying(false);
-                      }}
-                      className={cn(
-                        "w-2 h-2 rounded-full transition-all",
-                        index === currentImageIndex
-                          ? "bg-primary w-6"
-                          : "bg-primary/50 hover:bg-primary/80"
-                      )}
-                      aria-label={`Ir a imagen ${index + 1}`}
-                    />
-                  ))}
-                </div>
-
-                {/* Contador */}
-                <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm">
-                  {currentImageIndex + 1} / {project.images.length}
-                </div>
-              </>
+        {/* CONTENT */}
+        <div className="px-6 pb-6">
+          <div
+            className={cn(
+              "grid gap-6",
+              "md:grid-cols-[1.35fr_1fr]",
+              "items-start"
             )}
-          </div>
+          >
+            {/* IZQUIERDA: Media */}
+            <Card className="rounded-2xl border-border/60 shadow-sm overflow-hidden">
+              <div className="p-4">
+                <div className="relative rounded-xl overflow-hidden border border-border/60 bg-secondary">
+                  <div className="relative aspect-video w-full">
+                    {/* Fondo blur */}
+                    <img
+                      src={activeSrc}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-25"
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        e.currentTarget.src = FALLBACK_PROJECT_IMAGE;
+                      }}
+                    />
 
-          {/* Miniaturas */}
-          {project.images.length > 1 && (
-            <div className="flex gap-2 p-4 overflow-x-auto">
-              {project.images.map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setCurrentImageIndex(index);
-                    setIsAutoPlaying(false);
-                  }}
-                  className={cn(
-                    "flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 transition-all",
-                    index === currentImageIndex
-                      ? "border-accent"
-                      : "border-transparent hover:border-muted-foreground/30"
-                  )}
-                  aria-label={`Ver imagen ${index + 1}`}
-                >
-                  <img
-                    src={img}
-                    alt={`Miniatura ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </button>
-              ))}
+                    {/* Imagen principal */}
+                    <img
+                      key={`${project.id}-active-${activeIndex}`}
+                      src={activeSrc}
+                      alt={project.name}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        e.currentTarget.src = FALLBACK_PROJECT_IMAGE;
+                      }}
+                      className="absolute inset-0 m-auto max-w-[98%] max-h-[98%] object-contain block"
+                    />
+
+                    {images.length > 1 && (
+                      <>
+                        <button
+                          type="button"
+                          onClick={goPrev}
+                          className={cn(
+                            "absolute left-3 top-1/2 -translate-y-1/2",
+                            "w-10 h-10 rounded-full",
+                            "bg-background/80 backdrop-blur-md border border-border/60",
+                            "inline-flex items-center justify-center",
+                            "transition hover:bg-background hover:shadow-sm",
+                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35"
+                          )}
+                          aria-label="Imagen anterior"
+                        >
+                          <ChevronLeft className="h-5 w-5" />
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={goNext}
+                          className={cn(
+                            "absolute right-3 top-1/2 -translate-y-1/2",
+                            "w-10 h-10 rounded-full",
+                            "bg-background/80 backdrop-blur-md border border-border/60",
+                            "inline-flex items-center justify-center",
+                            "transition hover:bg-background hover:shadow-sm",
+                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35"
+                          )}
+                          aria-label="Siguiente imagen"
+                        >
+                          <ChevronRight className="h-5 w-5" />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Miniaturas */}
+                {images.length > 1 && (
+                  <div
+                    ref={thumbsRef}
+                    className={cn(
+                      "mt-4 flex gap-2 overflow-x-auto pb-1",
+                      "custom-scrollbar"
+                    )}
+                  >
+                    {images.map((img, idx) => {
+                      const isActive = idx === activeIndex;
+                      return (
+                        <button
+                          key={`${project.id}-thumb-${idx}`}
+                          data-thumb={idx}
+                          type="button"
+                          onClick={() => selectIndex(idx)}
+                          className={cn(
+                            "flex-shrink-0 w-20 h-16 rounded-xl overflow-hidden border transition",
+                            isActive
+                              ? "border-primary ring-2 ring-primary/25"
+                              : "border-border/60 hover:border-primary/50"
+                          )}
+                          aria-label={`Ver imagen ${idx + 1} de ${project.name}`}
+                          aria-pressed={isActive}
+                        >
+                          <img
+                            src={img}
+                            alt={`${project.name} - ${idx + 1}`}
+                            className="w-full h-full object-cover block"
+                            loading="lazy"
+                            decoding="async"
+                            onError={(e) => {
+                              e.currentTarget.src = FALLBACK_PROJECT_IMAGE;
+                            }}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </Card>
+
+            {/* DERECHA: Info */}
+            <div className="space-y-4">
+              <Card className="p-5 rounded-2xl border-border/60 shadow-sm">
+                <h3 className="text-base md:text-lg font-semibold mb-2">
+                  Descripción del Proyecto
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {project.description ||
+                    "Proyecto desarrollado con altos estándares técnicos y cumplimiento normativo."}
+                </p>
+              </Card>
+
+              <Card className="p-5 rounded-2xl border-border/60 shadow-sm">
+                <h3 className="text-base md:text-lg font-semibold mb-4">
+                  Datos clave
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-border/60 bg-card p-4">
+                    <div className="text-xs text-muted-foreground mb-1">
+                      Cliente
+                    </div>
+                    <div className="font-semibold">{project.client}</div>
+                  </div>
+
+                  <div className="rounded-xl border border-border/60 bg-card p-4">
+                    <div className="text-xs text-muted-foreground mb-1">
+                      Categoría
+                    </div>
+                    <div className="font-semibold">{project.category}</div>
+                  </div>
+                </div>
+              </Card>
             </div>
-          )}
-        </div>
-
-        {/* Información del proyecto */}
-        <div className="p-6 space-y-6">
-          {/* Descripción */}
-          <Card className="p-6" id="project-description">
-            <h3 className="text-lg font-semibold mb-3">Descripción del Proyecto</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              {project.description || "Proyecto desarrollado por OP Ingeniería. Implementación completa con altos estándares técnicos, calidad industrial y cumplimiento normativo."}
-            </p>
-          </Card>
-
-          {/* Detalles */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <Card className="p-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-                <Building2 className="w-4 h-4" />
-                <span>Cliente</span>
-              </div>
-              <p className="font-medium">{project.client}</p>
-            </Card>
-
-            <Card className="p-4">
-              <div className="text-sm text-muted-foreground mb-1">
-                <span>Categoría</span>
-              </div>
-              <p className="font-medium">{project.category}</p>
-            </Card>
           </div>
         </div>
       </DialogContent>

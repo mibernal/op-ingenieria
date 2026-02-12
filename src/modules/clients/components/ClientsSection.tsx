@@ -45,20 +45,18 @@ export function ClientsSection() {
             "px-3 sm:px-4 py-4"
           )}
         >
-          <LogoCarousel
-            items={carouselItems}
-            // ✅ Para evitar doble título si ya estás usando el header de arriba:
-            title={undefined}
-            subtitle={undefined}
-            variant="clients"
-            responsive={{ base: 2, sm: 3, md: 4, lg: 5, xl: 6 }}
-            gapPx={20}
-            className={cn(
-              "bg-transparent",
-              // suaviza el contorno visual del carrusel, sin crear espacio extra
-              "rounded-xl"
-            )}
-          />
+<LogoCarousel
+  items={carouselItems}
+  title={undefined}
+  subtitle={undefined}
+  variant="partners"
+  autoPlay
+  speed={3}                 // ✅ antes quedaba en 30s por defecto
+  responsive={{ base: 2, sm: 3, md: 4, lg: 5, xl: 8 }}
+  gapPx={16}
+  className={cn("bg-transparent rounded-xl")}
+/>
+
         </div>
       </div>
     </section>

@@ -1,9 +1,28 @@
 // src/core/services/clientsService.ts
-import { clients } from '@/modules/projects/data/clientsPartners'
-import type { Client } from '@/core/domain/client'
+import type { Client } from "@/core/domain/client";
+import {
+  clients,
+  getClients,
+  getFeaturedClients,
+  getClientsByCategory,
+} from "@/modules/clients/data/clients";
 
 export const clientsService = {
-  async list(): Promise<Client[]> {
-    return clients
-  }
-}
+  // Canon
+  list(): Client[] {
+    return clients;
+  },
+
+  // Alias compat
+  getClients(): Client[] {
+    return getClients();
+  },
+
+  featured(): Client[] {
+    return getFeaturedClients();
+  },
+
+  byCategory(category: string): Client[] {
+    return getClientsByCategory(category);
+  },
+} as const;

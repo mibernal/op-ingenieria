@@ -1,14 +1,26 @@
+// src/modules/partners/data/partners.ts
 import type { Partner } from "@/core/domain/partner";
 import data from "./partners.json";
 import { publicAsset } from "@/lib/assets";
 
-function normalizePartner(p: any): any {
-  // Si tu JSON tiene "logo" o "image" o algo parecido
-  if (p?.logo) p.logo = publicAsset(p.logo);
-  if (p?.image) p.image = publicAsset(p.image);
-  if (Array.isArray(p?.images)) p.images = p.images.map(publicAsset);
-  return p;
-}
+type PartnerJson = Record<string, unknown>;
 
-export const partners: Partner[] = (data as any[]).map(normalizePartner) as Partner[];
+const normalizePartner = (p: PartnerJson): Partner => {
+  const logo = typeof p.logo === "string" ? publicAsset(p.logo) : undefined;
+  const image = typeof p.image === "string" ? publicAsset(p.image) : undefined;
+  const images = Array.isArray(p.images)
+    ? (p.images.filter((x): x is string => typeof x === "string").map(publicAsset) as string[])
+    : undefined;
+
+  return {
+    ...(p as any),
+    ...(logo ? { logo } : {}),
+    ...(image ? { image } : {}),
+    ...(images ? { images } : {}),
+  } as Partner;
+};
+
+const raw = Array.isArray(data) ? (data as PartnerJson[]) : [];
+
+export const partners: Partner[] = raw.map(normalizePartner);
 export default partners;

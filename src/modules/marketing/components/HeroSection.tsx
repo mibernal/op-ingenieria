@@ -1,4 +1,4 @@
-// modules/marketing/components/HeroSection.tsx - FIX overlays + perf
+// src/modules/marketing/components/HeroSection.tsx - FIX overlays + perf (copy refined to avoid overlap)
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronRight, Sparkles } from "lucide-react";
@@ -21,7 +21,6 @@ const Hero = () => {
     setIsVisible(true);
   }, []);
 
-  // ✅ Evita Math.random en cada render (saltos / reflow)
   const floatingDots = useMemo<Dot[]>(() => {
     return Array.from({ length: 12 }).map((_, i) => ({
       left: `${Math.random() * 100}%`,
@@ -37,17 +36,14 @@ const Hero = () => {
       className={cn(
         "relative min-h-[85vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden",
         "bg-gradient-to-br from-primary via-primary/95 to-primary/90",
-        // ✅ ayuda a aislar stacking contexts (útil con framer/transforms)
         "isolate"
       )}
     >
-      {/* Background Pattern - decorativo: NO debe capturar clicks */}
       <div className="pointer-events-none absolute inset-0 opacity-10" aria-hidden="true">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:4rem_4rem]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] bg-gradient-to-r from-accent/20 to-transparent rounded-full blur-3xl" />
       </div>
 
-      {/* Animated Grid Lines - decorativo: NO debe capturar clicks */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {[...Array(8)].map((_, i) => (
           <motion.div
@@ -55,41 +51,24 @@ const Hero = () => {
             className="absolute h-px w-full bg-gradient-to-r from-transparent via-accent/30 to-transparent"
             initial={{ x: "-100%" }}
             animate={{ x: "100%" }}
-            transition={{
-              duration: 20,
-              delay: i * 2,
-              repeat: Infinity,
-              ease: "linear",
-            }}
+            transition={{ duration: 20, delay: i * 2, repeat: Infinity, ease: "linear" }}
             style={{ top: `${(i + 1) * 12}%` }}
           />
         ))}
       </div>
 
-      {/* Floating Elements - decorativo: NO debe capturar clicks */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         {floatingDots.map((dot, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-accent/50 rounded-full"
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: dot.duration,
-              repeat: Infinity,
-              delay: dot.delay,
-            }}
-            style={{
-              left: dot.left,
-              top: dot.top,
-            }}
+            animate={{ y: [0, -20, 0], opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: dot.duration, repeat: Infinity, delay: dot.delay }}
+            style={{ left: dot.left, top: dot.top }}
           />
         ))}
       </div>
 
-      {/* Main Content (clickeable) */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -98,7 +77,6 @@ const Hero = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center"
           >
-            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
@@ -111,7 +89,6 @@ const Hero = () => {
               </span>
             </motion.div>
 
-            {/* Title */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground mb-6 md:mb-8 leading-tight tracking-tight">
               <span className="block">Soluciones Integrales en</span>
               <span className="block bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mt-2">
@@ -119,20 +96,21 @@ const Hero = () => {
               </span>
             </h1>
 
-            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl lg:text-2xl text-primary-foreground/90 max-w-3xl mx-auto mb-10 md:mb-12 leading-relaxed font-light"
             >
-              Diseñamos, implementamos y ejecutamos proyectos con los más altos estándares de{" "}
-              <span className="font-semibold text-accent">calidad</span>,{" "}
-              <span className="font-semibold text-accent">innovación</span> y{" "}
-              <span className="font-semibold text-accent">confiabilidad</span> para el sector industrial y comercial.
+              Proyectos eléctricos, electromecánicos y energía solar para{" "}
+              <span className="font-semibold text-accent">industria</span>,{" "}
+              <span className="font-semibold text-accent">comercio</span> y{" "}
+              <span className="font-semibold text-accent">sector institucional</span>.
+              <span className="block mt-3 text-primary-foreground/75">
+                Respaldo energético, tableros, mantenimiento y modernización con ejecución en campo.
+              </span>
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -182,7 +160,6 @@ const Hero = () => {
               </Button>
             </motion.div>
 
-            {/* Trust stats */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -192,8 +169,8 @@ const Hero = () => {
               {[
                 { value: "300+", label: "Proyectos Completados" },
                 { value: "12+", label: "Años de Experiencia" },
-                { value: "100+", label: "Clientes Satisfechos" },
-                { value: "100%", label: "Compromiso Calidad" },
+                { value: "100+", label: "Clientes" },
+                { value: "100%", label: "Enfoque en calidad" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-2xl md:text-3xl font-bold text-accent mb-1">{stat.value}</div>
@@ -205,7 +182,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator - decorativo: NO debe capturar clicks */}
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}

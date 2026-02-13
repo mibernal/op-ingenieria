@@ -5,6 +5,10 @@ export const ROUTES = {
   PROJECTS: "/projects",
   CONTACT: "/contact",
   LEGAL: "/legal",
+  ABOUT: "/nosotros",
+  SERVICES: "/servicios",
+  CLIENTS: "/clientes",
+  PARTNERS: "/partners",
 } as const;
 
 export const HOME_SECTIONS = {
@@ -26,7 +30,7 @@ export type NavItem = {
   type: "route" | "section";
   hash?: `#${HomeSectionId}`;
   end?: boolean;
-  submenu?: NavItem[]; // ✅ nested
+  submenu?: NavItem[];
 };
 
 export const getNavHref = (item: NavItem) => {
@@ -35,20 +39,15 @@ export const getNavHref = (item: NavItem) => {
 };
 
 const q = (s: string) => encodeURIComponent(String(s ?? "").trim());
-const sortEs = (a: string, b: string) =>
-  a.localeCompare(b, "es", { sensitivity: "base" });
+const sortEs = (a: string, b: string) => a.localeCompare(b, "es", { sensitivity: "base" });
 
 /** ✅ Catalog querystring */
-export const getCatalogCategoryHref = (categoryId: string) =>
-  `${ROUTES.CATALOG}?cat=${q(categoryId)}`;
-
+export const getCatalogCategoryHref = (categoryId: string) => `${ROUTES.CATALOG}?cat=${q(categoryId)}`;
 export const getCatalogSubcategoryHref = (categoryId: string, subcategory: string) =>
   `${ROUTES.CATALOG}?cat=${q(categoryId)}&subcat=${q(subcategory)}`;
 
 /** ✅ Projects querystring */
-export const getProjectCategoryHref = (categoryId: string) =>
-  `${ROUTES.PROJECTS}?cat=${q(categoryId)}`;
-
+export const getProjectCategoryHref = (categoryId: string) => `${ROUTES.PROJECTS}?cat=${q(categoryId)}`;
 export const getProjectSubcategoryHref = (categoryId: string, subcategory: string) =>
   `${ROUTES.PROJECTS}?cat=${q(categoryId)}&subcat=${q(subcategory)}`;
 
@@ -59,28 +58,35 @@ export type MenuCategory = {
   subcategories?: string[];
 };
 
-/** Dedupe y ordena */
+/** Dedupe + normaliza + ordena */
 const normalizeCategories = (categories: MenuCategory[]) => {
   const map = new Map<string, MenuCategory>();
+
   for (const c of categories || []) {
     const id = String(c?.id ?? "").trim();
     const name = String(c?.name ?? "").trim();
     if (!id || !name) continue;
 
     if (!map.has(id)) {
-      map.set(id, { ...c, id, name, subcategories: Array.isArray(c.subcategories) ? c.subcategories : [] });
-    } else {
-      // merge subcategories si repite
-      const prev = map.get(id)!;
-      const nextSubs = [
-        ...(prev.subcategories ?? []),
-        ...(Array.isArray(c.subcategories) ? c.subcategories : []),
-      ]
-        .map((s) => String(s).trim())
-        .filter(Boolean);
-      prev.subcategories = Array.from(new Set(nextSubs));
-      map.set(id, prev);
+      map.set(id, {
+        ...c,
+        id,
+        name,
+        subcategories: Array.isArray(c.subcategories) ? c.subcategories : [],
+      });
+      continue;
     }
+
+    const prev = map.get(id)!;
+    const nextSubs = [
+      ...(prev.subcategories ?? []),
+      ...(Array.isArray(c.subcategories) ? c.subcategories : []),
+    ]
+      .map((s) => String(s).trim())
+      .filter(Boolean);
+
+    prev.subcategories = Array.from(new Set(nextSubs));
+    map.set(id, prev);
   }
 
   return Array.from(map.values()).sort((a, b) => sortEs(a.name, b.name));
@@ -117,11 +123,6 @@ const buildCategoryMenu = (opts: {
   });
 };
 
-/**
- * ✅ Builder final:
- * - Productos: categorías + subcategorías
- * - Proyectos: categorías + subcategorías
- */
 export const buildNavItems = (input?: {
   productCategories?: MenuCategory[];
   projectCategories?: MenuCategory[];
@@ -139,6 +140,7 @@ export const buildNavItems = (input?: {
   });
 
   return [
+    // Inicio se mantiene como sección en landing
     {
       label: "Inicio",
       to: ROUTES.HOME,
@@ -146,14 +148,11 @@ export const buildNavItems = (input?: {
       hash: `#${HOME_SECTIONS.HERO}`,
       end: true,
     },
-    {
-      label: "Nosotros",
-      to: ROUTES.HOME,
-      type: "section",
-      hash: `#${HOME_SECTIONS.ABOUT}`,
-    },
 
-    // ✅ PRODUCTOS (submenu dinámico)
+    // ✅ Directo a página (sin “Resumen”)
+    { label: "Nosotros", to: ROUTES.ABOUT, type: "route" },
+
+    // Productos (page) + submenu dinámico
     {
       label: "Productos",
       to: ROUTES.CATALOG,
@@ -163,14 +162,10 @@ export const buildNavItems = (input?: {
         : [{ label: "Ver catálogo", to: ROUTES.CATALOG, type: "route" }],
     },
 
-    {
-      label: "Servicios",
-      to: ROUTES.HOME,
-      type: "section",
-      hash: `#${HOME_SECTIONS.SERVICES}`,
-    },
+    // ✅ Directo a página (sin “Resumen”)
+    { label: "Servicios", to: ROUTES.SERVICES, type: "route" },
 
-    // ✅ PROYECTOS (submenu dinámico)
+    // Proyectos (page) + submenu dinámico
     {
       label: "Proyectos",
       to: ROUTES.PROJECTS,
@@ -180,18 +175,14 @@ export const buildNavItems = (input?: {
         : [{ label: "Ver proyectos", to: ROUTES.PROJECTS, type: "route" }],
     },
 
-    {
-      label: "Clientes",
-      to: ROUTES.HOME,
-      type: "section",
-      hash: `#${HOME_SECTIONS.CLIENTS}`,
-    },
-    {
-  label: "Contacto",
-  to: ROUTES.HOME,
-  type: "section",
-  hash: `#${HOME_SECTIONS.CONTACT}`, // #contacto
-},
+    // ✅ Directo a página
+    { label: "Clientes", to: ROUTES.CLIENTS, type: "route" },
+
+    // ✅ Directo a página (arregla el comportamiento esperado)
+    { label: "Partners", to: ROUTES.PARTNERS, type: "route" },
+
+    // Contacto (page)
+    { label: "Contacto", to: ROUTES.CONTACT, type: "route" },
   ];
 };
 

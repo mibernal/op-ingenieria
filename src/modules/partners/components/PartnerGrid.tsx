@@ -10,3 +10,6 @@
       </div>
     );
   }
+
+
+  export default PartnerGrid;

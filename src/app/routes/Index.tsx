@@ -1,10 +1,9 @@
-//src/app/routes/Index.tsx
-import { Suspense, lazy, useEffect } from "react";
+// src/app/routes/Index.tsx
+import { Suspense, lazy } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
-// Lazy loading para LandingPage
 const LandingPage = lazy(() => import("@/modules/marketing/pages/LandingPage"));
 
 const Index = () => {

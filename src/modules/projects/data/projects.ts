@@ -1,3 +1,4 @@
+//src/modules/projects/data/projects.ts
 import projectsData from "./projects_normalized.json";
 import { publicAsset, publicAssets } from "@/lib/assets";
 

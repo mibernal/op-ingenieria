@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MessageCircle, Mail, ChevronLeft, ChevronRight } from "lucide-react";
+import { MessageCircle, ChevronLeft, ChevronRight, Send } from "lucide-react";
 import type { Product } from "@/modules/catalog/data/products";
 import { Card } from "@/components/ui/card";
 import { categories } from "@/modules/catalog/data/products";
 import { cn } from "@/lib/utils";
+import { buildWhatsAppUrl, buildContactFormHref } from "@/shared/utils/quote";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -24,11 +25,7 @@ interface ProductDetailModalProps {
 const FALLBACK_PRODUCT_IMAGE = "/placeholder-product.jpg";
 const AUTO_SLIDE_INTERVAL = 6000;
 
-export const ProductDetailModal = ({
-  product,
-  open,
-  onOpenChange,
-}: ProductDetailModalProps) => {
+export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const thumbsRef = useRef<HTMLDivElement | null>(null);
@@ -47,10 +44,7 @@ export const ProductDetailModal = ({
 
   // Autoplay
   useEffect(() => {
-    if (!open) return;
-    if (!product) return;
-    if (!isAutoPlaying) return;
-    if (images.length <= 1) return;
+    if (!open || !product || !isAutoPlaying || images.length <= 1) return;
 
     const t = window.setInterval(() => {
       setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -64,9 +58,7 @@ export const ProductDetailModal = ({
     const el = thumbsRef.current;
     if (!el) return;
 
-    const active = el.querySelector<HTMLButtonElement>(
-      `button[data-thumb="${activeIndex}"]`
-    );
+    const active = el.querySelector<HTMLButtonElement>(`button[data-thumb="${activeIndex}"]`);
     if (!active) return;
 
     active.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
@@ -85,40 +77,22 @@ export const ProductDetailModal = ({
   };
 
   const goPrev = () =>
-    pauseAnd(() =>
-      setActiveIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-    );
+    pauseAnd(() => setActiveIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1)));
 
   const goNext = () =>
-    pauseAnd(() =>
-      setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-    );
+    pauseAnd(() => setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1)));
 
   const selectIndex = (idx: number) => pauseAnd(() => setActiveIndex(idx));
 
   const handleWhatsApp = () => {
-    const message = encodeURIComponent(
-      `Hola, me interesa obtener información sobre: ${product.title}`
-    );
-    window.open(`https://wa.me/573133638760?text=${message}`, "_blank");
+    window.open(buildWhatsAppUrl(product), "_blank", "noopener,noreferrer");
   };
 
-  const handleEmail = () => {
-    const subject = encodeURIComponent(`Cotización: ${product.title}`);
-    const body = encodeURIComponent(
-      `Hola,\n\nMe interesa obtener información y cotización del producto:\n\n${product.title}\n\nQuedo atento a su respuesta.`
-    );
-    window.open(
-      `mailto:info@opingenieria.com?subject=${subject}&body=${body}`,
-      "_blank"
-    );
-  };
+  const contactFormHref = buildContactFormHref(product);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      {/* ✅ dejamos el X nativo del DialogContent (shadcn) para evitar doble botón */}
       <DialogContent className="max-w-6xl max-h-[92vh] overflow-y-auto overflow-x-hidden p-0 rounded-2xl border-border/60">
-        {/* HEADER premium */}
         <DialogHeader className="px-6 pt-5 pb-4">
           <div className="min-w-0">
             <DialogTitle className="text-2xl md:text-3xl font-heading font-bold tracking-tight">
@@ -141,10 +115,7 @@ export const ProductDetailModal = ({
               )}
 
               {images.length > 1 && (
-                <Badge
-                  variant="outline"
-                  className="text-sm py-1.5 text-muted-foreground"
-                >
+                <Badge variant="outline" className="text-sm py-1.5 text-muted-foreground">
                   {activeIndex + 1} / {images.length}
                 </Badge>
               )}
@@ -154,10 +125,9 @@ export const ProductDetailModal = ({
           <div className="mt-4 h-px w-full bg-border/60" />
         </DialogHeader>
 
-        {/* CONTENT */}
         <div className="px-6 pb-6">
           <div className={cn("grid gap-6", "md:grid-cols-[1.35fr_1fr]", "items-start")}>
-            {/* IZQUIERDA: Media premium */}
+            {/* Media */}
             <Card className="rounded-2xl border-border/60 shadow-sm overflow-hidden">
               <div className="p-4">
                 <div className="relative rounded-xl overflow-hidden border border-border/60 bg-secondary">
@@ -170,21 +140,17 @@ export const ProductDetailModal = ({
                       className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-25"
                       loading="lazy"
                       decoding="async"
-                      onError={(e) => {
-                        e.currentTarget.src = FALLBACK_PRODUCT_IMAGE;
-                      }}
+                      onError={(e) => (e.currentTarget.src = FALLBACK_PRODUCT_IMAGE)}
                     />
 
-                    {/* imagen principal */}
+                    {/* main image */}
                     <img
                       key={`${product.id}-active-${activeIndex}`}
                       src={activeSrc}
                       alt={product.title}
                       loading="lazy"
                       decoding="async"
-                      onError={(e) => {
-                        e.currentTarget.src = FALLBACK_PRODUCT_IMAGE;
-                      }}
+                      onError={(e) => (e.currentTarget.src = FALLBACK_PRODUCT_IMAGE)}
                       className="absolute inset-0 m-auto max-w-[98%] max-h-[98%] object-contain block"
                     />
 
@@ -226,7 +192,7 @@ export const ProductDetailModal = ({
                   </div>
                 </div>
 
-                {/* Miniaturas */}
+                {/* Thumbs */}
                 {images.length > 1 && (
                   <div
                     ref={thumbsRef}
@@ -255,9 +221,7 @@ export const ProductDetailModal = ({
                             className="w-full h-full object-cover block"
                             loading="lazy"
                             decoding="async"
-                            onError={(e) => {
-                              e.currentTarget.src = FALLBACK_PRODUCT_IMAGE;
-                            }}
+                            onError={(e) => (e.currentTarget.src = FALLBACK_PRODUCT_IMAGE)}
                           />
                         </button>
                       );
@@ -267,7 +231,7 @@ export const ProductDetailModal = ({
               </div>
             </Card>
 
-            {/* DERECHA: Info */}
+            {/* Info + CTA */}
             <div className="space-y-4">
               <Card className="p-5 rounded-2xl border-border/60 shadow-sm">
                 <h3 className="text-base md:text-lg font-semibold mb-2">Descripción</h3>
@@ -286,18 +250,23 @@ export const ProductDetailModal = ({
                 </Card>
               )}
 
-              <div className="flex flex-col sm:flex-row gap-3 pt-1">
-                <Button
-                  onClick={handleWhatsApp}
-                  className="flex-1 gap-2 bg-accent hover:bg-accent/90"
-                >
+              {/* ✅ CTA premium: WhatsApp + Formulario */}
+              <div className="grid gap-3 pt-1">
+                <Button onClick={handleWhatsApp} className="gap-2 bg-accent hover:bg-accent/90">
                   <MessageCircle className="h-4 w-4" />
                   Cotizar por WhatsApp
                 </Button>
-                <Button onClick={handleEmail} variant="outline" className="flex-1 gap-2">
-                  <Mail className="h-4 w-4" />
-                  Cotizar por Email
+
+                <Button asChild variant="secondary" className="gap-2">
+                  <a href={contactFormHref}>
+                    <Send className="h-4 w-4" />
+                    Cotizar en formulario
+                  </a>
                 </Button>
+
+                <p className="text-xs text-muted-foreground">
+                  Recomendado: <span className="font-medium">Formulario</span> para asegurar entrega del mensaje.
+                </p>
               </div>
             </div>
           </div>

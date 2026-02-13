@@ -1,7 +1,15 @@
-import type { Partner } from "../domain/partner";
+// src/core/services/partnersService.ts
+import type { Partner } from "@/core/domain/partner";
 import { partners } from "@/modules/partners/data/partners";
 
-export const getPartners = (): Partner[] => partners;
+export const partnersService = {
+  // Canon
+  list(): Partner[] {
+    return partners;
+  },
 
-export const getFeaturedPartners = (): Partner[] =>
-  partners.filter(p => p.featured);
+  // Alias compat
+  getPartners(): Partner[] {
+    return partners;
+  },
+} as const;

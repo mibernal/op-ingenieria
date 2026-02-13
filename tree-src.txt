@@ -85,6 +85,13 @@ src
 │   ├── assets.ts
 │   └── utils.ts
 ├── modules
+│   ├── about
+│   │   ├── components
+│   │   │   └── AboutSection.tsx
+│   │   ├── content
+│   │   │   └── about.content.ts
+│   │   └── pages
+│   │       └── AboutPage.tsx
 │   ├── catalog
 │   │   ├── components
 │   │   │   ├── products
@@ -114,10 +121,12 @@ src
 │   │   ├── data
 │   │   │   ├── clients.json
 │   │   │   └── clients.ts
+│   │   ├── pages
+│   │   │   └── ClientsPage.tsx
 │   │   └── index.ts
 │   ├── contact
 │   │   ├── components
-│   │   │   ├── ContactSection.tsx
+│   │   │   ├── CTASection.tsx
 │   │   │   └── index.ts
 │   │   ├── pages
 │   │   │   └── ContactPage.tsx
@@ -128,11 +137,8 @@ src
 │   │   └── seo.ts
 │   ├── marketing
 │   │   ├── components
-│   │   │   ├── AboutSection.tsx
-│   │   │   ├── CTASection.tsx
 │   │   │   ├── HeroSection.tsx
-│   │   │   ├── index.ts
-│   │   │   └── ServicesSection.tsx
+│   │   │   └── index.ts
 │   │   ├── pages
 │   │   │   └── LandingPage.tsx
 │   │   └── seo.ts
@@ -142,36 +148,52 @@ src
 │   │   │   ├── PartnerCard.tsx
 │   │   │   ├── PartnerGrid.tsx
 │   │   │   └── PartnersSection.tsx
-│   │   └── data
-│   │       ├── partners.json
-│   │       └── partners.ts
+│   │   ├── data
+│   │   │   ├── partners.json
+│   │   │   └── partners.ts
+│   │   └── pages
+│   │       └── PartnersPage.tsx
 │   ├── projects
 │   │   ├── components
 │   │   │   ├── index.ts
 │   │   │   ├── ProjectCard.tsx
 │   │   │   ├── ProjectDetailModal.tsx
 │   │   │   ├── ProjectGrid.tsx
+│   │   │   ├── ProjectsExplorer.tsx
 │   │   │   └── ProjectsSection.tsx
 │   │   ├── data
-│   │   │   ├── clientsPartners.ts
 │   │   │   ├── projects.ts
 │   │   │   └── projects_normalized.json
 │   │   ├── pages
 │   │   │   └── ProjectsPage.tsx
 │   │   └── seo.ts
+│   ├── services
+│   │   ├── components
+│   │   │   └── ServicesSection.tsx
+│   │   └── pages
+│   │       └── ServicesPage.tsx
 │   └── index.ts
 ├── shared
 │   ├── components
 │   │   ├── LogoCarousel.tsx
-│   │   └── OptimizedImage.tsx
+│   │   ├── MetricsBlock.tsx
+│   │   ├── MetricsStrip.tsx
+│   │   ├── OptimizedImage.tsx
+│   │   ├── ProcessSteps.tsx
+│   │   ├── ProofChips.tsx
+│   │   ├── SectionDividerPremium.tsx
+│   │   ├── SectionHeader.tsx
+│   │   └── SectionShell.tsx
 │   ├── hooks
 │   │   ├── useIntersectionObserver.ts
 │   │   ├── useIsClient.ts
 │   │   └── useToast.ts
-│   └── skeletons
-│       ├── index.ts
-│       ├── ProductCardSkeleton.tsx
-│       └── ProductGridSkeleton.tsx
+│   ├── skeletons
+│   │   ├── index.ts
+│   │   ├── ProductCardSkeleton.tsx
+│   │   └── ProductGridSkeleton.tsx
+│   └── utils
+│       └── quote.ts
 ├── styles
 │   ├── animations.css
 │   ├── App.css

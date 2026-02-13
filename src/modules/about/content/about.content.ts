@@ -34,11 +34,11 @@ export const ABOUT_COPY = {
     titleA: "Ingeniería seria.",
     titleB: "Energía confiable.",
     subtitle:
-      "Continuidad electrica para operacion critica: diseno, ejecucion y puesta en marcha con pruebas y documentacion.",
+      "Ingenieria electrica y electromecanica para continuidad operativa en industria, comercio y sector institucional en Colombia.",
     positioningLine:
-      "Integramos soluciones electricas, electromecanicas y energia solar para operacion continua: protecciones, tableros, respaldo (UPS/baterias/plantas) y mantenimiento con evidencia tecnica.",
+      "Partimos de diagnostico en sitio, pasamos por ingenieria de detalle y cerramos con ejecucion en campo para reducir riesgos de operacion.",
     microProof:
-      "Metodo de punta a punta: diagnostico, diseno, suministro, instalacion, comisionamiento y documentacion.",
+      "Ruta completa: diagnostico, diseño, suministro, montaje, pruebas funcionales y entregables as-built para mantenimiento.",
     primaryCta: CTA_INTENT_COPY.diagnostic.form,
     secondaryCta: "Ver Nosotros",
   },

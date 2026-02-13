@@ -7,6 +7,7 @@ import SectionHeader from "@/shared/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/layout/NavLink";
 import { ROUTES } from "@/config/routes";
+import { buildContactIntentHref } from "@/shared/utils/contact-intent";
 
 import { clientsService } from "@/core/services/clientsService";
 import OptimizedImage from "@/shared/components/OptimizedImage";
@@ -57,7 +58,9 @@ export default function ClientsPage() {
               variant="outline"
               className="rounded-2xl border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30"
             >
-              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.secondaryCta}</NavLink>
+              <NavLink to={buildContactIntentHref({ intent: "diagnostico", source: "clients-page-hero" })}>
+                {copy.secondaryCta}
+              </NavLink>
             </Button>
           </div>
         </SectionShell>

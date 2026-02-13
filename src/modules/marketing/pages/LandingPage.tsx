@@ -15,15 +15,14 @@ export default function LandingPage() {
   return (
     <>
       <Seo {...landingSeo} />
-      {/* ✅ Ritmo premium: menos “space-y”, más secciones con fondos propios */}
       <div className="flex flex-col">
         <Hero />
-     {/*   <AboutSection />
-         <ProductsSection /> 
+        <AboutSection />
         <ServicesSection />
         <ProjectsSection />
+        <ProductsSection />
         <ClientsSection />
-        <PartnersSection />*/}
+        <PartnersSection />
         <CTASection />
       </div>
     </>

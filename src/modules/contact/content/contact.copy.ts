@@ -53,7 +53,7 @@ export const CONTACT_PAGE_COPY = {
       "En O&P Ingeniería diseñamos, implementamos y ejecutamos soluciones eléctricas e industriales con altos estándares de calidad, confiabilidad y seguridad.",
     primaryCta: CTA_INTENT_COPY.quote.form,
     secondaryCta: CTA_INTENT_COPY.quote.whatsapp,
-    footer: "Respuesta agil • Asesoria tecnica • Alcance definido",
+    footer: "Respuesta tecnica inicial en 24h habiles • Atiende un ingeniero • Alcance definido",
   },
   messaging: {
     lead: PAGE_MESSAGE_GUIDE.contact.lead,

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/layout/NavLink";
 import { ROUTES } from "@/config/routes";
 import { cn } from "@/lib/utils";
+import { buildContactIntentHref } from "@/shared/utils/contact-intent";
 import {
   ABOUT_BLOCKS,
   ABOUT_COPY,
@@ -44,7 +45,9 @@ export default function AboutPage() {
           <div className="mx-auto max-w-6xl">
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button asChild className="rounded-2xl bg-accent hover:bg-accent/90">
-                <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.heroCtaPrimary}</NavLink>
+                <NavLink to={buildContactIntentHref({ intent: "diagnostico", source: "about-page-hero" })}>
+                  {copy.heroCtaPrimary}
+                </NavLink>
               </Button>
               <Button
                 asChild

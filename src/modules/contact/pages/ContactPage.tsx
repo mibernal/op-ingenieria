@@ -14,23 +14,33 @@ import { cn } from "@/lib/utils";
 import SectionShell from "@/shared/components/SectionShell";
 import SectionHeader from "@/shared/components/SectionHeader";
 import { NavLink } from "@/components/layout/NavLink";
-import { ROUTES } from "@/config/routes";
 import { CONTACT_DATA, CONTACT_PAGE_COPY } from "@/modules/contact/content/contact.copy";
+import {
+  CONTACT_INTENT_PRESETS,
+  normalizeContactIntent,
+  type ContactIntent,
+  buildContactIntentHref,
+} from "@/shared/utils/contact-intent";
 
 const FORM_ACTION = `https://formsubmit.co/${CONTACT_DATA.email}`;
 const FORM_AJAX = `https://formsubmit.co/ajax/${CONTACT_DATA.email}`;
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
-function parseHashFormParams(hash: string) {
-  if (!hash) return null;
-  if (!hash.startsWith("#form")) return null;
+function parseContactFormParams(location: Location) {
+  const hash = location.hash || "";
+  const hasFormAnchor = hash.startsWith("#form");
 
-  const qIndex = hash.indexOf("?");
-  if (qIndex === -1) return { anchor: "form", params: new URLSearchParams() };
+  const mergedParams = new URLSearchParams(location.search);
+  if (hasFormAnchor) {
+    const qIndex = hash.indexOf("?");
+    if (qIndex !== -1) {
+      const hashParams = new URLSearchParams(hash.slice(qIndex + 1));
+      hashParams.forEach((value, key) => mergedParams.set(key, value));
+    }
+  }
 
-  const query = hash.slice(qIndex + 1);
-  return { anchor: "form", params: new URLSearchParams(query) };
+  return { anchor: hasFormAnchor ? "form" : null, params: mergedParams };
 }
 
 const CARD = cn(
@@ -48,6 +58,8 @@ export default function ContactPage() {
   const copy = CONTACT_PAGE_COPY;
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
 
+  const [leadIntent, setLeadIntent] = useState<ContactIntent>("general");
+  const [leadSource, setLeadSource] = useState("direct");
   const [subjectValue, setSubjectValue] = useState("");
   const [messageValue, setMessageValue] = useState("");
 
@@ -58,28 +70,38 @@ export default function ContactPage() {
   }, [subjectValue]);
 
   useEffect(() => {
-    const applyFromHash = () => {
-      const parsed = parseHashFormParams(window.location.hash);
-      if (!parsed) return;
+    const applyFromLocation = () => {
+      const parsed = parseContactFormParams(window.location);
+      const normalizedIntent = normalizeContactIntent(parsed.params.get("intent")) ?? "general";
+      const source = parsed.params.get("source")?.trim() || "direct";
+      const preset = CONTACT_INTENT_PRESETS[normalizedIntent];
 
-      const subj = parsed.params.get("subject") ?? "";
-      const msg = parsed.params.get("message") ?? "";
+      const subj = (parsed.params.get("subject") ?? "").trim();
+      const msg = (parsed.params.get("message") ?? "").trim();
+      const hasPrefill = Boolean(subj || msg || normalizedIntent !== "general");
 
-      if (subj) setSubjectValue(subj);
-      if (msg) setMessageValue(msg);
+      setLeadIntent(normalizedIntent);
+      setLeadSource(source);
 
-      const el = document.getElementById("form");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (hasPrefill) {
+        setSubjectValue(subj || preset.subject);
+        setMessageValue(msg || preset.message);
+      }
 
-      window.setTimeout(() => {
-        const subjectInput = document.getElementById("contact-subject") as HTMLInputElement | null;
-        subjectInput?.focus();
-      }, 250);
+      if (parsed.anchor === "form") {
+        const el = document.getElementById("form");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        window.setTimeout(() => {
+          const subjectInput = document.getElementById("contact-subject") as HTMLInputElement | null;
+          subjectInput?.focus();
+        }, 250);
+      }
     };
 
-    applyFromHash();
-    window.addEventListener("hashchange", applyFromHash);
-    return () => window.removeEventListener("hashchange", applyFromHash);
+    applyFromLocation();
+    window.addEventListener("hashchange", applyFromLocation);
+    return () => window.removeEventListener("hashchange", applyFromLocation);
   }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -108,6 +130,8 @@ export default function ContactPage() {
 
       setFormStatus("success");
       form.reset();
+      setLeadIntent("general");
+      setLeadSource("direct");
       setSubjectValue("");
       setMessageValue("");
     } catch {
@@ -135,7 +159,9 @@ export default function ContactPage() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="rounded-2xl bg-accent hover:bg-accent/90">
-              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.hero.primaryCta}</NavLink>
+              <NavLink to={buildContactIntentHref({ intent: "cotizacion", source: "contact-hero" })}>
+                {copy.hero.primaryCta}
+              </NavLink>
             </Button>
 
             <Button
@@ -232,6 +258,8 @@ export default function ContactPage() {
                   >
                     <input type="hidden" name="_template" value="table" />
                     <input type="hidden" name="_subject" value={computedFormSubmitSubject} />
+                    <input type="hidden" name="lead_intent" value={leadIntent} />
+                    <input type="hidden" name="lead_source" value={leadSource} />
 
                     {/* Honeypot */}
                     <input

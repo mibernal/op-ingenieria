@@ -14,6 +14,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { NavLink } from "@/components/layout/NavLink";
+import { buildContactIntentHref } from "@/shared/utils/contact-intent";
 import {
   ROUTES,
   getNavHref,
@@ -442,7 +443,10 @@ const Header = () => {
                 asChild
                 className="bg-accent hover:bg-accent/90 shadow-lg shadow-accent/20 rounded-xl"
               >
-                <NavLink to={`${ROUTES.CONTACT}#form`} activeClassName="text-inherit">
+                <NavLink
+                  to={buildContactIntentHref({ intent: "cotizacion", source: "header-desktop" })}
+                  activeClassName="text-inherit"
+                >
                   Solicitar cotización
                 </NavLink>
               </Button>
@@ -564,7 +568,7 @@ const Header = () => {
                   asChild
                 >
                   <NavLink
-                    to={`${ROUTES.CONTACT}#form`}
+                    to={buildContactIntentHref({ intent: "cotizacion", source: "header-mobile" })}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Solicitar cotización

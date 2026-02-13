@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/layout/NavLink";
 import { ROUTES } from "@/config/routes";
 import { CATALOG_COPY } from "@/modules/catalog/content/catalog.copy";
+import { buildContactIntentHref } from "@/shared/utils/contact-intent";
 
 const ProductGrid = lazy(() => import("@/modules/catalog/components/products/ProductGrid"));
 const ProductDetailModal = lazy(() => import("@/modules/catalog/components/products/ProductDetailModal"));
@@ -99,7 +100,9 @@ export default function CatalogPage() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="rounded-2xl bg-accent hover:bg-accent/90">
-              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.primaryCta}</NavLink>
+              <NavLink to={buildContactIntentHref({ intent: "cotizacion", source: "catalog-page-hero" })}>
+                {copy.primaryCta}
+              </NavLink>
             </Button>
 
             <Button

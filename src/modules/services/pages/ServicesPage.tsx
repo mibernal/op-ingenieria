@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/layout/NavLink";
 import { ROUTES } from "@/config/routes";
 import { Zap, Settings, Sun, Wrench, Lightbulb, Cable } from "lucide-react";
+import { buildContactIntentHref } from "@/shared/utils/contact-intent";
 
 const SERVICES = [
   {
@@ -96,7 +97,9 @@ export default function ServicesPage() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="rounded-2xl bg-accent hover:bg-accent/90">
-              <NavLink to={`${ROUTES.CONTACT}#form`}>Solicitar cotización</NavLink>
+              <NavLink to={buildContactIntentHref({ intent: "cotizacion", source: "services-page-hero" })}>
+                Solicitar cotización
+              </NavLink>
             </Button>
             <Button
               asChild

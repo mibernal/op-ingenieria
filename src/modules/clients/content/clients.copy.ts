@@ -17,13 +17,14 @@ export const CLIENTS_COPY = {
   },
   section: {
     eyebrow: "CLIENTES",
-    titleA: "Confianza construida",
-    titleB: "en campo",
+    titleA: "Confianza validada",
+    titleB: "en operacion",
     subtitle:
-      "Organizaciones que confian en nuestra ingenieria para continuidad energetica, energia solar y soluciones electricas de operacion critica.",
-    primaryCta: "Ver clientes",
-    secondaryCta: CTA_INTENT_COPY.diagnostic.form,
-    tertiaryCta: "Ver todo",
+      "Muestra de organizaciones en Colombia que han confiado proyectos de energia, respaldo y continuidad operativa.",
+    primaryCta: CTA_INTENT_COPY.cases.primary,
+    carouselTitle: "Organizaciones atendidas",
+    carouselSubtitle:
+      "Seleccion de entidades e industrias con proyectos ejecutados y documentados por nuestro equipo tecnico.",
   },
   messaging: {
     lead: PAGE_MESSAGE_GUIDE.clients.lead,

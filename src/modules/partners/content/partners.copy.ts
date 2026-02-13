@@ -1,5 +1,7 @@
 // src/modules/partners/content/partners.copy.ts
 
+import { CTA_INTENT_COPY } from "@/shared/content/copy-system";
+
 export type PartnerGroupCopy = {
   id: string;
   label: string;
@@ -10,6 +12,16 @@ export type PartnerGroupCopy = {
 };
 
 export const PARTNERS_COPY = {
+  preview: {
+    eyebrow: "PARTNERS",
+    titleA: "Ecosistema multi-marca",
+    titleB: "para operacion critica",
+    subtitle:
+      "Alianzas tecnicas para proyectos en Colombia, con integracion confiable, soporte local y continuidad operacional.",
+    specialtiesLabel: "Especialidades cubiertas",
+    brandsLabel: "Marcas integradas",
+    primaryCta: CTA_INTENT_COPY.diagnostic.form,
+  },
   section: {
     label: "ECOSISTEMA TECNICO",
     summary:
@@ -25,7 +37,7 @@ export const PARTNERS_COPY = {
 export const PARTNER_SELECTION_CRITERIA: string[] = [
   "Compatibilidad electrica y de control entre equipos.",
   "Disponibilidad local de repuestos y soporte.",
-  "Cumplimiento normativo y seguridad operativa.",
+  "Cumplimiento normativo (RETIE) y seguridad operativa.",
   "Desempeno comprobable en campo.",
 ];
 

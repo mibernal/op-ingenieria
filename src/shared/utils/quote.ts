@@ -1,5 +1,6 @@
 // src/shared/utils/quote.ts
 import type { Product } from "@/modules/catalog/data/products";
+import { buildContactIntentHref } from "@/shared/utils/contact-intent";
 
 const CONTACT = {
   email: "info@opingenieria.com",
@@ -56,10 +57,10 @@ export function buildMailtoHref(product: Product) {
 export function buildContactFormHref(product: Product) {
   const subject = buildQuoteSubject(product);
   const message = buildQuoteBody(product);
-
-  const params = new URLSearchParams();
-  params.set("subject", subject);
-  params.set("message", message);
-
-  return `/contact#form?${params.toString()}`;
+  return buildContactIntentHref({
+    intent: "cotizacion",
+    source: "catalog-modal",
+    subject,
+    message,
+  });
 }

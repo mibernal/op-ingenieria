@@ -6,16 +6,16 @@ export const MARKETING_COPY = {
     badge: "INGENIERIA ELECTRICA DESDE 2014",
     titleA: "Soluciones integrales en",
     titleB: "Ingenieria Electrica",
-    subtitle: "Proyectos electricos, electromecanicos y energia solar para",
+    subtitle: "Respaldo energetico, tableros, comisionamiento y mantenimiento para",
     subtitleDetail:
       "Respaldo energetico, tableros, mantenimiento y modernizacion con ejecucion en campo.",
-    primaryCta: "Explorar soluciones",
+    primaryCta: "Ver catalogo tecnico",
     secondaryCta: CTA_INTENT_COPY.cases.secondary,
     stats: [
-      { value: "300+", label: "Proyectos ejecutados" },
+      { value: "300+", label: "Proyectos ejecutados (historico)" },
       { value: "12+", label: "Anos de experiencia" },
-      { value: "100+", label: "Clientes atendidos" },
-      { value: "100%", label: "Enfoque en calidad" },
+      { value: "100+", label: "Clientes atendidos (historico)" },
+      { value: "24/7", label: "Continuidad operativa como criterio" },
     ],
   },
   messaging: {

@@ -2,6 +2,16 @@
 import { CTA_INTENT_COPY, CORE_MESSAGES, PAGE_MESSAGE_GUIDE } from "@/shared/content/copy-system";
 
 export const CATALOG_COPY = {
+  preview: {
+    eyebrow: "PRODUCTOS",
+    titleA: "Portafolio tecnico",
+    titleB: "por especialidad",
+    subtitle:
+      "Resumen de soluciones para preseleccion B2B antes de ingenieria de detalle y cotizacion con alcance claro.",
+    fallbackDescription:
+      "Solucion evaluada para continuidad operativa, seguridad y mantenibilidad.",
+    primaryCta: "Ver catalogo tecnico",
+  },
   page: {
     eyebrow: "PRODUCTOS",
     titleA: "Catalogo de",

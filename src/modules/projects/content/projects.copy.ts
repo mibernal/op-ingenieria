@@ -38,16 +38,16 @@ export const PROJECTS_COPY = {
   preview: {
     eyebrow: "PROYECTOS",
     titleA: "Evidencia en campo.",
-    titleB: "Resultados en operacion",
+    titleB: "Resultado verificable",
     subtitle:
-      "Muestra breve de implementaciones en continuidad energetica, respaldo, distribucion y energia solar.",
+      "Casos publicados en Colombia sobre continuidad energetica, respaldo y distribucion con pruebas funcionales y puesta en marcha.",
     fallbackDescription:
       "Implementacion en campo con enfoque en seguridad, pruebas y continuidad operativa.",
     cardCta: "Ver caso",
     bottomTitle: "Necesitas un caso similar en tu operacion?",
     bottomSubtitle:
       "Definimos alcance tecnico, criterios de aceptacion y plan de pruebas antes de cotizar.",
-    primaryCta: CTA_INTENT_COPY.diagnostic.form,
+    primaryCta: CTA_INTENT_COPY.cases.primary,
   },
   messaging: {
     lead: PAGE_MESSAGE_GUIDE.projects.lead,

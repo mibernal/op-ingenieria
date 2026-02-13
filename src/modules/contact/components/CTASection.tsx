@@ -1,8 +1,8 @@
 // src/modules/marketing/components/CTASection.tsx
 import { NavLink } from "@/components/layout/NavLink";
-import { ROUTES } from "@/config/routes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { buildContactIntentHref } from "@/shared/utils/contact-intent";
 import {
   Sparkles,
   Phone,
@@ -34,7 +34,7 @@ export function CTASection() {
       className={cn(
         "relative overflow-hidden",
         "bg-primary text-primary-foreground",
-        "py-12 md:py-14"
+        "py-10 md:py-12"
       )}
     >
       {/* Fondo decorativo sutil (marca) */}
@@ -57,13 +57,13 @@ export function CTASection() {
               {copy.title}
             </h2>
 
-            <p className="mt-4 text-base md:text-lg text-primary-foreground/80 leading-relaxed">
+            <p className="mt-4 text-sm md:text-base text-primary-foreground/80 leading-relaxed">
               {copy.subtitle}
             </p>
           </div>
 
           {/* ✅ Info rápida (del ContactSection) pero con look CTA */}
-          <div className="mt-8">
+          <div className="mt-6">
             <div
               className={cn(
                 "rounded-3xl border border-white/15 bg-white/5",
@@ -123,7 +123,7 @@ export function CTASection() {
           </div>
 
           {/* CTAs */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
             {/* ✅ Primario */}
             <Button
               size="lg"
@@ -138,7 +138,9 @@ export function CTASection() {
               )}
             >
               {/* ✅ Directo al form */}
-              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.primaryCta}</NavLink>
+              <NavLink to={buildContactIntentHref({ intent: "cotizacion", source: "landing-cta" })}>
+                {copy.primaryCta}
+              </NavLink>
             </Button>
 
             {/* ✅ Secundario (WhatsApp) */}
@@ -171,7 +173,7 @@ export function CTASection() {
             </Button>
           </div>
 
-          <p className="mt-4 text-center text-xs md:text-sm text-primary-foreground/70">
+          <p className="mt-3 text-center text-xs md:text-sm text-primary-foreground/70">
             {copy.footer}
           </p>
         </div>

@@ -270,6 +270,9 @@ export default function ProjectsExplorer({
             {categoriesWithAliases.map((category) => {
               const image = getCategoryImage(category.id);
               const count = categoryProjectsMap.get(category.id)?.length ?? 0;
+              const categoryDescription =
+                PROJECTS_COPY.explorer.categoryDescriptionsById[category.id as keyof typeof PROJECTS_COPY.explorer.categoryDescriptionsById] ??
+                PROJECTS_COPY.explorer.defaultCategoryDescription;
 
               return (
                 <button
@@ -325,7 +328,7 @@ export default function ProjectsExplorer({
                     </div>
 
                     <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                      Implementaciones reales enfocadas en respaldo, eficiencia y continuidad operativa.
+                      {categoryDescription}
                     </p>
                   </div>
                 </button>

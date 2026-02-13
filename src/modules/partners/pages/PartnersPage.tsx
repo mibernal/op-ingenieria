@@ -10,20 +10,20 @@ export default function PartnersPage() {
     <div className="min-h-screen bg-background flex flex-col">
       <Seo
         title="Partners | O&P Ingeniería"
-        description="Alianzas estratégicas y marcas para garantizar soporte, disponibilidad y escalabilidad."
+        description="Ecosistema de partners para operación crítica: interoperabilidad, disponibilidad y soporte técnico especializado."
       />
       <Header />
       <main className="flex-1">
-        <SectionShell variant="dark">
+        <SectionShell variant="dark" className="pt-10 pb-10 md:pt-14 md:pb-14">
           <SectionHeader
             eyebrow="PARTNERS"
             title={
               <>
-                Ecosistema para operación{" "}
-                <span className="text-accent">con soporte</span>.
+                Ecosistema de alianzas para{" "}
+                <span className="text-accent">operación crítica</span>.
               </>
             }
-            subtitle="Seleccionamos marcas por criterio técnico, disponibilidad y confiabilidad."
+            subtitle="Seleccionamos fabricantes por interoperabilidad, disponibilidad y soporte posventa con criterio de continuidad."
           />
         </SectionShell>
 

@@ -18,6 +18,7 @@ import {
   ClipboardList,
   ThermometerSun,
 } from "lucide-react";
+import { CTA_INTENT_COPY, CORE_MESSAGES } from "@/shared/content/copy-system";
 
 export type Metric = { value: string; label: string };
 export type Pillar = { icon: LucideIcon; title: string; desc: string };
@@ -33,63 +34,55 @@ export const ABOUT_COPY = {
     titleA: "Ingeniería seria.",
     titleB: "Energía confiable.",
     subtitle:
-      "Continuidad eléctrica para operación crítica: diseño, ejecución y puesta en marcha con pruebas y documentación.",
+      "Continuidad electrica para operacion critica: diseno, ejecucion y puesta en marcha con pruebas y documentacion.",
     positioningLine:
-      "Integramos soluciones eléctricas, electromecánicas y energía solar para operación continua: protecciones, tableros, respaldo (UPS/baterías/plantas) y mantenimiento con evidencias verificables.",
+      "Integramos soluciones electricas, electromecanicas y energia solar para operacion continua: protecciones, tableros, respaldo (UPS/baterias/plantas) y mantenimiento con evidencia tecnica.",
     microProof:
-      "Método de punta a punta: diagnóstico → diseño → suministro → instalación → comisionamiento → documentación. Sin improvisación.",
-    primaryCta: "Agendar diagnóstico",
+      "Metodo de punta a punta: diagnostico, diseno, suministro, instalacion, comisionamiento y documentacion.",
+    primaryCta: CTA_INTENT_COPY.diagnostic.form,
     secondaryCta: "Ver Nosotros",
   },
 
   page: {
     eyebrow: "NOSOTROS",
-    titleA: "Método industrial",
-    titleB: "para continuidad energética.",
+    titleA: "Ingeniería eléctrica y electromecánica",
+    titleB: "para operación confiable.",
     subtitle:
-      "Cuando una carga no puede fallar, importa el detalle: protecciones correctas, pruebas, criterios de aceptación y trazabilidad para operación y mantenimiento.",
-    heroCtaPrimary: "Hablar con un ingeniero",
-    heroCtaSecondary: "Ver proyectos",
+      "Integramos energía convencional y energía solar con foco en eficiencia, seguridad y continuidad operativa.",
+    heroCtaPrimary: CTA_INTENT_COPY.diagnostic.form,
+    heroCtaSecondary: CTA_INTENT_COPY.cases.primary,
 
-    identityEyebrow: "NUESTRA IDENTIDAD",
-    identityTitle: "Energía confiable, seguridad eléctrica y desempeño medible",
+    identityTitle: "Capacidad técnica para operación confiable y sostenible",
     identitySubtitle:
-      "Diseñamos y ejecutamos infraestructura eléctrica y electromecánica para industria, comercio e institucional: continuidad, eficiencia y soporte en campo.",
+      "Ingeniería eléctrica y electromecánica con enfoque en eficiencia y sostenibilidad: integramos energía convencional y energía solar para proyectos confiables, seguros y de alto desempeño.",
 
     workEyebrow: "CÓMO TRABAJAMOS",
     workTitle: "Diagnóstico → Diseño → Instalación → Pruebas → Puesta en marcha → Documentación",
     workSubtitle:
-      "Un flujo claro reduce reprocesos, evita paradas y deja evidencia para auditoría, operación y mantenimiento.",
+      "Un flujo claro reduce reprocesos, evita paradas y deja evidencia para auditoria, operacion y mantenimiento.",
 
     qualityEyebrow: "COMPROMISO DE CALIDAD",
-    qualityTitle: "Rigurosidad técnica, seguridad y comunicación transparente",
+    qualityTitle: "Compromiso de Calidad",
     qualitySubtitle:
-      "La calidad se demuestra en campo: verificación, pruebas funcionales y entregables que sostienen la operación.",
+      "Ejecución disciplinada, verificación en sitio y mejora continua para mantener estándares técnicos exigentes.",
   },
-} as const;
-
-/** SOLO ABOUT PAGE (no usar landing.positioningLine aquí para evitar repetición) */
-export const ABOUT_NOSOTROS = {
-  title: "NOSOTROS",
-  description:
-    "Integramos ingeniería eléctrica y electromecánica para operación continua. Diseñamos y ejecutamos sistemas de potencia, control y respaldo —incluyendo energía solar— con enfoque en seguridad, mantenibilidad y desempeño real.",
 } as const;
 
 export const ABOUT_FOCUS: { icon: LucideIcon; title: string; desc: string }[] = [
   {
     icon: PlugZap,
     title: "Continuidad energética",
-    desc: "Arquitecturas de respaldo (UPS, baterías, plantas, ATS/transferencia) y coordinación para cargas críticas.",
+    desc: "Arquitecturas de respaldo (UPS, baterias, plantas, ATS/transferencia) y coordinacion para cargas criticas.",
   },
   {
     icon: ShieldCheck,
     title: "Seguridad eléctrica",
-    desc: "Protecciones, selectividad, puesta a tierra y verificación en sitio para operar con riesgo controlado.",
+    desc: "Protecciones, selectividad, puesta a tierra y verificacion en sitio para operar con riesgo controlado.",
   },
   {
     icon: Gauge,
     title: "Desempeño medible",
-    desc: "Pruebas, protocolos y criterios de aceptación: evidencia para operación, auditoría y mantenimiento.",
+    desc: "Pruebas, protocolos y criterios de aceptacion: evidencia para operacion, auditoria y mantenimiento.",
   },
 ];
 
@@ -144,12 +137,12 @@ export const ABOUT_BLOCKS: Block[] = [
   {
     icon: ShieldCheck,
     title: "Protecciones y seguridad",
-    desc: "Selectividad, puesta a tierra, verificaciones en campo y control del riesgo eléctrico durante la ejecución.",
+    desc: "Selectividad, puesta a tierra, verificaciones en campo y control del riesgo electrico durante la ejecucion.",
   },
   {
     icon: FileText,
     title: "Entregables verificables",
-    desc: "Protocolos, reportes, as-built y evidencia para mantenimiento, auditoría y toma de decisiones.",
+    desc: CORE_MESSAGES.deliverables,
   },
 ];
 
@@ -181,38 +174,38 @@ export const ABOUT_IDENTITY: ValueCard[] = [
     icon: Target,
     title: "Misión",
     desc:
-      "Diseñamos y ejecutamos proyectos eléctricos y electromecánicos integrando energía convencional y solar. Entregamos continuidad, seguridad y desempeño mediante diagnóstico en sitio, ingeniería de detalle, suministro, instalación, pruebas y puesta en marcha, dejando evidencia y documentación para operación y mantenimiento.",
+      "Diseñamos y ejecutamos proyectos de ingeniería eléctrica y electromecánica, integrando soluciones de energía convencional y energía solar para entornos industriales, comerciales y residenciales. Aportamos eficiencia, seguridad y desempeño, con una ejecución rigurosa de principio a fin: diagnóstico, ingeniería de detalle, suministro, instalación, pruebas y puesta en marcha.",
   },
   {
     icon: Eye,
     title: "Visión",
     desc:
-      "Ser un referente en Colombia en infraestructura eléctrica, electromecánica y energía limpia. Ser reconocidos por la solidez técnica, la calidad de ejecución y el acompañamiento cercano, construyendo alianzas de largo plazo con soluciones confiables y medibles.",
+      "Ser un referente en Colombia en ingeniería eléctrica, electromecánica y energía limpia, reconocidos por la solidez técnica, la calidad de la ejecución y el acompañamiento cercano al cliente. Aspiramos a construir alianzas de largo plazo, entregando soluciones confiables y medibles que impulsen la competitividad y la sostenibilidad de cada operación.",
   },
 ];
 
 export const ABOUT_QUALITY_POLICY = {
   icon: Building2,
-  title: "Política de calidad",
+  title: "Compromiso de Calidad",
   desc:
-    "En cada proyecto garantizamos una experiencia profesional: asesoría técnica, planeación disciplinada y comunicación clara de avances, riesgos y entregables —con foco en continuidad y seguridad.",
+    "Gestionamos cada proyecto con control técnico y disciplina operativa para asegurar una ejecución confiable, segura y medible.",
 } as const;
 
 export const ABOUT_QUALITY: QualityPoint[] = [
   {
-    title: "Pruebas en sitio y puesta en marcha verificable",
+    title: "Experiencia profesional y comunicación transparente",
     desc:
-      "Ejecutamos protocolos funcionales (respaldo, transferencia, energización y verificación) y documentamos resultados antes de entregar.",
+      "Garantizar una experiencia profesional en cada proyecto, con asesoría experta, planeación disciplinada y comunicación transparente de avances, riesgos y entregables.",
   },
   {
-    title: "Control de riesgos y seguridad eléctrica",
+    title: "Ejecución con estándares exigentes",
     desc:
-      "Aplicamos buenas prácticas en campo: verificación, señalización, procedimientos y mitigaciones documentadas para intervenir con seguridad.",
+      "Ejecutar con estándares exigentes de seguridad, calidad y cumplimiento, aplicando buenas prácticas de ingeniería, verificación en sitio y pruebas funcionales para asegurar el desempeño esperado.",
   },
   {
-    title: "Mantenimiento y mejora continua",
+    title: "Mejora continua y sostenibilidad",
     desc:
-      "Reporte técnico con hallazgos y recomendaciones (preventivo/correctivo), promoviendo confiabilidad, eficiencia y prácticas responsables.",
+      "Impulsar la mejora continua mediante procesos estandarizados, capacitación permanente y evaluación del desempeño, promoviendo prácticas responsables y sostenibles con el medio ambiente.",
   },
 ];
 

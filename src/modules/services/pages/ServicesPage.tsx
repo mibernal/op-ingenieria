@@ -82,7 +82,7 @@ export default function ServicesPage() {
       <Header />
 
       <main className="flex-1">
-        <SectionShell variant="dark">
+        <SectionShell variant="dark" className="pt-10 pb-10 md:pt-14 md:pb-14">
           <SectionHeader
             eyebrow="SERVICIOS"
             title={
@@ -108,7 +108,7 @@ export default function ServicesPage() {
           </div>
         </SectionShell>
 
-        <SectionShell variant="light">
+        <SectionShell variant="light" className="pt-4 pb-16 md:pt-6 md:pb-24">
           <div className="mx-auto max-w-6xl">
             <SectionHeader
               align="left"
@@ -129,9 +129,7 @@ export default function ServicesPage() {
                     </div>
                     <div>
                       <div className="text-lg font-semibold">{s.title}</div>
-                      <div className="mt-2 text-sm text-muted-foreground">
-                        Entregables claros y ejecución controlada.
-                      </div>
+
                     </div>
                   </div>
 
@@ -143,10 +141,6 @@ export default function ServicesPage() {
                       </li>
                     ))}
                   </ul>
-
-                  <Button asChild className="mt-6 w-full rounded-2xl bg-accent hover:bg-accent/90">
-                    <NavLink to={`${ROUTES.CONTACT}#form`}>Hablar con un ingeniero</NavLink>
-                  </Button>
                 </div>
               ))}
             </div>

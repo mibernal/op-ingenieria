@@ -11,6 +11,7 @@ import ProjectGrid from "./ProjectGrid";
 import ProjectDetailModal from "./ProjectDetailModal";
 import OptimizedImage from "@/shared/components/OptimizedImage";
 import { cn } from "@/lib/utils";
+import { PROJECTS_COPY } from "@/modules/projects/content/projects.copy";
 
 type HeadingLevel = "h1" | "h2";
 type CategoryWithAliases = ProjectCategory & {
@@ -62,7 +63,7 @@ const SubcatChip = ({
 
 export default function ProjectsExplorer({
   title = "Proyectos Ejecutados",
-  subtitle = "Casos reales de energía y respaldo: plantas, solar y soluciones eléctricas implementadas con resultados verificables.",
+  subtitle = PROJECTS_COPY.explorer.defaultSubtitle,
   headingLevel = "h2",
   sectionId = "proyectos",
   className,
@@ -265,7 +266,7 @@ export default function ProjectsExplorer({
           // =========================
           // GRID CATEGORÍAS (SOLO VISUAL AJUSTADO)
           // =========================
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {categoriesWithAliases.map((category) => {
               const image = getCategoryImage(category.id);
               const count = categoryProjectsMap.get(category.id)?.length ?? 0;
@@ -292,7 +293,7 @@ export default function ProjectsExplorer({
                       className="w-full"
                       aspectRatio="video"
                       objectFit="cover"
-                      sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
                     />
                     <div
                       className={cn(

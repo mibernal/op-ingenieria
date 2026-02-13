@@ -15,6 +15,7 @@ import { Card } from "@/components/ui/card";
 import { categories } from "@/modules/catalog/data/products";
 import { cn } from "@/lib/utils";
 import { buildWhatsAppUrl, buildContactFormHref } from "@/shared/utils/quote";
+import { CATALOG_COPY } from "@/modules/catalog/content/catalog.copy";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -26,6 +27,7 @@ const FALLBACK_PRODUCT_IMAGE = "/placeholder-product.jpg";
 const AUTO_SLIDE_INTERVAL = 6000;
 
 export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetailModalProps) => {
+  const copy = CATALOG_COPY.modal;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const thumbsRef = useRef<HTMLDivElement | null>(null);
@@ -234,7 +236,7 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
             {/* Info + CTA */}
             <div className="space-y-4">
               <Card className="p-5 rounded-2xl border-border/60 shadow-sm">
-                <h3 className="text-base md:text-lg font-semibold mb-2">Descripción</h3>
+                <h3 className="text-base md:text-lg font-semibold mb-2">{copy.descriptionTitle}</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   {product.description || "Producto de alta calidad para aplicaciones industriales."}
                 </p>
@@ -242,7 +244,7 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
 
               {product.longDescription && product.longDescription.trim() && (
                 <Card className="p-5 rounded-2xl border-border/60 shadow-sm">
-                  <h3 className="text-base md:text-lg font-semibold mb-2">Detalles</h3>
+                  <h3 className="text-base md:text-lg font-semibold mb-2">{copy.detailsTitle}</h3>
                   <div
                     className="prose prose-sm max-w-none text-muted-foreground"
                     dangerouslySetInnerHTML={{ __html: product.longDescription }}
@@ -254,18 +256,18 @@ export const ProductDetailModal = ({ product, open, onOpenChange }: ProductDetai
               <div className="grid gap-3 pt-1">
                 <Button onClick={handleWhatsApp} className="gap-2 bg-accent hover:bg-accent/90">
                   <MessageCircle className="h-4 w-4" />
-                  Cotizar por WhatsApp
+                  {copy.primaryCta}
                 </Button>
 
                 <Button asChild variant="secondary" className="gap-2">
                   <a href={contactFormHref}>
                     <Send className="h-4 w-4" />
-                    Cotizar en formulario
+                    {copy.secondaryCta}
                   </a>
                 </Button>
 
                 <p className="text-xs text-muted-foreground">
-                  Recomendado: <span className="font-medium">Formulario</span> para asegurar entrega del mensaje.
+                  {copy.recommendation}
                 </p>
               </div>
             </div>

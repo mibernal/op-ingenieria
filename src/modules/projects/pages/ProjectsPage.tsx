@@ -5,36 +5,36 @@ import Seo from "@/components/seo/Seo";
 import { projectsSeo } from "@/modules/projects/seo";
 import SectionShell from "@/shared/components/SectionShell";
 import SectionHeader from "@/shared/components/SectionHeader";
-import { Button } from "@/components/ui/button";
-import { NavLink } from "@/components/layout/NavLink";
-import { ROUTES } from "@/config/routes";
 import ProjectsExplorer from "@/modules/projects/components/ProjectsExplorer";
+import { PROJECTS_COPY } from "@/modules/projects/content/projects.copy";
 
 export default function ProjectsPage() {
+  const copy = PROJECTS_COPY.page;
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo {...projectsSeo} />
       <Header />
 
       <main className="flex-1">
-        <SectionShell variant="dark">
+        <SectionShell variant="dark" className="pt-10 pb-10 md:pt-14 md:pb-14">
           <SectionHeader
-            eyebrow="PROYECTOS"
+            eyebrow={copy.eyebrow}
             title={
               <>
-                Casos reales con <span className="text-accent">resultados verificables</span>
+                {copy.titleA} <span className="text-accent">{copy.titleB}</span>
               </>
             }
-            subtitle="Explora por categoría: continuidad, respaldo, distribución y soluciones solares con evidencia y puesta en marcha."
+            subtitle={copy.subtitle}
           />
 
         </SectionShell>
 
         <ProjectsExplorer
           headingLevel="h1"
-          title="Proyectos ejecutados"
-          subtitle="Selecciona una categoría para ver casos y detalles."
-          className="py-0"
+          title={copy.explorerTitle}
+          subtitle={copy.explorerSubtitle}
+          className="pt-2 pb-0 md:pt-4 md:pb-10"
           backgroundClassName="bg-background"
         />
       </main>

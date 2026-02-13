@@ -1,7 +1,7 @@
 [
-  { "id": "1", "name": "Ecopetrol" },
+  { "id": "1", "name": "Ecopetrol", "logo": "uploads/2026/clients/Ecopetrol.png" },
   { "id": "2", "name": "ISA", "logo": "uploads/2019/10/Isa.jpg" },
-  { "id": "7", "name": "Hospital San Ignacio" },
+  { "id": "7", "name": "Hospital San Ignacio", "logo": "uploads/2026/clients/Hospital-San-Ignacio.png" },
   { "id": "11", "name": "Servicio Geológico Colombiano", "logo": "uploads/2019/10/SGC.png" },
   { "id": "12", "name": "Secretaría de Integración Social", "logo": "uploads/2019/10/Secretaria-de-Integracion-Social.png" },
   { "id": "13", "name": "Rama Judicial", "logo": "uploads/2019/10/Rama-Judicial.jpg" },
@@ -29,6 +29,5 @@
   { "id": "35", "name": "Disico", "logo": "uploads/2021/08/disico.png" },
   { "id": "36", "name": "Paime", "logo": "uploads/2021/08/Paime.jpg" }
 ]
-
 
 

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Clock, MessageCircle, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,18 +15,10 @@ import SectionShell from "@/shared/components/SectionShell";
 import SectionHeader from "@/shared/components/SectionHeader";
 import { NavLink } from "@/components/layout/NavLink";
 import { ROUTES } from "@/config/routes";
+import { CONTACT_DATA, CONTACT_PAGE_COPY } from "@/modules/contact/content/contact.copy";
 
-const CONTACT = {
-  email: "info@opingenieria.com",
-  phoneDisplay: "+57 (601) 4732039",
-  phoneHref: "tel:+576014732039",
-  whatsappHref: "https://wa.me/573133638760",
-  city: "Bogotá, Colombia",
-  hours: "Lun–Vie: 8:00–17:00",
-};
-
-const FORM_ACTION = `https://formsubmit.co/${CONTACT.email}`;
-const FORM_AJAX = `https://formsubmit.co/ajax/${CONTACT.email}`;
+const FORM_ACTION = `https://formsubmit.co/${CONTACT_DATA.email}`;
+const FORM_AJAX = `https://formsubmit.co/ajax/${CONTACT_DATA.email}`;
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -53,6 +45,7 @@ const HOVER_ROW = cn(
 );
 
 export default function ContactPage() {
+  const copy = CONTACT_PAGE_COPY;
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
 
   const [subjectValue, setSubjectValue] = useState("");
@@ -129,20 +122,20 @@ export default function ContactPage() {
 
       <main className="flex-1">
         {/* HERO oscuro (mismo patrón que Clientes/Proyectos) */}
-        <SectionShell variant="dark">
+        <SectionShell variant="dark" className="pt-10 pb-10 md:pt-14 md:pb-14">
           <SectionHeader
-            eyebrow="CONTACTO"
+            eyebrow={copy.hero.eyebrow}
             title={
               <>
-                Hablemos de tu <span className="text-accent">proyecto</span>
+                {copy.hero.titleA} <span className="text-accent">{copy.hero.titleB}</span>
               </>
             }
-            subtitle="Cuéntanos la necesidad técnica (UPS, baterías, plantas, tableros, solar, mantenimiento) y te respondemos con una propuesta clara y viable."
+            subtitle={copy.hero.subtitle}
           />
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="rounded-2xl bg-accent hover:bg-accent/90">
-              <NavLink to={`${ROUTES.CONTACT}#form`}>Ir al formulario</NavLink>
+              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.hero.primaryCta}</NavLink>
             </Button>
 
             <Button
@@ -150,55 +143,47 @@ export default function ContactPage() {
               variant="outline"
               className="rounded-2xl border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30"
             >
-              <a href={CONTACT.whatsappHref} target="_blank" rel="noreferrer">
-                WhatsApp
+              <a href={CONTACT_DATA.whatsappHref} target="_blank" rel="noreferrer">
+                {copy.hero.secondaryCta}
               </a>
-            </Button>
-
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-2xl border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30"
-            >
-              <a href={CONTACT.phoneHref}>Llamar</a>
             </Button>
           </div>
 
         </SectionShell>
 
         {/* CONTENIDO claro */}
-        <SectionShell variant="light">
+        <SectionShell variant="light" className="pt-4 pb-16 md:pt-6 md:pb-24">
           <div className="mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 gap-6">
               {/* Información de contacto */}
               <div className="space-y-6">
                 <Card className={CARD}>
                   <CardContent className="p-6 md:p-7">
-                    <h2 className="text-xl font-heading font-bold mb-4">Información de contacto</h2>
+                    <h2 className="text-xl font-heading font-bold mb-4">{copy.info.title}</h2>
 
                     <div className="space-y-4">
                       <a
-                        href={CONTACT.phoneHref}
+                        href={CONTACT_DATA.phoneHref}
                         className={HOVER_ROW}
-                        aria-label={`Llamar al ${CONTACT.phoneDisplay}`}
+                        aria-label={`Llamar al ${CONTACT_DATA.phoneDisplay}`}
                       >
                         <Phone className="h-5 w-5 text-accent mt-0.5" />
                         <div className="min-w-0 flex-1">
-                          <p className="font-medium">Teléfono</p>
-                          <p className="text-muted-foreground">{CONTACT.phoneDisplay}</p>
+                          <p className="font-medium">{copy.info.phoneLabel}</p>
+                          <p className="text-muted-foreground">{CONTACT_DATA.phoneDisplay}</p>
                         </div>
                         <ArrowUpRight className="h-4 w-4 text-muted-foreground mt-1 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                       </a>
 
                       <a
-                        href={`mailto:${CONTACT.email}`}
+                        href={`mailto:${CONTACT_DATA.email}`}
                         className={HOVER_ROW}
-                        aria-label={`Enviar correo a ${CONTACT.email}`}
+                        aria-label={`Enviar correo a ${CONTACT_DATA.email}`}
                       >
                         <Mail className="h-5 w-5 text-accent mt-0.5" />
                         <div className="min-w-0 flex-1">
-                          <p className="font-medium">Email</p>
-                          <p className="text-muted-foreground">{CONTACT.email}</p>
+                          <p className="font-medium">{copy.info.emailLabel}</p>
+                          <p className="text-muted-foreground">{CONTACT_DATA.email}</p>
                         </div>
                         <ArrowUpRight className="h-4 w-4 text-muted-foreground mt-1 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                       </a>
@@ -206,16 +191,16 @@ export default function ContactPage() {
                       <div className="flex items-start gap-3 rounded-2xl border border-border/60 bg-background/30 p-4">
                         <MapPin className="h-5 w-5 text-accent mt-0.5" />
                         <div>
-                          <p className="font-medium">Ubicación</p>
-                          <p className="text-muted-foreground">{CONTACT.city}</p>
+                          <p className="font-medium">{copy.info.locationLabel}</p>
+                          <p className="text-muted-foreground">{CONTACT_DATA.city}</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-3 rounded-2xl border border-border/60 bg-background/30 p-4">
                         <Clock className="h-5 w-5 text-accent mt-0.5" />
                         <div>
-                          <p className="font-medium">Horario</p>
-                          <p className="text-muted-foreground">{CONTACT.hours}</p>
+                          <p className="font-medium">{copy.info.scheduleLabel}</p>
+                          <p className="text-muted-foreground">{CONTACT_DATA.hours}</p>
                         </div>
                       </div>
                     </div>
@@ -228,9 +213,9 @@ export default function ContactPage() {
               {/* Formulario */}
               <Card className={CARD}>
                 <CardContent className="p-6 md:p-7">
-                  <h2 className="text-xl font-heading font-bold mb-1">Envíanos un mensaje</h2>
+                  <h2 className="text-xl font-heading font-bold mb-1">{copy.form.title}</h2>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Cuéntanos el alcance (planta, solar, baterías, UPS, tableros) y la ciudad. Te respondemos con asesoría técnica.
+                    {copy.form.subtitle}
                   </p>
 
                   {/* ✅ Ancla real para /contact#form */}
@@ -365,20 +350,20 @@ export default function ContactPage() {
                       className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20 rounded-2xl"
                       disabled={formStatus === "loading"}
                     >
-                      {formStatus === "loading" ? "Enviando..." : "Enviar mensaje"}
+                      {formStatus === "loading" ? copy.form.loading : copy.form.submit}
                     </Button>
 
                     <div aria-live="polite">
                       {formStatus === "success" && (
                         <p className="text-sm text-emerald-600">
-                          Mensaje enviado correctamente. Te responderemos pronto.
+                          {copy.form.success}
                         </p>
                       )}
                       {formStatus === "error" && (
                         <p className="text-sm text-rose-600">
-                          No pudimos enviar el mensaje. Inténtalo de nuevo o escríbenos a{" "}
-                          <a className="underline" href={`mailto:${CONTACT.email}`}>
-                            {CONTACT.email}
+                          {copy.form.errorPrefix}{" "}
+                          <a className="underline" href={`mailto:${CONTACT_DATA.email}`}>
+                            {CONTACT_DATA.email}
                           </a>
                           .
                         </p>
@@ -386,7 +371,7 @@ export default function ContactPage() {
                     </div>
 
                     <p className="text-xs text-muted-foreground">
-                      Al enviar, aceptas ser contactado para atender tu solicitud. No compartimos tu información.
+                      {copy.form.privacy}
                     </p>
                   </form>
                 </CardContent>

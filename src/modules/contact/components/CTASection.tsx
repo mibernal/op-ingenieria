@@ -12,46 +12,22 @@ import {
   ArrowUpRight,
   MessageCircle,
 } from "lucide-react";
+import {
+  CONTACT_DATA,
+  CONTACT_INFO_ITEMS,
+  CONTACT_PAGE_COPY,
+} from "@/modules/contact/content/contact.copy";
 
-const CONTACT = {
-  email: "info@opingenieria.com",
-  phoneDisplay: "+57 (601) 4732039",
-  phoneHref: "tel:+576014732039",
-  whatsappHref: "https://wa.me/573133638760",
-  city: "Bogotá, Colombia",
-  hours: "Lun–Vie • 8:00 a.m. – 5:00 p.m.",
-};
-
-const infoItems = [
-  {
-    icon: Clock,
-    title: "Horario",
-    value: CONTACT.hours,
-    helper: "Atención y respuesta ágil",
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    value: CONTACT.email,
-    helper: "Asesoría técnica por correo",
-    href: `mailto:${CONTACT.email}`,
-  },
-  {
-    icon: Phone,
-    title: "Teléfono",
-    value: CONTACT.phoneDisplay,
-    helper: "Cotizaciones y soporte",
-    href: CONTACT.phoneHref,
-  },
-  {
-    icon: MapPin,
-    title: "Ubicación",
-    value: CONTACT.city,
-    helper: "Cobertura industrial, comercial y residencial",
-  },
-];
+const ICON_BY_ID = {
+  hours: Clock,
+  email: Mail,
+  phone: Phone,
+  location: MapPin,
+} as const;
 
 export function CTASection() {
+  const copy = CONTACT_PAGE_COPY.ctaSection;
+
   return (
     <section
       aria-label="Llamado a la acción"
@@ -74,17 +50,15 @@ export function CTASection() {
           <div className="text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/5 px-4 py-2 text-xs md:text-sm text-primary-foreground/90">
               <Sparkles className="h-4 w-4 text-accent" aria-hidden="true" />
-              Ingeniería eléctrica e industrial con estándares profesionales
+              {copy.badge}
             </div>
 
             <h2 className="mt-6 text-3xl md:text-4xl font-heading font-bold tracking-tight">
-              ¿Listo para llevar tu proyecto al siguiente nivel?
+              {copy.title}
             </h2>
 
             <p className="mt-4 text-base md:text-lg text-primary-foreground/80 leading-relaxed">
-              En O&amp;P Ingeniería diseñamos, implementamos y ejecutamos soluciones
-              eléctricas e industriales con altos estándares de calidad,
-              confiabilidad y seguridad. Cuéntanos tu necesidad técnica y te respondemos con una propuesta clara y viable.
+              {copy.subtitle}
             </p>
           </div>
 
@@ -99,8 +73,8 @@ export function CTASection() {
               )}
             >
               <div className="grid gap-3 sm:grid-cols-2">
-                {infoItems.map((it) => {
-                  const Icon = it.icon;
+                {CONTACT_INFO_ITEMS.map((it) => {
+                  const Icon = ICON_BY_ID[it.id];
                   const Wrapper: any = it.href ? "a" : "div";
 
                   return (
@@ -164,7 +138,7 @@ export function CTASection() {
               )}
             >
               {/* ✅ Directo al form */}
-              <NavLink to={`${ROUTES.CONTACT}#form`}>Solicitar Cotización</NavLink>
+              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.primaryCta}</NavLink>
             </Button>
 
             {/* ✅ Secundario (WhatsApp) */}
@@ -184,48 +158,21 @@ export function CTASection() {
               )}
             >
               <a
-                href={CONTACT.whatsappHref}
+                href={CONTACT_DATA.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2"
                 aria-label="Cotizar por WhatsApp"
               >
                 <MessageCircle className="h-4 w-4 text-white/80" aria-hidden="true" />
-                WhatsApp
-                <span aria-hidden className="text-white/70">›</span>
-              </a>
-            </Button>
-
-            {/* ✅ Tercero opcional: Llamar (si quieres dejarlo) */}
-            <Button
-              size="lg"
-              variant="outline"
-              asChild
-              className={cn(
-                "w-full sm:w-auto",
-                "h-14 px-8 rounded-2xl",
-                "border border-white/20 bg-white/5 text-white/90",
-                "hover:bg-white/10 hover:text-white hover:border-white/30",
-                "transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0",
-                "shadow-sm hover:shadow-md",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
-                "backdrop-blur-md"
-              )}
-            >
-              <a
-                href={CONTACT.phoneHref}
-                className="inline-flex items-center justify-center gap-2"
-                aria-label={`Llamar ahora al ${CONTACT.phoneDisplay}`}
-              >
-                <Phone className="h-4 w-4 text-white/80" aria-hidden="true" />
-                Llamar Ahora
+                {copy.secondaryCta}
                 <span aria-hidden className="text-white/70">›</span>
               </a>
             </Button>
           </div>
 
           <p className="mt-4 text-center text-xs md:text-sm text-primary-foreground/70">
-            Respuesta rápida • Asesoría técnica • Soluciones a medida
+            {copy.footer}
           </p>
         </div>
       </div>

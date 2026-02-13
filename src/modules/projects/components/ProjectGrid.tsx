@@ -23,7 +23,7 @@ const ProjectGrid = memo(
     columns = {
       mobile: 1,
       tablet: 2,
-      desktop: 3,
+      desktop: 4,
       wide: 4,
     },
   }: ProjectGridProps) => {

@@ -9,6 +9,7 @@ import LogoCarousel from "@/shared/components/LogoCarousel";
 import { clientsService } from "@/core/services/clientsService";
 import { cn } from "@/lib/utils";
 import { ChevronRight, ShieldCheck, Timer, FileText } from "lucide-react";
+import { CLIENTS_COPY } from "@/modules/clients/content/clients.copy";
 
 const HIGHLIGHTS = [
   {
@@ -29,20 +30,21 @@ const HIGHLIGHTS = [
 ];
 
 export default function ClientsSection() {
+  const copy = CLIENTS_COPY.section;
   const reduced = useReducedMotion();
   const clients = clientsService.list();
 
   return (
     <SectionShell id="clientes" variant="tint">
       <SectionHeader
-        eyebrow="CLIENTES"
+        eyebrow={copy.eyebrow}
         title={
           <>
-            Confianza construida{" "}
-            <span className="text-accent">en campo</span>.
+            {copy.titleA}{" "}
+            <span className="text-accent">{copy.titleB}</span>.
           </>
         }
-        subtitle="Organizaciones que confían en nuestra ingeniería para continuidad energética, energía solar y soluciones eléctricas con estándares de operación."
+        subtitle={copy.subtitle}
       />
 
       <div className="mx-auto max-w-6xl">
@@ -58,11 +60,11 @@ export default function ClientsSection() {
           <div className="flex flex-col sm:flex-row gap-3">
             <Button asChild className="rounded-2xl bg-accent hover:bg-accent/90 shadow-lg shadow-accent/20">
               <NavLink to={ROUTES.CLIENTS}>
-                Ver clientes <ChevronRight className="ml-1 h-4 w-4" />
+                {copy.primaryCta} <ChevronRight className="ml-1 h-4 w-4" />
               </NavLink>
             </Button>
             <Button asChild variant="outline" className="rounded-2xl">
-              <NavLink to={`${ROUTES.CONTACT}#form`}>Hablar con un ingeniero</NavLink>
+              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.secondaryCta}</NavLink>
             </Button>
           </div>
         </div>
@@ -106,12 +108,6 @@ export default function ClientsSection() {
                   </div>
                 ))}
               </div>
-
-              <div className="mt-6">
-                <Button asChild className="w-full rounded-2xl bg-accent hover:bg-accent/90">
-                  <NavLink to={ROUTES.PROJECTS}>Ver proyectos ejecutados</NavLink>
-                </Button>
-              </div>
             </div>
           </motion.div>
 
@@ -141,7 +137,7 @@ export default function ClientsSection() {
                 </div>
 
                 <Button asChild size="sm" variant="outline" className="rounded-xl">
-                  <NavLink to={ROUTES.CLIENTS}>Ver todo</NavLink>
+                  <NavLink to={ROUTES.CLIENTS}>{copy.tertiaryCta}</NavLink>
                 </Button>
               </div>
 

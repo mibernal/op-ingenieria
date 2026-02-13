@@ -5,7 +5,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { products, categories, type Product } from "../data/products";
 import CategoryFilter from "../components/CategoryFilter";
-import SubcategoryList from "../components/SubcategoryList";
 import Seo from "@/components/seo/Seo";
 import { catalogSeo } from "@/modules/catalog/seo";
 import ProductGridSkeleton from "@/shared/skeletons/ProductGridSkeleton";
@@ -15,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/layout/NavLink";
 import { ROUTES } from "@/config/routes";
+import { CATALOG_COPY } from "@/modules/catalog/content/catalog.copy";
 
 const ProductGrid = lazy(() => import("@/modules/catalog/components/products/ProductGrid"));
 const ProductDetailModal = lazy(() => import("@/modules/catalog/components/products/ProductDetailModal"));
@@ -25,23 +25,22 @@ const CARD = cn(
 );
 
 export default function CatalogPage() {
+  const copy = CATALOG_COPY.page;
+  const emptyCopy = CATALOG_COPY.emptyState;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [categoryId, setCategoryId] = useState<string | null>(null);
-  const [subcategory, setSubcategory] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const initialCategoryId = searchParams.get("cat");
-  const initialSubcategory = searchParams.get("sub");
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
       if (categoryId && p.categoryId !== categoryId) return false;
-      if (subcategory && p.subcategory !== subcategory) return false;
       return true;
     });
-  }, [categoryId, subcategory]);
+  }, [categoryId]);
 
   const activeCategory = useMemo(() => {
     return categories.find((c) => c.id === categoryId) ?? null;
@@ -60,28 +59,12 @@ export default function CatalogPage() {
     setCategoryId(category ? category.id : initialCategoryId);
   }, [initialCategoryId]);
 
-  useEffect(() => {
-    setSubcategory(initialSubcategory || null);
-  }, [initialSubcategory]);
-
   const handleCategorySelect = (id: string | null) => {
     setCategoryId(id);
-    setSubcategory(null);
 
     const params = new URLSearchParams(searchParams);
     if (id) params.set("cat", id);
     else params.delete("cat");
-
-    params.delete("sub");
-    setSearchParams(params);
-  };
-
-  const handleSubcategorySelect = (sub: string | null) => {
-    setSubcategory(sub);
-
-    const params = new URLSearchParams(searchParams);
-    if (sub) params.set("sub", sub);
-    else params.delete("sub");
 
     setSearchParams(params);
   };
@@ -93,7 +76,6 @@ export default function CatalogPage() {
 
   const handleClearFilters = () => {
     setCategoryId(null);
-    setSubcategory(null);
     setSearchParams({});
   };
 
@@ -104,20 +86,20 @@ export default function CatalogPage() {
 
       <main className="flex-1">
         {/* ✅ HERO OSCURO (como Clients) */}
-        <SectionShell variant="dark">
+        <SectionShell variant="dark" className="pt-10 pb-10 md:pt-14 md:pb-14">
           <SectionHeader
-            eyebrow="PRODUCTOS"
+            eyebrow={copy.eyebrow}
             title={
               <>
-                Catálogo de <span className="text-accent">Soluciones</span>
+                {copy.titleA} <span className="text-accent">{copy.titleB}</span>
               </>
             }
-            subtitle="Infraestructura eléctrica, respaldo (UPS/baterías/plantas), energía solar y distribución para operación confiable."
+            subtitle={copy.subtitle}
           />
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="rounded-2xl bg-accent hover:bg-accent/90">
-              <NavLink to={`${ROUTES.CONTACT}#form`}>Solicitar cotización</NavLink>
+              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.primaryCta}</NavLink>
             </Button>
 
             <Button
@@ -125,13 +107,13 @@ export default function CatalogPage() {
               variant="outline"
               className="rounded-2xl border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30"
             >
-              <NavLink to={ROUTES.PROJECTS}>Ver proyectos</NavLink>
+              <NavLink to={ROUTES.PROJECTS}>{copy.secondaryCta}</NavLink>
             </Button>
           </div>
         </SectionShell>
 
         {/* ✅ CONTENIDO CLARO (filtros + grid) */}
-        <SectionShell variant="light">
+        <SectionShell variant="light" className="pt-4 pb-16 md:pt-6 md:pb-24">
           <div className="mx-auto max-w-screen-2xl">
             <div className="grid gap-6">
               {/* Filtros */}
@@ -143,29 +125,14 @@ export default function CatalogPage() {
                 />
               </div>
 
-              {/* Subcategorías */}
-              {activeCategory && activeCategory.subcategories.length > 0 && (
-                <div className={cn(CARD, "p-6 md:p-7")}>
-                  <h3 className="font-heading font-semibold text-lg mb-4">
-                    Filtra por tipo de {activeCategory.name.toLowerCase()}
-                  </h3>
-                  <SubcategoryList
-                    subcategories={activeCategory.subcategories}
-                    selected={subcategory}
-                    onSelect={handleSubcategorySelect}
-                  />
-                </div>
-              )}
-
               {/* Meta row */}
               <div className="flex items-center justify-between gap-4">
                 <p className="text-sm text-muted-foreground">
                   Resultados
                   {categoryId && ` en ${activeCategory?.name ?? ""}`}
-                  {subcategory && ` > ${subcategory}`}
                 </p>
 
-                {(categoryId || subcategory) && (
+                {categoryId && (
                   <button
                     onClick={handleClearFilters}
                     className="text-sm text-accent hover:text-accent/80 transition-colors"
@@ -182,7 +149,7 @@ export default function CatalogPage() {
                     <ProductGrid
                       products={filteredProducts}
                       onProductClick={handleProductClick}
-                      columns={{ mobile: 1, tablet: 2, desktop: 3, wide: 4 }}
+                      columns={{ mobile: 1, tablet: 2, desktop: 4, wide: 4 }}
                     />
                   </Suspense>
                 </div>
@@ -205,16 +172,12 @@ export default function CatalogPage() {
                     </svg>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-foreground mb-2">No se encontraron productos</h3>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{emptyCopy.title}</h3>
 
                   <p className="text-muted-foreground max-w-md mx-auto mb-4">
                     {categoryId
-                      ? `No hay productos ${
-                          subcategory
-                            ? `en la subcategoría "${subcategory}"`
-                            : `en la categoría "${activeCategory?.name ?? ""}"`
-                        }.`
-                      : "Prueba seleccionando una categoría o solicita asesoría técnica."}
+                      ? `No hay productos en la categoría "${activeCategory?.name ?? ""}".`
+                      : emptyCopy.noFilters}
                   </p>
 
                   {categoryId && (
@@ -222,7 +185,7 @@ export default function CatalogPage() {
                       onClick={() => handleCategorySelect(null)}
                       className="text-accent hover:text-accent/80 transition-colors"
                     >
-                      Ver todos los productos
+                      {emptyCopy.clearFilters}
                     </button>
                   )}
                 </div>

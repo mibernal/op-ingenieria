@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { NavLink } from "@/components/layout/NavLink";
 import { ROUTES } from "@/config/routes";
+import { MARKETING_COPY } from "@/modules/marketing/content/marketing.copy";
 
 type Dot = {
   left: string;
@@ -15,6 +16,7 @@ type Dot = {
 };
 
 const Hero = () => {
+  const copy = MARKETING_COPY.hero;
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -85,14 +87,14 @@ const Hero = () => {
             >
               <Sparkles className="h-4 w-4 text-accent" />
               <span className="text-sm font-medium text-primary-foreground/90 tracking-wide">
-                LÍDERES EN INGENIERÍA ELÉCTRICA DESDE 2014
+                {copy.badge}
               </span>
             </motion.div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground mb-6 md:mb-8 leading-tight tracking-tight">
-              <span className="block">Soluciones Integrales en</span>
+              <span className="block">{copy.titleA}</span>
               <span className="block bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mt-2">
-                Ingeniería Eléctrica
+                {copy.titleB}
               </span>
             </h1>
 
@@ -102,13 +104,11 @@ const Hero = () => {
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl lg:text-2xl text-primary-foreground/90 max-w-3xl mx-auto mb-10 md:mb-12 leading-relaxed font-light"
             >
-              Proyectos eléctricos, electromecánicos y energía solar para{" "}
+              {copy.subtitle}{" "}
               <span className="font-semibold text-accent">industria</span>,{" "}
-              <span className="font-semibold text-accent">comercio</span> y{" "}
+              <span className="font-semibold text-accent">comercio</span>,{" "}
+              <span className="font-semibold text-accent">residencial</span> y{" "}
               <span className="font-semibold text-accent">sector institucional</span>.
-              <span className="block mt-3 text-primary-foreground/75">
-                Respaldo energético, tableros, mantenimiento y modernización con ejecución en campo.
-              </span>
             </motion.p>
 
             <motion.div
@@ -132,8 +132,8 @@ const Hero = () => {
                   "relative overflow-hidden"
                 )}
               >
-                <NavLink to={ROUTES.CONTACT} className="relative z-10 inline-flex items-center gap-2">
-                  Solicitar Cotización
+                <NavLink to={ROUTES.CATALOG} className="relative z-10 inline-flex items-center gap-2">
+                  {copy.primaryCta}
                   <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </NavLink>
               </Button>
@@ -154,7 +154,7 @@ const Hero = () => {
                 )}
               >
                 <NavLink to={ROUTES.PROJECTS} className="inline-flex items-center justify-center gap-2">
-                  Ver Proyectos Ejecutados
+                  {copy.secondaryCta}
                   <span aria-hidden className="text-white/70">›</span>
                 </NavLink>
               </Button>
@@ -166,12 +166,7 @@ const Hero = () => {
               transition={{ delay: 0.8 }}
               className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"
             >
-              {[
-                { value: "300+", label: "Proyectos Completados" },
-                { value: "12+", label: "Años de Experiencia" },
-                { value: "100+", label: "Clientes" },
-                { value: "100%", label: "Enfoque en calidad" },
-              ].map((stat, index) => (
+              {copy.stats.map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-2xl md:text-3xl font-bold text-accent mb-1">{stat.value}</div>
                   <div className="text-sm text-primary-foreground/70">{stat.label}</div>

@@ -7,6 +7,7 @@ import SectionShell from "@/shared/components/SectionShell";
 import SectionHeader from "@/shared/components/SectionHeader";
 import { cn } from "@/lib/utils";
 import OptimizedImage from "@/shared/components/OptimizedImage";
+import { PROJECTS_COPY } from "@/modules/projects/content/projects.copy";
 
 import {
   projects as allProjects,
@@ -32,19 +33,20 @@ function getCategoryBase(value?: string) {
 }
 
 export default function ProjectsSection() {
+  const copy = PROJECTS_COPY.preview;
   const featured = useMemo(() => pickFeaturedProjects(allProjects, 6), []);
   const categoryBadges = useMemo(() => projectCategories.slice(0, 6), []);
 
   return (
     <SectionShell id="proyectos" variant="light">
       <SectionHeader
-        eyebrow="PROYECTOS"
+        eyebrow={copy.eyebrow}
         title={
           <>
-            Evidencia en campo. <span className="text-accent">Entrega real</span>
+            {copy.titleA} <span className="text-accent">{copy.titleB}</span>
           </>
         }
-        subtitle="Una muestra breve de casos implementados en continuidad energética, respaldo, distribución y energía solar."
+        subtitle={copy.subtitle}
       />
 
       <div className="mx-auto max-w-6xl">
@@ -61,7 +63,7 @@ export default function ProjectsSection() {
         </div>
 
         {/* Preview grid */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((p) => {
             const img = p.images?.[0] || p.image || "/placeholder-project.jpg";
             const catBase = getCategoryBase(p.category);
@@ -75,7 +77,7 @@ export default function ProjectsSection() {
                     className="w-full"
                     aspectRatio="video"
                     objectFit="cover"
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     loading="lazy"
                   />
                 </div>
@@ -85,7 +87,7 @@ export default function ProjectsSection() {
                   <div className="mt-1 text-sm text-muted-foreground line-clamp-1">{p.client}</div>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed line-clamp-2">
                     {p.description ||
-                      "Implementación en campo con enfoque en seguridad, pruebas y continuidad operativa."}
+                      copy.fallbackDescription}
                   </p>
                 </div>
 
@@ -98,11 +100,8 @@ export default function ProjectsSection() {
                           : ROUTES.PROJECTS
                       }
                     >
-                      Ver casos
+                      {copy.cardCta}
                     </NavLink>
-                  </Button>
-                  <Button asChild size="sm" variant="outline" className="rounded-xl">
-                    <NavLink to={ROUTES.PROJECTS}>Ver todos</NavLink>
                   </Button>
                 </div>
               </article>
@@ -112,16 +111,13 @@ export default function ProjectsSection() {
 
         {/* Bottom CTA */}
         <div className="mt-12 rounded-3xl border border-border/60 bg-muted/20 p-8 text-center">
-          <div className="text-2xl font-semibold">¿Quieres un caso similar en tu operación?</div>
+          <div className="text-2xl font-semibold">{copy.bottomTitle}</div>
           <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            Te ayudamos a definir alcance, criterios de aceptación y plan de pruebas para cotizar con claridad.
+            {copy.bottomSubtitle}
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild className="rounded-2xl bg-accent hover:bg-accent/90">
-              <NavLink to={`${ROUTES.CONTACT}#form`}>Solicitar propuesta</NavLink>
-            </Button>
-            <Button asChild variant="outline" className="rounded-2xl">
-              <NavLink to={ROUTES.PROJECTS}>Ver proyectos</NavLink>
+              <NavLink to={`${ROUTES.CONTACT}#form`}>{copy.primaryCta}</NavLink>
             </Button>
           </div>
         </div>
